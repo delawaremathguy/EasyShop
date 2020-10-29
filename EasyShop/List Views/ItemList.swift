@@ -2,6 +2,7 @@
 Shop - shopName /// Item - itemName -> getItem
 */
 import SwiftUI
+import CoreData
 
 struct ItemList: View {
     @Environment(\.managedObjectContext) var moc
@@ -30,18 +31,29 @@ struct ItemList: View {
                         HStack {
                             Text(s.itemName)
                         }
-                    }
+                    }.onDelete(perform: deleteItem)
                 }
             }
-        }
+        }.navigationBarTitle(("Items"), displayMode: .inline)
     }
     
     func newItem() {
-        let addItem = Item(context: self.moc)
-        addItem.name = name
-        store.addToItem(addItem)
-        PersistentContainer.saveContext()
-        self.name = ""
+        withAnimation {
+            let addItem = Item(context: self.moc)
+            addItem.name = name
+            store.addToItem(addItem)
+            PersistentContainer.saveContext()
+            self.name = ""
+        }
+    }
+    
+    func deleteItem(at offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                self.moc.delete(self.items[index])
+            }
+            PersistentContainer.saveContext()
+        }
     }
 }
 

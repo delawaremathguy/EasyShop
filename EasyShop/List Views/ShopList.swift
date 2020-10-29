@@ -31,10 +31,9 @@ struct ShopList: View {
                                 Text(s.shopName)
                             }
                         }
-                    }
+                    }.onDelete(perform: deleteShop)
                 }
-            }
-            .navigationBarTitle(("Shops"), displayMode: .inline)
+            }.navigationBarTitle(("Shops"), displayMode: .inline)
         }
     }
     
@@ -44,6 +43,15 @@ struct ShopList: View {
             addShop.name = self.name
             PersistentContainer.saveContext()
             self.name = ""
+        }
+    }
+    
+    func deleteShop(at offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                self.moc.delete(self.shops[index])
+            }
+            PersistentContainer.saveContext()
         }
     }
 }
