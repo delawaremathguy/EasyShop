@@ -1,16 +1,18 @@
-//
-//  ContentView.swift
-//  EasyShop
-//
-//  Created by Fede Duarte on 29/10/2020.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selected = 0
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        TabView(selection: $selected) {
+            SelectedShopView().tabItem ({
+                Text("Selected")
+                Image(systemName: "plus")
+            }).tag(0)
+            ShopList().tabItem ({
+                Text("List")
+                Image(systemName: "calendar")
+            }).tag(1)
+        }
     }
 }
 

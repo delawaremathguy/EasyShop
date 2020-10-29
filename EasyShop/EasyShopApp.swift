@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct EasyShopApp: App {
+    let context = PersistentContainer.persistentContainer.viewContext
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environment(\.managedObjectContext, context)
         }
     }
 }
