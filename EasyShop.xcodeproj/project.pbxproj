@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA1CF276254C9A63008E4084 /* Shop+ItemRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1CF275254C9A63008E4084 /* Shop+ItemRows.swift */; };
 		DA3B3C65254B417700A78604 /* EasyShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C64254B417700A78604 /* EasyShopApp.swift */; };
 		DA3B3C67254B417700A78604 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C66254B417700A78604 /* ContentView.swift */; };
 		DA3B3C69254B417700A78604 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA3B3C68254B417700A78604 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA1CF275254C9A63008E4084 /* Shop+ItemRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shop+ItemRows.swift"; sourceTree = "<group>"; };
 		DA3B3C61254B417700A78604 /* EasyShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3B3C64254B417700A78604 /* EasyShopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyShopApp.swift; sourceTree = "<group>"; };
 		DA3B3C66254B417700A78604 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			children = (
 				DA3B3C99254B477800A78604 /* ShopList.swift */,
 				DA3B3C9D254B478300A78604 /* ItemList.swift */,
+				DA1CF275254C9A63008E4084 /* Shop+ItemRows.swift */,
 			);
 			path = "List Views";
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				DA3B3C65254B417700A78604 /* EasyShopApp.swift in Sources */,
 				DA3B3C7B254B43A200A78604 /* CoreDataModel.xcdatamodeld in Sources */,
 				DA3B3C8F254B465700A78604 /* Item+CoreDataClass.swift in Sources */,
+				DA1CF276254C9A63008E4084 /* Shop+ItemRows.swift in Sources */,
 				DA3B3CA4254B4CED00A78604 /* Modifiers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

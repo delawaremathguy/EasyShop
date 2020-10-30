@@ -9,9 +9,21 @@ import SwiftUI
 
 struct Modifiers: View {
     var body: some View {
-        HStack {
-            Text("Hello, World!").modifier(cellText())
-        }.modifier(cellStack())
+        VStack {
+            HStack {
+                Text("Hello, World!").modifier(cellText())
+            }.modifier(cellStack())
+            
+            HStack {
+                Text("Carrefour")
+                    .font(Font.system(size: 30))
+                    .padding(.leading, 20)
+                Spacer()
+            }
+            .frame(width: .infinity, height: 80)
+            .background(Color("rowcolor"))
+            .cornerRadius(20)
+        }
     }
 }
 

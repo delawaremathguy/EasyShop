@@ -26,11 +26,14 @@ struct ItemList: View {
             Section {
                 List {
                     ForEach(store.getItem) { s in
-                        ItemRow(item: s).id(UUID())
+                        ItemListRow(item: s).id(UUID())
                     }.onDelete(perform: deleteItem)
-                }.onAppear(perform: countItems)
+                }
             }
-        }.navigationBarTitle(("Items"), displayMode: .inline)
+        }
+        .onAppear(perform: countItems)
+        .navigationBarTitle(("Items"), displayMode: .inline)
+        .navigationBarItems(leading: Text(String(totalItems)).bold())
     }
     
     func newItem() {
@@ -61,17 +64,6 @@ struct ItemList: View {
     }
 }
 
-// MARK: - CUSTOM ROW
-
-struct ItemRow: View {
-    let item: Item
-    var body: some View {
-        HStack {
-            Text(item.itemName).modifier(cellText())
-        }
-    }
-}
-
 // MARK: - PREVIEWS
 
 struct ItemList_Previews: PreviewProvider {
@@ -86,11 +78,3 @@ struct ItemList_Previews: PreviewProvider {
     }
 }
 
-struct ItemRow_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    static var previews: some View {
-        let datum = Item(context: moc)
-        datum.name = "Caramelo"
-        return ItemRow(item: datum).previewLayout(.sizeThatFits)
-    }
-}

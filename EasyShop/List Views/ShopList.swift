@@ -24,11 +24,13 @@ struct ShopList: View {
                 Section {
                     ForEach(shops, id: \.self) { s in
                         NavigationLink(destination: ItemList(store: s)) {
-                            ShopRow(store: s).id(UUID())
+                            ShopListRow(store: s).id(UUID())
                         }
                     }.onDelete(perform: deleteShop)
+                    
                 }
             }
+            
             .navigationBarTitle(("Shops"), displayMode: .inline)
         }
     }
@@ -51,18 +53,6 @@ struct ShopList: View {
     }
 }
 
-// MARK: - CUSTOM ROW
-
-struct ShopRow: View {
-    let store: Shop
-    var body: some View {
-        HStack {
-            Text(store.shopName).modifier(cellText())
-           // Text(String(totalItems)).bold()
-        }
-    }
-}
-
 // MARK: - PREVIEWS
 
 struct ShopList_Previews: PreviewProvider {
@@ -71,12 +61,4 @@ struct ShopList_Previews: PreviewProvider {
     }
 }
 
-struct ShopRow_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    static var previews: some View {
-        let data = Shop(context: moc)
-        data.name = "Carrefour"
-        return ShopRow(store: data).previewLayout(.sizeThatFits)
-    }
-}
 
