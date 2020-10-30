@@ -9,7 +9,9 @@ import SwiftUI
 
 struct Modifiers: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text("Hello, World!").modifier(cellText())
+        }.modifier(cellStack())
     }
 }
 
@@ -29,5 +31,22 @@ struct customTextfield: ViewModifier { // Image
             .font(Font.system(size: 20))
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .disableAutocorrection(true)
+    }
+}
+
+struct cellText: ViewModifier { // Text
+    func body(content: Content) -> some View {
+        content
+            .font(Font.system(size: 22))
+            .foregroundColor(Color.black)
+            .padding(.all, 5)
+    }
+}
+
+struct cellStack: ViewModifier { // Stack
+    func body(content: Content) -> some View {
+        content
+            .background(RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color("rowcolor"))) // card
     }
 }

@@ -12,4 +12,5 @@ import CoreData
 @objc(Shop)
 public class Shop: NSManagedObject {
 
+
 }

@@ -1,6 +1,3 @@
-/*
-Shop - shopName /// Item - itemName -> getItem
-*/
 import SwiftUI
 import CoreData
 
@@ -8,7 +5,7 @@ struct ItemList: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
         entity: Item.entity(),
-        sortDescriptors: []
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.order, ascending: true)]
     ) var items: FetchedResults<Item>
     
     @ObservedObject var store: Shop
@@ -28,9 +25,7 @@ struct ItemList: View {
             Section {
                 List {
                     ForEach(store.getItem) { s in
-                        HStack {
-                            Text(s.itemName)
-                        }
+                        ItemRow(item: s).id(UUID())
                     }.onDelete(perform: deleteItem)
                 }
             }
@@ -41,6 +36,7 @@ struct ItemList: View {
         withAnimation {
             let addItem = Item(context: self.moc)
             addItem.name = name
+            addItem.order = (items.last?.order ?? 0) + 1
             store.addToItem(addItem)
             PersistentContainer.saveContext()
             self.name = ""
@@ -57,8 +53,36 @@ struct ItemList: View {
     }
 }
 
-//struct ItemList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ItemList()
-//    }
-//}
+// MARK: - CUSTOM ROW
+
+struct ItemRow: View {
+    let item: Item
+    var body: some View {
+        HStack {
+            Text(item.itemName).modifier(cellText())
+        }
+    }
+}
+
+// MARK: - PREVIEWS
+
+struct ItemList_Previews: PreviewProvider {
+    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    static var previews: some View {
+        let data = Shop(context: moc)
+        data.name = "Carrefour"
+        let datum = Item(context: moc)
+        datum.name = "Caramelo"
+        data.addToItem(datum) // addToItem - default func
+        return ItemList(store: data) // store - ObservedObject
+    }
+}
+
+struct ItemRow_Previews: PreviewProvider {
+    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    static var previews: some View {
+        let datum = Item(context: moc)
+        datum.name = "Caramelo"
+        return ItemRow(item: datum).previewLayout(.sizeThatFits)
+    }
+}
