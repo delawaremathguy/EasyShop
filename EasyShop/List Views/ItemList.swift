@@ -10,6 +10,7 @@ struct ItemList: View {
     
     @ObservedObject var store: Shop
     @State var name = ""
+    @State private var totalItems: Int = 0 // Text(String(totalItems)).bold()
     
     var body: some View {
         VStack {
@@ -27,7 +28,7 @@ struct ItemList: View {
                     ForEach(store.getItem) { s in
                         ItemRow(item: s).id(UUID())
                     }.onDelete(perform: deleteItem)
-                }
+                }.onAppear(perform: countItems)
             }
         }.navigationBarTitle(("Items"), displayMode: .inline)
     }
@@ -49,6 +50,13 @@ struct ItemList: View {
                 self.moc.delete(self.items[index])
             }
             PersistentContainer.saveContext()
+        }
+    }
+    
+    func countItems() {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        if let count = try? self.moc.count(for: request) {
+            self.totalItems = count
         }
     }
 }

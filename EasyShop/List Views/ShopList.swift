@@ -58,6 +58,7 @@ struct ShopRow: View {
     var body: some View {
         HStack {
             Text(store.shopName).modifier(cellText())
+           // Text(String(totalItems)).bold()
         }
     }
 }
