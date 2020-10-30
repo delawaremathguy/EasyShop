@@ -1,20 +1,34 @@
-//
-//  SelectedItemView.swift
-//  EasyShop
-//
-//  Created by Fede Duarte on 29/10/2020.
-//
-
 import SwiftUI
+import CoreData
 
 struct SelectedItemView: View {
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(
+        entity: Item.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.select, ascending: false)],
+        predicate: NSPredicate(format: "select == %@", NSNumber(value: true))
+    ) var selectedItems: FetchedResults<Item>
+    @ObservedObject var store: Shop
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            List {
+                ForEach(store.getItem) { s in
+                    Text(s.itemName)
+                }
+            }
+        }.navigationTitle("Items")
     }
 }
 
 struct SelectedItemView_Previews: PreviewProvider {
+    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     static var previews: some View {
-        SelectedItemView()
+        let data = Shop(context: moc)
+        data.name = "Carrefour"
+        let datum = Item(context: moc)
+        datum.name = "Chicken"
+        data.addToItem(datum)
+        return SelectedItemView(store: data)
     }
 }

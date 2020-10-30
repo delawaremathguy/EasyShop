@@ -26,7 +26,7 @@ struct ItemList: View {
             Section {
                 List {
                     ForEach(store.getItem) { s in
-                        ItemListRow(item: s).id(UUID())
+                        ItemListRow(item: s).id(UUID())//, store: store
                     }.onDelete(perform: deleteItem)
                 }
             }
@@ -41,6 +41,7 @@ struct ItemList: View {
             let addItem = Item(context: self.moc)
             addItem.name = name
             addItem.order = (items.last?.order ?? 0) + 1
+            addItem.select = false 
             store.addToItem(addItem)
             PersistentContainer.saveContext()
             self.name = ""
@@ -78,3 +79,22 @@ struct ItemList_Previews: PreviewProvider {
     }
 }
 
+/*
+ 
+ func selectedData(shop: [Shop]) {
+     let moc = PersistentContainer.context
+     moc.performAndWait {
+         shop.forEach { stores in
+             let newShop = Shop(context: moc)
+             newShop.select = true
+             
+             newShop.item?.forEach { itemss in
+                 let itemss = Item(context: moc)
+                 itemss.select = true
+                 
+             }
+         }
+     }
+     PersistentContainer.saveContext()
+ }
+ */

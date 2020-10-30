@@ -39,6 +39,7 @@ struct ShopList: View {
             let addShop = Shop(context: moc)
             addShop.name = self.name
             addShop.order = (shops.last?.order ?? 0) + 1
+            addShop.select = false
             PersistentContainer.saveContext()
             self.name = ""
         }
