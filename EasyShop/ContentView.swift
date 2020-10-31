@@ -6,11 +6,11 @@ struct ContentView: View {
         TabView(selection: $selected) {
             SelectedShopView().tabItem ({
                 Text("Selected")
-                Image(systemName: "plus")
+                Image(systemName: "cart")
             }).tag(0)
             ShopList().tabItem ({
                 Text("List")
-                Image(systemName: "calendar")
+                Image(systemName: "square.and.pencil")
             }).tag(1)
         }
     }
