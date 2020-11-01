@@ -14,13 +14,11 @@ struct ShopListRow: View {
             Spacer()
             Image(systemName: self.store.select ? "star.fill" : "star")
                 .imageScale(.large)
-                .foregroundColor(.yellow)
+                .foregroundColor(Color("tint"))
                 .onTapGesture {  self.store.select.toggle()  }
                 .padding(.trailing, 30)
         }
         .onReceive(self.store.objectWillChange) { PersistentContainer.saveContext() }
-        .frame(width: .infinity, height: 50)
-        
     }
 }
 
@@ -29,7 +27,6 @@ struct ShopListRow: View {
 struct ItemListRow: View {
     @Environment(\.managedObjectContext) var moc
     @ObservedObject var item: Item
-//    @ObservedObject var store: Shop
     
     var body: some View {
         HStack {
@@ -39,16 +36,13 @@ struct ItemListRow: View {
             Spacer()
             Image(systemName: self.item.select ? "star.fill" : "star")
                 .imageScale(.large)
-                .foregroundColor(.yellow)
+                .foregroundColor(Color("tint"))
                 .onTapGesture {
                     self.item.select.toggle()
-//                    self.store.select.toggle()
                 }
                 .padding(.trailing, 30)
         }
         .onReceive(self.item.objectWillChange) { PersistentContainer.saveContext() }
-//        .onReceive(self.store.objectWillChange) { PersistentContainer.saveContext() }
-        .frame(width: .infinity, height: 50)
     }
 }
 

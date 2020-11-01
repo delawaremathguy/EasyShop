@@ -8,60 +8,48 @@ struct ShopList: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Shop.order, ascending: true)]
     ) var shops: FetchedResults<Shop>
     @State var name = ""
+    @State var isPresented = false
     
     var body: some View {
         NavigationView {
             List {
-                Section {
-                    HStack {
-                        TextField("name of the shop", text: self.$name)
-                            .padding(.vertical, 10)
-                            .padding(.leading, 15)
-                            .font(Font.system(size: 20))
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .multilineTextAlignment(.center)
-                            .disableAutocorrection(true)
-                            .keyboardType(UIKeyboardType.default)
-                        
-                        Button(action: { newShop()  }) {
-                            Image(systemName: "plus")
-                                .imageScale(.large)
-                                .frame(width: 50, height: 50)
-                        }.disabled(name.isEmpty)
-                        .padding()
-                    } // HS
-                   // .frame(height: 60)
-                    .background(Color("accent"))
-
+                ForEach(shops, id: \.self) { s in
+                    NavigationLink(destination: ItemList(store: s)) {
+                        ShopListRow(store: s).id(UUID())
+                    }
+                }.onDelete(perform: deleteShop)
+            }
+            .sheet(isPresented: $isPresented) { ShopListModal { name in
+                    self.newShop(name: name)
+                    self.isPresented = false
                 }
-                Section {
-                    ForEach(shops, id: \.self) { s in
-                        NavigationLink(destination: ItemList(store: s)) {
-                            ShopListRow(store: s).id(UUID())
-                        }
-                    }.onDelete(perform: deleteShop)
-                    
-                }
-            }.navigationBarTitle(("Shops"))
+            }
+            .navigationBarTitle(("Shops"), displayMode: .inline)
+            .navigationBarItems(trailing:
+                    Button(action: { self.isPresented.toggle() }) {
+                          Image(systemName: "plus")
+                               .imageScale(.large)
+                               .frame(width: 40, height: 40)
+            })
         }.accentColor(Color("tint"))
     }
-    func newShop() {
-        withAnimation {
+    func newShop(name: String) {
+//       withAnimation {
             let addShop = Shop(context: moc)
-            addShop.name = self.name
+            addShop.name = name
             addShop.order = (shops.last?.order ?? 0) + 1
             addShop.select = false
             PersistentContainer.saveContext()
-            self.name = ""
-        }
+         // self.name = ""
+//        }
     }
     func deleteShop(at offsets: IndexSet) {
-        withAnimation {
+//        withAnimation {
             for index in offsets {
                 self.moc.delete(self.shops[index])
             }
             PersistentContainer.saveContext()
-        }
+//        }
     }
 }
 

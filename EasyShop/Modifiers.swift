@@ -38,6 +38,7 @@ struct customTextfield: ViewModifier { // Image
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .multilineTextAlignment(.center)
             .disableAutocorrection(true)
+            .keyboardType(UIKeyboardType.default)
     }
 }
 
@@ -55,5 +56,15 @@ struct cellStack: ViewModifier { // Stack
         content
             .background(RoundedRectangle(cornerRadius: 10)
                             .foregroundColor(Color("rowcolor"))) // card
+    }
+}
+
+struct customButton: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(width: 150, height: 50)
+            .foregroundColor(Color("tint"))
+            .background(Color("accent"))
+            .cornerRadius(15)
     }
 }

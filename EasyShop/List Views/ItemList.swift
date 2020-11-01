@@ -17,14 +17,7 @@ struct ItemList: View {
             Section {
                 HStack {
                     TextField("name of the product", text: $name)
-                        .padding(.vertical, 10)
-                        .padding(.leading, 15)
-                        .font(Font.system(size: 20))
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .multilineTextAlignment(.center)
-                        .disableAutocorrection(true)
-                        .keyboardType(UIKeyboardType.default)
-                    
+                        .modifier(customTextfield())
                     Button(action: { newItem() }) {
                         Image(systemName: "plus")
                             .imageScale(.large)
@@ -49,7 +42,7 @@ struct ItemList: View {
         .navigationBarItems(leading: Text(String(totalItems)).bold())
     }
     func newItem() {
-        withAnimation {
+//        withAnimation {
             let addItem = Item(context: self.moc)
             addItem.name = name
             addItem.order = (items.last?.order ?? 0) + 1
@@ -57,15 +50,15 @@ struct ItemList: View {
             store.addToItem(addItem)
             PersistentContainer.saveContext()
             self.name = ""
-        }
+ //       }
     }
     func deleteItem(at offsets: IndexSet) {
-        withAnimation {
+//        withAnimation {
             for index in offsets {
                 self.moc.delete(self.items[index])
             }
             PersistentContainer.saveContext()
-        }
+//        }
     }
     
     func countItems() {

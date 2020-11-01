@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selected = 0
+    @State private var selected = 1
     var body: some View {
         TabView(selection: $selected) {
             SelectedShopView().tabItem ({
@@ -12,7 +12,7 @@ struct ContentView: View {
                 Text("List")
                 Image(systemName: "square.and.pencil")
             }).tag(1)
-        }
+        }.accentColor(Color("tint"))
     }
 }
 

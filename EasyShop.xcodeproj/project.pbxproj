@@ -24,6 +24,7 @@
 		DA3B3C9A254B477800A78604 /* ShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C99254B477800A78604 /* ShopList.swift */; };
 		DA3B3C9E254B478300A78604 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C9D254B478300A78604 /* ItemList.swift */; };
 		DA3B3CA4254B4CED00A78604 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3CA3254B4CED00A78604 /* Modifiers.swift */; };
+		DA420583254F350100A30CC5 /* ShopListModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA420582254F350100A30CC5 /* ShopListModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		DA3B3C99254B477800A78604 /* ShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopList.swift; sourceTree = "<group>"; };
 		DA3B3C9D254B478300A78604 /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
 		DA3B3CA3254B4CED00A78604 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		DA420582254F350100A30CC5 /* ShopListModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				DA3B3C99254B477800A78604 /* ShopList.swift */,
+				DA420582254F350100A30CC5 /* ShopListModal.swift */,
 				DA3B3C9D254B478300A78604 /* ItemList.swift */,
 				DA1CF275254C9A63008E4084 /* Shop+ItemRows.swift */,
 				DA27874B254CD4A5003E1EDC /* StackOverFlow.swift */,
@@ -209,6 +212,7 @@
 				DA27874C254CD4A5003E1EDC /* StackOverFlow.swift in Sources */,
 				DA3B3C90254B465700A78604 /* Item+CoreDataProperties.swift in Sources */,
 				DA3B3C8D254B465700A78604 /* Shop+CoreDataClass.swift in Sources */,
+				DA420583254F350100A30CC5 /* ShopListModal.swift in Sources */,
 				DA3B3C93254B475500A78604 /* SelectedShopView.swift in Sources */,
 				DA3B3C67254B417700A78604 /* ContentView.swift in Sources */,
 				DA3B3C65254B417700A78604 /* EasyShopApp.swift in Sources */,
