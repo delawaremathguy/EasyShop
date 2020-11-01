@@ -16,13 +16,25 @@ struct ItemList: View {
         VStack {
             Section {
                 HStack {
-                    TextField("name of the product", text: $name).modifier(customTextfield())
+                    TextField("name of the product", text: $name)
+                        .padding(.vertical, 10)
+                        .padding(.leading, 15)
+                        .font(Font.system(size: 20))
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .multilineTextAlignment(.center)
+                        .disableAutocorrection(true)
+                        .keyboardType(UIKeyboardType.default)
+                    
                     Button(action: { newItem() }) {
                         Image(systemName: "plus")
                             .imageScale(.large)
                             .frame(width: 40, height: 40)
                     }.disabled(name.isEmpty)
-                }
+                    .padding()
+                } // HS
+               // .frame(height: 60)
+                .background(Color("accent"))
+
             }
             Section {
                 List {
@@ -75,6 +87,7 @@ struct ItemList_Previews: PreviewProvider {
         datum.name = "Caramelo"
         data.addToItem(datum) // addToItem - default func
         return ItemList(store: data) // store - ObservedObject
+            .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
     }
 }
 

@@ -1,19 +1,13 @@
-//
-//  Modifiers.swift
-//  EasyShop
-//
-//  Created by Fede Duarte on 29/10/2020.
-//
-
 import SwiftUI
 
 struct Modifiers: View {
+    @State private var name = ""
     var body: some View {
         VStack {
             HStack {
                 Text("Hello, World!").modifier(cellText())
             }.modifier(cellStack())
-            
+            TextField("name goes here", text: $name).modifier(customTextfield())
             HStack {
                 Text("Carrefour")
                     .font(Font.system(size: 30))
@@ -42,6 +36,7 @@ struct customTextfield: ViewModifier { // Image
             .padding(.leading, 15)
             .font(Font.system(size: 20))
             .textFieldStyle(RoundedBorderTextFieldStyle())
+            .multilineTextAlignment(.center)
             .disableAutocorrection(true)
     }
 }

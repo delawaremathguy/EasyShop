@@ -14,15 +14,25 @@ struct ShopList: View {
             List {
                 Section {
                     HStack {
-                        TextField("name of the shop", text: self.$name).modifier(customTextfield())
+                        TextField("name of the shop", text: self.$name)
+                            .padding(.vertical, 10)
+                            .padding(.leading, 15)
+                            .font(Font.system(size: 20))
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .multilineTextAlignment(.center)
+                            .disableAutocorrection(true)
+                            .keyboardType(UIKeyboardType.default)
+                        
                         Button(action: { newShop()  }) {
                             Image(systemName: "plus")
                                 .imageScale(.large)
-                                .frame(width: 40, height: 40)
+                                .frame(width: 50, height: 50)
                         }.disabled(name.isEmpty)
                         .padding()
                     } // HS
-                    .frame(width: .infinity, height: 60)
+                   // .frame(height: 60)
+                    .background(Color("accent"))
+
                 }
                 Section {
                     ForEach(shops, id: \.self) { s in
@@ -32,9 +42,8 @@ struct ShopList: View {
                     }.onDelete(perform: deleteShop)
                     
                 }
-            }
-            .navigationBarTitle(("Shops"), displayMode: .inline)
-        }
+            }.navigationBarTitle(("Shops"))
+        }.accentColor(Color("tint"))
     }
     func newShop() {
         withAnimation {

@@ -20,6 +20,7 @@ struct ShopListRow: View {
         }
         .onReceive(self.store.objectWillChange) { PersistentContainer.saveContext() }
         .frame(width: .infinity, height: 50)
+        
     }
 }
 
