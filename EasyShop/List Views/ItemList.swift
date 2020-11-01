@@ -19,6 +19,7 @@ struct ItemList: View {
                     TextField("name of the product", text: $name).modifier(customTextfield())
                     Button(action: { newItem() }) {
                         Image(systemName: "plus")
+                            .imageScale(.large)
                             .frame(width: 40, height: 40)
                     }.disabled(name.isEmpty)
                 }
@@ -35,7 +36,6 @@ struct ItemList: View {
         .navigationBarTitle(("Items"), displayMode: .inline)
         .navigationBarItems(leading: Text(String(totalItems)).bold())
     }
-    
     func newItem() {
         withAnimation {
             let addItem = Item(context: self.moc)
@@ -47,7 +47,6 @@ struct ItemList: View {
             self.name = ""
         }
     }
-    
     func deleteItem(at offsets: IndexSet) {
         withAnimation {
             for index in offsets {

@@ -17,9 +17,12 @@ struct ShopList: View {
                         TextField("name of the shop", text: self.$name).modifier(customTextfield())
                         Button(action: { newShop()  }) {
                             Image(systemName: "plus")
+                                .imageScale(.large)
                                 .frame(width: 40, height: 40)
                         }.disabled(name.isEmpty)
-                    }
+                        .padding()
+                    } // HS
+                    .frame(width: .infinity, height: 60)
                 }
                 Section {
                     ForEach(shops, id: \.self) { s in
@@ -30,7 +33,6 @@ struct ShopList: View {
                     
                 }
             }
-            
             .navigationBarTitle(("Shops"), displayMode: .inline)
         }
     }

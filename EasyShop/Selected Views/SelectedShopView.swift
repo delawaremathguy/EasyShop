@@ -17,13 +17,11 @@ struct SelectedShopView: View {
                         NavigationLink(destination: SelectedItemView(store: s)) {
                             HStack {
                                 Text(s.shopName).id(UUID())
-                                    .font(Font.system(size: 30))
+                                    .font(Font.system(size: 20))
                                     .padding(.leading, 20)
                                 Spacer()
                             }
-                            .frame(width: .infinity, height: 80)
-                            .background(Color("rowcolor"))
-                            .cornerRadius(20)
+                            .frame(width: .infinity, height: 50)
                         }
                     }
                 }

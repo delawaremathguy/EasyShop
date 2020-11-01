@@ -9,17 +9,17 @@ struct ShopListRow: View {
     var body: some View {
         HStack {
             Text(store.shopName)
-                .font(Font.system(size: 30))
+                .font(Font.system(size: 20))
                 .padding(.leading, 20)
             Spacer()
-            Image(systemName: self.store.select ? "checkmark.square.fill" : "checkmark.square")
+            Image(systemName: self.store.select ? "star.fill" : "star")
+                .imageScale(.large)
+                .foregroundColor(.yellow)
                 .onTapGesture {  self.store.select.toggle()  }
-                .padding(.trailing, 50)
+                .padding(.trailing, 30)
         }
         .onReceive(self.store.objectWillChange) { PersistentContainer.saveContext() }
-        .frame(width: .infinity, height: 80)
-        .background(Color("rowcolor"))
-        .cornerRadius(20)
+        .frame(width: .infinity, height: 50)
     }
 }
 
@@ -33,21 +33,21 @@ struct ItemListRow: View {
     var body: some View {
         HStack {
             Text(item.itemName)
-                .font(Font.system(size: 30))
+                .font(Font.system(size: 20))
                 .padding(.leading, 20)
             Spacer()
-            Image(systemName: self.item.select ? "checkmark.square.fill" : "checkmark.square")
+            Image(systemName: self.item.select ? "star.fill" : "star")
+                .imageScale(.large)
+                .foregroundColor(.yellow)
                 .onTapGesture {
                     self.item.select.toggle()
 //                    self.store.select.toggle()
                 }
-                .padding(.trailing, 50)
+                .padding(.trailing, 30)
         }
         .onReceive(self.item.objectWillChange) { PersistentContainer.saveContext() }
 //        .onReceive(self.store.objectWillChange) { PersistentContainer.saveContext() }
-        .frame(width: .infinity, height: 80)
-        .background(Color("rowcolor"))
-        .cornerRadius(20)
+        .frame(width: .infinity, height: 50)
     }
 }
 
@@ -70,5 +70,11 @@ struct ItemListRow_Previews: PreviewProvider {
         let datum = Item(context: moc)
         datum.name = "Pollo"
         return ItemListRow(item: datum).previewLayout(.sizeThatFits)//, store: data
+    }
+}
+
+struct List_Previews: PreviewProvider {
+    static var previews: some View {
+        ShopList().environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
     }
 }
