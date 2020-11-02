@@ -1,8 +1,7 @@
 import SwiftUI
 import CoreData
 
-var rowHeight: CGFloat = 50
-// .frame(height: rowHeight)
+var rowHeight: CGFloat = 50 //.frame(height: rowHeight)
 
 struct ShopList: View {
     @Environment(\.managedObjectContext) var moc
@@ -35,9 +34,7 @@ struct ShopList: View {
                                                 .imageScale(.large)
                                                 .frame(width: 50, height: 50)
                                         })
-                if shops.count == 0 {
-                    EmptyShopList()
-                }
+                if shops.count == 0 { EmptyShopList() }
             } // ZS
         }.accentColor(Color("tint"))
     }
@@ -70,22 +67,3 @@ struct ShopList_Previews: PreviewProvider {
     }
 }
 
-// MARK: - EMPTY VIEW
-
-struct EmptyShopList: View {
-    var body: some View {
-        ZStack {
-            VStack {
-                HStack {
-                    Text("Add new Shop from here!")
-                    Image(systemName: "arrow.up.right")
-                        .resizable()
-                        .frame(width: 60, height: 60, alignment: .trailing)
-                }
-                .foregroundColor(Color("tint")).opacity(0.8)
-                .padding()
-                Spacer()
-            }
-        }
-    }
-}

@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selected = 1
+    @State private var selected = 0
     var body: some View {
         TabView(selection: $selected) {
             SelectedShopView().tabItem ({
-                Text("Selected")
+                Text("Cart")
                 Image(systemName: "cart")
             }).tag(0)
             ShopList().tabItem ({
