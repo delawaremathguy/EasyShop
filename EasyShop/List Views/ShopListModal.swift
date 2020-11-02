@@ -38,13 +38,7 @@ struct ModalTest: View {
         NavigationView {
             VStack {
                 TextField("Enter the name", text: $name)
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 15)
-                    .font(Font.system(size: 20))
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .multilineTextAlignment(.center)
-                    .disableAutocorrection(true)
-                    .keyboardType(UIKeyboardType.default)
+                    .modifier(customTextfield())
                 
                 Button(action: { }) {
                     Text("Save")

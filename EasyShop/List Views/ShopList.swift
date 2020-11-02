@@ -18,7 +18,11 @@ struct ShopList: View {
                         ShopListRow(store: s).id(UUID())
                     }
                 }.onDelete(perform: deleteShop)
-            }
+            } // LS
+            //.listStyle(SidebarListStyle())
+            .listStyle(GroupedListStyle())
+            //.listStyle(InsetGroupedListStyle())
+            
             .sheet(isPresented: $isPresented) { ShopListModal { name in
                     self.newShop(name: name)
                     self.isPresented = false

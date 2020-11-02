@@ -37,9 +37,7 @@ struct ItemListRow: View {
             Image(systemName: self.item.select ? "star.fill" : "star")
                 .imageScale(.large)
                 .foregroundColor(Color("tint"))
-                .onTapGesture {
-                    self.item.select.toggle()
-                }
+                .onTapGesture { self.item.select.toggle() }
                 .padding(.trailing, 30)
         }
         .onReceive(self.item.objectWillChange) { PersistentContainer.saveContext() }

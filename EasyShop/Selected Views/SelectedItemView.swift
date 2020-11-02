@@ -15,9 +15,11 @@ struct SelectedItemView: View {
             List {
                 ForEach(store.getItem) { s in
                     Text(s.itemName)
+                        .font(Font.system(size: 20))
+                        .padding(.leading, 20)
                 }
-            }
-        }.navigationTitle("Items")
+            }.listStyle(GroupedListStyle())
+        }.navigationTitle("Products")
     }
 }
 

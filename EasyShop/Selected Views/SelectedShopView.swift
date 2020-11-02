@@ -12,6 +12,9 @@ struct SelectedShopView: View {
     var body: some View {
         NavigationView {
             VStack {
+                if selectedShops.count == 0 {
+                    EmptyList().padding(.top, 50)
+                }
                 List {
                     ForEach(selectedShops, id:\.self) { s in
                         NavigationLink(destination: SelectedItemView(store: s)) {
@@ -21,10 +24,10 @@ struct SelectedShopView: View {
                                     .padding(.leading, 20)
                                 Spacer()
                             }
-                            .frame(width: .infinity, height: 50)
+                           // .frame(width: .infinity, height: 50)
                         }
                     }
-                }
+                }.listStyle(GroupedListStyle())
             }
             .navigationTitle("Shops")
         }
@@ -34,5 +37,16 @@ struct SelectedShopView: View {
 struct SelectedShopView_Previews: PreviewProvider {
     static var previews: some View {
         SelectedShopView().environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
+    }
+}
+
+struct EmptyList: View {
+    var body: some View {
+        VStack {
+            Text("Start from the list of Shops")
+            Image(systemName: "tray.and.arrow.down.fill")
+                .resizable()
+                .frame(width: 200, height: 200)
+        }.foregroundColor(Color("tint")).opacity(0.8)
     }
 }

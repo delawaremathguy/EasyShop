@@ -15,13 +15,22 @@ struct ItemList: View {
     var body: some View {
         VStack {
             Section {
-                HStack {
+                HStack(spacing: 5) {
                     TextField("name of the product", text: $name)
-                        .modifier(customTextfield())
+                        .padding(.vertical, 10)
+                        .padding(.leading, 15)
+                        .font(Font.system(size: 20))
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .multilineTextAlignment(.center)
+                        .disableAutocorrection(true)
+                        .keyboardType(UIKeyboardType.default)
+                    
                     Button(action: { newItem() }) {
                         Image(systemName: "plus")
                             .imageScale(.large)
                             .frame(width: 40, height: 40)
+                            .foregroundColor(Color("tint"))
+                            .opacity(name.isEmpty ? 0.6 : 1.0)
                     }.disabled(name.isEmpty)
                     .padding()
                 } // HS
@@ -34,11 +43,11 @@ struct ItemList: View {
                     ForEach(store.getItem) { s in
                         ItemListRow(item: s).id(UUID())//, store: store
                     }.onDelete(perform: deleteItem)
-                }
+                }.listStyle(GroupedListStyle())
             }
         }
         .onAppear(perform: countItems)
-        .navigationBarTitle(("Items"), displayMode: .inline)
+        .navigationBarTitle(("Products"), displayMode: .inline)
         .navigationBarItems(leading: Text(String(totalItems)).bold())
     }
     func newItem() {

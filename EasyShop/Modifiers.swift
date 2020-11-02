@@ -33,7 +33,7 @@ struct customTextfield: ViewModifier { // Image
     func body(content: Content) -> some View {
         content
             .padding(.vertical, 10)
-            .padding(.leading, 15)
+            .padding(.horizontal, 25)
             .font(Font.system(size: 20))
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .multilineTextAlignment(.center)
