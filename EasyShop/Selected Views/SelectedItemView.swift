@@ -14,9 +14,12 @@ struct SelectedItemView: View {
         VStack {
             List {
                 ForEach(store.getItem) { s in
-                    Text(s.itemName)
-                        .font(Font.system(size: 20))
-                        .padding(.leading, 20)
+                    HStack {
+                        Text(s.itemName).id(UUID())
+                            .font(Font.system(size: 20))
+                            .padding(.leading, 20)
+                        Spacer()
+                    }.frame(height: rowHeight)
                 }
             }.listStyle(GroupedListStyle())
         }.navigationTitle("Products")

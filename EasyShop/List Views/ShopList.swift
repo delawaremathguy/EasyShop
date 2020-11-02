@@ -1,6 +1,9 @@
 import SwiftUI
 import CoreData
 
+var rowHeight: CGFloat = 50
+// .frame(height: rowHeight)
+
 struct ShopList: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(
@@ -12,29 +15,30 @@ struct ShopList: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(shops, id: \.self) { s in
-                    NavigationLink(destination: ItemList(store: s)) {
-                        ShopListRow(store: s).id(UUID())
-                    }
-                }.onDelete(perform: deleteShop)
-            } // LS
-            //.listStyle(SidebarListStyle())
-            .listStyle(GroupedListStyle())
-            //.listStyle(InsetGroupedListStyle())
-            
-            .sheet(isPresented: $isPresented) { ShopListModal { name in
+            ZStack {
+                List {
+                    ForEach(shops, id: \.self) { s in
+                        NavigationLink(destination: ItemList(store: s)) {
+                            ShopListRow(store: s).id(UUID())
+                        }
+                    }.onDelete(perform: deleteShop)
+                    
+                } // LS
+                .listStyle(GroupedListStyle())
+                .sheet(isPresented: $isPresented) { ShopListModal { name in
                     self.newShop(name: name)
-                    self.isPresented = false
+                    self.isPresented = false } }
+                .navigationBarTitle(("Shops"), displayMode: .inline)
+                .navigationBarItems(trailing:
+                                        Button(action: { self.isPresented.toggle() }) {
+                                            Image(systemName: "plus")
+                                                .imageScale(.large)
+                                                .frame(width: 50, height: 50)
+                                        })
+                if shops.count == 0 {
+                    EmptyShopList()
                 }
-            }
-            .navigationBarTitle(("Shops"), displayMode: .inline)
-            .navigationBarItems(trailing:
-                    Button(action: { self.isPresented.toggle() }) {
-                          Image(systemName: "plus")
-                               .imageScale(.large)
-                               .frame(width: 40, height: 40)
-            })
+            } // ZS
         }.accentColor(Color("tint"))
     }
     func newShop(name: String) {
@@ -61,8 +65,27 @@ struct ShopList: View {
 
 struct ShopList_Previews: PreviewProvider {
     static var previews: some View {
-       ShopList().environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
+        ShopList().environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
+            .preferredColorScheme(.dark)
     }
 }
 
+// MARK: - EMPTY VIEW
 
+struct EmptyShopList: View {
+    var body: some View {
+        ZStack {
+            VStack {
+                HStack {
+                    Text("Add new Shop from here!")
+                    Image(systemName: "arrow.up.right")
+                        .resizable()
+                        .frame(width: 60, height: 60, alignment: .trailing)
+                }
+                .foregroundColor(Color("tint")).opacity(0.8)
+                .padding()
+                Spacer()
+            }
+        }
+    }
+}

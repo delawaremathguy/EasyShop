@@ -8,16 +8,18 @@ struct ShopListRow: View {
     @ObservedObject var store: Shop
     var body: some View {
         HStack {
-            Text(store.shopName)
-                .font(Font.system(size: 20))
-                .padding(.leading, 20)
-            Spacer()
             Image(systemName: self.store.select ? "star.fill" : "star")
                 .imageScale(.large)
                 .foregroundColor(Color("tint"))
                 .onTapGesture {  self.store.select.toggle()  }
-                .padding(.trailing, 30)
-        }
+                .padding(.leading, 10)
+            
+            Text(store.shopName)
+                .font(Font.system(size: 20))
+                .padding(.leading, 20)
+            Spacer()
+
+        }.frame(height: rowHeight)
         .onReceive(self.store.objectWillChange) { PersistentContainer.saveContext() }
     }
 }
@@ -30,16 +32,18 @@ struct ItemListRow: View {
     
     var body: some View {
         HStack {
-            Text(item.itemName)
-                .font(Font.system(size: 20))
-                .padding(.leading, 20)
-            Spacer()
             Image(systemName: self.item.select ? "star.fill" : "star")
                 .imageScale(.large)
                 .foregroundColor(Color("tint"))
                 .onTapGesture { self.item.select.toggle() }
-                .padding(.trailing, 30)
-        }
+                .padding(.leading, 10)
+            
+            Text(item.itemName)
+                .font(Font.system(size: 20))
+                .padding(.leading, 20)
+            Spacer()
+
+        }.frame(height: rowHeight)
         .onReceive(self.item.objectWillChange) { PersistentContainer.saveContext() }
     }
 }

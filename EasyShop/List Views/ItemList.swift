@@ -17,6 +17,7 @@ struct ItemList: View {
             Section {
                 HStack(spacing: 5) {
                     TextField("name of the product", text: $name)
+                        .frame(height: rowHeight)
                         .padding(.vertical, 10)
                         .padding(.leading, 15)
                         .font(Font.system(size: 20))
@@ -28,15 +29,13 @@ struct ItemList: View {
                     Button(action: { newItem() }) {
                         Image(systemName: "plus")
                             .imageScale(.large)
-                            .frame(width: 40, height: 40)
+                            .frame(width: 50, height: 50)
                             .foregroundColor(Color("tint"))
                             .opacity(name.isEmpty ? 0.6 : 1.0)
                     }.disabled(name.isEmpty)
                     .padding()
                 } // HS
-               // .frame(height: 60)
                 .background(Color("accent"))
-
             }
             Section {
                 List {
