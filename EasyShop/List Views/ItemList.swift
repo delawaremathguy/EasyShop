@@ -12,34 +12,21 @@ struct ItemList: View {
     @State var name = ""
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Section {
-                HStack(spacing: 5) {
+                HStack(spacing: 0) {
                     TextField("name of the product", text: $name)
-                        .frame(height: rowHeight)
-                        .padding(.vertical, 10)
-                        .padding(.leading, 15)
-                        .font(Font.system(size: 20))
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .multilineTextAlignment(.center)
-                        .disableAutocorrection(true)
-                        .keyboardType(UIKeyboardType.default)
-                    
+                        .modifier(CustomTextField1())
                     Button(action: { newItem() }) {
                         Image(systemName: "plus")
-                            .imageScale(.large)
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(Color("tint"))
-                            .opacity(name.isEmpty ? 0.6 : 1.0)
+                            .modifier(CustomButton1())
+                            .foregroundColor(name.isEmpty ? Color("wb") : Color("tint"))
                     }.disabled(name.isEmpty)
-                    .padding()
-                } // HS
-                .background(Color("accent"))
-            }
+                }.modifier(CustomHStack1())
+            } // SN
             Section {
                 List {
-                    ForEach(store.getItem) { s in
-                        ItemListRow(item: s).id(UUID())
+                    ForEach(store.getItem) { s in ItemListRow(item: s).id(UUID())
                     }.onDelete(perform: deleteItem)
                 }.listStyle(GroupedListStyle())
             }
@@ -77,10 +64,41 @@ struct ItemList_Previews: PreviewProvider {
         datum.name = "Caramelo"
         data.addToItem(datum) // addToItem - default func
         return ItemList(store: data) // store - ObservedObject
-            .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
+            .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)//.preferredColorScheme(.dark)
     }
 }
 
+// MARK: - MODIFIERS
+
+struct CustomTextField1: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(height: rowHeight)
+            .background(Color("wb"))
+            .font(Font.system(size: 20))
+            .multilineTextAlignment(.center)
+            .disableAutocorrection(true)
+            .keyboardType(UIKeyboardType.default)
+    }
+}
+
+struct CustomButton1: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .imageScale(.large)
+            .frame(width: 50, height: 50)
+            .background(Color("wb"))
+    }
+}
+
+struct CustomHStack1: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("wb")))
+            .padding()
+            .background(Color("accent"))
+    }
+}
 /*
  
  func selectedData(shop: [Shop]) {

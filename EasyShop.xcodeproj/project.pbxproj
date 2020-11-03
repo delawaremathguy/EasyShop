@@ -27,6 +27,7 @@
 		DA40F4F925505BD700017392 /* EmptySelectedShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40F4F825505BD700017392 /* EmptySelectedShop.swift */; };
 		DA40F4FD25505C3100017392 /* EmptyShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40F4FC25505C3100017392 /* EmptyShopList.swift */; };
 		DA420583254F350100A30CC5 /* ShopListModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA420582254F350100A30CC5 /* ShopListModal.swift */; };
+		DA887F6D2551D54700E93918 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA887F6C2551D54700E93918 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		DA40F4F825505BD700017392 /* EmptySelectedShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySelectedShop.swift; sourceTree = "<group>"; };
 		DA40F4FC25505C3100017392 /* EmptyShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyShopList.swift; sourceTree = "<group>"; };
 		DA420582254F350100A30CC5 /* ShopListModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListModal.swift; sourceTree = "<group>"; };
+		DA887F6C2551D54700E93918 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				DA3B3C8C254B465700A78604 /* Item+CoreDataProperties.swift */,
 				DA3B3C79254B43A200A78604 /* CoreDataModel.xcdatamodeld */,
 				DA3B3C75254B426400A78604 /* Persistence.swift */,
+				DA887F6C2551D54700E93918 /* CoreDataManager.swift */,
 			);
 			path = CoreDataFiles;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				DA3B3C76254B426400A78604 /* Persistence.swift in Sources */,
 				DA3B3C9A254B477800A78604 /* ShopList.swift in Sources */,
 				DA40F4F925505BD700017392 /* EmptySelectedShop.swift in Sources */,
+				DA887F6D2551D54700E93918 /* CoreDataManager.swift in Sources */,
 				DA3B3C8E254B465700A78604 /* Shop+CoreDataProperties.swift in Sources */,
 				DA3B3C96254B476300A78604 /* SelectedItemView.swift in Sources */,
 				DA3B3C9E254B478300A78604 /* ItemList.swift in Sources */,

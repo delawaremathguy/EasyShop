@@ -24,7 +24,7 @@ struct ShopListModal: View {
                         .frame(width: 150, height: 50)
                         .font(Font.system(size: 20))
                         .foregroundColor(Color("tint"))
-                        .background(Color("wb"))
+                        .background(Color("grayblack"))
                         .cornerRadius(15)
                         .opacity(name.isEmpty ? 0.6 : 1.0)
                     
