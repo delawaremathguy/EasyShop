@@ -23,3 +23,6 @@ struct EmptyShopList_Previews: PreviewProvider {
         EmptyShopList()
     }
 }
+
+
+
