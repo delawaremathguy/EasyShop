@@ -39,22 +39,17 @@ struct ShopList: View {
         }.accentColor(Color("tint"))
     }
     func newShop(name: String) {
-//       withAnimation {
             let addShop = Shop(context: moc)
             addShop.name = name
             addShop.order = (shops.last?.order ?? 0) + 1
             addShop.select = false
             PersistentContainer.saveContext()
-         // self.name = ""
-//        }
     }
     func deleteShop(at offsets: IndexSet) {
-//        withAnimation {
             for index in offsets {
                 self.moc.delete(self.shops[index])
             }
             PersistentContainer.saveContext()
-//        }
     }
 }
 

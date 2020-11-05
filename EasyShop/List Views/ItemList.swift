@@ -33,7 +33,6 @@ struct ItemList: View {
         }.navigationBarTitle(("Products"), displayMode: .inline)
     }
     func newItem() {
-//        withAnimation {
             let addItem = Item(context: self.moc)
             addItem.name = name
             addItem.order = (items.last?.order ?? 0) + 1
@@ -41,15 +40,12 @@ struct ItemList: View {
             store.addToItem(addItem)
             PersistentContainer.saveContext()
             self.name = ""
- //       }
     }
     func deleteItem(at offsets: IndexSet) {
-//        withAnimation {
             for index in offsets {
                 self.moc.delete(self.items[index])
             }
             PersistentContainer.saveContext()
-//        }
     }
 }
 
@@ -99,22 +95,4 @@ struct CustomHStack1: ViewModifier {
             .background(Color("accent"))
     }
 }
-/*
- 
- func selectedData(shop: [Shop]) {
-     let moc = PersistentContainer.context
-     moc.performAndWait {
-         shop.forEach { stores in
-             let newShop = Shop(context: moc)
-             newShop.select = true
-             
-             newShop.item?.forEach { itemss in
-                 let itemss = Item(context: moc)
-                 itemss.select = true
-                 
-             }
-         }
-     }
-     PersistentContainer.saveContext()
- }
- */
+

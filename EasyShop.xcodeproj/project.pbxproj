@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		DA1CF276254C9A63008E4084 /* Shop+ItemRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1CF275254C9A63008E4084 /* Shop+ItemRows.swift */; };
-		DA27874C254CD4A5003E1EDC /* StackOverFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27874B254CD4A5003E1EDC /* StackOverFlow.swift */; };
 		DA3B3C65254B417700A78604 /* EasyShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C64254B417700A78604 /* EasyShopApp.swift */; };
 		DA3B3C67254B417700A78604 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C66254B417700A78604 /* ContentView.swift */; };
 		DA3B3C69254B417700A78604 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA3B3C68254B417700A78604 /* Assets.xcassets */; };
@@ -27,12 +26,10 @@
 		DA40F4F925505BD700017392 /* EmptySelectedShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40F4F825505BD700017392 /* EmptySelectedShop.swift */; };
 		DA40F4FD25505C3100017392 /* EmptyShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40F4FC25505C3100017392 /* EmptyShopList.swift */; };
 		DA420583254F350100A30CC5 /* ShopListModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA420582254F350100A30CC5 /* ShopListModal.swift */; };
-		DA887F6D2551D54700E93918 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA887F6C2551D54700E93918 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DA1CF275254C9A63008E4084 /* Shop+ItemRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shop+ItemRows.swift"; sourceTree = "<group>"; };
-		DA27874B254CD4A5003E1EDC /* StackOverFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackOverFlow.swift; sourceTree = "<group>"; };
 		DA3B3C61254B417700A78604 /* EasyShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3B3C64254B417700A78604 /* EasyShopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyShopApp.swift; sourceTree = "<group>"; };
 		DA3B3C66254B417700A78604 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,7 +50,6 @@
 		DA40F4F825505BD700017392 /* EmptySelectedShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySelectedShop.swift; sourceTree = "<group>"; };
 		DA40F4FC25505C3100017392 /* EmptyShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyShopList.swift; sourceTree = "<group>"; };
 		DA420582254F350100A30CC5 /* ShopListModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListModal.swift; sourceTree = "<group>"; };
-		DA887F6C2551D54700E93918 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +112,6 @@
 				DA3B3C8C254B465700A78604 /* Item+CoreDataProperties.swift */,
 				DA3B3C79254B43A200A78604 /* CoreDataModel.xcdatamodeld */,
 				DA3B3C75254B426400A78604 /* Persistence.swift */,
-				DA887F6C2551D54700E93918 /* CoreDataManager.swift */,
 			);
 			path = CoreDataFiles;
 			sourceTree = "<group>";
@@ -139,7 +134,6 @@
 				DA3B3C9D254B478300A78604 /* ItemList.swift */,
 				DA1CF275254C9A63008E4084 /* Shop+ItemRows.swift */,
 				DA40F4FC25505C3100017392 /* EmptyShopList.swift */,
-				DA27874B254CD4A5003E1EDC /* StackOverFlow.swift */,
 			);
 			path = "List Views";
 			sourceTree = "<group>";
@@ -216,11 +210,9 @@
 				DA3B3C76254B426400A78604 /* Persistence.swift in Sources */,
 				DA3B3C9A254B477800A78604 /* ShopList.swift in Sources */,
 				DA40F4F925505BD700017392 /* EmptySelectedShop.swift in Sources */,
-				DA887F6D2551D54700E93918 /* CoreDataManager.swift in Sources */,
 				DA3B3C8E254B465700A78604 /* Shop+CoreDataProperties.swift in Sources */,
 				DA3B3C96254B476300A78604 /* SelectedItemView.swift in Sources */,
 				DA3B3C9E254B478300A78604 /* ItemList.swift in Sources */,
-				DA27874C254CD4A5003E1EDC /* StackOverFlow.swift in Sources */,
 				DA3B3C90254B465700A78604 /* Item+CoreDataProperties.swift in Sources */,
 				DA3B3C8D254B465700A78604 /* Shop+CoreDataClass.swift in Sources */,
 				DA420583254F350100A30CC5 /* ShopListModal.swift in Sources */,
