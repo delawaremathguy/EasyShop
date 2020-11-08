@@ -5,10 +5,8 @@ var rowHeight: CGFloat = 50 //.frame(height: rowHeight)
 
 struct ShopList: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(
-        entity: Shop.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Shop.order, ascending: true)]
-    ) var shops: FetchedResults<Shop>
+    @FetchRequest(fetchRequest: Shop.allShops()) var shops: FetchedResults<Shop>
+    
     @State var name = ""
     @State var isPresented = false
     
@@ -21,7 +19,6 @@ struct ShopList: View {
                             ShopListRow(store: s).id(UUID())
                         }
                     }.onDelete(perform: deleteShop)
-                    
                 } // LS
                 .listStyle(GroupedListStyle())
                 .sheet(isPresented: $isPresented) { ShopListModal { name in
@@ -53,12 +50,41 @@ struct ShopList: View {
     }
 }
 
+// MARK: - SHOP ROW
+
+struct ShopListRow: View {
+    @Environment(\.managedObjectContext) var moc
+    @ObservedObject var store: Shop
+    var body: some View {
+        HStack {
+            Image(systemName: self.store.select ? "star.fill" : "star")
+                .imageScale(.large)
+                .foregroundColor(Color("tint"))
+                .onTapGesture { self.store.select.toggle() }
+                .padding(.leading, 10)
+            Text(store.shopName)
+                .font(Font.system(size: 20))
+                .padding(.leading, 20)
+            Spacer()
+        }.frame(height: rowHeight)
+        .onReceive(self.store.objectWillChange) { PersistentContainer.saveContext() }
+    }
+}
+
 // MARK: - PREVIEWS
 
 struct ShopList_Previews: PreviewProvider {
     static var previews: some View {
         ShopList().environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
-            .preferredColorScheme(.dark)
+            //.preferredColorScheme(.dark)
     }
 }
 
+struct ShopListRow_Previews: PreviewProvider {
+    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    static var previews: some View {
+        let data = Shop(context: moc)
+        data.name = "Whole Foods"
+        return ShopListRow(store: data).previewLayout(.sizeThatFits)
+    }
+}

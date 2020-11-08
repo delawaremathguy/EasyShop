@@ -3,10 +3,7 @@ import CoreData
 
 struct ItemList: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(
-        entity: Item.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.order, ascending: true)]
-    ) var items: FetchedResults<Item>
+    @FetchRequest(fetchRequest: Item.allItems()) var items: FetchedResults<Item>
     
     @ObservedObject var store: Shop
     @State var name = ""
@@ -49,18 +46,63 @@ struct ItemList: View {
     }
 }
 
+// MARK: - ITEM ROW
+
+struct ItemListRow: View {
+    @Environment(\.managedObjectContext) var moc
+    @ObservedObject var item: Item
+    var body: some View {
+        Button(action: {
+              //  self.item.select.toggle()
+                selectParent()
+        }) {
+            HStack {
+                Image(systemName: self.item.select ? "star.fill" : "star")
+                    .imageScale(.large)
+                    .foregroundColor(Color("tint"))
+                    .padding(.leading, 10)
+                Text(item.itemName)
+                    .foregroundColor(Color("bw"))
+                    .font(Font.system(size: 20))
+                    .padding(.leading, 20)
+                Spacer()
+            }.frame(height: rowHeight)
+        }
+        .onReceive(self.item.objectWillChange) { PersistentContainer.saveContext() }
+    }
+    func selectParent() {
+        let data = Item(context: moc)
+        data.select = true
+        let datum = Shop(context: moc)
+        datum.addToItem(data)
+        datum.select = true
+        
+        
+        PersistentContainer.saveContext()
+    }
+}
+
 // MARK: - PREVIEWS
 
 struct ItemList_Previews: PreviewProvider {
     static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     static var previews: some View {
         let data = Shop(context: moc)
-        data.name = "Carrefour"
+        data.name = "K-Mart"
         let datum = Item(context: moc)
-        datum.name = "Caramelo"
+        datum.name = "Eggs"
         data.addToItem(datum) // addToItem - default func
         return ItemList(store: data) // store - ObservedObject
             .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)//.preferredColorScheme(.dark)
+    }
+}
+
+struct ItemListRow_Previews: PreviewProvider {
+    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    static var previews: some View {
+        let datum = Item(context: moc)
+        datum.name = "Chicken"
+        return ItemListRow(item: datum).previewLayout(.sizeThatFits)//, store: data
     }
 }
 

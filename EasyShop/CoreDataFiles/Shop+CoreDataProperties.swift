@@ -1,21 +1,8 @@
-//
-//  Shop+CoreDataProperties.swift
-//  EasyShop
-//
-//  Created by Fede Duarte on 29/10/2020.
-//
-//
-
 import Foundation
 import CoreData
 
-
 extension Shop {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Shop> {
-        return NSFetchRequest<Shop>(entityName: "Shop")
-    }
-
+    
     @NSManaged public var select: Bool
     @NSManaged public var order: Int64
     @NSManaged public var name: String?
@@ -30,6 +17,21 @@ extension Shop {
         return set.sorted {
             $0.itemName < $1.itemName
         }
+    } // HWS
+}
+
+extension Shop {
+    static func allShops() -> NSFetchRequest<Shop> {
+        let request: NSFetchRequest<Shop> = Shop.fetchRequest() as! NSFetchRequest<Shop>
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Shop.order, ascending: true)]
+        return request
+    }
+    
+    static func selectedShops() -> NSFetchRequest<Shop> {
+        let request: NSFetchRequest<Shop> = Shop.fetchRequest() as! NSFetchRequest<Shop>
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Shop.select, ascending: false)]
+        request.predicate = NSPredicate(format: "select == %@", NSNumber(value: true))
+        return request
     }
 }
 
@@ -53,3 +55,23 @@ extension Shop {
 extension Shop : Identifiable {
 
 }
+
+/*
+ THISFILE:
+     @nonobjc public class func fetchRequest() -> NSFetchRequest<Shop> {
+         return NSFetchRequest<Shop>(entityName: "Shop")
+     }
+ 
+ SHOPLIST:
+     @FetchRequest(
+         entity: Shop.entity(),
+         sortDescriptors: [NSSortDescriptor(keyPath: \Shop.order, ascending: true)]
+     ) var shops: FetchedResults<Shop>
+ 
+ SELECTEDSHOPVIEW:
+     @FetchRequest(
+         entity: Shop.entity(),
+         sortDescriptors: [NSSortDescriptor(keyPath: \Shop.select, ascending: false)],
+         predicate: NSPredicate(format: "select == %@", NSNumber(value: true))
+     ) var selectedShops: FetchedResults<Shop>
+*/

@@ -3,11 +3,7 @@ import CoreData
 
 struct SelectedItemView: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(
-        entity: Item.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.select, ascending: false)],
-        predicate: NSPredicate(format: "select == %@", NSNumber(value: true))
-    ) var selectedItems: FetchedResults<Item>
+    @FetchRequest(fetchRequest: Item.selectedItems()) var selectedItems: FetchedResults<Item>
     @ObservedObject var store: Shop
     
     var body: some View {
