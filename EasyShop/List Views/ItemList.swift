@@ -66,9 +66,17 @@ struct ItemListRow: View {
                     .padding(.leading, 20)
                 Spacer()
             }.frame(height: rowHeight)
+        }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
+            
         }
-        .onReceive(self.item.objectWillChange) { PersistentContainer.saveContext() }
     }
+    /*
+     let addItem = Item(context: self.moc)
+     addItem.name = name
+     addItem.order = (items.last?.order ?? 0) + 1
+     addItem.select = false
+     store.addToItem(addItem)
+     */
 }
 
 // MARK: - PREVIEWS

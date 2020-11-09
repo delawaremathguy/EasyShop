@@ -3,13 +3,13 @@ import CoreData
 
 struct SelectedItemView: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(fetchRequest: Item.selectedItems()) var selectedItems: FetchedResults<Item>
+    @FetchRequest(fetchRequest: Item.selectedItems()) var selectedItems: FetchedResults<Item> // Solution HERE
     @ObservedObject var store: Shop
     
     var body: some View {
         VStack {
             List {
-                ForEach(store.getItem) { s in
+                ForEach(selectedItems) { s in //store.getItem
                     HStack {
                         Text(s.itemName).id(UUID())
                             .font(Font.system(size: 20))

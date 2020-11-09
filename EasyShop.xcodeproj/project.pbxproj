@@ -22,7 +22,6 @@
 		DA3B3C9A254B477800A78604 /* ShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C99254B477800A78604 /* ShopList.swift */; };
 		DA3B3C9E254B478300A78604 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C9D254B478300A78604 /* ItemList.swift */; };
 		DA3B3CA4254B4CED00A78604 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3CA3254B4CED00A78604 /* Modifiers.swift */; };
-		DA40F4FD25505C3100017392 /* EmptyShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40F4FC25505C3100017392 /* EmptyShopList.swift */; };
 		DA420583254F350100A30CC5 /* ShopListModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA420582254F350100A30CC5 /* ShopListModal.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +43,6 @@
 		DA3B3C99254B477800A78604 /* ShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopList.swift; sourceTree = "<group>"; };
 		DA3B3C9D254B478300A78604 /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
 		DA3B3CA3254B4CED00A78604 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
-		DA40F4FC25505C3100017392 /* EmptyShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyShopList.swift; sourceTree = "<group>"; };
 		DA420582254F350100A30CC5 /* ShopListModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				DA3B3C99254B477800A78604 /* ShopList.swift */,
-				DA40F4FC25505C3100017392 /* EmptyShopList.swift */,
 				DA420582254F350100A30CC5 /* ShopListModal.swift */,
 				DA3B3C9D254B478300A78604 /* ItemList.swift */,
 			);
@@ -215,7 +212,6 @@
 				DA3B3C7B254B43A200A78604 /* CoreDataModel.xcdatamodeld in Sources */,
 				DA3B3C8F254B465700A78604 /* Item+CoreDataClass.swift in Sources */,
 				DA3B3CA4254B4CED00A78604 /* Modifiers.swift in Sources */,
-				DA40F4FD25505C3100017392 /* EmptyShopList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -57,11 +57,39 @@ struct ShopListRow: View {
     @ObservedObject var store: Shop
     var body: some View {
         HStack {
+            Image(systemName: self.store.select ? "star.fill" : "star")
+                .imageScale(.large)
+                .foregroundColor(Color("tint"))
+                .padding(.leading, 10)
+                .onTapGesture(perform: { self.store.select.toggle() })
             Text(store.shopName)
                 .font(Font.system(size: 20))
                 .padding(.leading, 20)
             Spacer()
         }.frame(height: rowHeight)
+        .onReceive(self.store.objectWillChange) {
+            PersistentContainer.saveContext()
+        }
+    }
+}
+
+// MARK: - EMPTY SHOP LIST
+
+struct EmptyShopList: View {
+    var body: some View {
+        ZStack {
+            VStack {
+                HStack {
+                    Text("Add new Shop from here!")
+                    Image(systemName: "arrow.up.right")
+                        .resizable()
+                        .frame(width: 60, height: 60, alignment: .trailing)
+                }
+                .foregroundColor(Color("tint")).opacity(0.8)
+                .padding()
+                Spacer()
+            }
+        }
     }
 }
 
@@ -80,5 +108,13 @@ struct ShopListRow_Previews: PreviewProvider {
         let data = Shop(context: moc)
         data.name = "Whole Foods"
         return ShopListRow(store: data).previewLayout(.sizeThatFits)
+    }
+}
+
+struct EmptyShopList_Previews: PreviewProvider {
+    static var previews: some View {
+        EmptyShopList()
+            .frame(width: 300, height: 100)
+            .previewLayout(.sizeThatFits)
     }
 }
