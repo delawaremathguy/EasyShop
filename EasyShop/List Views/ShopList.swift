@@ -57,17 +57,11 @@ struct ShopListRow: View {
     @ObservedObject var store: Shop
     var body: some View {
         HStack {
-            Image(systemName: self.store.select ? "star.fill" : "star")
-                .imageScale(.large)
-                .foregroundColor(Color("tint"))
-                .onTapGesture { self.store.select.toggle() }
-                .padding(.leading, 10)
             Text(store.shopName)
                 .font(Font.system(size: 20))
                 .padding(.leading, 20)
             Spacer()
         }.frame(height: rowHeight)
-        .onReceive(self.store.objectWillChange) { PersistentContainer.saveContext() }
     }
 }
 

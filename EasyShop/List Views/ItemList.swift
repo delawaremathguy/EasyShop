@@ -53,8 +53,7 @@ struct ItemListRow: View {
     @ObservedObject var item: Item
     var body: some View {
         Button(action: {
-              //  self.item.select.toggle()
-                selectParent()
+               self.item.select.toggle()
         }) {
             HStack {
                 Image(systemName: self.item.select ? "star.fill" : "star")
@@ -69,16 +68,6 @@ struct ItemListRow: View {
             }.frame(height: rowHeight)
         }
         .onReceive(self.item.objectWillChange) { PersistentContainer.saveContext() }
-    }
-    func selectParent() {
-        let data = Item(context: moc)
-        data.select = true
-        let datum = Shop(context: moc)
-        datum.addToItem(data)
-        datum.select = true
-        
-        
-        PersistentContainer.saveContext()
     }
 }
 

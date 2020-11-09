@@ -125,9 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				DA3B3C99254B477800A78604 /* ShopList.swift */,
+				DA40F4FC25505C3100017392 /* EmptyShopList.swift */,
 				DA420582254F350100A30CC5 /* ShopListModal.swift */,
 				DA3B3C9D254B478300A78604 /* ItemList.swift */,
-				DA40F4FC25505C3100017392 /* EmptyShopList.swift */,
 			);
 			path = "List Views";
 			sourceTree = "<group>";
