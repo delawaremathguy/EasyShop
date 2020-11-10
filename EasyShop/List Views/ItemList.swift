@@ -23,7 +23,7 @@ struct ItemList: View {
             } // SN
             Section {
                 List {
-                    ForEach(store.getItem) { s in ItemListRow(item: s).id(UUID())
+                    ForEach(store.getItem) { s in ItemListRow(item: s).id(UUID())//, store: s
                     }.onDelete(perform: deleteItem)
                 }.listStyle(GroupedListStyle())
             }
@@ -50,10 +50,12 @@ struct ItemList: View {
 
 struct ItemListRow: View {
     @Environment(\.managedObjectContext) var moc
+ //   @ObservedObject var store: Shop
     @ObservedObject var item: Item
     var body: some View {
         Button(action: {
                self.item.select.toggle()
+//               self.store.select.toggle()
         }) {
             HStack {
                 Image(systemName: self.item.select ? "star.fill" : "star")
@@ -70,13 +72,6 @@ struct ItemListRow: View {
             
         }
     }
-    /*
-     let addItem = Item(context: self.moc)
-     addItem.name = name
-     addItem.order = (items.last?.order ?? 0) + 1
-     addItem.select = false
-     store.addToItem(addItem)
-     */
 }
 
 // MARK: - PREVIEWS

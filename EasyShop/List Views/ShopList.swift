@@ -98,7 +98,6 @@ struct EmptyShopList: View {
 struct ShopList_Previews: PreviewProvider {
     static var previews: some View {
         ShopList().environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
-            //.preferredColorScheme(.dark)
     }
 }
 
