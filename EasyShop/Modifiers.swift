@@ -17,6 +17,7 @@ struct Modifiers: View {
             .frame(width: .infinity, height: 80)
             .background(Color("rowcolor"))
             .cornerRadius(20)
+            
         }
     }
 }
@@ -26,6 +27,8 @@ struct Modifiers_Previews: PreviewProvider {
         Modifiers()
     }
 }
+
+
 
 // MARK: - TextField
 

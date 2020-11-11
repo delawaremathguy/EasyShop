@@ -11,12 +11,7 @@ struct SelectedShopView: View {
                 List {
                     ForEach(selectedShops, id:\.self) { s in
                         NavigationLink(destination: SelectedItemView(store: s)) {
-                            HStack {
-                                Text(s.shopName).id(UUID())
-                                    .font(Font.system(size: 20))
-                                    .padding(.leading, 20)
-                                Spacer()
-                            }.frame(height: rowHeight)
+                            SelectedShopRow(store: s)
                         }
                     }
                 }.listStyle(GroupedListStyle())
@@ -29,11 +24,39 @@ struct SelectedShopView: View {
     }
 }
 
+// MARK: - SELECTEDSHOP
+
+struct SelectedShopRow: View {
+    
+    @Environment(\.managedObjectContext) var moc
+    @ObservedObject var store: Shop
+    
+    var body: some View {
+        HStack {
+            Text(store.shopName)
+                .font(Font.system(size: 28))
+                .padding(.leading, 20)
+            Spacer()
+        }.frame(height: rowHeight)
+    }
+}
+
 // MARK: - PREVIEWS
 
 struct SelectedShopView_Previews: PreviewProvider {
     static var previews: some View {
         SelectedShopView().environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
+    }
+}
+
+struct SelectedShopRow_Previews: PreviewProvider {
+    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    static var previews: some View {
+        let data = Shop(context: moc)
+        data.name = "Whole Food"
+        return SelectedShopRow(store: data)
+            .padding()
+            .previewLayout(.sizeThatFits)
     }
 }
 
