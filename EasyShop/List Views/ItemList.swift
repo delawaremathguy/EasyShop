@@ -3,7 +3,11 @@ import CoreData
 
 struct ItemList: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(fetchRequest: Item.allItems()) var items: FetchedResults<Item>
+    //DMG --
+    // you don't want to keep a list of allItems; you display a list below
+    // of the items in a store; so if any item gets deleted, you want to
+    // delete by index according to its position in store.getItem
+//    @FetchRequest(fetchRequest: Item.allItems()) var items: FetchedResults<Item>
     
     @ObservedObject var store: Shop
     @State var name = ""
@@ -23,24 +27,31 @@ struct ItemList: View {
             } // SN
             Section {
                 List {
-                    ForEach(store.getItem) { s in ItemListRow(item: s).id(UUID())//, store: s
+                    ForEach(store.getItem) { s in ItemListRow(item: s)//, store: s
                     }.onDelete(perform: deleteItem)
                 }.listStyle(GroupedListStyle())
             }
         }.navigationBarTitle(("Products"), displayMode: .inline)
     }
     func newItem() {
-            let addItem = Item(context: self.moc)
-            addItem.name = name
-            addItem.order = (items.last?.order ?? 0) + 1
-            addItem.select = false 
-            store.addToItem(addItem)
-            PersistentContainer.saveContext()
+//            let addItem = Item(context: self.moc)
+//            addItem.name = name
+//            addItem.order = (items.last?.order ?? 0) + 1
+//            addItem.select = false
+//            store.addToItem(addItem)
+//            PersistentContainer.saveContext()
+        
+        //DMG -- pushed this off to a class function on Item
+        // to remove a little bit of clutter here
+        Item.addNewItem(named: name, to: store)
             self.name = ""
     }
     func deleteItem(at offsets: IndexSet) {
+        //DMG --
+        // offsets refer to the list store.getItem
+        let items = store.getItem
             for index in offsets {
-                self.moc.delete(self.items[index])
+                self.moc.delete(items[index])
             }
             PersistentContainer.saveContext()
     }
@@ -54,7 +65,12 @@ struct ItemListRow: View {
     @ObservedObject var item: Item
     var body: some View {
         Button(action: {
-               self.item.select.toggle()
+            //DMG --
+            // call new toggleSelection method on an Item, which
+            // in turn, will update the select status of the
+            // associated shop
+            self.item.toggleSelected()
+//               self.item.select.toggle()
 //               self.store.select.toggle()
         }) {
             HStack {
@@ -69,7 +85,6 @@ struct ItemListRow: View {
                 Spacer()
             }.frame(height: rowHeight)
         }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
-            
         }
     }
 }

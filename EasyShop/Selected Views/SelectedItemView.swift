@@ -2,16 +2,21 @@ import SwiftUI
 import CoreData
 
 struct SelectedItemView: View {
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(fetchRequest: Item.selectedItems()) var selectedItems: FetchedResults<Item>
+    //DMG --
+    // perhaps i am missing something here, but don't you want to display the
+    // items in the given store that are selected?  so you don't need a
+    // general FetchRequest to find those: the store already knows its
+    // items
+//    @Environment(\.managedObjectContext) var moc
+//    @FetchRequest(fetchRequest: Item.selectedItems()) var selectedItems: FetchedResults<Item>
     @ObservedObject var store: Shop
     
     var body: some View {
         VStack {
             List {
-                ForEach(selectedItems) { s in 
+                ForEach(store.getItem.filter({ $0.select })) { s in
                     HStack {
-                        Text(s.itemName).id(UUID())
+                        Text(s.itemName)//.id(UUID())
                             .font(Font.system(size: 20))
                             .padding(.leading, 20)
                         Spacer()

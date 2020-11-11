@@ -23,6 +23,7 @@
 		DA3B3C9E254B478300A78604 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C9D254B478300A78604 /* ItemList.swift */; };
 		DA3B3CA4254B4CED00A78604 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3CA3254B4CED00A78604 /* Modifiers.swift */; };
 		DA420583254F350100A30CC5 /* ShopListModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA420582254F350100A30CC5 /* ShopListModal.swift */; };
+		DAB1E9AB255C33C50071AAC0 /* Item+Extensions Jerry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E9A8255C33C50071AAC0 /* Item+Extensions Jerry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		DA3B3C9D254B478300A78604 /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
 		DA3B3CA3254B4CED00A78604 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		DA420582254F350100A30CC5 /* ShopListModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListModal.swift; sourceTree = "<group>"; };
+		DAB1E9A8255C33C50071AAC0 /* Item+Extensions Jerry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Item+Extensions Jerry.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				DA3B3C66254B417700A78604 /* ContentView.swift */,
 				DA3B3C98254B476800A78604 /* Selected Views */,
 				DA3B3CA0254B478700A78604 /* List Views */,
+				DAB1E9A5255C33B40071AAC0 /* Jerry */,
 				DA3B3C68254B417700A78604 /* Assets.xcassets */,
 				DA3B3C6D254B417700A78604 /* Info.plist */,
 				DA3B3C74254B425200A78604 /* CoreDataFiles */,
@@ -104,6 +107,7 @@
 				DA3B3C8A254B465700A78604 /* Shop+CoreDataProperties.swift */,
 				DA3B3C8B254B465700A78604 /* Item+CoreDataClass.swift */,
 				DA3B3C8C254B465700A78604 /* Item+CoreDataProperties.swift */,
+				DAB1E9A8255C33C50071AAC0 /* Item+Extensions Jerry.swift */,
 				DA3B3C79254B43A200A78604 /* CoreDataModel.xcdatamodeld */,
 				DA3B3C75254B426400A78604 /* Persistence.swift */,
 			);
@@ -127,6 +131,13 @@
 				DA3B3C9D254B478300A78604 /* ItemList.swift */,
 			);
 			path = "List Views";
+			sourceTree = "<group>";
+		};
+		DAB1E9A5255C33B40071AAC0 /* Jerry */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Jerry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +220,7 @@
 				DA3B3C93254B475500A78604 /* SelectedShopView.swift in Sources */,
 				DA3B3C67254B417700A78604 /* ContentView.swift in Sources */,
 				DA3B3C65254B417700A78604 /* EasyShopApp.swift in Sources */,
+				DAB1E9AB255C33C50071AAC0 /* Item+Extensions Jerry.swift in Sources */,
 				DA3B3C7B254B43A200A78604 /* CoreDataModel.xcdatamodeld in Sources */,
 				DA3B3C8F254B465700A78604 /* Item+CoreDataClass.swift in Sources */,
 				DA3B3CA4254B4CED00A78604 /* Modifiers.swift in Sources */,

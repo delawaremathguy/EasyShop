@@ -61,7 +61,7 @@ struct ShopListRow: View {
                 .imageScale(.large)
                 .foregroundColor(Color("tint"))
                 .padding(.leading, 10)
-                .onTapGesture(perform: { self.store.select.toggle() })
+              //.onTapGesture(perform: { self.store.select.toggle() })
             Text(store.shopName)
                 .font(Font.system(size: 20))
                 .padding(.leading, 20)

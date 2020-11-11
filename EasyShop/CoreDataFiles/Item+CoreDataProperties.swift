@@ -8,24 +8,6 @@ extension Item {
     @NSManaged public var name: String?
     @NSManaged public var shop: Shop?
     
-    public var itemName: String {
-        name ?? "Unknown item name"
-    }
-}
-
-extension Item {
-    static func allItems() -> NSFetchRequest<Item> {
-    let request: NSFetchRequest<Item> = Item.fetchRequest() as! NSFetchRequest<Item>
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Item.order, ascending: true)]
-    return request
-    }
-    
-    static func selectedItems() -> NSFetchRequest<Item> {
-        let request: NSFetchRequest<Item> = Item.fetchRequest() as! NSFetchRequest<Item>
-            request.sortDescriptors = [NSSortDescriptor(keyPath: \Item.select, ascending: false)]
-            request.predicate = NSPredicate(format: "select == %@", NSNumber(value: true))
-        return request
-    }
 }
 
 extension Item : Identifiable {
@@ -36,18 +18,14 @@ extension Item : Identifiable {
  THISFILE:
      @nonobjc public class func fetchRequest() -> NSFetchRequest<Item> {
          return NSFetchRequest<Item>(entityName: "Item")
-     }
+}
+ */
+
+/*
  
- ITEMLIST:
-     @FetchRequest(
-         entity: Item.entity(),
-         sortDescriptors: [NSSortDescriptor(keyPath: \Item.order, ascending: true)]
-     ) var items: FetchedResults<Item>
- 
- SELECTEDITEMVIEW:
-     @FetchRequest(
-         entity: Item.entity(),
-         sortDescriptors: [NSSortDescriptor(keyPath: \Item.select, ascending: false)],
-         predicate: NSPredicate(format: "select == %@", NSNumber(value: true))
-     ) var selectedItems: FetchedResults<Item>
+ i kept the select attribute on Shop because you have some fetch requests that use it as a key path; but it really is read-only and should be treated that way in code.  so you should remove this line in the ShopListRow view:
+
+    .onTapGesture(perform: { self.store.select.toggle() })
+
+ you don’t want to set this the store’s select attribute directly.
  */
