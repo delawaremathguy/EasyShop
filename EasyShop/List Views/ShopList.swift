@@ -1,7 +1,7 @@
 import SwiftUI
 import CoreData
 
-var rowHeight: CGFloat = 50 //.frame(height: rowHeight)
+var rowHeight: CGFloat = 50
 
 struct ShopList: View {
     @Environment(\.managedObjectContext) var moc
@@ -53,15 +53,16 @@ struct ShopList: View {
 // MARK: - SHOP ROW
 
 struct ShopListRow: View {
+    
     @Environment(\.managedObjectContext) var moc
     @ObservedObject var store: Shop
+    
     var body: some View {
         HStack {
             Image(systemName: self.store.select ? "star.fill" : "star")
                 .imageScale(.large)
                 .foregroundColor(Color("tint"))
                 .padding(.leading, 10)
-              //.onTapGesture(perform: { self.store.select.toggle() })
             Text(store.shopName)
                 .font(Font.system(size: 20))
                 .padding(.leading, 20)

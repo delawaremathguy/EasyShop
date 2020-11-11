@@ -4,7 +4,6 @@ import CoreData
 struct SelectedShopView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(fetchRequest: Shop.selectedShops()) var selectedShops: FetchedResults<Shop>
-    @FetchRequest(fetchRequest: Item.selectedItems()) var selectedItems: FetchedResults<Item>
     
     var body: some View {
         NavigationView {

@@ -2,13 +2,8 @@ import SwiftUI
 import CoreData
 
 struct ItemList: View {
-    @Environment(\.managedObjectContext) var moc
-    //DMG --
-    // you don't want to keep a list of allItems; you display a list below
-    // of the items in a store; so if any item gets deleted, you want to
-    // delete by index according to its position in store.getItem
-//    @FetchRequest(fetchRequest: Item.allItems()) var items: FetchedResults<Item>
     
+    @Environment(\.managedObjectContext) var moc
     @ObservedObject var store: Shop
     @State var name = ""
     
@@ -24,7 +19,7 @@ struct ItemList: View {
                             .foregroundColor(name.isEmpty ? Color("wb") : Color("tint"))
                     }.disabled(name.isEmpty)
                 }.modifier(CustomHStack1())
-            } // SN
+            } // SE
             Section {
                 List {
                     ForEach(store.getItem) { s in ItemListRow(item: s)//, store: s
@@ -34,21 +29,10 @@ struct ItemList: View {
         }.navigationBarTitle(("Products"), displayMode: .inline)
     }
     func newItem() {
-//            let addItem = Item(context: self.moc)
-//            addItem.name = name
-//            addItem.order = (items.last?.order ?? 0) + 1
-//            addItem.select = false
-//            store.addToItem(addItem)
-//            PersistentContainer.saveContext()
-        
-        //DMG -- pushed this off to a class function on Item
-        // to remove a little bit of clutter here
         Item.addNewItem(named: name, to: store)
             self.name = ""
     }
     func deleteItem(at offsets: IndexSet) {
-        //DMG --
-        // offsets refer to the list store.getItem
         let items = store.getItem
             for index in offsets {
                 self.moc.delete(items[index])
@@ -60,18 +44,13 @@ struct ItemList: View {
 // MARK: - ITEM ROW
 
 struct ItemListRow: View {
+    
     @Environment(\.managedObjectContext) var moc
- //   @ObservedObject var store: Shop
     @ObservedObject var item: Item
+    
     var body: some View {
         Button(action: {
-            //DMG --
-            // call new toggleSelection method on an Item, which
-            // in turn, will update the select status of the
-            // associated shop
             self.item.toggleSelected()
-//               self.item.select.toggle()
-//               self.store.select.toggle()
         }) {
             HStack {
                 Image(systemName: self.item.select ? "star.fill" : "star")
@@ -98,8 +77,8 @@ struct ItemList_Previews: PreviewProvider {
         data.name = "K-Mart"
         let datum = Item(context: moc)
         datum.name = "Eggs"
-        data.addToItem(datum) // addToItem - default func
-        return ItemList(store: data) // store - ObservedObject
+        data.addToItem(datum)
+        return ItemList(store: data) 
             .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)//.preferredColorScheme(.dark)
     }
 }

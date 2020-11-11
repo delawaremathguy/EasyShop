@@ -7,20 +7,6 @@
 import Foundation
 import CoreData
 
-//DMG --
-// this new file adds some functions directly to the Item class
-// for what it's worth, this is a better strategy than going in to
-// the XCode-generated Item+CoreDataProperties.swift file and
-// making edits there; if you ever make a change to the Core Data
-// model for Item, regenerating Item+CoreDataProperties.swift will
-// overwrite everything you've added there.
-//
-// my suggestion: move the definitions you made in Item+CoreDataProperties.swift
-// to this file:
-// public var itemName: String
-// static func allItems() -> NSFetchRequest<Item>
-// static func selectedItems() -> NSFetchRequest<Item>
-
 extension Item {
     
     // My Extensions
@@ -28,19 +14,7 @@ extension Item {
     public var itemName: String {
         name ?? "Unknown item name"
     }
-    static func allItems() -> NSFetchRequest<Item> {
-    let request: NSFetchRequest<Item> = Item.fetchRequest() as! NSFetchRequest<Item>
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Item.order, ascending: true)]
-    return request
-    }
-    
-    static func selectedItems() -> NSFetchRequest<Item> {
-        let request: NSFetchRequest<Item> = Item.fetchRequest() as! NSFetchRequest<Item>
-            request.sortDescriptors = [NSSortDescriptor(keyPath: \Item.select, ascending: false)]
-            request.predicate = NSPredicate(format: "select == %@", NSNumber(value: true))
-        return request
-    }
-    
+
     // Jerry's
 	
 	class func addNewItem(named name: String, to store: Shop) {
@@ -54,8 +28,8 @@ extension Item {
 		// this strategy.  fo now, i'll leave it essentially as you had it:
 		// e.g., if we just added this as the fourth item, its .order should
 		// be 4 (?)
-		let index = store.item?.count ?? 0
-		addItem.order = Int64(index)
+		let index = store.item?.count ?? 0 // Delete?
+		addItem.order = Int64(index) // Delete?
 		PersistentContainer.saveContext()
 	}
 	
@@ -77,12 +51,5 @@ extension Item {
 	func toggleSelected() {
 		setSelected(to: !select)
 	}
-
 }
-/*
- //DMG --
- // call new toggleSelection method on an Item, which
- // in turn, will update the select status of the
- // associated shop
- self.item.toggleSelected()
- */
+
