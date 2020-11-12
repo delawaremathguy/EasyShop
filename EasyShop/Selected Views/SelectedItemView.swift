@@ -4,7 +4,7 @@ import CoreData
 struct SelectedItemView: View {
     
     @ObservedObject var store: Shop
-    @State private var totalItems: Int = 0
+    
     
     var body: some View {
         VStack {
@@ -20,9 +20,9 @@ struct SelectedItemView: View {
 // MARK: - SELECTEDITEMROW
 
 struct SelectedItemRow: View {
-    
-    @Environment(\.managedObjectContext) var moc
+
     @ObservedObject var item: Item
+    @State private var hasDoubleTapped = false
     
     var body: some View {
         HStack {
@@ -30,7 +30,15 @@ struct SelectedItemRow: View {
                 .font(Font.system(size: 26))
                 .padding(.leading, 20)
             Spacer()
+            Image(systemName: hasDoubleTapped ? "cart.fill" : "cart.badge.plus")
+                .font(.system(size: 35))
+                .foregroundColor(Color("tint"))
+
         }.frame(height: rowHeight)
+        .contentShape(Rectangle())
+        .onTapGesture(count: 2) {
+            self.hasDoubleTapped.toggle()
+        }
     }
 }
 
