@@ -25,14 +25,14 @@ extension Shop {
         let request: NSFetchRequest<Shop> = Shop.fetchRequest() as! NSFetchRequest<Shop>
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Shop.order, ascending: true)]
         return request
-    }
+    } // On ShopList file
     
     static func selectedShops() -> NSFetchRequest<Shop> {
         let request: NSFetchRequest<Shop> = Shop.fetchRequest() as! NSFetchRequest<Shop>
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Shop.select, ascending: false)]
         request.predicate = NSPredicate(format: "select == %@", NSNumber(value: true))
         return request
-    }
+    } // On SelectedShopView file
 }
 
 // MARK: Generated accessors for item

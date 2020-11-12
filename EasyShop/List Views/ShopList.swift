@@ -1,7 +1,7 @@
 import SwiftUI
 import CoreData
 
-var rowHeight: CGFloat = 50 //.frame(height: rowHeight)
+var rowHeight: CGFloat = 50
 
 struct ShopList: View {
     @Environment(\.managedObjectContext) var moc
@@ -16,7 +16,7 @@ struct ShopList: View {
                 List {
                     ForEach(shops, id: \.self) { s in
                         NavigationLink(destination: ItemList(store: s)) {
-                            ShopListRow(store: s).id(UUID())
+                            ShopListRow(store: s)
                         }
                     }.onDelete(perform: deleteShop)
                 } // LS
@@ -53,20 +53,23 @@ struct ShopList: View {
 // MARK: - SHOP ROW
 
 struct ShopListRow: View {
+    
     @Environment(\.managedObjectContext) var moc
     @ObservedObject var store: Shop
+    
     var body: some View {
         HStack {
-            Image(systemName: self.store.select ? "star.fill" : "star")
+            Image(systemName: self.store.select ? "checkmark" : "")
                 .imageScale(.large)
                 .foregroundColor(Color("tint"))
                 .padding(.leading, 10)
-                .onTapGesture(perform: { self.store.select.toggle() })
             Text(store.shopName)
                 .font(Font.system(size: 20))
                 .padding(.leading, 20)
             Spacer()
-        }.frame(height: rowHeight)
+        }
+        
+        .frame(height: rowHeight)
         .onReceive(self.store.objectWillChange) {
             PersistentContainer.saveContext()
         }

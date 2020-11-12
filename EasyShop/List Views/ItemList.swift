@@ -2,9 +2,8 @@ import SwiftUI
 import CoreData
 
 struct ItemList: View {
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(fetchRequest: Item.allItems()) var items: FetchedResults<Item>
     
+    @Environment(\.managedObjectContext) var moc
     @ObservedObject var store: Shop
     @State var name = ""
     
@@ -20,27 +19,23 @@ struct ItemList: View {
                             .foregroundColor(name.isEmpty ? Color("wb") : Color("tint"))
                     }.disabled(name.isEmpty)
                 }.modifier(CustomHStack1())
-            } // SN
+            } // SE
             Section {
                 List {
-                    ForEach(store.getItem) { s in ItemListRow(item: s).id(UUID())//, store: s
+                    ForEach(store.getItem) { s in ItemListRow(item: s)//, store: s
                     }.onDelete(perform: deleteItem)
                 }.listStyle(GroupedListStyle())
             }
         }.navigationBarTitle(("Products"), displayMode: .inline)
     }
     func newItem() {
-            let addItem = Item(context: self.moc)
-            addItem.name = name
-            addItem.order = (items.last?.order ?? 0) + 1
-            addItem.select = false 
-            store.addToItem(addItem)
-            PersistentContainer.saveContext()
+        Item.addNewItem(named: name, to: store)
             self.name = ""
     }
     func deleteItem(at offsets: IndexSet) {
+        let items = store.getItem
             for index in offsets {
-                self.moc.delete(self.items[index])
+                self.moc.delete(items[index])
             }
             PersistentContainer.saveContext()
     }
@@ -49,13 +44,13 @@ struct ItemList: View {
 // MARK: - ITEM ROW
 
 struct ItemListRow: View {
+    
     @Environment(\.managedObjectContext) var moc
- //   @ObservedObject var store: Shop
     @ObservedObject var item: Item
+    
     var body: some View {
         Button(action: {
-               self.item.select.toggle()
-//               self.store.select.toggle()
+            self.item.toggleSelected()
         }) {
             HStack {
                 Image(systemName: self.item.select ? "star.fill" : "star")
@@ -69,7 +64,6 @@ struct ItemListRow: View {
                 Spacer()
             }.frame(height: rowHeight)
         }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
-            
         }
     }
 }
@@ -83,8 +77,8 @@ struct ItemList_Previews: PreviewProvider {
         data.name = "K-Mart"
         let datum = Item(context: moc)
         datum.name = "Eggs"
-        data.addToItem(datum) // addToItem - default func
-        return ItemList(store: data) // store - ObservedObject
+        data.addToItem(datum)
+        return ItemList(store: data) 
             .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)//.preferredColorScheme(.dark)
     }
 }
