@@ -4,8 +4,7 @@ import CoreData
 struct SelectedItemView: View {
     
     @ObservedObject var store: Shop
-    
-    
+
     var body: some View {
         VStack {
             List {
