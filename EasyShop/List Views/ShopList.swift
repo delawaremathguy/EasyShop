@@ -36,11 +36,8 @@ struct ShopList: View {
         }.accentColor(Color("tint"))
     }
     func newShop(name: String) {
-            let addShop = Shop(context: moc)
-            addShop.name = name
-            addShop.order = (shops.last?.order ?? 0) + 1
-            addShop.select = false
-            PersistentContainer.saveContext()
+        Shop.addNewShop(named: name)
+         self.name = ""
     }
     func deleteShop(at offsets: IndexSet) {
             for index in offsets {
@@ -59,16 +56,15 @@ struct ShopListRow: View {
     
     var body: some View {
         HStack {
-            Image(systemName: self.store.select ? "checkmark" : "")
-                .imageScale(.large)
-                .foregroundColor(Color("tint"))
-                .padding(.leading, 10)
             Text(store.shopName)
                 .font(Font.system(size: 20))
                 .padding(.leading, 20)
             Spacer()
+            Image(systemName: self.store.select ? "checkmark" : "")
+                .imageScale(.large)
+                .foregroundColor(Color("tint"))
+                .padding(.leading, 10)
         }
-        
         .frame(height: rowHeight)
         .onReceive(self.store.objectWillChange) {
             PersistentContainer.saveContext()

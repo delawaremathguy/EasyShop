@@ -31,7 +31,7 @@ struct SelectedItemRow: View {
             Spacer()
             Image(systemName: hasDoubleTapped ? "cart.fill" : "cart.badge.plus")
                 .font(.system(size: 35))
-                .foregroundColor(Color("tint"))
+                .foregroundColor(hasDoubleTapped ? .green : .red)
 
         }.frame(height: rowHeight)
         .contentShape(Rectangle())

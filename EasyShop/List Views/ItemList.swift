@@ -5,6 +5,7 @@ struct ItemList: View {
     
     @Environment(\.managedObjectContext) var moc
     @ObservedObject var store: Shop
+    @ObservedObject var viewModel = ItemViewModel()
     @State var name = ""
     
     var body: some View {
@@ -26,7 +27,9 @@ struct ItemList: View {
                     }.onDelete(perform: deleteItem)
                 }.listStyle(GroupedListStyle())
             }
-        }.navigationBarTitle(("Products"), displayMode: .inline)
+        }
+        .navigationBarTitle(("Products"), displayMode: .inline)
+        .navigationBarItems(trailing: ItemListView(label: "Items: \(viewModel.itemCount)"))
     }
     func newItem() {
         Item.addNewItem(named: name, to: store)
@@ -53,15 +56,15 @@ struct ItemListRow: View {
             self.item.toggleSelected()
         }) {
             HStack {
-                Image(systemName: self.item.select ? "star.fill" : "star")
-                    .imageScale(.large)
-                    .foregroundColor(Color("tint"))
-                    .padding(.leading, 10)
                 Text(item.itemName)
                     .foregroundColor(Color("bw"))
                     .font(Font.system(size: 20))
                     .padding(.leading, 20)
                 Spacer()
+                Image(systemName: self.item.select ? "checkmark.circle.fill" : "circle") .imageScale(.large)
+                    .foregroundColor(Color("tint"))
+                    //.opacity(self.item.select ? 1.0 : 0.6)
+                    //.padding(.leading, 10)
             }.frame(height: rowHeight)
         }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
         }

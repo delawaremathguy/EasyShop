@@ -34,7 +34,7 @@ extension Item {
 	func setSelected(to newValue: Bool) {
 		select = newValue
 		guard let shop = shop else { return }
-		// update the associated shop value
+		// update the associated s 
 		if newValue {
 			shop.select = true
 		} else {
