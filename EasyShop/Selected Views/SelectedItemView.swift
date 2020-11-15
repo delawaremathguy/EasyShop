@@ -46,6 +46,7 @@ struct SelectedItemRow: View {
         .contentShape(Rectangle())
         .onTapGesture(count: 2) {
             self.item.taken.toggle()
+            self.item.select.toggle()
         }
     }
 }
@@ -65,6 +66,11 @@ struct TakenItemRow: View {
                 .font(.system(size: 35))
                 .foregroundColor(.green)
         }.frame(height: rowHeight)
+        .contentShape(Rectangle())
+        .onTapGesture(count: 2) {
+            self.item.taken.toggle()
+            self.item.select.toggle()
+        }
     }
 }
 // MARK: - DRAWING A LINE
