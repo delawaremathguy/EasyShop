@@ -9,7 +9,7 @@
  1. DRAWING A LINE
  on the “drawing a line” idea, it would be easy to section out the items in a list to include “those in the cart,” so let me know if you want to go in that direction.
  
- 2. CLASS NEWSHOP
+ 2. CLASS NEWSHOP - Done, just missing .order
  my belief is that when you want to create new objects or delete existing objects, let the Core Data class do it for you (rather than have to pass around the managedObjectContext all over the place so some View can do it).  also, if you modify a Core Data object in any way that affects other CD objects (like changing “select” on an Item and having to update “select” on a Shop), do that through a method defined in the class.
 
  you might want to add similar functionality to the Shop class.
@@ -32,7 +32,5 @@
 
  if i want to use all this output as seed data in the future, i simply copy it into the app bundle (i.e., include in the Xcode project) and then write code to open up all the files and put everything back together again.  nothing need be done here with an asset catalog.
 
- 
- 
  
  */

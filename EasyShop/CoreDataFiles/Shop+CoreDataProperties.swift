@@ -23,22 +23,8 @@ extension Shop {
         let newShop = Shop(context: PersistentContainer.context)
         newShop.name = name
         newShop.select = false
-        
-        /*
-        let index = store.item?.count ?? 0
-        addItem.order = Int64(index)
-         */
-        
         PersistentContainer.saveContext()
     }
-    
-    /* Old func
-     let addShop = Shop(context: moc)
-     addShop.name = name
-     addShop.order = (shops.last?.order ?? 0) + 1
-     addShop.select = false
-     PersistentContainer.saveContext()
-     */
 }
 
 extension Shop {
