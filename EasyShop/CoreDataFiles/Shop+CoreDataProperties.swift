@@ -18,6 +18,13 @@ extension Shop {
             $0.itemName < $1.itemName
         }
     } // HWS
+    
+    class func addNewShop(named name: String) {
+        let newShop = Shop(context: PersistentContainer.context)
+        newShop.name = name
+        newShop.select = false
+        PersistentContainer.saveContext()
+    }
 }
 
 extension Shop {
