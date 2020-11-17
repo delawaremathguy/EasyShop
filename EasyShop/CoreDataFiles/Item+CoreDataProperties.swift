@@ -13,17 +13,17 @@ extension Item {
 
 extension Item { // On SelectedItemView
 // @FetchRequest(fetchRequest: Item.takenItems()) var takenItems: FetchedResults<Item>
-    static func takenItems() -> NSFetchRequest<Item> {
-        let request: NSFetchRequest<Item> = Item.fetchRequest() as! NSFetchRequest<Item>
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Item.select, ascending: false)]
-        request.sortDescriptors = [NSSortDescriptor(keyPath:
-            \Item.taken, ascending: false)]
-        
-        request.predicate = NSPredicate(format: "select == %@", NSNumber(value: true))
-        request.predicate = NSPredicate(format: "taken == %@", NSNumber(value: true))
-        
-        return request
-    }
+//    static func takenItems() -> NSFetchRequest<Item> {
+//        let request: NSFetchRequest<Item> = Item.fetchRequest() as! NSFetchRequest<Item>
+//        request.sortDescriptors = [NSSortDescriptor(keyPath: \Item.select, ascending: false)]
+//        request.sortDescriptors = [NSSortDescriptor(keyPath:
+//            \Item.taken, ascending: false)]
+//        
+//        request.predicate = NSPredicate(format: "select == %@", NSNumber(value: true))
+//        request.predicate = NSPredicate(format: "taken == %@", NSNumber(value: true))
+//        
+//        return request
+//    }
 }
 extension Item : Identifiable {
 

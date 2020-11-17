@@ -15,5 +15,29 @@ class ItemViewModel: ObservableObject {
     
     // @ObservedObject var viewModel = ItemViewModel()
     // Text("Items: \(viewModel.itemCount)")
-    // ItemListView(label: "Items: \(viewModel.itemCount)")
+
 }
+
+/*
+ Count items
+ 
+ @State private var totalItems: Int = 0
+ 
+ HStack {
+     Text("Total Items")
+     Spacer()
+     Text(String(totalItems)).bold()
+ }.foregroundColor(Color.green)
+ 
+ .onAppear(perform: {
+     countItems()
+ })
+ 
+ func countItems() {
+     let request: NSFetchRequest<Item> = Item.fetchRequest()
+     if let count = try? self.moc.count(for: request) {
+         self.totalItems = count
+     }
+ }
+ 
+ */
