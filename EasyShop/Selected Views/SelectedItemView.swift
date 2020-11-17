@@ -51,8 +51,14 @@ struct SelectedTakenRow: View {
         }.frame(height: rowHeight)
         .contentShape(Rectangle())
         .onTapGesture(count: 2) {
-            self.item.taken.toggle()
-            self.item.select.toggle()
+//            self.item.taken.toggle()
+//            self.item.select.toggle()
+//            item.shop?.objectWillChange.send()
+            if item.status == kOnListNotTaken {
+             item.status = kOnListAndTaken
+            } else {
+             item.status = kOnListNotTaken
+            }
             item.shop?.objectWillChange.send()
         }
     }
@@ -72,3 +78,22 @@ struct SelectedItemView_Previews: PreviewProvider {
     }
 }
 
+/*
+ Form {
+     if store.getItem.filter({ $0.select && !$0.taken }).count > 0 {
+         Section(header: Text("Items Remaining")) {
+             ForEach(store.getItem.filter({ $0.select && !$0.taken })) { s in
+                 SelectedTakenRow(item: s)
+             } // s
+         }
+     }
+     if store.getItem.filter({ !$0.select && $0.taken }).count > 0 {
+         Section(header: Text("Items Taken")) {
+             ForEach(store.getItem.filter({ !$0.select && $0.taken })) { k in
+                 SelectedTakenRow(item: k)
+             } // k
+         }
+     }
+ }
+ 
+ */

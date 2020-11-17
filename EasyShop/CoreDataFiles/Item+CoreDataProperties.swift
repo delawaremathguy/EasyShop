@@ -9,6 +9,7 @@ extension Item {
     @NSManaged public var name: String?
     @NSManaged public var shop: Shop?
     
+    @NSManaged public var status16: Int16
 }
 
 extension Item { // On SelectedItemView

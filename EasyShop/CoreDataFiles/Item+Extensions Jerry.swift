@@ -7,6 +7,19 @@
 import Foundation
 import CoreData
 
+// 1
+extension Item {
+    var status: Int {
+        get { Int( status16 )}
+        set { status16 = Int16(newValue)}
+    }
+}
+// 2
+let kNotOnList: Int = 0
+let kOnListNotTaken: Int = 1
+let kOnListAndTaken: Int = 2
+
+
 extension Item {
     
     // My Extensions

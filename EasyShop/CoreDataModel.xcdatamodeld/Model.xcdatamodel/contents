@@ -4,6 +4,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="select" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="status16" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="taken" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="shop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shop" inverseName="item" inverseEntity="Shop"/>
     </entity>
@@ -19,7 +20,7 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="Item" positionX="-5308.4375" positionY="-2362.59375" width="128" height="14"/>
+        <element name="Item" positionX="-5308.4375" positionY="-2362.59375" width="128" height="119"/>
         <element name="Shop" positionX="-5504.33984375" positionY="-2443.8828125" width="128" height="103"/>
     </elements>
 </model>
