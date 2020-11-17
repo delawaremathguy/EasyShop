@@ -5,7 +5,6 @@ struct ItemList: View {
     
     @Environment(\.managedObjectContext) var moc
     @ObservedObject var store: Shop
-    @ObservedObject var viewModel = ItemViewModel()
     @State var name = ""
     
     var body: some View {
@@ -29,7 +28,6 @@ struct ItemList: View {
             }
         }
         .navigationBarTitle(("Products"), displayMode: .inline)
-        .navigationBarItems(trailing: ItemListView(label: "Items: \(viewModel.itemCount)"))
     }
     func newItem() {
         Item.addNewItem(named: name, to: store)

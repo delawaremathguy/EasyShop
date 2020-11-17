@@ -3,7 +3,7 @@ import CoreData
 
 struct SelectedItemView: View {
     @ObservedObject var store: Shop
-    
+
     var body: some View {
         Form {
             if store.getItem.filter({ $0.select && !$0.taken }).count > 0 {
@@ -20,7 +20,18 @@ struct SelectedItemView: View {
                     } // k
                 }
             }
-        }.navigationBarTitle("Products", displayMode: .inline)
+        }
+        .navigationBarTitle("Products", displayMode: .inline)
+        .navigationBarItems(trailing: Button(action: {
+            DeleteAll()
+        }) {
+            Text("Delete All") // only visible when all items are taken
+        })
+    }
+    func DeleteAll() {
+        if store.getItem.filter({ $0.select && !$0.taken }).count == 0 {
+            // all items are taken. Then deselect them
+        }
     }
 }
 
