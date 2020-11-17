@@ -25,6 +25,21 @@ extension Shop {
         newShop.select = false
         PersistentContainer.saveContext()
     }
+    
+    /*
+     .sheet(isPresented: $isPresented) { ShopListModal { name in
+         self.newShop(name: name)
+         self.isPresented = false
+        }
+     }
+    func newShop(name: String) {
+        Shop.addNewShop(named: name)
+        self.name = ""
+     }
+     Button(action: { newItem() }) {
+         Image(systemName: "plus")
+     
+     */
 }
 
 extension Shop {

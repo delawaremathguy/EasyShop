@@ -31,6 +31,12 @@ extension Item {
 		addItem.order = Int64(index) // Delete?
 		PersistentContainer.saveContext()
 	}
+    /*
+     func newItem() {
+         Item.addNewItem(named: name, to: store)
+             self.name = ""
+     }
+     */
 	
 	func setSelected(to newValue: Bool) {
 		select = newValue

@@ -23,12 +23,12 @@ struct SelectedItemView: View {
         }
         .navigationBarTitle("Products", displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
-            DeleteAll()
+            ClearAll()
         }) {
-            Text("Delete All") // only visible when all items are taken
+            Text("Clear All") // only visible when all items are taken
         })
     }
-    func DeleteAll() {
+    func ClearAll() {
         if store.getItem.filter({ $0.select && !$0.taken }).count == 0 {
             // all items are taken. Then deselect them
         }
