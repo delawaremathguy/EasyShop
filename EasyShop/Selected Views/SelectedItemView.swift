@@ -5,17 +5,17 @@ struct SelectedItemView: View {
     @ObservedObject var store: Shop
 
     var body: some View {
-        Form {
-            if store.getItem.filter({ $0.select && !$0.taken }).count > 0 {
+         Form {
+            if store.getItem.filter ({ $0.status == kOnListNotTaken }).count > 0 {
                 Section(header: Text("Items Remaining")) {
-                    ForEach(store.getItem.filter({ $0.select && !$0.taken })) { s in
+                    ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
                         SelectedTakenRow(item: s)
                     } // s
                 }
             }
-            if store.getItem.filter({ !$0.select && $0.taken }).count > 0 {
+            if store.getItem.filter ({ $0.status == kOnListAndTaken }).count > 0 {
                 Section(header: Text("Items Taken")) {
-                    ForEach(store.getItem.filter({ !$0.select && $0.taken })) { k in
+                    ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
                         SelectedTakenRow(item: k)
                     } // k
                 }
@@ -23,15 +23,13 @@ struct SelectedItemView: View {
         }
         .navigationBarTitle("Products", displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
-            DeleteAll()
+            ClearAll()
         }) {
-            Text("Delete All") // only visible when all items are taken
+            Text("Clear All") // only visible when all items are taken
         })
     }
-    func DeleteAll() {
-        if store.getItem.filter({ $0.select && !$0.taken }).count == 0 {
+    func ClearAll() {
             // all items are taken. Then deselect them
-        }
     }
 }
 
@@ -45,14 +43,17 @@ struct SelectedTakenRow: View {
                 .font(Font.system(size: 26))
                 .padding(.leading, 20)
             Spacer()
-            Image(systemName: item.taken ? "cart.fill" : "cart.badge.plus")
+            Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
                 .font(.system(size: 35))
-                .foregroundColor(item.taken ? .green : .red)
+                .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
         }.frame(height: rowHeight)
         .contentShape(Rectangle())
         .onTapGesture(count: 2) {
-            self.item.taken.toggle()
-            self.item.select.toggle()
+            if item.status == kOnListNotTaken {
+             item.status = kOnListAndTaken
+            } else {
+             item.status = kOnListNotTaken
+            }
             item.shop?.objectWillChange.send()
         }
     }
@@ -72,3 +73,28 @@ struct SelectedItemView_Previews: PreviewProvider {
     }
 }
 
+/*
+          self.item.taken.toggle()
+          self.item.select.toggle()
+          item.shop?.objectWillChange.send()
+ 
+ 
+ 
+ Form {
+     if store.getItem.filter({ $0.select && !$0.taken }).count > 0 {
+         Section(header: Text("Items Remaining")) {
+             ForEach(store.getItem.filter({ $0.select && !$0.taken })) { s in
+                 SelectedTakenRow(item: s)
+             } // s
+         }
+     }
+     if store.getItem.filter({ !$0.select && $0.taken }).count > 0 {
+         Section(header: Text("Items Taken")) {
+             ForEach(store.getItem.filter({ !$0.select && $0.taken })) { k in
+                 SelectedTakenRow(item: k)
+             } // k
+         }
+     }
+ }
+ 
+ */
