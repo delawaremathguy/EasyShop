@@ -6,19 +6,19 @@ struct SelectedItemView: View {
 
     var body: some View {
          Form {
-            if store.getItem.filter ({ $0.status == kOnListNotTaken }).count > 0 {
+//            if store.getItem.filter ({ $0.status == kOnListNotTaken }).count > 0 {
                 Section(header: Text("Items Remaining")) {
                     ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
                         SelectedTakenRow(item: s)
                     } // s
-                }
+//                }
             }
-            if store.getItem.filter ({ $0.status == kOnListAndTaken }).count > 0 {
+//            if store.getItem.filter ({ $0.status == kOnListAndTaken }).count > 0 {
                 Section(header: Text("Items Taken")) {
                     ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
                         SelectedTakenRow(item: k)
                     } // k
-                }
+//                }
             }
         }
         .navigationBarTitle("Products", displayMode: .inline)
