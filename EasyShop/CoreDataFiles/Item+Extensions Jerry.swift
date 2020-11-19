@@ -30,6 +30,7 @@ extension Item {
 		store.addToItem(addItem) //DMG 1
 		let index = store.item?.count ?? 0
 		addItem.order = Int64(index)
+        addItem.status = kNotOnList
 		PersistentContainer.saveContext()
 	}
 //DMG3 --
