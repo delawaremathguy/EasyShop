@@ -10,7 +10,6 @@
 		880E86BE2561801A00632E6B /* Jerry'sHint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880E86BD2561801A00632E6B /* Jerry'sHint.swift */; };
 		882842C62566F26600E75B59 /* Shop+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882842C52566F26600E75B59 /* Shop+Extension.swift */; };
 		887D445B255F207A0083F01B /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887D445A255F207A0083F01B /* ItemViewModel.swift */; };
-		88FEA1AE2566B99800670B2C /* Shop+Extensions Jerry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FEA1AD2566B99800670B2C /* Shop+Extensions Jerry.swift */; };
 		DA3B3C65254B417700A78604 /* EasyShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C64254B417700A78604 /* EasyShopApp.swift */; };
 		DA3B3C67254B417700A78604 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C66254B417700A78604 /* ContentView.swift */; };
 		DA3B3C69254B417700A78604 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA3B3C68254B417700A78604 /* Assets.xcassets */; };
@@ -31,7 +30,6 @@
 		880E86BD2561801A00632E6B /* Jerry'sHint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Jerry'sHint.swift"; sourceTree = "<group>"; };
 		882842C52566F26600E75B59 /* Shop+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shop+Extension.swift"; sourceTree = "<group>"; };
 		887D445A255F207A0083F01B /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
-		88FEA1AD2566B99800670B2C /* Shop+Extensions Jerry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Shop+Extensions Jerry.swift"; path = "../../../LastBOSS/Shared/CoreDataFiles/Shop+Extensions Jerry.swift"; sourceTree = "<group>"; };
 		DA3B3C61254B417700A78604 /* EasyShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3B3C64254B417700A78604 /* EasyShopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyShopApp.swift; sourceTree = "<group>"; };
 		DA3B3C66254B417700A78604 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 		DA3B3C74254B425200A78604 /* CoreDataFiles */ = {
 			isa = PBXGroup;
 			children = (
-				88FEA1AD2566B99800670B2C /* Shop+Extensions Jerry.swift */,
 				882842C52566F26600E75B59 /* Shop+Extension.swift */,
 				DAB1E9A8255C33C50071AAC0 /* Item+Extensions Jerry.swift */,
 				DA3B3C79254B43A200A78604 /* CoreDataModel.xcdatamodeld */,
@@ -212,7 +209,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88FEA1AE2566B99800670B2C /* Shop+Extensions Jerry.swift in Sources */,
 				882842C62566F26600E75B59 /* Shop+Extension.swift in Sources */,
 				DAA5BDAB255CA9C900969E42 /* DarkMode.swift in Sources */,
 				DA3B3C76254B426400A78604 /* Persistence.swift in Sources */,
