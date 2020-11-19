@@ -5,31 +5,30 @@ struct SelectedItemView: View {
     @ObservedObject var store: Shop
 
     var body: some View {
-         Form {
-//            if store.getItem.filter ({ $0.status == kOnListNotTaken }).count > 0 {
-                Section(header: Text("Items Remaining")) {
-                    ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
-                        SelectedTakenRow(item: s)
-                    } // s
-//                }
+        Form {
+            Section(header: Text("Items Remaining")) {
+                ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
+                    SelectedTakenRow(item: s)
+                }
             }
-//            if store.getItem.filter ({ $0.status == kOnListAndTaken }).count > 0 {
-                Section(header: Text("Items Taken")) {
-                    ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
-                        SelectedTakenRow(item: k)
-                    } // k
-//                }
+            Section(header: Text("Items Taken")) {
+                ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
+                    SelectedTakenRow(item: k)
+                }
             }
         }
-        .navigationBarTitle("Products", displayMode: .inline)
-        .navigationBarItems(trailing: Button(action: {
-            ClearAll()
-        }) {
-            Text("Clear All") // only visible when all items are taken
-        })
+        .navigationTitle("Products")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: { ClearAll() }) {
+                    Text("Clear All")
+                }
+            }
+        }
     }
     func ClearAll() {
-            // all items are taken. Then deselect them
+        // all items are taken. Then deselect them
     }
 }
 

@@ -22,31 +22,30 @@ struct ItemList: View {
             } // SE
             Section {
                 List {
-                    ForEach(store.getItem) { s in ItemListRow(item: s)//, store: s
+                    ForEach(store.getItem) { s in ItemListRow(item: s)
                     }.onDelete(perform: deleteItem)
                 }.listStyle(GroupedListStyle())
             }
         }
-        .navigationBarTitle(("Products"), displayMode: .inline)
+        .navigationTitle("Products")
+        .navigationBarTitleDisplayMode(.inline)
     }
     func newItem() {
         Item.addNewItem(named: name, to: store)
-            self.name = ""
+        self.name = ""
     }
     func deleteItem(at offsets: IndexSet) {
         let items = store.getItem
-            for index in offsets {
-                self.moc.delete(items[index])
-            }
-            PersistentContainer.saveContext()
+        for index in offsets {
+            self.moc.delete(items[index])
+        }
+        PersistentContainer.saveContext()
     }
 }
 
 // MARK: - ITEM ROW
 
 struct ItemListRow: View {
-    
-    @Environment(\.managedObjectContext) var moc
     @ObservedObject var item: Item
     
     var body: some View {
