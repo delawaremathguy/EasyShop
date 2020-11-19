@@ -59,10 +59,8 @@ struct ItemListRow: View {
                     .font(Font.system(size: 20))
                     .padding(.leading, 20)
                 Spacer()
-                Image(systemName: item.status == kOnListNotTaken ? "checkmark.circle.fill" : "circle") .imageScale(.large)
+                Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill") .imageScale(.large)
                     .foregroundColor(Color("tint"))
-                    //.opacity(self.item.select ? 1.0 : 0.6)
-                    //.padding(.leading, 10)
             }.frame(height: rowHeight)
         }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
         }

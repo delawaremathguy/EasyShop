@@ -7,8 +7,19 @@
 import Foundation
 import CoreData
 
-extension Item {
+//DMG3 --
+// these definitions must be known globally to use them in code.  we may be able to
+// hide these in the future, depending on whether you want to stick with them as is,
+// maining that an Item can be in only one of three states:
+// 0 = not on the list today
+// 1 = on the list, but not yet picked up and placed in the cart
+// 2 = on the list and i placed it into the cart (so it is purchased)
 
+let kNotOnList: Int = 0
+let kOnListNotTaken: Int = 1
+let kOnListAndTaken: Int = 2
+
+extension Item {
     public var itemName: String {
         name ?? "Unknown item name"
     }
@@ -21,40 +32,29 @@ extension Item {
 		addItem.order = Int64(index)
 		PersistentContainer.saveContext()
 	}
-	
-	func setSelected(to newValue: Bool) {
-		select = newValue
-		guard let shop = shop else { return } // update the associated's
-		if newValue {
-			shop.select = true
-		} else { //DMG 2
-			shop.select = !shop.getItem.allSatisfy({ !$0.select })
-		}
-	}
-
-	func toggleSelected() {
-		setSelected(to: !select)
-	}
+//DMG3 --
+// this is called from the ItemListRow view that appears in the ItemList
+// view. there's some question about what this means: if you put it on the list
+// previously and have placed it into your shopping cart, should it still
+// remain "selected"?  i will take the approach that it means that if the
+// status of the item in kNotOnList, then we will change it to kOnListNotTaken,
+// and otherwise, we will change the status to kNotOnList
+    func toggleSelected() {
+        if status == kNotOnList {
+            status = kOnListNotTaken
+        } else {
+            status = kNotOnList
+        }
+    }
     
     var status: Int { // 1
         get { Int( status16 )}
-        set { status16 = Int16(newValue)}
+        set {
+// let the shop know we're changing the status of an item, because the
+// shop's computed value of "select" depends on it
+            shop?.objectWillChange.send()
+            status16 = Int16(newValue)
+        }
     }
 }
-// 2
-let kNotOnList: Int = 0
-let kOnListNotTaken: Int = 1
-let kOnListAndTaken: Int = 2
 
-//DMG 1
-// not quite sure what .order means; i think you're trying to track
-// the order in which items are added, but there are problems with
-// this strategy.  fo now, i'll leave it essentially as you had it:
-// e.g., if we just added this as the fourth item, its .order should
-// be 4 (?)
-
-//DMG 2
-// this one-liner is a little subtle: allSatisfy will return true if
-// every item in the shop is NOT selected, and will return
-// false if any one item is selected.  the shop's select state
-// is then the opposite of this result

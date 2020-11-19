@@ -5,7 +5,11 @@ var rowHeight: CGFloat = 50
 
 struct ShopList: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(fetchRequest: Shop.allShops()) var shops: FetchedResults<Shop>
+    //DMG3 -- use a simple, direct fetch request here.
+    @FetchRequest(
+        entity: Shop.entity(),
+        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
+    private var shops: FetchedResults<Shop>
     
     @State var name = ""
     @State var isPresented = false
@@ -26,11 +30,11 @@ struct ShopList: View {
                     self.isPresented = false } }
                 .navigationBarTitle(("Shops"), displayMode: .inline)
                 .navigationBarItems(trailing:
-                                        Button(action: { self.isPresented.toggle() }) {
-                                            Image(systemName: "plus")
-                                                .imageScale(.large)
-                                                .frame(width: 50, height: 50)
-                                        })
+                    Button(action: { self.isPresented.toggle() }) {
+                    Image(systemName: "plus")
+                          .imageScale(.large)
+                          .frame(width: 50, height: 50)
+                })
                 if shops.count == 0 { EmptyShopList() }
             } // ZS
         }.accentColor(Color("tint"))
@@ -50,8 +54,7 @@ struct ShopList: View {
 // MARK: - SHOP ROW
 
 struct ShopListRow: View {
-    
-    @Environment(\.managedObjectContext) var moc
+    //DMG3 -- no need for @Environment(\.managedObjectContext) var moc
     @ObservedObject var store: Shop
     
     var body: some View {
@@ -60,10 +63,14 @@ struct ShopListRow: View {
                 .font(Font.system(size: 20))
                 .padding(.leading, 20)
             Spacer()
-            Image(systemName: self.store.select ? "checkmark" : "")
-                .imageScale(.large)
-                .foregroundColor(Color("tint"))
-                .padding(.leading, 10)
+            //DMG3 --
+            // you can't leave a system name "" here, so instead, use an if ...
+            if store.hasItemsInCartNotYetTaken {
+                Image(systemName: "checkmark")
+                    .imageScale(.large)
+                    .foregroundColor(Color("tint"))
+                    .padding(.leading, 10)
+            }
         }
         .frame(height: rowHeight)
         .onReceive(self.store.objectWillChange) {
