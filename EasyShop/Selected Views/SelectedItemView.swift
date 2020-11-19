@@ -54,7 +54,12 @@ struct SelectedTakenRow: View {
             } else {
              item.status = kOnListNotTaken
             }
-            item.shop?.objectWillChange.send()
+//DMG3 --
+// this was moved to the Item class so that whenever you set the status of
+// an item, it automatically does this for you.  the View should not be
+// responsible for remembering that it has to do this whenever it changes
+// the status of an item
+// item.shop?.objectWillChange.send()
         }
     }
 }
@@ -72,29 +77,3 @@ struct SelectedItemView_Previews: PreviewProvider {
         return SelectedItemView(store: data)
     }
 }
-
-/*
-          self.item.taken.toggle()
-          self.item.select.toggle()
-          item.shop?.objectWillChange.send()
- 
- 
- 
- Form {
-     if store.getItem.filter({ $0.select && !$0.taken }).count > 0 {
-         Section(header: Text("Items Remaining")) {
-             ForEach(store.getItem.filter({ $0.select && !$0.taken })) { s in
-                 SelectedTakenRow(item: s)
-             } // s
-         }
-     }
-     if store.getItem.filter({ !$0.select && $0.taken }).count > 0 {
-         Section(header: Text("Items Taken")) {
-             ForEach(store.getItem.filter({ !$0.select && $0.taken })) { k in
-                 SelectedTakenRow(item: k)
-             } // k
-         }
-     }
- }
- 
- */
