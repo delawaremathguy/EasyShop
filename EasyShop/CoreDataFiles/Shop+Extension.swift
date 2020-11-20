@@ -25,6 +25,26 @@ extension Shop {
         newShop.name = name
         PersistentContainer.saveContext()
     }
+/*
+it would be cleaner … for me … to have the Shop class (or even the PersistentContainer itself,
+because it knows where all the data is) be able to return to you “the list of items on the
+list (in cart or not).”
+so, i would add this as a class function in an extension of Shop:
+*/
+    static func selectedShops() -> [Shop] {
+        let fetchRequest: NSFetchRequest<Shop> = Shop.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        fetchRequest.predicate = NSPredicate(format: "ANY item.status16 > 0")
+        let context = PersistentContainer.context
+        do {
+            let shops = try context.fetch(fetchRequest)
+            print("number of selected shops is \(shops.count)")
+            return shops
+        } catch let error as NSError {
+            print("Error finding selected shops: \(error.localizedDescription)")
+            return []
+        }
+    }
     
 //DMG3 --
 // i am re-inventing the "select" property of a Shop to be a computed property
