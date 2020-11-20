@@ -11,7 +11,7 @@ struct ItemList: View {
         VStack(spacing: 0) {
             Section {
                 HStack(spacing: 0) {
-                    TextField("name of the product", text: $name)
+                    TextField("name of the Product", text: $name)
                         .modifier(CustomTextField1())
                     Button(action: { newItem() }) {
                         Image(systemName: "plus")
@@ -54,9 +54,7 @@ struct ItemListRow: View {
         }) {
             HStack {
                 Text(item.itemName)
-                    .foregroundColor(Color("bw"))
-                    .font(Font.system(size: 20))
-                    .padding(.leading, 20)
+                    .modifier(customText())
                 Spacer()
                 Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill") .imageScale(.large)
                     .foregroundColor(Color("tint"))
@@ -86,39 +84,11 @@ struct ItemListRow_Previews: PreviewProvider {
     static var previews: some View {
         let datum = Item(context: moc)
         datum.name = "Chicken"
-        return ItemListRow(item: datum).previewLayout(.sizeThatFits)//, store: data
-    }
-}
-
-// MARK: - MODIFIERS
-
-struct CustomTextField1: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .frame(height: rowHeight)
-            .background(Color("wb"))
-            .font(Font.system(size: 20))
-            .multilineTextAlignment(.center)
-            .disableAutocorrection(true)
-            .keyboardType(UIKeyboardType.default)
-    }
-}
-
-struct CustomButton1: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .imageScale(.large)
-            .frame(width: 50, height: 50)
-            .background(Color("wb"))
-    }
-}
-
-struct CustomHStack1: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("wb")))
+        return ItemListRow(item: datum)
             .padding()
-            .background(Color("accent"))
+            .previewLayout(.sizeThatFits)//, store: data
     }
 }
+
+
 

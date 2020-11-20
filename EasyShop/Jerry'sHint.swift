@@ -1,11 +1,7 @@
-//
 //  Jerry'sHint.swift
 //  EasyShop
-//
 //  Created on 15/11/20.
-
 /*
- 
  1. DRAWING A LINE
  on the “drawing a line” idea, it would be easy to section out the items in a list to include “those in the cart,” so let me know if you want to go in that direction.
  

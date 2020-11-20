@@ -22,14 +22,35 @@ struct Modifiers: View {
     }
 }
 
-struct Modifiers_Previews: PreviewProvider {
-    static var previews: some View {
-        Modifiers()
+// MARK: - MODIFIERS
+
+struct CustomTextField1: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(height: rowHeight)
+            .background(Color("wb"))
+            .font(Font.system(size: 20))
+            .multilineTextAlignment(.center)
+            .disableAutocorrection(true)
+            .keyboardType(UIKeyboardType.default)
     }
 }
-
-
-
+struct CustomButton1: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .imageScale(.large)
+            .frame(width: 50, height: 50)
+            .background(Color("wb"))
+    }
+}
+struct CustomHStack1: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("wb")))
+            .padding()
+            .background(Color("accent"))
+    }
+}
 // MARK: - TextField
 
 struct customTextfield: ViewModifier { // Image
@@ -44,7 +65,6 @@ struct customTextfield: ViewModifier { // Image
             .keyboardType(UIKeyboardType.default)
     }
 }
-
 struct cellText: ViewModifier { // Text
     func body(content: Content) -> some View {
         content
@@ -53,7 +73,6 @@ struct cellText: ViewModifier { // Text
             .padding(.all, 5)
     }
 }
-
 struct cellStack: ViewModifier { // Stack
     func body(content: Content) -> some View {
         content
@@ -61,7 +80,6 @@ struct cellStack: ViewModifier { // Stack
                             .foregroundColor(Color("rowcolor"))) // card
     }
 }
-
 struct customButton: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -71,7 +89,6 @@ struct customButton: ViewModifier {
             .cornerRadius(15)
     }
 }
-
 // MARK: - MODIFIERS - On ShopListModal
 
 struct CustomTextField2: ViewModifier {
@@ -87,7 +104,6 @@ struct CustomTextField2: ViewModifier {
             .keyboardType(UIKeyboardType.default)
     }
 }
-
 struct CustomButton2: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -96,5 +112,12 @@ struct CustomButton2: ViewModifier {
             .foregroundColor(Color("tint"))
             .background(Color("grayblack"))
             .cornerRadius(15)
+    }
+}
+// MARK: - MODIFIERS
+
+struct Modifiers_Previews: PreviewProvider {
+    static var previews: some View {
+        Modifiers()
     }
 }

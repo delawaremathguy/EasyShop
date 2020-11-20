@@ -60,8 +60,7 @@ struct ShopListRow: View {//DMG4
     var body: some View {
         HStack {
             Text(store.shopName)
-                .font(Font.system(size: 20))
-                .padding(.leading, 20)
+                .modifier(customText())
             Spacer()
             if store.hasItemsInCartNotYetTaken {
                 Image(systemName: "checkmark")
@@ -94,6 +93,16 @@ struct ShopListRow_Previews: PreviewProvider {
     }
 }
 
+// MARK: - Modifiers
+
+struct customText: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(Color("bw"))
+            .font(Font.system(size: 28))
+            .padding(.leading, 20)
+    }
+} // .modifier(customText())
 
 //DMG3 -- use a simple, direct fetch request here.
 //DMG4 -- no need for @Environment(\.managedObjectContext) var moc

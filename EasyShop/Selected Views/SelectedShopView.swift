@@ -2,7 +2,6 @@ import SwiftUI
 import CoreData
 
 struct SelectedShopView: View { // Section A
-
     @State private var selectedShops = [Shop]() // DMG3 — added
     
     var body: some View {
@@ -27,39 +26,15 @@ struct SelectedShopView: View { // Section A
 // MARK: - SELECTEDSHOP
 
 struct SelectedShopRow: View {
-
     @ObservedObject var store: Shop
     
     var body: some View {
         HStack {
-            Text(store.shopName)
-                .font(Font.system(size: 28))
-                .padding(.leading, 20)
-            Spacer()
-            //Text(store.hasItemsOnListOrInCart ? "has items" : "no items")
+            Text(store.shopName).modifier(customText())
+            Spacer() // Section B
         }.frame(height: rowHeight)
     }
 }
-
-// MARK: - PREVIEWS
-
-struct SelectedShopView_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectedShopView().environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
-    }
-}
-
-struct SelectedShopRow_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    static var previews: some View {
-        let data = Shop(context: moc)
-        data.name = "Whole Food"
-        return SelectedShopRow(store: data)
-            .padding()
-            .previewLayout(.sizeThatFits)
-    }
-}
-
 // MARK: - EmptySelectedShop
 
 struct EmptySelectedShop: View {
@@ -74,6 +49,24 @@ struct EmptySelectedShop: View {
         }.edgesIgnoringSafeArea(.all)
     }
 }
+// MARK: - PREVIEWS
+
+struct SelectedShopView_Previews: PreviewProvider {
+    static var previews: some View {
+        SelectedShopView().environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
+    }
+}
+struct SelectedShopRow_Previews: PreviewProvider {
+    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    static var previews: some View {
+        let data = Shop(context: moc)
+        data.name = "Whole Food"
+        return SelectedShopRow(store: data)
+            .padding()
+            .previewLayout(.sizeThatFits)
+    }
+}
+
 
 // Section A
 
@@ -91,3 +84,6 @@ struct EmptySelectedShop: View {
 //        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)],
 //        predicate: NSPredicate(format: "ANY item.status16 > 0"))
 //    private var shops: FetchedResults<Shop> //DMG3
+
+// Section B
+//Text(store.hasItemsOnListOrInCart ? "has items" : "no items")
