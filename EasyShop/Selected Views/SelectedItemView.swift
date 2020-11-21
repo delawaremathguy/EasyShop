@@ -29,6 +29,7 @@ struct SelectedItemView: View {
     }
     func ClearAll() {
         // all items are taken. Then deselect them
+
     }
 }
 
@@ -36,11 +37,11 @@ struct SelectedItemView: View {
 
 struct SelectedTakenRow: View {
     @ObservedObject var item: Item
+    
     var body: some View {
         HStack {
             Text(item.itemName)
-                .font(Font.system(size: 26))
-                .padding(.leading, 20)
+                .modifier(customText())
             Spacer()
             Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
                 .font(.system(size: 35))
@@ -49,16 +50,10 @@ struct SelectedTakenRow: View {
         .contentShape(Rectangle())
         .onTapGesture(count: 2) {
             if item.status == kOnListNotTaken {
-             item.status = kOnListAndTaken
+                item.status = kOnListAndTaken
             } else {
-             item.status = kOnListNotTaken
-            }
-//DMG3 --
-// this was moved to the Item class so that whenever you set the status of
-// an item, it automatically does this for you.  the View should not be
-// responsible for remembering that it has to do this whenever it changes
-// the status of an item
-// item.shop?.objectWillChange.send()
+                item.status = kOnListNotTaken
+            }//DMG3 --
         }
     }
 }
@@ -76,3 +71,21 @@ struct SelectedItemView_Previews: PreviewProvider {
         return SelectedItemView(store: data)
     }
 }
+
+struct SelectedTakenRow_Previews: PreviewProvider {
+    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    static var previews: some View {
+        let datum = Item(context: moc)
+        datum.name = "Chicken"
+        return SelectedTakenRow(item: datum)
+            .padding()
+            .previewLayout(.sizeThatFits)
+    }
+}
+
+//DMG3 --
+// this was moved to the Item class so that whenever you set the status of
+// an item, it automatically does this for you.  the View should not be
+// responsible for remembering that it has to do this whenever it changes
+// the status of an item
+// item.shop?.objectWillChange.send()
