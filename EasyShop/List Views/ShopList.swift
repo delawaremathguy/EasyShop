@@ -16,14 +16,25 @@ struct ShopList: View {
             VStack(spacing: 0) {
                 Section {
                     HStack(spacing: 0) {
-                        TextField("name of the Shop", text: $name)
-                            .modifier(CustomTextField1())
+                        TextField("new Shop here...", text: $name)
+                            .frame(height: rowHeight)
+                            .background(Color("wb"))
+                            .font(Font.system(size: 20))
+                            .multilineTextAlignment(.center)
+                            .disableAutocorrection(true)
+                            .keyboardType(UIKeyboardType.default)
                         Button(action: { newShop(name: name) }) {
                             Image(systemName: "plus")
-                                .modifier(CustomButton1())
-                                .foregroundColor(name.isEmpty ? Color("wb") : Color("tint"))
+                                .imageScale(.large)
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(Color("tint"))
+                                .opacity(name.isEmpty ? 0.4 : 1.0)
+                                .background(Color("wb"))
                         }.disabled(name.isEmpty)
-                    }.modifier(CustomHStack1())
+                    }
+                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("wb")))
+                    .padding()
+                    .background(Color("accent"))
                 } // SE
                 Section {
                     List {
@@ -89,7 +100,9 @@ struct ShopListRow_Previews: PreviewProvider {
     static var previews: some View {
         let data = Shop(context: moc)
         data.name = "Whole Foods"
-        return ShopListRow(store: data).previewLayout(.sizeThatFits)
+        return ShopListRow(store: data)
+            .padding()
+            .previewLayout(.sizeThatFits)
     }
 }
 
