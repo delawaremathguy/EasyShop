@@ -71,14 +71,16 @@ struct ShopListRow: View {//DMG4
     var body: some View {
         HStack {
             Text(store.shopName)
-                .modifier(customText())
+                .foregroundColor(store.hasItemsInCartNotYetTaken ? Color("tint") : Color("bw"))
+                .font(Font.system(size: 28))
+                .padding(.leading, 20)
             Spacer()
-            if store.hasItemsInCartNotYetTaken {
-                Image(systemName: "checkmark")
-                    .imageScale(.large)
-                    .foregroundColor(Color("tint"))
-                    .padding(.leading, 10)
-            }
+//            if store.hasItemsInCartNotYetTaken {
+//                Image(systemName: "checkmark")
+//                    .imageScale(.large)
+//                    .foregroundColor(Color("tint"))
+//                    .padding(.leading, 10)
+//            }
         }
         .frame(height: rowHeight)
         .onReceive(self.store.objectWillChange) {
@@ -100,9 +102,15 @@ struct ShopListRow_Previews: PreviewProvider {
     static var previews: some View {
         let data = Shop(context: moc)
         data.name = "Whole Foods"
-        return ShopListRow(store: data)
-            .padding()
-            .previewLayout(.sizeThatFits)
+        return Group {
+            ShopListRow(store: data)
+                .padding()
+                .previewLayout(.sizeThatFits)
+            ShopListRow(store: data)
+                .preferredColorScheme(.dark)
+                .padding()
+                .previewLayout(.sizeThatFits)
+        }
     }
 }
 
