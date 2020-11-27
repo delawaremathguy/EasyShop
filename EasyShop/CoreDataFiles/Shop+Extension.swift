@@ -72,6 +72,33 @@ so, i would add this as a class function in an extension of Shop:
         }
         return false
     }
+//DMG 4 - from BOSS app - SeedData
+    static func count() -> Int {
+        let context = PersistentContainer.context
+        let fetchRequest: NSFetchRequest<Shop> = Shop.fetchRequest()
+        do {
+            let itemCount = try context.count(for: fetchRequest)
+            return itemCount
+        }
+        catch let error as NSError {
+            print("Error counting Shops: \(error.localizedDescription), \(error.userInfo)")
+        }
+        return 0
+    }
+    
+    static func loadSeedData(into context: NSManagedObjectContext) {
+        for shop in shopsList {
+            let newShop = Shop(context: context)
+            newShop.name = shop.name
+            
+            for item in shop.item {
+                let newItem = Item(context: context)
+                newItem.name = item.name
+                newItem.shop = newShop
+            }
+        }
+        PersistentContainer.saveContext()
+    }
     
 }
 /*
