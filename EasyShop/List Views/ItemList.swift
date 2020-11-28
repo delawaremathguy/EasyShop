@@ -11,14 +11,25 @@ struct ItemList: View {
         VStack(spacing: 0) {
             Section {
                 HStack(spacing: 0) {
-                    TextField("name of the Product", text: $name)
-                        .modifier(CustomTextField1())
+                    TextField("new Product here...", text: $name)
+                        .frame(height: rowHeight)
+                        .background(Color("wb"))
+                        .font(Font.system(size: 20))
+                        .multilineTextAlignment(.center)
+                        .disableAutocorrection(true)
+                        .keyboardType(UIKeyboardType.default)
                     Button(action: { newItem() }) {
                         Image(systemName: "plus")
-                            .modifier(CustomButton1())
-                            .foregroundColor(name.isEmpty ? Color("wb") : Color("tint"))
+                            .imageScale(.large)
+                            .frame(width: 50, height: 50)
+                            .foregroundColor(Color("tint"))
+                            .opacity(name.isEmpty ? 0.4 : 1.0)
+                            .background(Color("wb"))
                     }.disabled(name.isEmpty)
-                }.modifier(CustomHStack1())
+                }
+                .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("wb")))
+                .padding()
+                .background(Color("accent"))
             } // SE
             Section {
                 List {
