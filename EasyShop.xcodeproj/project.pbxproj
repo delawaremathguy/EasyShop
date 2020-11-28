@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		880E86BE2561801A00632E6B /* Jerry'sHint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880E86BD2561801A00632E6B /* Jerry'sHint.swift */; };
 		882842C62566F26600E75B59 /* Shop+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882842C52566F26600E75B59 /* Shop+Extension.swift */; };
+		884E3A9B2572A93F00F9CBE4 /* SettingsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E3A9A2572A93F00F9CBE4 /* SettingsViews.swift */; };
 		887D445B255F207A0083F01B /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887D445A255F207A0083F01B /* ItemViewModel.swift */; };
 		88CBEC882571148E0055003F /* DefaultData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CBEC872571148E0055003F /* DefaultData.swift */; };
 		DA3B3C65254B417700A78604 /* EasyShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C64254B417700A78604 /* EasyShopApp.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		880E86BD2561801A00632E6B /* Jerry'sHint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Jerry'sHint.swift"; sourceTree = "<group>"; };
 		882842C52566F26600E75B59 /* Shop+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shop+Extension.swift"; sourceTree = "<group>"; };
+		884E3A9A2572A93F00F9CBE4 /* SettingsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViews.swift; sourceTree = "<group>"; };
 		887D445A255F207A0083F01B /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		88CBEC872571148E0055003F /* DefaultData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultData.swift; sourceTree = "<group>"; };
 		DA3B3C61254B417700A78604 /* EasyShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +61,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		884E3A992572A90D00F9CBE4 /* Settings Views */ = {
+			isa = PBXGroup;
+			children = (
+				884E3A9A2572A93F00F9CBE4 /* SettingsViews.swift */,
+			);
+			path = "Settings Views";
+			sourceTree = "<group>";
+		};
 		887D445E255F217C0083F01B /* DMG */ = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +102,7 @@
 				880E86BD2561801A00632E6B /* Jerry'sHint.swift */,
 				DA3B3C98254B476800A78604 /* Selected Views */,
 				DA3B3CA0254B478700A78604 /* List Views */,
+				884E3A992572A90D00F9CBE4 /* Settings Views */,
 				DA3B3C68254B417700A78604 /* Assets.xcassets */,
 				DA3B3C6D254B417700A78604 /* Info.plist */,
 				DA3B3C74254B425200A78604 /* CoreDataFiles */,
@@ -222,6 +233,7 @@
 				DA3B3C67254B417700A78604 /* ContentView.swift in Sources */,
 				DA3B3C65254B417700A78604 /* EasyShopApp.swift in Sources */,
 				DAB1E9AB255C33C50071AAC0 /* Item+Extensions Jerry.swift in Sources */,
+				884E3A9B2572A93F00F9CBE4 /* SettingsViews.swift in Sources */,
 				DA3B3C7B254B43A200A78604 /* CoreDataModel.xcdatamodeld in Sources */,
 				DA3B3CA4254B4CED00A78604 /* Modifiers.swift in Sources */,
 			);

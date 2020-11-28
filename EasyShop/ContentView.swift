@@ -8,12 +8,17 @@ struct ContentView: View {
         TabView(selection: $selected) {
             SelectedShopView().tabItem ({
                 Text("Cart")
-                Image(systemName: "cart")
+                Image("shopcart")
             }).tag(0)
             ShopList().tabItem ({
                 Text("List")
-                Image(systemName: "square.and.pencil")
+                Image("shoplist")
             }).tag(1)
+            SettingsViews().tabItem ({
+                Text("Settings")
+                Image("shopsettings")
+            }).tag(2)
+            
         }.accentColor(Color("tint"))
     }
 }
