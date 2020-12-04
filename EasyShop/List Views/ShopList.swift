@@ -9,6 +9,8 @@ struct ShopList: View {
         entity: Shop.entity(),
         sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
     private var shops: FetchedResults<Shop>
+    @ObservedObject var theme = ThemeSettings()
+    let themes: [Theme] = themeData
     @State var name = ""
     
     var body: some View {
@@ -18,7 +20,7 @@ struct ShopList: View {
                     HStack(spacing: 0) {
                         TextField("new Shop here...", text: $name)
                             .frame(height: rowHeight)
-                            .background(Color("wb"))
+                            .background(Color("ColorWhiteBlack"))
                             .font(Font.system(size: 20))
                             .multilineTextAlignment(.center)
                             .disableAutocorrection(true)
@@ -27,14 +29,14 @@ struct ShopList: View {
                             Image(systemName: "plus")
                                 .imageScale(.large)
                                 .frame(width: 50, height: 50)
-                                .foregroundColor(Color("tint"))
+                                .foregroundColor(themes[self.theme.themeSettings].mainColor)
                                 .opacity(name.isEmpty ? 0.4 : 1.0)
-                                .background(Color("wb"))
+                                .background(Color("ColorWhiteBlack"))
                         }.disabled(name.isEmpty)
                     }
-                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("wb")))
+                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("ColorWhiteBlack")))
                     .padding()
-                    .background(Color("accent"))
+                    .background(Color("ColorAccent"))
                 } // SE
                 Section {
                     List {
@@ -49,7 +51,7 @@ struct ShopList: View {
                     .navigationBarTitleDisplayMode(.inline)
                 }
             }
-        }.accentColor(Color("tint"))
+        }.accentColor(themes[self.theme.themeSettings].mainColor)
     }
     func newShop(name: String) {
         Shop.addNewShop(named: name)
@@ -71,7 +73,7 @@ struct ShopListRow: View {//DMG4
     var body: some View {
         HStack {
             Text(store.shopName)
-                .foregroundColor(store.hasItemsInCartNotYetTaken ? Color("tint") : Color("bw"))
+                .foregroundColor(store.hasItemsInCartNotYetTaken ? Color("ColorTint") : Color("ColorBlackWhite"))
                 .font(Font.system(size: 28))
                 .padding(.leading, 20)
             Spacer()
@@ -119,7 +121,7 @@ struct ShopListRow_Previews: PreviewProvider {
 struct customText: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .foregroundColor(Color("bw"))
+            .foregroundColor(Color("ColorBlackWhite"))
             .font(Font.system(size: 28))
             .padding(.leading, 20)
     }

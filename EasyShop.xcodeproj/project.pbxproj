@@ -11,6 +11,9 @@
 		882842C62566F26600E75B59 /* Shop+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882842C52566F26600E75B59 /* Shop+Extension.swift */; };
 		884E3A9B2572A93F00F9CBE4 /* SettingsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E3A9A2572A93F00F9CBE4 /* SettingsViews.swift */; };
 		887D445B255F207A0083F01B /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887D445A255F207A0083F01B /* ItemViewModel.swift */; };
+		88B1A0202578579E007AFE02 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88B1A01F2578579E007AFE02 /* Colors.xcassets */; };
+		88B1A023257860EC007AFE02 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B1A022257860EC007AFE02 /* ColorTheme.swift */; };
+		88B1A027257865F9007AFE02 /* SettingsTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B1A026257865F9007AFE02 /* SettingsTheme.swift */; };
 		88CBEC882571148E0055003F /* DefaultData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CBEC872571148E0055003F /* DefaultData.swift */; };
 		DA3B3C65254B417700A78604 /* EasyShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C64254B417700A78604 /* EasyShopApp.swift */; };
 		DA3B3C67254B417700A78604 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C66254B417700A78604 /* ContentView.swift */; };
@@ -32,6 +35,9 @@
 		882842C52566F26600E75B59 /* Shop+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shop+Extension.swift"; sourceTree = "<group>"; };
 		884E3A9A2572A93F00F9CBE4 /* SettingsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViews.swift; sourceTree = "<group>"; };
 		887D445A255F207A0083F01B /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
+		88B1A01F2578579E007AFE02 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		88B1A022257860EC007AFE02 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
+		88B1A026257865F9007AFE02 /* SettingsTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTheme.swift; sourceTree = "<group>"; };
 		88CBEC872571148E0055003F /* DefaultData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultData.swift; sourceTree = "<group>"; };
 		DA3B3C61254B417700A78604 /* EasyShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3B3C64254B417700A78604 /* EasyShopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyShopApp.swift; sourceTree = "<group>"; };
@@ -65,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				884E3A9A2572A93F00F9CBE4 /* SettingsViews.swift */,
+				88B1A026257865F9007AFE02 /* SettingsTheme.swift */,
 			);
 			path = "Settings Views";
 			sourceTree = "<group>";
@@ -104,6 +111,8 @@
 				DA3B3CA0254B478700A78604 /* List Views */,
 				884E3A992572A90D00F9CBE4 /* Settings Views */,
 				DA3B3C68254B417700A78604 /* Assets.xcassets */,
+				88B1A01F2578579E007AFE02 /* Colors.xcassets */,
+				88B1A022257860EC007AFE02 /* ColorTheme.swift */,
 				DA3B3C6D254B417700A78604 /* Info.plist */,
 				DA3B3C74254B425200A78604 /* CoreDataFiles */,
 				DA3B3CA3254B4CED00A78604 /* Modifiers.swift */,
@@ -208,6 +217,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88B1A0202578579E007AFE02 /* Colors.xcassets in Resources */,
 				DA3B3C6C254B417700A78604 /* Preview Assets.xcassets in Resources */,
 				DA3B3C69254B417700A78604 /* Assets.xcassets in Resources */,
 			);
@@ -220,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88B1A023257860EC007AFE02 /* ColorTheme.swift in Sources */,
 				88CBEC882571148E0055003F /* DefaultData.swift in Sources */,
 				882842C62566F26600E75B59 /* Shop+Extension.swift in Sources */,
 				DAA5BDAB255CA9C900969E42 /* DarkMode.swift in Sources */,
@@ -233,6 +244,7 @@
 				DA3B3C67254B417700A78604 /* ContentView.swift in Sources */,
 				DA3B3C65254B417700A78604 /* EasyShopApp.swift in Sources */,
 				DAB1E9AB255C33C50071AAC0 /* Item+Extensions Jerry.swift in Sources */,
+				88B1A027257865F9007AFE02 /* SettingsTheme.swift in Sources */,
 				884E3A9B2572A93F00F9CBE4 /* SettingsViews.swift in Sources */,
 				DA3B3C7B254B43A200A78604 /* CoreDataModel.xcdatamodeld in Sources */,
 				DA3B3CA4254B4CED00A78604 /* Modifiers.swift in Sources */,

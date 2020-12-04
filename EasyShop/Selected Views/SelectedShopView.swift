@@ -2,6 +2,8 @@ import SwiftUI
 import CoreData
 
 struct SelectedShopView: View { // Section A
+    @ObservedObject var theme = ThemeSettings()
+    let themes: [Theme] = themeData
     @State private var selectedShops = [Shop]() // DMG3 — added
     
     var body: some View {
@@ -19,7 +21,7 @@ struct SelectedShopView: View { // Section A
                 .onAppear { selectedShops = Shop.selectedShops() }
                 if selectedShops.count == 0 { EmptySelectedShop() }
             }
-        }
+        }.accentColor(themes[self.theme.themeSettings].mainColor)
     }
 }
 
@@ -38,6 +40,8 @@ struct SelectedShopRow: View {
 // MARK: - EmptySelectedShop
 
 struct EmptySelectedShop: View {
+    @ObservedObject var theme = ThemeSettings()
+    let themes: [Theme] = themeData
     var body: some View {
         ZStack {
             VStack {
@@ -45,7 +49,7 @@ struct EmptySelectedShop: View {
                 Image(systemName: "tray.and.arrow.down.fill")
                     .resizable()
                     .frame(width: 200, height: 200)
-            }.foregroundColor(Color("tint")).opacity(0.8)
+            }.foregroundColor(themes[self.theme.themeSettings].mainColor).opacity(0.8)
         }.edgesIgnoringSafeArea(.all)
     }
 }
@@ -61,9 +65,15 @@ struct SelectedShopRow_Previews: PreviewProvider {
     static var previews: some View {
         let data = Shop(context: moc)
         data.name = "Whole Food"
-        return SelectedShopRow(store: data)
-            .padding()
-            .previewLayout(.sizeThatFits)
+        return Group {
+            SelectedShopRow(store: data)
+                .padding()
+                .previewLayout(.sizeThatFits)
+            SelectedShopRow(store: data)
+                .preferredColorScheme(.dark)
+                .padding()
+                .previewLayout(.sizeThatFits)
+        }
     }
 }
 

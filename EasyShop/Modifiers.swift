@@ -28,7 +28,7 @@ struct CustomTextField1: ViewModifier {
     func body(content: Content) -> some View {
         content
             .frame(height: rowHeight)
-            .background(Color("wb"))
+            .background(Color("ColorWhiteBlack"))
             .font(Font.system(size: 20))
             .multilineTextAlignment(.center)
             .disableAutocorrection(true)
@@ -40,15 +40,15 @@ struct CustomButton1: ViewModifier {
         content
             .imageScale(.large)
             .frame(width: 50, height: 50)
-            .background(Color("wb"))
+            .background(Color("ColorWhiteBlack"))
     }
 }
 struct CustomHStack1: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("wb")))
+            .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("ColorWhiteBlack")))
             .padding()
-            .background(Color("accent"))
+            .background(Color("ColorAccent"))
     }
 }
 // MARK: - TextField
@@ -84,8 +84,8 @@ struct customButton: ViewModifier {
     func body(content: Content) -> some View {
         content
             .frame(width: 150, height: 50)
-            .foregroundColor(Color("tint"))
-            .background(Color("accent"))
+            .foregroundColor(Color("ColorTint"))
+            .background(Color("ColorAccent"))
             .cornerRadius(15)
     }
 }
@@ -109,8 +109,8 @@ struct CustomButton2: ViewModifier {
         content
             .frame(width: 150, height: 50)
             .font(Font.system(size: 20))
-            .foregroundColor(Color("tint"))
-            .background(Color("grayblack"))
+            .foregroundColor(Color("ColorTint"))
+            .background(Color("ColorGrayBlack"))
             .cornerRadius(15)
     }
 }
