@@ -5,7 +5,7 @@ var rowHeight: CGFloat = 50
 
 struct ShopList: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest( //DMG3
+    @FetchRequest(
         entity: Shop.entity(),
         sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
     private var shops: FetchedResults<Shop>
@@ -67,22 +67,18 @@ struct ShopList: View {
 
 // MARK: - SHOP ROW
 
-struct ShopListRow: View {//DMG4
+struct ShopListRow: View {
+    @ObservedObject var theme = ThemeSettings()
+    let themes: [Theme] = themeData
     @ObservedObject var store: Shop
     
     var body: some View {
         HStack {
             Text(store.shopName)
-                .foregroundColor(store.hasItemsInCartNotYetTaken ? Color("ColorTint") : Color("ColorBlackWhite"))
+                .foregroundColor(store.hasItemsInCartNotYetTaken ? (themes[self.theme.themeSettings].mainColor) : Color("ColorBlackWhite"))
                 .font(Font.system(size: 28))
                 .padding(.leading, 20)
             Spacer()
-//            if store.hasItemsInCartNotYetTaken {
-//                Image(systemName: "checkmark")
-//                    .imageScale(.large)
-//                    .foregroundColor(Color("tint"))
-//                    .padding(.leading, 10)
-//            }
         }
         .frame(height: rowHeight)
         .onReceive(self.store.objectWillChange) {
@@ -125,7 +121,4 @@ struct customText: ViewModifier {
             .font(Font.system(size: 28))
             .padding(.leading, 20)
     }
-} // .modifier(customText())
-
-//DMG3 -- use a simple, direct fetch request here.
-//DMG4 -- no need for @Environment(\.managedObjectContext) var moc
+} 

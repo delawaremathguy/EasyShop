@@ -91,10 +91,3 @@ struct SelectedTakenRow_Previews: PreviewProvider {
         }
     }
 }
-
-//DMG3 --
-// this was moved to the Item class so that whenever you set the status of
-// an item, it automatically does this for you.  the View should not be
-// responsible for remembering that it has to do this whenever it changes
-// the status of an item
-// item.shop?.objectWillChange.send()

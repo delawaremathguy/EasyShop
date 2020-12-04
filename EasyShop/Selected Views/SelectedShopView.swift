@@ -1,10 +1,10 @@
 import SwiftUI
 import CoreData
 
-struct SelectedShopView: View { // Section A
+struct SelectedShopView: View {
     @ObservedObject var theme = ThemeSettings()
     let themes: [Theme] = themeData
-    @State private var selectedShops = [Shop]() // DMG3 — added
+    @State private var selectedShops = [Shop]()
     
     var body: some View {
         NavigationView {
@@ -76,24 +76,3 @@ struct SelectedShopRow_Previews: PreviewProvider {
         }
     }
 }
-
-
-// Section A
-
-//DMG3 -- not used in this View: @Environment(\.managedObjectContext) var moc
-//DMG3 --
-// use a simple, direct fetch request here.  we'll just get all the
-// shops and filter them for what appears in the list.  however, for some reason
-// that i don't fully understand, when a Shop's itemWillChange.send() message is
-// invoked on the change of the status of an Item, this @FetchRequest is not
-// redrawing.  i think this can be fixed; staty tuned.  but there is a UI issue
-// that you might want to think about as to whether this view should be empty
-// if no shop has any items remaining to be purchased.
-//    @FetchRequest(
-//        entity: Shop.entity(),
-//        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)],
-//        predicate: NSPredicate(format: "ANY item.status16 > 0"))
-//    private var shops: FetchedResults<Shop> //DMG3
-
-// Section B
-//Text(store.hasItemsOnListOrInCart ? "has items" : "no items")
