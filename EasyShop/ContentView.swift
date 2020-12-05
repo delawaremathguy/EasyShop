@@ -1,20 +1,26 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @ObservedObject var theme = ThemeSettings()
+    let themes: [Theme] = themeData
     @State private var selected = 0
     
     var body: some View {
         TabView(selection: $selected) {
             SelectedShopView().tabItem ({
                 Text("Cart")
-                Image(systemName: "cart")
+                Image("shopcart")
             }).tag(0)
             ShopList().tabItem ({
                 Text("List")
-                Image(systemName: "square.and.pencil")
+                Image("shoplist")
             }).tag(1)
-        }.accentColor(Color("tint"))
+            SettingsViews().tabItem ({
+                Text("Settings")
+                Image("shopsettings")
+            }).tag(2)
+            
+        }.accentColor(themes[self.theme.themeSettings].mainColor)
     }
 }
 

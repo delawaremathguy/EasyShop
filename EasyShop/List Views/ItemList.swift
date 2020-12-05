@@ -5,6 +5,8 @@ struct ItemList: View {
     
     @Environment(\.managedObjectContext) var moc
     @ObservedObject var store: Shop
+    @ObservedObject var theme = ThemeSettings()
+    let themes: [Theme] = themeData
     @State var name = ""
     
     var body: some View {
@@ -13,7 +15,7 @@ struct ItemList: View {
                 HStack(spacing: 0) {
                     TextField("new Product here...", text: $name)
                         .frame(height: rowHeight)
-                        .background(Color("wb"))
+                        .background(Color("ColorWhiteBlack"))
                         .font(Font.system(size: 20))
                         .multilineTextAlignment(.center)
                         .disableAutocorrection(true)
@@ -22,14 +24,14 @@ struct ItemList: View {
                         Image(systemName: "plus")
                             .imageScale(.large)
                             .frame(width: 50, height: 50)
-                            .foregroundColor(Color("tint"))
+                            .foregroundColor(themes[self.theme.themeSettings].mainColor)
                             .opacity(name.isEmpty ? 0.4 : 1.0)
-                            .background(Color("wb"))
+                            .background(Color("ColorWhiteBlack"))
                     }.disabled(name.isEmpty)
                 }
-                .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("wb")))
+                .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("ColorWhiteBlack")))
                 .padding()
-                .background(Color("accent"))
+                .background(Color("ColorAccent"))
             } // SE
             Section {
                 List {
@@ -58,6 +60,8 @@ struct ItemList: View {
 
 struct ItemListRow: View {
     @ObservedObject var item: Item
+    @ObservedObject var theme = ThemeSettings()
+    let themes: [Theme] = themeData
     
     var body: some View {
         Button(action: {
@@ -67,8 +71,9 @@ struct ItemListRow: View {
                 Text(item.itemName)
                     .modifier(customText())
                 Spacer()
-                Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill") .imageScale(.large)
-                    .foregroundColor(Color("tint"))
+                Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill")
+                    .imageScale(.large)
+                    .foregroundColor(themes[self.theme.themeSettings].mainColor)
             }.frame(height: rowHeight)
         }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
         }
@@ -86,7 +91,7 @@ struct ItemList_Previews: PreviewProvider {
         datum.name = "Eggs"
         data.addToItem(datum)
         return ItemList(store: data) 
-            .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)//.preferredColorScheme(.dark)
+            .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
     }
 }
 
@@ -95,9 +100,15 @@ struct ItemListRow_Previews: PreviewProvider {
     static var previews: some View {
         let datum = Item(context: moc)
         datum.name = "Chicken"
-        return ItemListRow(item: datum)
-            .padding()
-            .previewLayout(.sizeThatFits)//, store: data
+        return Group {
+            ItemListRow(item: datum)
+                .padding()
+                .previewLayout(.sizeThatFits)
+            ItemListRow(item: datum)
+                .preferredColorScheme(.dark)
+                .padding()
+                .previewLayout(.sizeThatFits)
+        }
     }
 }
 

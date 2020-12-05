@@ -2,6 +2,8 @@ import SwiftUI
 import CoreData
 
 struct SelectedItemView: View {
+    @ObservedObject var theme = ThemeSettings()
+    let themes: [Theme] = themeData
     @ObservedObject var store: Shop
 
     var body: some View {
@@ -23,6 +25,7 @@ struct SelectedItemView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { ClearAll() }) {
                     Text("Clear All")
+                        .foregroundColor(themes[self.theme.themeSettings].mainColor)
                 }
             }
         }
@@ -77,9 +80,15 @@ struct SelectedTakenRow_Previews: PreviewProvider {
     static var previews: some View {
         let datum = Item(context: moc)
         datum.name = "Chicken"
-        return SelectedTakenRow(item: datum)
-            .padding()
-            .previewLayout(.sizeThatFits)
+        return Group {
+            SelectedTakenRow(item: datum)
+                .padding()
+                .previewLayout(.sizeThatFits)
+            SelectedTakenRow(item: datum)
+                .preferredColorScheme(.dark)
+                .padding()
+                .previewLayout(.sizeThatFits)
+        }
     }
 }
 
