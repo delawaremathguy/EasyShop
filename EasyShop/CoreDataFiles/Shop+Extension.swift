@@ -25,6 +25,7 @@ extension Shop {
         newShop.name = name
         PersistentContainer.saveContext()
     }
+    
 /*
 it would be cleaner … for me … to have the Shop class (or even the PersistentContainer itself,
 because it knows where all the data is) be able to return to you “the list of items on the

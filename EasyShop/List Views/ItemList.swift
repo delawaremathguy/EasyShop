@@ -41,8 +41,14 @@ struct ItemList: View {
                     }.onDelete(perform: deleteItem)
                 }.listStyle(GroupedListStyle())
             }
+            // MARK: - Footer
+            HStack {
+                Text("Total items: \(store.getItem.count) ")
+                Spacer()
+                Text("Items selected: ?? ")
+            }.padding(5)
         }
-        .navigationTitle("\(store.shopName) = \(store.getItem.count)")
+        .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

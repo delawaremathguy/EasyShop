@@ -48,6 +48,12 @@ extension Item {
         }
     }
     
+//    func ClearAllItems() {
+//        if status == kOnListAndTaken && kOnListNotTaken == 0 {
+//            status = kNotOnList
+//        }
+//    }
+
     var status: Int { // 1
         get { Int( status16 )}
         set {

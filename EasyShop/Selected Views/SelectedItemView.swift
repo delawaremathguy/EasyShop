@@ -30,14 +30,19 @@ struct SelectedItemView: View {
                 Button(action: { ClearAll() }) {
                     Text("Clear All")
                         .foregroundColor(themes[self.theme.themeSettings].mainColor)
-                }.disabled(store.getItem.isEmpty)
+                }
             }
         }
     }
     // MARK: - FUNCTIONS
     func ClearAll() {
-        // all items are taken. Then deselect them
-
+//        var status0 = kNotOnList
+//        var status1 = kOnListNotTaken
+//        var status2 = kOnListAndTaken
+//
+//        if status2 != 0 && status1 == 0 {
+//            status2 = status0
+//        }
     }
 }
 

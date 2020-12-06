@@ -19,7 +19,6 @@ struct ContentView: View {
                 Text("Settings")
                 Image("shopsettings")
             }.tag(2)
-
         }.accentColor(themes[self.theme.themeSettings].mainColor)
     }
 }

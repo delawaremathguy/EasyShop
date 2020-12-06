@@ -8,6 +8,7 @@ struct TabbarTest: View {
     private var tabCounts: CGFloat = 3 // Tabbar Badge Test
     @State private var selected = 0
 //    @ObservedObject var store: Shop // Tabbar Badge Test
+    @State private var selectedShops = [Shop]() // Tabbar Badge Test 2
     
     var body: some View {
         GeometryReader { geo in
@@ -34,6 +35,7 @@ struct TabbarTest: View {
                     Circle()
                         .foregroundColor((themes[self.theme.themeSettings].mainColor))
 //                        .opacity(store.hasItemsInCartNotYetTaken ? 1.0 : 0.0) // Tabbar Badge Test
+                        .opacity(selectedShops.count == 0 ? 1.0 : 0.0) // Tabbar Badge Test 2
                 }
                 .frame(width: 12, height: 12)
                 .offset(x: (( 1 * self.badgePosition) - 0.95) * ( geo.size.width / (2 * self.tabCounts)) + 2, y: -30)

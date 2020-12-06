@@ -17,6 +17,7 @@ struct ShopList: View {
         NavigationView {
             VStack(spacing: 0) {
                 Section {
+                    // MARK: - TEXTFIELD
                     HStack(spacing: 0) {
                         TextField("new Shop here...", text: $name)
                             .frame(height: rowHeight)
@@ -39,12 +40,15 @@ struct ShopList: View {
                     .background(Color("ColorAccent"))
                 } // SE
                 Section {
+                    // MARK: - LIST
                     List {
-                        ForEach(shops) { s in
-                            NavigationLink(destination: ItemList(store: s)) {
-                                ShopListRow(store: s)
-                            }
-                        }.onDelete(perform: deleteShop)
+                        Section {
+                            ForEach(shops) { s in
+                                NavigationLink(destination: ItemList(store: s)) {
+                                    ShopListRow(store: s)
+                                }
+                            }.onDelete(perform: deleteShop)
+                        }
                     } // LS
                     .listStyle(GroupedListStyle())
                     .navigationTitle("Shops")
@@ -53,6 +57,7 @@ struct ShopList: View {
             }
         }.accentColor(themes[self.theme.themeSettings].mainColor)
     }
+    // MARK: - FUNCTIONS
     func newShop(name: String) {
         Shop.addNewShop(named: name)
         self.name = ""
