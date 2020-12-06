@@ -46,6 +46,7 @@ struct EmptySelectedShop: View {
         ZStack {
             VStack {
                 Text("Start from the List section!")
+                    .font(Font.system(size: 20))
                 Image(systemName: "tray.and.arrow.down.fill")
                     .resizable()
                     .frame(width: 200, height: 200)

@@ -12,6 +12,7 @@ struct ItemList: View {
     var body: some View {
         VStack(spacing: 0) {
             Section {
+                // MARK: - TEXTFIELD
                 HStack(spacing: 0) {
                     TextField("new Product here...", text: $name)
                         .frame(height: rowHeight)
@@ -34,15 +35,25 @@ struct ItemList: View {
                 .background(Color("ColorAccent"))
             } // SE
             Section {
+                // MARK: - LIST
                 List {
                     ForEach(store.getItem) { s in ItemListRow(item: s)
                     }.onDelete(perform: deleteItem)
                 }.listStyle(GroupedListStyle())
             }
         }
-        .navigationTitle("Products")
+        .navigationTitle("\(store.shopName) = \(store.getItem.count)")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: { selectAll() }) {
+                    Text("Select All")
+                        .foregroundColor(themes[self.theme.themeSettings].mainColor)
+                }.disabled(store.getItem.isEmpty)
+            }
+        }
     }
+    // MARK: - FUNCTIONS
     func newItem() {
         Item.addNewItem(named: name, to: store)
         self.name = ""
@@ -53,6 +64,9 @@ struct ItemList: View {
             self.moc.delete(items[index])
         }
         PersistentContainer.saveContext()
+    }
+    func selectAll() {
+        // all items are selected when pressed
     }
 }
 

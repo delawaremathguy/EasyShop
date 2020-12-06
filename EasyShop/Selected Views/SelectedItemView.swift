@@ -7,29 +7,34 @@ struct SelectedItemView: View {
     @ObservedObject var store: Shop
 
     var body: some View {
-        Form {
-            Section(header: Text("Items Remaining")) {
-                ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
-                    SelectedTakenRow(item: s)
+        VStack {
+            List {
+                Section(header: Text("Items Remaining") ) {
+                    ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
+                        SelectedTakenRow(item: s)
+                    }
                 }
             }
-            Section(header: Text("Items Taken")) {
-                ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
-                    SelectedTakenRow(item: k)
+            List {
+                Section(header: Text("Items Taken")) {
+                    ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
+                        SelectedTakenRow(item: k)
+                    }
                 }
             }
         }
-        .navigationTitle("Products")
+        .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { ClearAll() }) {
                     Text("Clear All")
                         .foregroundColor(themes[self.theme.themeSettings].mainColor)
-                }
+                }.disabled(store.getItem.isEmpty)
             }
         }
     }
+    // MARK: - FUNCTIONS
     func ClearAll() {
         // all items are taken. Then deselect them
 
