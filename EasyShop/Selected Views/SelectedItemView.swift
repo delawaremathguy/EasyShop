@@ -9,7 +9,7 @@ struct SelectedItemView: View {
     var body: some View {
         VStack {
             List {
-                Section(header: Text("Items Remaining") ) {
+                Section(header: Text("Items Remaining")) {
                     ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
                         SelectedTakenRow(item: s)
                     }

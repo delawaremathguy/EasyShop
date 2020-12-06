@@ -23,6 +23,7 @@ extension Item {
     public var itemName: String {
         name ?? "Unknown item name"
     }
+    
 // Jerry's
 	class func addNewItem(named name: String, to store: Shop) {
 		let addItem = Item(context: PersistentContainer.context)

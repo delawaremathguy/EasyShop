@@ -17,15 +17,8 @@ struct ShopList: View {
         NavigationView {
             VStack(spacing: 0) {
                 Section {
-                    // MARK: - TEXTFIELD
                     HStack(spacing: 0) {
-                        TextField("new Shop here...", text: $name)
-                            .frame(height: rowHeight)
-                            .background(Color("ColorWhiteBlack"))
-                            .font(Font.system(size: 20))
-                            .multilineTextAlignment(.center)
-                            .disableAutocorrection(true)
-                            .keyboardType(UIKeyboardType.default)
+                        // MARK: - BUTTON
                         Button(action: { newShop(name: name) }) {
                             Image(systemName: "plus")
                                 .imageScale(.large)
@@ -34,6 +27,18 @@ struct ShopList: View {
                                 .opacity(name.isEmpty ? 0.4 : 1.0)
                                 .background(Color("ColorWhiteBlack"))
                         }.disabled(name.isEmpty)
+                        
+                        // MARK: - TEXTFIELD
+                        TextField("new shop here...", text: $name)
+                            .frame(height: rowHeight)
+                            .background(Color("ColorWhiteBlack"))
+                            .font(Font.system(size: 20))
+                            .multilineTextAlignment(.center)
+                            .disableAutocorrection(true)
+                            .keyboardType(UIKeyboardType.default)
+                        
+                        // MARK: - COUNT
+                        Text("\(shops.count)").padding(15)
                     }
                     .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("ColorWhiteBlack")))
                     .padding()
