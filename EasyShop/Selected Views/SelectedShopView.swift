@@ -4,13 +4,16 @@ import CoreData
 struct SelectedShopView: View {
     @ObservedObject var theme = ThemeSettings()
     let themes: [Theme] = themeData
-    @State private var selectedShops = [Shop]()
+    @FetchRequest(
+        entity: Shop.entity(),
+        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
+    private var allShops: FetchedResults<Shop> // DMG 5 - clearAll() email
     
     var body: some View {
         NavigationView {
             ZStack {
                 List {
-                    ForEach(selectedShops) { s in
+                    ForEach(allShops) { s in
                         NavigationLink(destination: SelectedItemView(store: s)) {
                             SelectedShopRow(store: s)
                         }
@@ -18,8 +21,9 @@ struct SelectedShopView: View {
                 }
                 .listStyle(GroupedListStyle())
                 .navigationTitle("Shops")
-                .onAppear { selectedShops = Shop.selectedShops() }
-                if selectedShops.count == 0 { EmptySelectedShop() }
+//                if allShops.filter({ $0.hasItemsOnListOrInCart }).count == 0 {
+//                    EmptySelectedShop()
+//                }
             }
         }.accentColor(themes[self.theme.themeSettings].mainColor)
     }
@@ -28,12 +32,18 @@ struct SelectedShopView: View {
 // MARK: - SELECTEDSHOP
 
 struct SelectedShopRow: View {
+    @ObservedObject var theme = ThemeSettings()
+    let themes: [Theme] = themeData
     @ObservedObject var store: Shop
     
     var body: some View {
         HStack {
-            Text(store.shopName).modifier(customText())
+            Text(store.shopName)
+                .foregroundColor((store.countItemsInCart != 0) ? (themes[self.theme.themeSettings].mainColor) : Color("ColorBlackWhite"))
+                .font(Font.system(size: 28))
+                .padding(.leading, 20)
             Spacer() // Section B
+            Text("Items Remaining: \(store.countItemsInCart)").font(.caption)
         }.frame(height: rowHeight)
     }
 }

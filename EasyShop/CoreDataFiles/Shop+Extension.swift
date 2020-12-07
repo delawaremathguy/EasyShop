@@ -73,6 +73,17 @@ so, i would add this as a class function in an extension of Shop:
         }
         return false
     }
+// DMG 5 - clearAll() email
+    var countItemsInCart: Int {
+        var count = 0
+        for item in getItem {
+            if item.status == kOnListNotTaken {
+                count += 1
+            }
+        }
+        return count
+    }
+    
 //DMG 4 - from BOSS app - SeedData
     static func count() -> Int {
         let context = PersistentContainer.context
