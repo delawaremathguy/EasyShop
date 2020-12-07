@@ -16,7 +16,7 @@ struct SelectedShopView: View {
                     Section(header: HStack {
                         Spacer()
                         Text("Products remaining")
-                    }) {
+                    }.textCase(nil)) {
                         ForEach(allShops) { s in
                             NavigationLink(destination: SelectedItemView(store: s)) {
                                 SelectedShopRow(store: s)

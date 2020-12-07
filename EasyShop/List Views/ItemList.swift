@@ -43,7 +43,7 @@ struct ItemList: View {
                 }.listStyle(GroupedListStyle())
             }
         }
-        .navigationTitle("Products")
+        .navigationTitle("\(store.shopName)")// products
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -51,7 +51,7 @@ struct ItemList: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { present.wrappedValue.dismiss() }) {
                     Image(systemName: "chevron.left")
-                    Text("\(store.shopName)")
+//                    Text("\(store.shopName)")
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
