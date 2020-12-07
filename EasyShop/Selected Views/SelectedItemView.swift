@@ -11,14 +11,14 @@ struct SelectedItemView: View {
         VStack {
 // MARK: - LIST
             List {
-                Section(header: Text("Items Remaining")) {
+                Section(header: Text("Products remaining")) {
                     ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
                         SelectedTakenRow(item: s)
                     }
                 }
             }
             List {
-                Section(header: Text("Items Taken")) {
+                Section(header: Text("Products taken")) {
                     ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
                         SelectedTakenRow(item: k)
                     }

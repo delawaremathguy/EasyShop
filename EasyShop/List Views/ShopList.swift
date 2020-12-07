@@ -132,3 +132,54 @@ struct customText: ViewModifier {
             .padding(.leading, 20)
     }
 } 
+
+/*
+ NavigationView {
+     VStack(spacing: 0) {
+         Section {
+             HStack(spacing: 0) {
+                 // MARK: - BUTTON
+                 Button(action: { newShop(name: name) }) {
+                     Image(systemName: "plus")
+                         .imageScale(.large)
+                         .frame(width: 50, height: 50)
+                         .foregroundColor(themes[self.theme.themeSettings].mainColor)
+                         .opacity(name.isEmpty ? 0.4 : 1.0)
+                         .background(Color("ColorWhiteBlack"))
+                 }.disabled(name.isEmpty)
+                 
+                 // MARK: - TEXTFIELD
+                 TextField("new shop here...", text: $name)
+                     .frame(height: rowHeight)
+                     .background(Color("ColorWhiteBlack"))
+                     .font(Font.system(size: 20))
+                     .multilineTextAlignment(.center)
+                     .disableAutocorrection(true)
+                     .keyboardType(UIKeyboardType.default)
+                 
+                 // MARK: - COUNT
+                 Text("\(shops.count)").padding(15)
+             }
+             .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("ColorWhiteBlack")))
+             .padding()
+             .background(Color("ColorAccent"))
+         } // SE
+         Section {
+             // MARK: - LIST
+             List {
+                 Section {
+                     ForEach(shops) { s in
+                         NavigationLink(destination: ItemList(store: s)) {
+                             ShopListRow(store: s)
+                         }
+                     }.onDelete(perform: deleteShop)
+                 }
+             } // LS
+             .listStyle(GroupedListStyle())
+             .navigationTitle("Shops")
+             .navigationBarTitleDisplayMode(.inline)
+         }
+     }
+ }.accentColor(themes[self.theme.themeSettings].mainColor)
+}
+ */

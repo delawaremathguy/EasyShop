@@ -13,17 +13,22 @@ struct SelectedShopView: View {
         NavigationView {
             ZStack {
                 List {
-                    ForEach(allShops) { s in
-                        NavigationLink(destination: SelectedItemView(store: s)) {
-                            SelectedShopRow(store: s)
+                    Section(header: HStack {
+                        Spacer()
+                        Text("Products remaining")
+                    }) {
+                        ForEach(allShops) { s in
+                            NavigationLink(destination: SelectedItemView(store: s)) {
+                                SelectedShopRow(store: s)
+                            }
                         }
                     }
                 }
                 .listStyle(GroupedListStyle())
                 .navigationTitle("Shops")
-//                if allShops.filter({ $0.hasItemsOnListOrInCart }).count == 0 {
-//                    EmptySelectedShop()
-//                }
+                if allShops.filter({ $0.hasItemsOnListOrInCart }).count == 0 {
+                    EmptySelectedShop()
+                }
             }
         }.accentColor(themes[self.theme.themeSettings].mainColor)
     }
@@ -43,7 +48,7 @@ struct SelectedShopRow: View {
                 .font(Font.system(size: 28))
                 .padding(.leading, 20)
             Spacer() // Section B
-            Text("Items Remaining: \(store.countItemsInCart)").font(.caption)
+            Text("\(store.countItemsInCart)").font(.caption)//Items Remaining:
         }.frame(height: rowHeight)
     }
 }
