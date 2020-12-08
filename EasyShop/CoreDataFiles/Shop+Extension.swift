@@ -25,6 +25,7 @@ extension Shop {
         newShop.name = name
         PersistentContainer.saveContext()
     }
+    
 /*
 it would be cleaner … for me … to have the Shop class (or even the PersistentContainer itself,
 because it knows where all the data is) be able to return to you “the list of items on the
@@ -72,6 +73,17 @@ so, i would add this as a class function in an extension of Shop:
         }
         return false
     }
+// DMG 5 - clearAll() email
+    var countItemsInCart: Int {
+        var count = 0
+        for item in getItem {
+            if item.status == kOnListNotTaken {
+                count += 1
+            }
+        }
+        return count
+    }
+    
 //DMG 4 - from BOSS app - SeedData
     static func count() -> Int {
         let context = PersistentContainer.context

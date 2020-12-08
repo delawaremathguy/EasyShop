@@ -12,8 +12,8 @@ struct SettingsViews: View {
                     NavigationLink(destination: SettingsTheme(), tag: 1, selection: $action) {
                         HStack {
                             Image("appearance")
+                                .resizable()
                                 .frame(width: 40, height: 40)
-                                .scaledToFit()
                                 .padding(10)
                             Text("Appearance")
                                 .foregroundColor(themes[self.theme.themeSettings].mainColor)

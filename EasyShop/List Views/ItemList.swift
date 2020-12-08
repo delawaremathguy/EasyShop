@@ -2,7 +2,7 @@ import SwiftUI
 import CoreData
 
 struct ItemList: View {
-    
+    @Environment(\.presentationMode) var present
     @Environment(\.managedObjectContext) var moc
     @ObservedObject var store: Shop
     @ObservedObject var theme = ThemeSettings()
@@ -13,13 +13,7 @@ struct ItemList: View {
         VStack(spacing: 0) {
             Section {
                 HStack(spacing: 0) {
-                    TextField("new Product here...", text: $name)
-                        .frame(height: rowHeight)
-                        .background(Color("ColorWhiteBlack"))
-                        .font(Font.system(size: 20))
-                        .multilineTextAlignment(.center)
-                        .disableAutocorrection(true)
-                        .keyboardType(UIKeyboardType.default)
+// MARK: - HEADER
                     Button(action: { newItem() }) {
                         Image(systemName: "plus")
                             .imageScale(.large)
@@ -28,12 +22,21 @@ struct ItemList: View {
                             .opacity(name.isEmpty ? 0.4 : 1.0)
                             .background(Color("ColorWhiteBlack"))
                     }.disabled(name.isEmpty)
+                    TextField("new product here...", text: $name)
+                        .frame(height: rowHeight)
+                        .background(Color("ColorWhiteBlack"))
+                        .font(Font.system(size: 20))
+                        .multilineTextAlignment(.center)
+                        .disableAutocorrection(true)
+                        .keyboardType(UIKeyboardType.default)
+                    Text("\(store.getItem.count)").padding(15)
                 }
                 .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("ColorWhiteBlack")))
                 .padding()
                 .background(Color("ColorAccent"))
             } // SE
             Section {
+// MARK: - LIST
                 List {
                     ForEach(store.getItem) { s in ItemListRow(item: s)
                     }.onDelete(perform: deleteItem)
@@ -42,7 +45,23 @@ struct ItemList: View {
         }
         .navigationTitle("Products")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+// MARK: - TOOLBAR
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { present.wrappedValue.dismiss() }) {
+                    Image(systemName: "chevron.left")
+                    Text("\(store.shopName)")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: { selectAll() }) {
+                    Text("Select All")
+                }.disabled(store.getItem.isEmpty)
+            }
+        }
     }
+// MARK: - FUNCTIONS
     func newItem() {
         Item.addNewItem(named: name, to: store)
         self.name = ""
@@ -53,6 +72,9 @@ struct ItemList: View {
             self.moc.delete(items[index])
         }
         PersistentContainer.saveContext()
+    }
+    func selectAll() {
+        // all items are selected when pressed
     }
 }
 

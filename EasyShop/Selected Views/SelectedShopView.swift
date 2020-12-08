@@ -1,25 +1,34 @@
 import SwiftUI
 import CoreData
 
-struct SelectedShopView: View { // Section A
+struct SelectedShopView: View {
     @ObservedObject var theme = ThemeSettings()
     let themes: [Theme] = themeData
-    @State private var selectedShops = [Shop]() // DMG3 — added
+    @FetchRequest(
+        entity: Shop.entity(),
+        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
+    private var allShops: FetchedResults<Shop> // DMG 5 - clearAll() email
     
     var body: some View {
         NavigationView {
             ZStack {
                 List {
-                    ForEach(selectedShops) { s in
-                        NavigationLink(destination: SelectedItemView(store: s)) {
-                            SelectedShopRow(store: s)
+                    Section(header: HStack {
+                        Spacer()
+                        Text("Products remaining")
+                    }) {
+                        ForEach(allShops) { s in
+                            NavigationLink(destination: SelectedItemView(store: s)) {
+                                SelectedShopRow(store: s)
+                            }
                         }
                     }
                 }
                 .listStyle(GroupedListStyle())
                 .navigationTitle("Shops")
-                .onAppear { selectedShops = Shop.selectedShops() }
-                if selectedShops.count == 0 { EmptySelectedShop() }
+                if allShops.filter({ $0.hasItemsOnListOrInCart }).count == 0 {
+                    EmptySelectedShop()
+                }
             }
         }.accentColor(themes[self.theme.themeSettings].mainColor)
     }
@@ -28,12 +37,18 @@ struct SelectedShopView: View { // Section A
 // MARK: - SELECTEDSHOP
 
 struct SelectedShopRow: View {
+    @ObservedObject var theme = ThemeSettings()
+    let themes: [Theme] = themeData
     @ObservedObject var store: Shop
     
     var body: some View {
         HStack {
-            Text(store.shopName).modifier(customText())
+            Text(store.shopName)
+                .foregroundColor((store.countItemsInCart != 0) ? (themes[self.theme.themeSettings].mainColor) : Color("ColorBlackWhite"))
+                .font(Font.system(size: 28))
+                .padding(.leading, 20)
             Spacer() // Section B
+            Text("\(store.countItemsInCart)").font(.caption)//Items Remaining:
         }.frame(height: rowHeight)
     }
 }
@@ -46,6 +61,7 @@ struct EmptySelectedShop: View {
         ZStack {
             VStack {
                 Text("Start from the List section!")
+                    .font(Font.system(size: 20))
                 Image(systemName: "tray.and.arrow.down.fill")
                     .resizable()
                     .frame(width: 200, height: 200)
@@ -76,24 +92,3 @@ struct SelectedShopRow_Previews: PreviewProvider {
         }
     }
 }
-
-
-// Section A
-
-//DMG3 -- not used in this View: @Environment(\.managedObjectContext) var moc
-//DMG3 --
-// use a simple, direct fetch request here.  we'll just get all the
-// shops and filter them for what appears in the list.  however, for some reason
-// that i don't fully understand, when a Shop's itemWillChange.send() message is
-// invoked on the change of the status of an Item, this @FetchRequest is not
-// redrawing.  i think this can be fixed; staty tuned.  but there is a UI issue
-// that you might want to think about as to whether this view should be empty
-// if no shop has any items remaining to be purchased.
-//    @FetchRequest(
-//        entity: Shop.entity(),
-//        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)],
-//        predicate: NSPredicate(format: "ANY item.status16 > 0"))
-//    private var shops: FetchedResults<Shop> //DMG3
-
-// Section B
-//Text(store.hasItemsOnListOrInCart ? "has items" : "no items")

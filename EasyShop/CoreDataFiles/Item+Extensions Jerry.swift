@@ -23,6 +23,7 @@ extension Item {
     public var itemName: String {
         name ?? "Unknown item name"
     }
+    
 // Jerry's
 	class func addNewItem(named name: String, to store: Shop) {
 		let addItem = Item(context: PersistentContainer.context)
@@ -48,6 +49,12 @@ extension Item {
         }
     }
     
+//    func ClearAllItems() {
+//        if status == kOnListAndTaken && kOnListNotTaken == 0 {
+//            status = kNotOnList
+//        }
+//    }
+
     var status: Int { // 1
         get { Int( status16 )}
         set {

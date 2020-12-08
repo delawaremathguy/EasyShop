@@ -2,37 +2,55 @@ import SwiftUI
 import CoreData
 
 struct SelectedItemView: View {
+    @Environment(\.presentationMode) var present
     @ObservedObject var theme = ThemeSettings()
     let themes: [Theme] = themeData
     @ObservedObject var store: Shop
 
     var body: some View {
-        Form {
-            Section(header: Text("Items Remaining")) {
-                ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
-                    SelectedTakenRow(item: s)
+        VStack {
+// MARK: - LIST
+            List {
+                Section(header: Text("Products remaining")) {
+                    ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
+                        SelectedTakenRow(item: s)
+                    }
                 }
             }
-            Section(header: Text("Items Taken")) {
-                ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
-                    SelectedTakenRow(item: k)
+            List {
+                Section(header: Text("Products taken")) {
+                    ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
+                        SelectedTakenRow(item: k)
+                    }
                 }
             }
         }
         .navigationTitle("Products")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { ClearAll() }) {
-                    Text("Clear All")
-                        .foregroundColor(themes[self.theme.themeSettings].mainColor)
+// MARK: - TOOLBAR
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { present.wrappedValue.dismiss() }) {
+                    Image(systemName: "chevron.left")
+                    Text("\(store.shopName)")
                 }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: { clearAll() }) {
+                    Text("Clear All")
+                        .opacity(kOnListNotTaken != 0 ? 1.0 : 0.6)
+                }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count != 0) == true)
             }
         }
     }
-    func ClearAll() {
-        // all items are taken. Then deselect them
-
+// MARK: - FUNCTIONS
+    func clearAll() { // DMG 5 - clearAll() email
+        for item in store.getItem {
+            if item.status == kOnListAndTaken {
+                item.status = kNotOnList
+            }
+        }
     }
 }
 
@@ -91,10 +109,3 @@ struct SelectedTakenRow_Previews: PreviewProvider {
         }
     }
 }
-
-//DMG3 --
-// this was moved to the Item class so that whenever you set the status of
-// an item, it automatically does this for you.  the View should not be
-// responsible for remembering that it has to do this whenever it changes
-// the status of an item
-// item.shop?.objectWillChange.send()
