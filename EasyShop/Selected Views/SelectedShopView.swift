@@ -4,10 +4,12 @@ import CoreData
 struct SelectedShopView: View {
     @ObservedObject var theme = ThemeSettings()
     let themes: [Theme] = themeData
-    @FetchRequest(
-        entity: Shop.entity(),
-        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
-    private var allShops: FetchedResults<Shop> // DMG 5 - clearAll() email
+//    @FetchRequest(
+//        entity: Shop.entity(),
+//        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
+//    private var allShops: FetchedResults<Shop> // DMG 5 - clearAll() email
+    @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop>
+    
     
     var body: some View {
         NavigationView {
@@ -15,7 +17,7 @@ struct SelectedShopView: View {
                 List {
                     Section(header: HStack {
                         Spacer()
-                        Text("Products remaining")
+                        Text("Products remaining") // Needs a fix
                     }.textCase(nil)) {
                         ForEach(allShops) { s in
                             NavigationLink(destination: SelectedItemView(store: s)) {

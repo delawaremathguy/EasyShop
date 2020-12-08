@@ -57,6 +57,7 @@ struct ItemList: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { selectAll() }) {
                     Text("Select All")
+                        .opacity(kNotOnList != 0 ? 1.0 : 0.6)
                 }.disabled(store.getItem.isEmpty)
             }
         }
@@ -73,8 +74,12 @@ struct ItemList: View {
         }
         PersistentContainer.saveContext()
     }
-    func selectAll() {
-        // all items are selected when pressed
+    func selectAll() { // Test
+        for item in store.getItem {
+            if item.status == kNotOnList {
+                item.status = kOnListNotTaken
+            }
+        }
     }
 }
 
