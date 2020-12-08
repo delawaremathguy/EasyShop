@@ -43,20 +43,21 @@ struct ItemList: View {
                 }.listStyle(GroupedListStyle())
             }
         }
-        .navigationTitle("Products")
+        .navigationTitle("\(store.shopName)")// products
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
 // MARK: - TOOLBAR
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { present.wrappedValue.dismiss() }) {
-                    Image(systemName: "chevron.left")
-                    Text("\(store.shopName)")
+                    Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
+//                    Text("\(store.shopName)")
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { selectAll() }) {
                     Text("Select All")
+                        .opacity(kNotOnList != 0 ? 1.0 : 0.6)
                 }.disabled(store.getItem.isEmpty)
             }
         }
@@ -73,8 +74,12 @@ struct ItemList: View {
         }
         PersistentContainer.saveContext()
     }
-    func selectAll() {
-        // all items are selected when pressed
+    func selectAll() { // Test
+        for item in store.getItem {
+            if item.status == kNotOnList {
+                item.status = kOnListNotTaken
+            }
+        }
     }
 }
 

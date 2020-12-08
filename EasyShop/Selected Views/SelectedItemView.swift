@@ -11,29 +11,30 @@ struct SelectedItemView: View {
         VStack {
 // MARK: - LIST
             List {
-                Section(header: Text("Products remaining")) {
+                Section(header: Text("Remaining")) {
                     ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
                         SelectedTakenRow(item: s)
                     }
-                }
+                }.textCase(nil)
             }
             List {
-                Section(header: Text("Products taken")) {
+                Section(header: Text("Taken")) {
                     ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
                         SelectedTakenRow(item: k)
                     }
-                }
+                }.textCase(nil)
             }
         }
-        .navigationTitle("Products")
+        .navigationTitle("\(store.shopName)")// Products
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
 // MARK: - TOOLBAR
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { present.wrappedValue.dismiss() }) {
-                    Image(systemName: "chevron.left")
-                    Text("\(store.shopName)")
+                    Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
+//                    Text("\(store.shopName)")
+
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {

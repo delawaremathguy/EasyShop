@@ -5,10 +5,13 @@ var rowHeight: CGFloat = 50
 
 struct ShopList: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(
-        entity: Shop.entity(),
-        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
-    private var shops: FetchedResults<Shop>
+//    @FetchRequest(
+//        entity: Shop.entity(),
+//        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
+//    private var allShops: FetchedResults<Shop>
+    
+    @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop>
+    
     @ObservedObject var theme = ThemeSettings()
     let themes: [Theme] = themeData
     @State var name = ""
@@ -38,7 +41,7 @@ struct ShopList: View {
                             .keyboardType(UIKeyboardType.default)
                         
                         // MARK: - COUNT
-                        Text("\(shops.count)").padding(15)
+                        Text("\(allShops.count)").padding(15)
                     }
                     .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("ColorWhiteBlack")))
                     .padding()
@@ -48,7 +51,7 @@ struct ShopList: View {
                     // MARK: - LIST
                     List {
                         Section {
-                            ForEach(shops) { s in
+                            ForEach(allShops) { s in
                                 NavigationLink(destination: ItemList(store: s)) {
                                     ShopListRow(store: s)
                                 }
@@ -69,7 +72,7 @@ struct ShopList: View {
     }
     func deleteShop(at offsets: IndexSet) {
         for index in offsets {
-            self.moc.delete(self.shops[index])
+            self.moc.delete(self.allShops[index])
         }
         PersistentContainer.saveContext()
     }

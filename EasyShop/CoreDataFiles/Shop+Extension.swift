@@ -113,6 +113,22 @@ so, i would add this as a class function in an extension of Shop:
     }
     
 }
+extension Shop {
+    static func allShops() -> NSFetchRequest<Shop> {
+        let request: NSFetchRequest<Shop> = Shop.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        return request
+    }
+}
+
+
+
+
+
+
+
+
+
 /*
  extension Shop {
      static func allShops() -> NSFetchRequest<Shop> {
