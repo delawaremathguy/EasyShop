@@ -32,8 +32,9 @@ struct SelectedItemView: View {
 // MARK: - TOOLBAR
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { present.wrappedValue.dismiss() }) {
-                    Image(systemName: "chevron.left")
+                    Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
 //                    Text("\(store.shopName)")
+
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
