@@ -4,31 +4,29 @@ import CoreData
 struct SelectedShopView: View {
     @ObservedObject var theme = ThemeSettings()
     let themes: [Theme] = themeData
-//    @FetchRequest(
-//        entity: Shop.entity(),
-//        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
-//    private var allShops: FetchedResults<Shop> // DMG 5 - clearAll() email
-    @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop>
-    
+    @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop> // DMG 5 - clearAll() email
     
     var body: some View {
         NavigationView {
             ZStack {
                 List {
-                    Section(header: HStack {
-                        Spacer()
-                        Text("Products remaining") // Needs a fix
-                    }.textCase(nil)) {
+                    Section(header:
+                        HStack {
+                            Spacer()
+                            Text("Products remaining")
+                                .opacity(allShops.count != 0 ? 1 : 0)
+                        }.textCase(nil)
+                    ) {
                         ForEach(allShops) { s in
                             NavigationLink(destination: SelectedItemView(store: s)) {
                                 SelectedShopRow(store: s)
                             }
                         }
                     }
-                }
+                } // LS
                 .listStyle(GroupedListStyle())
                 .navigationTitle("Shops")
-                if allShops.filter({ $0.hasItemsOnListOrInCart }).count == 0 {
+                if allShops.count == 0 {
                     EmptySelectedShop()
                 }
             }
@@ -50,7 +48,7 @@ struct SelectedShopRow: View {
                 .font(Font.system(size: 28))
                 .padding(.leading, 20)
             Spacer() // Section B
-            Text("\(store.countItemsInCart)").font(.caption)//Items Remaining:
+            Text("\(store.countItemsInCart)").font(.caption)
         }.frame(height: rowHeight)
     }
 }
