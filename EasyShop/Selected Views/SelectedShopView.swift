@@ -4,7 +4,7 @@ import CoreData
 struct SelectedShopView: View {
     @ObservedObject var theme = ThemeSettings()
     let themes: [Theme] = themeData
-    @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop> // DMG 5 - clearAll() email
+    @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop>
     
     var body: some View {
         NavigationView {
@@ -34,7 +34,7 @@ struct SelectedShopView: View {
     }
 }
 
-// MARK: - SELECTEDSHOP
+// MARK: - SelectedRow
 
 struct SelectedShopRow: View {
     @ObservedObject var theme = ThemeSettings()
@@ -47,7 +47,7 @@ struct SelectedShopRow: View {
                 .foregroundColor((store.countItemsInCart != 0) ? (themes[self.theme.themeSettings].mainColor) : Color("ColorBlackWhite"))
                 .font(Font.system(size: 28))
                 .padding(.leading, 20)
-            Spacer() // Section B
+            Spacer() 
             Text("\(store.countItemsInCart)").font(.caption)
         }.frame(height: rowHeight)
     }
@@ -76,6 +76,7 @@ struct SelectedShopView_Previews: PreviewProvider {
         SelectedShopView().environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
     }
 }
+
 struct SelectedShopRow_Previews: PreviewProvider {
     static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     static var previews: some View {

@@ -25,7 +25,7 @@ struct SelectedItemView: View {
                 }.textCase(nil)
             }
         }
-        .navigationTitle("\(store.shopName)")// Products
+        .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -33,7 +33,6 @@ struct SelectedItemView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { present.wrappedValue.dismiss() }) {
                     Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
-//                    Text("\(store.shopName)")
 
                 }
             }
@@ -75,7 +74,7 @@ struct SelectedTakenRow: View {
                 item.status = kOnListAndTaken
             } else {
                 item.status = kOnListNotTaken
-            }//DMG3 --
+            }
         }
     }
 }
