@@ -16,34 +16,20 @@ struct ShopList: View {
             VStack(spacing: 0) {
                 Section {
                     HStack(spacing: 0) {
-                        // MARK: - BUTTON
+// MARK: - Header
                         Button(action: { newShop(name: name) }) {
                             Image(systemName: "plus")
-                                .imageScale(.large)
-                                .frame(width: 50, height: 50)
-                                .foregroundColor(themes[self.theme.themeSettings].mainColor)
+                                .modifier(customButton())
                                 .opacity(name.isEmpty ? 0.4 : 1.0)
                                 .background(Color("ColorWhiteBlack"))
                         }.disabled(name.isEmpty)
-                        
-                        // MARK: - TEXTFIELD
                         TextField("new shop here...", text: $name)
-                            .frame(height: rowHeight)
-                            .background(Color("ColorWhiteBlack"))
-                            .font(Font.system(size: 20))
-                            .multilineTextAlignment(.center)
-                            .disableAutocorrection(true)
-                            .keyboardType(UIKeyboardType.default)
-                        
-                        // MARK: - COUNT
+                            .modifier(customTextfield())
                         Text("\(allShops.count)").padding(15)
-                    }
-                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("ColorWhiteBlack")))
-                    .padding()
-                    .background(Color("ColorAccent"))
+                    }.modifier(customHStack())
                 } // SE
                 Section {
-                    // MARK: - LIST
+// MARK: - LIST
                     List {
                         Section {
                             ForEach(allShops) { s in
@@ -59,17 +45,21 @@ struct ShopList: View {
                 }
             }
         }.accentColor(themes[self.theme.themeSettings].mainColor)
+        .onAppear { print("ShopList appears") }
+        .onDisappear { print("ShopList disappers") }
     }
     // MARK: - FUNCTIONS
     func newShop(name: String) {
         Shop.addNewShop(named: name)
         self.name = ""
+        print("New Shop created")
     }
     func deleteShop(at offsets: IndexSet) {
         for index in offsets {
             self.moc.delete(self.allShops[index])
         }
         PersistentContainer.saveContext()
+        print("Shop deleted")
     }
 }
 
@@ -120,13 +110,4 @@ struct ShopListRow_Previews: PreviewProvider {
     }
 }
 
-// MARK: - Modifiers
 
-struct customText: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .foregroundColor(Color("ColorBlackWhite"))
-            .font(Font.system(size: 28))
-            .padding(.leading, 20)
-    }
-} 

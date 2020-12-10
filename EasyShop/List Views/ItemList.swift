@@ -16,24 +16,14 @@ struct ItemList: View {
 // MARK: - HEADER
                     Button(action: { newItem() }) {
                         Image(systemName: "plus")
-                            .imageScale(.large)
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(themes[self.theme.themeSettings].mainColor)
+                            .modifier(customButton())
                             .opacity(name.isEmpty ? 0.4 : 1.0)
                             .background(Color("ColorWhiteBlack"))
                     }.disabled(name.isEmpty)
                     TextField("new product here...", text: $name)
-                        .frame(height: rowHeight)
-                        .background(Color("ColorWhiteBlack"))
-                        .font(Font.system(size: 20))
-                        .multilineTextAlignment(.center)
-                        .disableAutocorrection(true)
-                        .keyboardType(UIKeyboardType.default)
+                        .modifier(customTextfield())
                     Text("\(store.getItem.count)").padding(15)
-                }
-                .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("ColorWhiteBlack")))
-                .padding()
-                .background(Color("ColorAccent"))
+                }.modifier(customHStack())
             } // SE
             Section {
 // MARK: - LIST
@@ -60,11 +50,14 @@ struct ItemList: View {
                 }.disabled(store.getItem.isEmpty)
             }
         }
+        .onAppear { print("ItemList appears") }
+        .onDisappear { print("ItemList disappers") }
     }
 // MARK: - FUNCTIONS
     func newItem() {
         Item.addNewItem(named: name, to: store)
         self.name = ""
+        print("New Item created")
     }
     func deleteItem(at offsets: IndexSet) {
         let items = store.getItem
@@ -72,8 +65,10 @@ struct ItemList: View {
             self.moc.delete(items[index])
         }
         PersistentContainer.saveContext()
+        print("Item deleted")
     }
     func selectAll() { // Test
+        print(" selectAll function executed")
         for item in store.getItem {
             if item.status == kNotOnList {
                 item.status = kOnListNotTaken
@@ -92,6 +87,7 @@ struct ItemListRow: View {
     var body: some View {
         Button(action: {
             self.item.toggleSelected()
+            print("item added to List not taken")
         }) {
             HStack {
                 Text(item.itemName)
