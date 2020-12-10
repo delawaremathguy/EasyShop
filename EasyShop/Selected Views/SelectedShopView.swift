@@ -31,6 +31,8 @@ struct SelectedShopView: View {
                 }
             }
         }.accentColor(themes[self.theme.themeSettings].mainColor)
+        .onAppear { print("SelectedShopView appears") }
+        .onDisappear { print("SelectedShopView disappers") }
     }
 }
 
@@ -67,6 +69,8 @@ struct EmptySelectedShop: View {
                     .frame(width: 200, height: 200)
             }.foregroundColor(themes[self.theme.themeSettings].mainColor).opacity(0.8)
         }.edgesIgnoringSafeArea(.all)
+        .onAppear { print("EmptySelectedShop appears") }
+        .onDisappear { print("EmptySelectedShop disappers") }
     }
 }
 // MARK: - PREVIEWS

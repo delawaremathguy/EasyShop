@@ -43,9 +43,12 @@ struct SelectedItemView: View {
                 }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count != 0) == true)
             }
         }
+        .onAppear { print("SelectedItemView appears") }
+        .onDisappear { print("SelectedItemView disappers") }
     }
 // MARK: - FUNCTIONS
     func clearAll() { // DMG 5 - clearAll() email
+        print("clearAll function executed")
         for item in store.getItem {
             if item.status == kOnListAndTaken {
                 item.status = kNotOnList
@@ -72,8 +75,10 @@ struct SelectedTakenRow: View {
         .onTapGesture(count: 2) {
             if item.status == kOnListNotTaken {
                 item.status = kOnListAndTaken
+                print("item added on taken list")
             } else {
                 item.status = kOnListNotTaken
+                print("item added on not taken list")
             }
         }
     }
