@@ -65,7 +65,7 @@ struct customText: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(Color("ColorBlackWhite"))
-            .font(Font.system(size: 28))
+            .font(Font.system(size: 20))
             .padding(.leading, 20)
     }
 }

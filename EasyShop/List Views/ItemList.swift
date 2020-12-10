@@ -35,12 +35,13 @@ struct ItemList: View {
         .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .toolbar {
+        
 // MARK: - TOOLBAR
+        .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { present.wrappedValue.dismiss() }) {
                     Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
-                }
+                } // slider.horizontal.3 - slider.vertical.3
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { selectAll() }) {

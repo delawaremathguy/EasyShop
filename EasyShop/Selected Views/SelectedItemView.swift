@@ -4,36 +4,70 @@ import CoreData
 struct SelectedItemView: View {
     @Environment(\.presentationMode) var present
     @ObservedObject var store: Shop
-
+    @ObservedObject var theme = gThemeSettings
+    @State private var layoutView = false
+    @State private var switchButton = false
+    
     var body: some View {
         VStack {
 // MARK: - LIST
-            List {
-                Section(header: Text("Remaining")) {
-                    ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
-                        SelectedTakenRow(item: s)
+            Group {
+                if layoutView {
+                    List {
+                        Section(header: Text("Remaining")) {
+                            ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
+                                SelectedTakenRow(item: s)
+                            }
+                        }.textCase(nil)
                     }
-                }.textCase(nil)
-            }
-            List {
-                Section(header: Text("Taken")) {
-                    ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
-                        SelectedTakenRow(item: k)
+                    List {
+                        Section(header: Text("Taken")) {
+                            ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
+                                SelectedTakenRow(item: k)
+                            }
+                        }.textCase(nil)
                     }
-                }.textCase(nil)
+                } else {
+                    HStack(spacing: 0) {
+                        List {
+                            Section(header: Text("Remaining")) {
+                                ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
+                                    SelectedTakenRow(item: s)
+                                }
+                            }.textCase(nil)
+                        }
+                        Divider().background(theme.mainColor)
+                        List {
+                            Section(header: Text("Taken")) {
+                                ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
+                                    SelectedTakenRow(item: k)
+                                }
+                            }.textCase(nil)
+                        }
+                    }
+                } // Else
             }
         }
         .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .toolbar {
 // MARK: - TOOLBAR
-            ToolbarItem(placement: .navigationBarLeading) {
+        .navigationBarItems(leading:
+            HStack {
                 Button(action: { present.wrappedValue.dismiss() }) {
-                    Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
-
-                }
-            }
+                    Image(systemName: "chevron.left").font(.system(size: 20, weight: .regular))
+                } // Button 1
+                Spacer()
+                Button(action: {
+                    self.switchButton.toggle()
+                    self.layoutView.toggle()
+                }) {
+                    Image(systemName: switchButton ? "slider.vertical.3" : "slider.horizontal.3")
+                        .font(.system(size: 20, weight: .regular))
+                } // Button 2
+            } // HS
+        )
+        .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { clearAll() }) {
                     Text("Clear All")
@@ -54,7 +88,6 @@ struct SelectedItemView: View {
         }
     }
 }
-
 // MARK: - SELECTED-TAKEN-ROW
 
 struct SelectedTakenRow: View {
@@ -66,7 +99,7 @@ struct SelectedTakenRow: View {
                 .modifier(customText())
             Spacer()
             Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
-                .font(.system(size: 35))
+                .font(.system(size: 32))
                 .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
         }.frame(height: rowHeight)
         .contentShape(Rectangle())
