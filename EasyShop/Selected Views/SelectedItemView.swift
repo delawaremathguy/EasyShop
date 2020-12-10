@@ -3,8 +3,6 @@ import CoreData
 
 struct SelectedItemView: View {
     @Environment(\.presentationMode) var present
-    @ObservedObject var theme = ThemeSettings()
-    let themes: [Theme] = themeData
     @ObservedObject var store: Shop
 
     var body: some View {

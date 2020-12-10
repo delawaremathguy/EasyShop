@@ -40,13 +40,12 @@ struct customHStack: ViewModifier {
 }
 
 struct customButton: ViewModifier {
-    @ObservedObject var theme = ThemeSettings()
-    let themes: [Theme] = themeData
+    @ObservedObject var theme = gThemeSettings
     func body(content: Content) -> some View {
         content
             .imageScale(.large)
             .frame(width: 50, height: 50)
-            .foregroundColor(themes[self.theme.themeSettings].mainColor)
+            .foregroundColor(theme.mainColor)
     }
 }
 

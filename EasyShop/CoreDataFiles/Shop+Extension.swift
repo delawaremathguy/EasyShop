@@ -53,6 +53,11 @@ extension Shop {
         }
         return count
     }
+    
+    static func delete(_ shop: Shop) { // DMG 6
+        let context = shop.managedObjectContext
+        context?.delete(shop)
+    }
 
     static func count() -> Int {
         let context = PersistentContainer.context

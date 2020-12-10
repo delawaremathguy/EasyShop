@@ -4,11 +4,9 @@ import CoreData
 var rowHeight: CGFloat = 50
 
 struct ShopList: View {
-    @Environment(\.managedObjectContext) var moc
     @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop>
     
-    @ObservedObject var theme = ThemeSettings()
-    let themes: [Theme] = themeData
+    @ObservedObject var theme = gThemeSettings
     @State var name = ""
     
     var body: some View {
@@ -44,7 +42,7 @@ struct ShopList: View {
                     .navigationBarTitleDisplayMode(.inline)
                 }
             }
-        }.accentColor(themes[self.theme.themeSettings].mainColor)
+        }.accentColor(theme.mainColor)
         .onAppear { print("ShopList appears") }
         .onDisappear { print("ShopList disappers") }
     }
@@ -56,7 +54,7 @@ struct ShopList: View {
     }
     func deleteShop(at offsets: IndexSet) {
         for index in offsets {
-            self.moc.delete(self.allShops[index])
+            Shop.delete(allShops[index]) // DMG 6
         }
         PersistentContainer.saveContext()
         print("Shop deleted")
@@ -66,14 +64,13 @@ struct ShopList: View {
 // MARK: - SHOP ROW
 
 struct ShopListRow: View {
-    @ObservedObject var theme = ThemeSettings()
-    let themes: [Theme] = themeData
+    @ObservedObject var theme = gThemeSettings
     @ObservedObject var store: Shop
     
     var body: some View {
         HStack {
             Text(store.shopName)
-                .foregroundColor(store.hasItemsInCartNotYetTaken ? (themes[self.theme.themeSettings].mainColor) : Color("ColorBlackWhite"))
+                .foregroundColor(store.hasItemsInCartNotYetTaken ? (theme.mainColor) : Color("ColorBlackWhite"))
                 .font(Font.system(size: 28))
                 .padding(.leading, 20)
             Spacer()

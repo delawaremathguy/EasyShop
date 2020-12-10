@@ -33,7 +33,11 @@ class ThemeSettings: ObservableObject {
             UserDefaults.standard.set(self.themeSettings, forKey: "Theme")
         }
     }
+    var mainColor: Color { themeData[themeSettings].mainColor }
 }
+
+let gThemeSettings = ThemeSettings()
+
 /*
  
  @ObservedObject var theme = ThemeSettings()

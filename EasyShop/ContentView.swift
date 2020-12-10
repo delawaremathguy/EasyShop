@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var theme = ThemeSettings()
-    let themes: [Theme] = themeData
+    @ObservedObject var theme = gThemeSettings // DMG 6
     @State private var selected = 0
 
     var body: some View {
@@ -19,7 +18,7 @@ struct ContentView: View {
                 Text("Settings")
                 Image("shopsettings")
             }.tag(2)
-        }.accentColor(themes[self.theme.themeSettings].mainColor)
+        }.accentColor(theme.mainColor) // DMG 6
     }
 }
 
