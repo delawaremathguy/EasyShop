@@ -27,14 +27,33 @@ struct ItemList: View {
 // MARK: - LIST
                 List {
                     ForEach(store.getItem) { s in ItemListRow(item: s)
-                    }.onDelete(perform: deleteItem)
+                    }
+                    .onDelete(perform: deleteItem)
+                    .onMove(perform: doMove)
                 }.listStyle(GroupedListStyle())
+// MARK: - Footer
+            }
+            Section {
+                Rectangle()
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
+                HStack {
+                    Button(action: {
+                        deselectAll()
+                    }) {
+                        Text("Deselect All").padding(.leading)
+                    }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count != 0) == true)
+                    Spacer()
+                    Button(action: {
+                        selectAll()
+                    }) {
+                        Text("Select All").padding(.trailing)
+                    }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count != 0) == true)
+                }.padding(6)
             }
         }
         .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        
 // MARK: - TOOLBAR
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -43,10 +62,7 @@ struct ItemList: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { selectAll() }) {
-                    Text("Select All")
-                        .opacity(kNotOnList != 0 ? 1.0 : 0.6)
-                }.disabled(store.getItem.isEmpty)
+                EditButton()
             }
         }
         .onAppear { print("ItemList appears") }
@@ -66,12 +82,26 @@ struct ItemList: View {
         PersistentContainer.saveContext()
         print("Item deleted")
     }
-
+    private func doMove(from indexes: IndexSet, to destinationIndex: Int) {
+        let sourceIndex = indexes.first!
+        print("move from \(sourceIndex) to \(destinationIndex)")
+        guard sourceIndex != destinationIndex else {
+            return
+        }
+    }
     func selectAll() { // Test
         print("selectAll function executed")
         for item in store.getItem {
             if item.status == kNotOnList {
                 item.status = kOnListNotTaken
+            }
+        }
+    }
+    func deselectAll() { // Test
+        print("deselectAll function executed")
+        for item in store.getItem {
+            if item.status == kOnListNotTaken {
+                item.status = kNotOnList
             }
         }
     }
