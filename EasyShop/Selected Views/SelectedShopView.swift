@@ -12,8 +12,7 @@ struct SelectedShopView: View {
                     Section(header:
                         HStack {
                             Spacer()
-                            Text("Products remaining")
-                                .opacity(allShops.count != 0 ? 1 : 0)
+                            Text("Products remaining").opacity(allShops.count != 0 ? 1 : 0)
                         }.textCase(nil)
                     ) {
                         ForEach(allShops) { s in
