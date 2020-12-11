@@ -10,7 +10,7 @@ struct SelectedItemView: View {
     
     var body: some View {
         VStack {
-// MARK: - LIST
+// MARK: - List
             Group {
                 if layoutView {
                     List {
@@ -46,39 +46,56 @@ struct SelectedItemView: View {
                         }
                     }
                 } // Else
-            }
+            } // Group
+// MARK: - Footer
+            Rectangle()
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
+            HStack {
+                Button(action: {
+                    takeAll()
+                }) {
+                    Text("Take all").padding(.leading)
+                }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
+                Spacer()
+                Button(action: {
+                    clearAll()
+                }) {
+                    Text("Clear all").padding(.trailing)
+                }.disabled((store.getItem.filter({ $0.status == kOnListAndTaken }).count == 0) == true)
+            }.padding(.bottom, 5)
         }
         .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-// MARK: - TOOLBAR
-        .navigationBarItems(leading:
-            HStack {
+// MARK: - Toolbar
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { present.wrappedValue.dismiss() }) {
                     Image(systemName: "chevron.left").font(.system(size: 20, weight: .regular))
-                } // Button 1
-                Spacer()
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     self.switchButton.toggle()
                     self.layoutView.toggle()
                 }) {
                     Image(systemName: switchButton ? "slider.vertical.3" : "slider.horizontal.3")
                         .font(.system(size: 20, weight: .regular))
-                } // Button 2
-            } // HS
-        )
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { clearAll() }) {
-                    Text("Clear All")
-                        .opacity(kOnListNotTaken != 0 ? 1.0 : 0.6)
-                }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count != 0) == true)
+                }
             }
         }
         .onAppear { print("SelectedItemView appears") }
         .onDisappear { print("SelectedItemView disappers") }
     }
 // MARK: - FUNCTIONS
+    func takeAll() {
+        print("takeAll function executed")
+        for item in store.getItem {
+            if item.status == kOnListNotTaken {
+                item.status = kOnListAndTaken
+            }
+        }
+    }
     func clearAll() { // DMG 5 - clearAll() email
         print("clearAll function executed")
         for item in store.getItem {
@@ -95,8 +112,7 @@ struct SelectedTakenRow: View {
     
     var body: some View {
         HStack {
-            Text(item.itemName)
-                .modifier(customText())
+            Text(item.itemName).modifier(customItemText())
             Spacer()
             Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
                 .font(.system(size: 32))

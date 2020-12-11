@@ -20,7 +20,7 @@ struct Modifiers: View {
                     }.modifier(customHStack())
                 }
                 List {
-                    Text("Chicken").modifier(customText())
+                    Text("Chicken").modifier(customItemText())
                 }
             }
             .navigationBarTitle(("Modifiers"), displayMode: .inline)
@@ -61,12 +61,18 @@ struct customTextfield: ViewModifier { // Image
     }
 }
 
-struct customText: ViewModifier {
+struct customItemText: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(Color("ColorBlackWhite"))
             .font(Font.system(size: 20))
-            .padding(.leading, 20)
+    }
+}
+
+struct customShopText: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(Font.system(size: 20))
     }
 }
 

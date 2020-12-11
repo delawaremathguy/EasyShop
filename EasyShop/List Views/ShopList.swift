@@ -69,10 +69,8 @@ struct ShopListRow: View {
     
     var body: some View {
         HStack {
-            Text(store.shopName)
+            Text(store.shopName).modifier(customShopText())
                 .foregroundColor(store.hasItemsInCartNotYetTaken ? (theme.mainColor) : Color("ColorBlackWhite"))
-                .font(Font.system(size: 28))
-                .padding(.leading, 20)
             Spacer()
         }
         .frame(height: rowHeight)

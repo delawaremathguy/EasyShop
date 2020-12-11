@@ -89,8 +89,7 @@ struct ItemListRow: View {
             print("item added to List not taken")
         }) {
             HStack {
-                Text(item.itemName)
-                    .modifier(customText())
+                Text(item.itemName).modifier(customItemText())
                 Spacer()
                 Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill")
                     .imageScale(.large)

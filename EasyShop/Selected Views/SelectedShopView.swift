@@ -44,9 +44,9 @@ struct SelectedShopRow: View {
     var body: some View {
         HStack {
             Text(store.shopName)
+                .modifier(customShopText())
                 .foregroundColor((store.countItemsInCart != 0) ? (theme.mainColor) : Color("ColorBlackWhite"))
-                .font(Font.system(size: 28))
-                .padding(.leading, 20)
+                
             Spacer() 
             Text("\(store.countItemsInCart)").font(.caption)
         }.frame(height: rowHeight)
