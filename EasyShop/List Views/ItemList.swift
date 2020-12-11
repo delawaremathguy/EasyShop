@@ -5,8 +5,7 @@ struct ItemList: View {
     @Environment(\.presentationMode) var present
     @Environment(\.managedObjectContext) var moc
     @ObservedObject var store: Shop
-    @ObservedObject var theme = ThemeSettings()
-    let themes: [Theme] = themeData
+    @ObservedObject var theme = gThemeSettings
     @State var name = ""
     
     var body: some View {
@@ -36,12 +35,13 @@ struct ItemList: View {
         .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .toolbar {
+        
 // MARK: - TOOLBAR
+        .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { present.wrappedValue.dismiss() }) {
                     Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
-                }
+                } // slider.horizontal.3 - slider.vertical.3
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { selectAll() }) {
@@ -81,8 +81,7 @@ struct ItemList: View {
 
 struct ItemListRow: View {
     @ObservedObject var item: Item
-    @ObservedObject var theme = ThemeSettings()
-    let themes: [Theme] = themeData
+    @ObservedObject var theme = gThemeSettings
     
     var body: some View {
         Button(action: {
@@ -90,12 +89,11 @@ struct ItemListRow: View {
             print("item added to List not taken")
         }) {
             HStack {
-                Text(item.itemName)
-                    .modifier(customText())
+                Text(item.itemName).modifier(customItemText())
                 Spacer()
                 Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill")
                     .imageScale(.large)
-                    .foregroundColor(themes[self.theme.themeSettings].mainColor)
+                    .foregroundColor(theme.mainColor)
             }.frame(height: rowHeight)
         }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
         }

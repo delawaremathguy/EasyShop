@@ -20,7 +20,7 @@ struct Modifiers: View {
                     }.modifier(customHStack())
                 }
                 List {
-                    Text("Chicken").modifier(customText())
+                    Text("Chicken").modifier(customItemText())
                 }
             }
             .navigationBarTitle(("Modifiers"), displayMode: .inline)
@@ -40,13 +40,12 @@ struct customHStack: ViewModifier {
 }
 
 struct customButton: ViewModifier {
-    @ObservedObject var theme = ThemeSettings()
-    let themes: [Theme] = themeData
+    @ObservedObject var theme = gThemeSettings
     func body(content: Content) -> some View {
         content
             .imageScale(.large)
             .frame(width: 50, height: 50)
-            .foregroundColor(themes[self.theme.themeSettings].mainColor)
+            .foregroundColor(theme.mainColor)
     }
 }
 
@@ -62,12 +61,18 @@ struct customTextfield: ViewModifier { // Image
     }
 }
 
-struct customText: ViewModifier {
+struct customItemText: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(Color("ColorBlackWhite"))
-            .font(Font.system(size: 28))
-            .padding(.leading, 20)
+            .font(Font.system(size: 20))
+    }
+}
+
+struct customShopText: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(Font.system(size: 20))
     }
 }
 

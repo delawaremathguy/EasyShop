@@ -3,50 +3,99 @@ import CoreData
 
 struct SelectedItemView: View {
     @Environment(\.presentationMode) var present
-    @ObservedObject var theme = ThemeSettings()
-    let themes: [Theme] = themeData
     @ObservedObject var store: Shop
-
+    @ObservedObject var theme = gThemeSettings
+    @State private var layoutView = false
+    @State private var switchButton = false
+    
     var body: some View {
         VStack {
-// MARK: - LIST
-            List {
-                Section(header: Text("Remaining")) {
-                    ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
-                        SelectedTakenRow(item: s)
+// MARK: - List
+            Group {
+                if layoutView {
+                    List {
+                        Section(header: Text("Remaining")) {
+                            ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
+                                SelectedTakenRow(item: s)
+                            }
+                        }.textCase(nil)
                     }
-                }.textCase(nil)
-            }
-            List {
-                Section(header: Text("Taken")) {
-                    ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
-                        SelectedTakenRow(item: k)
+                    List {
+                        Section(header: Text("Taken")) {
+                            ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
+                                SelectedTakenRow(item: k)
+                            }
+                        }.textCase(nil)
                     }
-                }.textCase(nil)
-            }
+                } else {
+                    HStack(spacing: 0) {
+                        List {
+                            Section(header: Text("Remaining")) {
+                                ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
+                                    SelectedTakenRow(item: s).listRowInsets(EdgeInsets())
+                                }
+                            }.textCase(nil)
+                        }
+                        Divider().background(theme.mainColor)
+                        List {
+                            Section(header: Text("Taken")) {
+                                ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
+                                    SelectedTakenRow(item: k).listRowInsets(EdgeInsets())
+                                }
+                            }.textCase(nil)
+                        }
+                    }
+                } // Else
+            } // Group
+// MARK: - Footer
+            Rectangle()
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
+            HStack {
+                Button(action: {
+                    takeAll()
+                }) {
+                    Text("Take all").padding(.leading)
+                }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
+                Spacer()
+                Button(action: {
+                    clearAll()
+                }) {
+                    Text("Clear all").padding(.trailing)
+                }.disabled((store.getItem.filter({ $0.status == kOnListAndTaken }).count == 0) == true)
+            }.padding(.bottom, 5)
         }
         .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
+// MARK: - Toolbar
         .toolbar {
-// MARK: - TOOLBAR
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { present.wrappedValue.dismiss() }) {
-                    Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
-
+                    Image(systemName: "chevron.left").font(.system(size: 20, weight: .regular))
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { clearAll() }) {
-                    Text("Clear All")
-                        .opacity(kOnListNotTaken != 0 ? 1.0 : 0.6)
-                }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count != 0) == true)
+                Button(action: {
+                    self.switchButton.toggle()
+                    self.layoutView.toggle()
+                }) {
+                    Image(systemName: switchButton ? "slider.vertical.3" : "slider.horizontal.3")
+                        .font(.system(size: 20, weight: .regular))
+                }
             }
         }
         .onAppear { print("SelectedItemView appears") }
         .onDisappear { print("SelectedItemView disappers") }
     }
 // MARK: - FUNCTIONS
+    func takeAll() {
+        print("takeAll function executed")
+        for item in store.getItem {
+            if item.status == kOnListNotTaken {
+                item.status = kOnListAndTaken
+            }
+        }
+    }
     func clearAll() { // DMG 5 - clearAll() email
         print("clearAll function executed")
         for item in store.getItem {
@@ -56,7 +105,6 @@ struct SelectedItemView: View {
         }
     }
 }
-
 // MARK: - SELECTED-TAKEN-ROW
 
 struct SelectedTakenRow: View {
@@ -64,13 +112,14 @@ struct SelectedTakenRow: View {
     
     var body: some View {
         HStack {
-            Text(item.itemName)
-                .modifier(customText())
+            Text(item.itemName).modifier(customItemText())
             Spacer()
             Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
-                .font(.system(size: 35))
+                .font(.system(size: 28))
                 .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
-        }.frame(height: rowHeight)
+        }
+        .padding(.horizontal, 5)
+        .frame(height: rowHeight)
         .contentShape(Rectangle())
         .onTapGesture(count: 2) {
             if item.status == kOnListNotTaken {
@@ -86,6 +135,7 @@ struct SelectedTakenRow: View {
 
 // MARK: - PREVIEWS
 
+/* NOT WORKING
 struct SelectedItemView_Previews: PreviewProvider {
     static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     static var previews: some View {
@@ -114,3 +164,4 @@ struct SelectedTakenRow_Previews: PreviewProvider {
         }
     }
 }
+*/

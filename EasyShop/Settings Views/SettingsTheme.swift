@@ -1,9 +1,8 @@
 import SwiftUI
 
 struct SettingsTheme: View {
-    
-    let themes: [Theme] = themeData
     @ObservedObject var theme = ThemeSettings()
+    let themes: [Theme] = themeData
     @State private var isThemeChanged: Bool = false
     
     var body: some View {
@@ -14,7 +13,7 @@ struct SettingsTheme: View {
                         HStack(spacing: 35) {
                             ForEach(themes, id: \.id) { item in
                                 Button(action: {
-                                    self.theme.themeSettings = item.id
+                                    gThemeSettings.themeSettings = item.id
                                     UserDefaults.standard.set(self.theme.themeSettings, forKey: "Theme")
                                     self.isThemeChanged.toggle()
                                 }) {
@@ -60,7 +59,7 @@ struct SettingsTheme: View {
                     .alert(isPresented: $isThemeChanged) {
                         Alert(
                             title: Text("DONE!"),
-                            message: Text("\(themes[self.theme.themeSettings].themeName) is ON!!! Now close the App and open it again"),
+                            message: Text("\(themes[self.theme.themeSettings].themeName) is ON!!!"),
                             dismissButton: .default(Text("Ok"))
                     )}
                 }
