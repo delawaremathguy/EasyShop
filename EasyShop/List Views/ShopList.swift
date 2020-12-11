@@ -5,7 +5,6 @@ var rowHeight: CGFloat = 50
 
 struct ShopList: View {
     @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop>
-    
     @ObservedObject var theme = gThemeSettings
     @State var name = ""
     

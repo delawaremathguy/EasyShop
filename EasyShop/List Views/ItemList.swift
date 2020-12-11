@@ -3,7 +3,6 @@ import CoreData
 
 struct ItemList: View {
     @Environment(\.presentationMode) var present
-    @Environment(\.managedObjectContext) var moc
     @ObservedObject var store: Shop
     @ObservedObject var theme = gThemeSettings
     @State var name = ""
@@ -41,7 +40,7 @@ struct ItemList: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { present.wrappedValue.dismiss() }) {
                     Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
-                } // slider.horizontal.3 - slider.vertical.3
+                }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { selectAll() }) {
@@ -62,13 +61,14 @@ struct ItemList: View {
     func deleteItem(at offsets: IndexSet) {
         let items = store.getItem
         for index in offsets {
-            self.moc.delete(items[index])
+            Item.delete(items[index])
         }
         PersistentContainer.saveContext()
         print("Item deleted")
     }
+
     func selectAll() { // Test
-        print(" selectAll function executed")
+        print("selectAll function executed")
         for item in store.getItem {
             if item.status == kNotOnList {
                 item.status = kOnListNotTaken
