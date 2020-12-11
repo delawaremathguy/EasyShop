@@ -26,8 +26,7 @@ struct ItemList: View {
             Section {
 // MARK: - LIST
                 List {
-                    ForEach(store.getItem) { s in ItemListRow(item: s)
-                    }
+                    ForEach(store.getItem) { s in ItemListRow(item: s) }
                     .onDelete(perform: deleteItem)
                     .onMove(perform: doMove)
                 }.listStyle(GroupedListStyle())
@@ -37,15 +36,11 @@ struct ItemList: View {
                 Rectangle()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
                 HStack {
-                    Button(action: {
-                        deselectAll()
-                    }) {
+                    Button(action: { deselectAll() }) {
                         Text("Deselect All").padding(.leading)
                     }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count != 0) == true)
                     Spacer()
-                    Button(action: {
-                        selectAll()
-                    }) {
+                    Button(action: { selectAll() }) {
                         Text("Select All").padding(.trailing)
                     }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count != 0) == true)
                 }.padding(6)

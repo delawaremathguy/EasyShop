@@ -17,8 +17,12 @@ struct SelectedShopView: View {
                         }.textCase(nil)
                     ) {
                         ForEach(allShops) { s in
-                            NavigationLink(destination: SelectedItemView(store: s)) {
+                            if s.countItemsInCart == 0 {
                                 SelectedShopRow(store: s)
+                            } else {
+                                NavigationLink(destination: SelectedItemView(store: s)) {
+                                    SelectedShopRow(store: s)
+                                }
                             }
                         }
                     }
