@@ -32,7 +32,7 @@ struct SelectedItemView: View {
                         List {
                             Section(header: Text("Remaining")) {
                                 ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
-                                    SelectedTakenRow(item: s)
+                                    SelectedTakenRow(item: s).listRowInsets(EdgeInsets())
                                 }
                             }.textCase(nil)
                         }
@@ -40,7 +40,7 @@ struct SelectedItemView: View {
                         List {
                             Section(header: Text("Taken")) {
                                 ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
-                                    SelectedTakenRow(item: k)
+                                    SelectedTakenRow(item: k).listRowInsets(EdgeInsets())
                                 }
                             }.textCase(nil)
                         }
@@ -115,9 +115,11 @@ struct SelectedTakenRow: View {
             Text(item.itemName).modifier(customItemText())
             Spacer()
             Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
-                .font(.system(size: 32))
+                .font(.system(size: 28))
                 .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
-        }.frame(height: rowHeight)
+        }
+        .padding(.horizontal, 5)
+        .frame(height: rowHeight)
         .contentShape(Rectangle())
         .onTapGesture(count: 2) {
             if item.status == kOnListNotTaken {
@@ -133,6 +135,7 @@ struct SelectedTakenRow: View {
 
 // MARK: - PREVIEWS
 
+/* NOT WORKING
 struct SelectedItemView_Previews: PreviewProvider {
     static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     static var previews: some View {
@@ -161,3 +164,4 @@ struct SelectedTakenRow_Previews: PreviewProvider {
         }
     }
 }
+*/
