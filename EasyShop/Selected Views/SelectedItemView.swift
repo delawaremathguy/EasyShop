@@ -71,7 +71,9 @@ struct SelectedItemView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { present.wrappedValue.dismiss() }) {
-                    Image(systemName: "chevron.left").font(.system(size: 20, weight: .regular))
+                    Image(systemName: "chevron.left")
+                        .padding(.horizontal)
+                        .font(.system(size: 20, weight: .regular))
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -79,8 +81,7 @@ struct SelectedItemView: View {
                     self.switchButton.toggle()
                     self.layoutView.toggle()
                 }) {
-                    Image(systemName: switchButton ? "slider.vertical.3" : "slider.horizontal.3")
-                        .font(.system(size: 20, weight: .regular))
+                    Image(switchButton ? "viewswitch1" : "viewswitch2")
                 }
             }
         }

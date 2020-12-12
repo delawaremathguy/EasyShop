@@ -79,9 +79,14 @@ struct ItemList: View {
     }
     private func doMove(from indexes: IndexSet, to destinationIndex: Int) {
         let sourceIndex = indexes.first!
+// let’s say for the moment we’ll only move the first item
+// print out what we’re going to do in terms of what gets moved by index
         print("move from \(sourceIndex) to \(destinationIndex)")
+// nothing to do if indices are the same.  this can happen: the user begins
+// to drag, but then sort of drops it where she started.
         guard sourceIndex != destinationIndex else {
             return
+                
         }
     }
     func selectAll() { // Test

@@ -14,7 +14,8 @@ extension Shop {
     public var getItem: [Item] {
         let set = item as? Set<Item> ?? []
         return set.sorted {
-            $0.itemName < $1.itemName
+     //       $0.itemName < $1.itemName
+            $0.position < $1.position
         }
     }
     
