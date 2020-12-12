@@ -38,15 +38,3 @@ class ThemeSettings: ObservableObject {
 
 let gThemeSettings = ThemeSettings()
 
-/*
- 
- @ObservedObject var theme = ThemeSettings()
- let themes: [Theme] = themeData
- 
- .background(themes[self.theme.themeSettings].mainColor)
- 
- .accentColor(themes[self.theme.themeSettings].mainColor)
- 
- .foregroundColor(themes[self.theme.themeSettings].mainColor)
- 
- */

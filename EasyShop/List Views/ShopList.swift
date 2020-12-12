@@ -32,12 +32,14 @@ struct ShopList: View {
                             ForEach(allShops) { s in
                                 NavigationLink(destination: ItemList(store: s)) {
                                     ShopListRow(store: s)
-                                }
+                                }.onReceive(s.objectWillChange) {
+                                    PersistentContainer.saveContext() }
                             }
                             .onDelete(perform: deleteShop)
                             .onMove(perform: doMove)
                         }
                     } // LS
+                    
                     .listStyle(GroupedListStyle())
                     .navigationTitle("Shops")
                     .navigationBarTitleDisplayMode(.inline)
@@ -45,6 +47,7 @@ struct ShopList: View {
                 }
             }
         }.accentColor(theme.mainColor)
+        
         .onAppear { print("ShopList appears") }
         .onDisappear { print("ShopList disappers") }
     }
@@ -62,18 +65,28 @@ struct ShopList: View {
         print("Shop deleted")
     }
     private func doMove(from indexes: IndexSet, to destinationIndex: Int) {
-        let sourceIndex = indexes.first!
-// let’s say for the moment we’ll only move the first item
-// print out what we’re going to do in terms of what gets moved by index
-        print("move from \(sourceIndex) to \(destinationIndex)")
-// nothing to do if indices are the same.  this can happen: the user begins
-// to drag, but then sort of drops it where she started.
-        guard sourceIndex != destinationIndex else {
-            return
+        var revisedItems: [Shop] = allShops.map{ $0 }
+        revisedItems.move(fromOffsets: indexes, toOffset: destinationIndex)
+        for index in 0 ..< revisedItems.count {
+            revisedItems[index].position = Double(index)
         }
-// more code to come here, once you decide what to do in CD
+//        for reverseIndex in stride( from: revisedItems.count - 1, to: 0, by: -1)
+//
+//        { revisedItems[reverseIndex].position = Double(reverseIndex) }
+        print("move from \(indexes) to \(destinationIndex)")
     }
 }
+/*
+ SelectedShopRow(store: s).onReceive(s.objectWillChange) {
+     PersistentContainer.saveContext() } // test
+ ---
+ .onReceive(self.store.objectWillChange) {
+     PersistentContainer.saveContext()
+ }
+ ---
+ }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
+ ---
+ */
 
 // MARK: - SHOP ROW
 

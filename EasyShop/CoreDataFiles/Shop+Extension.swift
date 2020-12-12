@@ -19,9 +19,28 @@ extension Shop {
         }
     }
     
+    static func shopList() -> [Shop] {
+        let context = PersistentContainer.context
+        let fetchRequest: NSFetchRequest<Shop> = Shop.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "position", ascending: true)]
+        do {
+            let shops = try context.fetch(fetchRequest)// for: removed
+            return shops
+        }
+        catch let error as NSError {
+            print("Error fetching Shops: \(error.localizedDescription), \(error.userInfo)")
+        }
+        return []
+    }
+    
     class func addNewShop(named name: String) {
         let newShop = Shop(context: PersistentContainer.context)
         newShop.name = name
+        if let lastShopByPosition = shopList().last {
+            newShop.position = lastShopByPosition.position + 1
+        } else {
+            newShop.position = 0
+        }
         PersistentContainer.saveContext()
     }
 
