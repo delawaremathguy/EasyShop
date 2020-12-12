@@ -5,7 +5,6 @@ var rowHeight: CGFloat = 50
 
 struct ShopList: View {
     @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop>
-    
     @ObservedObject var theme = gThemeSettings
     @State var name = ""
     
@@ -34,12 +33,15 @@ struct ShopList: View {
                                 NavigationLink(destination: ItemList(store: s)) {
                                     ShopListRow(store: s)
                                 }
-                            }.onDelete(perform: deleteShop)
+                            }
+                            .onDelete(perform: deleteShop)
+                            .onMove(perform: doMove)
                         }
                     } // LS
                     .listStyle(GroupedListStyle())
                     .navigationTitle("Shops")
                     .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarItems(trailing: EditButton())
                 }
             }
         }.accentColor(theme.mainColor)
@@ -58,6 +60,18 @@ struct ShopList: View {
         }
         PersistentContainer.saveContext()
         print("Shop deleted")
+    }
+    private func doMove(from indexes: IndexSet, to destinationIndex: Int) {
+        let sourceIndex = indexes.first!
+// let’s say for the moment we’ll only move the first item
+// print out what we’re going to do in terms of what gets moved by index
+        print("move from \(sourceIndex) to \(destinationIndex)")
+// nothing to do if indices are the same.  this can happen: the user begins
+// to drag, but then sort of drops it where she started.
+        guard sourceIndex != destinationIndex else {
+            return
+        }
+// more code to come here, once you decide what to do in CD
     }
 }
 

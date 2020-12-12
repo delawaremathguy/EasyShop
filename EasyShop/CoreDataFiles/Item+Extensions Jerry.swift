@@ -1,5 +1,3 @@
-//
-//  Item+Extensions.swift
 //  EasyShop
 //
 //  Created by Jerry on 11/11/20.
@@ -25,7 +23,12 @@ extension Item {
         addItem.status = kNotOnList
 		PersistentContainer.saveContext()
 	}
-
+    
+    class func delete(_ item: Item) { // DMG 6
+        let context = item.managedObjectContext
+        context?.delete(item)
+    }
+    
     func toggleSelected() {
         if status == kNotOnList {
             status = kOnListNotTaken

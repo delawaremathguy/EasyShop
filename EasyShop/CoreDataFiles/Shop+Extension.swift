@@ -1,5 +1,3 @@
-//
-//  Shop+Extension.swift
 //  EasyShop
 //
 //  Created by Jerry on 11/19/20.

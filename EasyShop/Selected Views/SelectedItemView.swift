@@ -13,6 +13,24 @@ struct SelectedItemView: View {
 // MARK: - List
             Group {
                 if layoutView {
+                    HStack(spacing: 0) {
+                        List {
+                            Section(header: Text("Remaining")) {
+                                ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
+                                    SelectedTakenImage(item: s).listRowInsets(EdgeInsets())
+                                }
+                            }.textCase(nil)
+                        }
+                        Divider().background(theme.mainColor)
+                        List {
+                            Section(header: Text("Taken")) {
+                                ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
+                                    SelectedTakenImage(item: k).listRowInsets(EdgeInsets())
+                                }
+                            }.textCase(nil)
+                        }
+                    } // HS
+                } else {
                     List {
                         Section(header: Text("Remaining")) {
                             ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
@@ -26,24 +44,6 @@ struct SelectedItemView: View {
                                 SelectedTakenRow(item: k)
                             }
                         }.textCase(nil)
-                    }
-                } else {
-                    HStack(spacing: 0) {
-                        List {
-                            Section(header: Text("Remaining")) {
-                                ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
-                                    SelectedTakenRow(item: s).listRowInsets(EdgeInsets())
-                                }
-                            }.textCase(nil)
-                        }
-                        Divider().background(theme.mainColor)
-                        List {
-                            Section(header: Text("Taken")) {
-                                ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
-                                    SelectedTakenRow(item: k).listRowInsets(EdgeInsets())
-                                }
-                            }.textCase(nil)
-                        }
                     }
                 } // Else
             } // Group
@@ -133,6 +133,31 @@ struct SelectedTakenRow: View {
     }
 }
 
+struct SelectedTakenImage: View {
+    @ObservedObject var item: Item
+    var body: some View {
+        HStack {
+            Text(item.itemName).modifier(customItemText())
+            Spacer()
+            Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
+                .font(.system(size: 20))
+                .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
+        }
+        .padding(.horizontal, 5)
+        .frame(height: rowHeight)
+        .contentShape(Rectangle())
+        .onTapGesture(count: 2) {
+            if item.status == kOnListNotTaken {
+                item.status = kOnListAndTaken
+                print("item added on taken list")
+            } else {
+                item.status = kOnListNotTaken
+                print("item added on not taken list")
+            }
+        }
+    }
+}
+
 // MARK: - PREVIEWS
 
 /* NOT WORKING
@@ -165,3 +190,7 @@ struct SelectedTakenRow_Previews: PreviewProvider {
     }
 }
 */
+
+/*
+
+ */

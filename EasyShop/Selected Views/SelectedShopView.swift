@@ -12,13 +12,16 @@ struct SelectedShopView: View {
                     Section(header:
                         HStack {
                             Spacer()
-                            Text("Products remaining")
-                                .opacity(allShops.count != 0 ? 1 : 0)
+                            Text("Products remaining").opacity(allShops.count != 0 ? 1 : 0)
                         }.textCase(nil)
                     ) {
                         ForEach(allShops) { s in
-                            NavigationLink(destination: SelectedItemView(store: s)) {
+                            if s.countItemsInCart == 0 {
                                 SelectedShopRow(store: s)
+                            } else {
+                                NavigationLink(destination: SelectedItemView(store: s)) {
+                                    SelectedShopRow(store: s)
+                                }
                             }
                         }
                     }
