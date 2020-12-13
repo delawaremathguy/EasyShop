@@ -28,10 +28,6 @@ extension Item {
 		PersistentContainer.saveContext()
 	}
 
-    //        let index = store.item?.count ?? 0
-    //        addItem.order = Int64(index)
-    //        addItem.position = Double(index)
-    
     class func delete(_ item: Item) { // DMG 6
         let context = item.managedObjectContext
         context?.delete(item)
@@ -43,6 +39,7 @@ extension Item {
         } else {
             status = kNotOnList
         }
+        shop?.objectWillChange.send() // updating view Test
     }
 
     var status: Int { 

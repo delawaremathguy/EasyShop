@@ -84,11 +84,9 @@ struct ItemList: View {
         var revisedItems: [Item] = store.getItem.map{ $0 }
         revisedItems.move(fromOffsets: indexes, toOffset: destinationIndex)
         for index in 0 ..< revisedItems.count {
-            revisedItems[index].position = Double(index) //Double(index)
+            revisedItems[index].position = Double(index) 
+            revisedItems.first?.shop?.objectWillChange.send()
         }
-//        for reverseIndex in stride( from: revisedItems.count - 1, to: 0, by: -1)
-//
-//        { revisedItems[reverseIndex].position = Double(reverseIndex) }
         print("move from \(indexes) to \(destinationIndex)")
     }
     
@@ -97,6 +95,7 @@ struct ItemList: View {
         for item in store.getItem {
             if item.status == kNotOnList {
                 item.status = kOnListNotTaken
+                store.objectWillChange.send() // updating view Test
             }
         }
     }
@@ -105,11 +104,14 @@ struct ItemList: View {
         for item in store.getItem {
             if item.status == kOnListNotTaken {
                 item.status = kNotOnList
+                store.objectWillChange.send() // updating view Test
             }
         }
     }
 }
 /*
+ shop.objectWillChange.send()
+ 
  SelectedShopRow(store: s).onReceive(s.objectWillChange) {
      PersistentContainer.saveContext() } // test
  ---

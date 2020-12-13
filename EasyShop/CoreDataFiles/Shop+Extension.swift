@@ -14,7 +14,6 @@ extension Shop {
     public var getItem: [Item] {
         let set = item as? Set<Item> ?? []
         return set.sorted {
-     //       $0.itemName < $1.itemName
             $0.position < $1.position
         }
     }
@@ -24,7 +23,7 @@ extension Shop {
         let fetchRequest: NSFetchRequest<Shop> = Shop.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "position", ascending: true)]
         do {
-            let shops = try context.fetch(fetchRequest)// for: removed
+            let shops = try context.fetch(fetchRequest)
             return shops
         }
         catch let error as NSError {
@@ -94,10 +93,12 @@ extension Shop {
         for shop in shopsList {
             let newShop = Shop(context: context)
             newShop.name = shop.name
+            newShop.position = shop.position
             
             for item in shop.item {
                 let newItem = Item(context: context)
                 newItem.name = item.name
+                newItem.position = item.position
                 newItem.shop = newShop
             }
         }
@@ -108,7 +109,7 @@ extension Shop {
 extension Shop {
     static func allShops() -> NSFetchRequest<Shop> {
         let request: NSFetchRequest<Shop> = Shop.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "position", ascending: true)]
         return request
     }
 }
