@@ -18,7 +18,7 @@ struct ContentView: View {
                 Text("Settings")
                 Image("shopsettings")
             }.tag(2)
-        }.accentColor(theme.mainColor) // DMG 6
+        }.accentColor(theme.mainColor)
     }
 }
 

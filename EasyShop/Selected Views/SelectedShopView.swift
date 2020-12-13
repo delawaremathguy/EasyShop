@@ -18,7 +18,7 @@ struct SelectedShopView: View {
                         ForEach(allShops) { s in
                             if s.countItemsInCart == 0 {
                                 SelectedShopRow(store: s).onReceive(s.objectWillChange) {
-                                    PersistentContainer.saveContext() // test
+                                    PersistentContainer.saveContext() // updating view Test
                                 }
                             } else {
                                 NavigationLink(destination: SelectedItemView(store: s)) {
