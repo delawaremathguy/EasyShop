@@ -17,7 +17,9 @@ struct SelectedShopView: View {
                     ) {
                         ForEach(allShops) { s in
                             if s.countItemsInCart == 0 {
-                                SelectedShopRow(store: s)
+                                SelectedShopRow(store: s).onReceive(s.objectWillChange) {
+                                    PersistentContainer.saveContext() // test
+                                }
                             } else {
                                 NavigationLink(destination: SelectedItemView(store: s)) {
                                     SelectedShopRow(store: s)
@@ -32,7 +34,8 @@ struct SelectedShopView: View {
                     EmptySelectedShop()
                 }
             }
-        }.accentColor(theme.mainColor)
+        }
+        .accentColor(theme.mainColor)
         .onAppear { print("SelectedShopView appears") }
         .onDisappear { print("SelectedShopView disappers") }
     }

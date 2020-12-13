@@ -10,19 +10,27 @@ let kOnListNotTaken: Int = 1
 let kOnListAndTaken: Int = 2
 
 extension Item {
+    
     public var itemName: String {
         name ?? "Unknown item name"
     }
-
+    
 	class func addNewItem(named name: String, to store: Shop) {
 		let addItem = Item(context: PersistentContainer.context)
 		addItem.name = name
-		store.addToItem(addItem) //DMG 1
-		let index = store.item?.count ?? 0
-		addItem.order = Int64(index)
+		store.addToItem(addItem)
+        if let lastItemByPosition = store.getItem.last {
+            addItem.position = lastItemByPosition.position + 1
+        } else {
+            addItem.position = 0
+        }
         addItem.status = kNotOnList
 		PersistentContainer.saveContext()
 	}
+
+    //        let index = store.item?.count ?? 0
+    //        addItem.order = Int64(index)
+    //        addItem.position = Double(index)
     
     class func delete(_ item: Item) { // DMG 6
         let context = item.managedObjectContext

@@ -26,7 +26,10 @@ struct ItemList: View {
             Section {
 // MARK: - LIST
                 List {
-                    ForEach(store.getItem) { s in ItemListRow(item: s) }
+                    ForEach(store.getItem) { s in
+                        ItemListRow(item: s).onReceive(s.objectWillChange) {
+                            PersistentContainer.saveContext() }
+                    }
                     .onDelete(perform: deleteItem)
                     .onMove(perform: doMove)
                 }.listStyle(GroupedListStyle())
@@ -78,12 +81,17 @@ struct ItemList: View {
         print("Item deleted")
     }
     private func doMove(from indexes: IndexSet, to destinationIndex: Int) {
-        let sourceIndex = indexes.first!
-        print("move from \(sourceIndex) to \(destinationIndex)")
-        guard sourceIndex != destinationIndex else {
-            return
+        var revisedItems: [Item] = store.getItem.map{ $0 }
+        revisedItems.move(fromOffsets: indexes, toOffset: destinationIndex)
+        for index in 0 ..< revisedItems.count {
+            revisedItems[index].position = Double(index) //Double(index)
         }
+//        for reverseIndex in stride( from: revisedItems.count - 1, to: 0, by: -1)
+//
+//        { revisedItems[reverseIndex].position = Double(reverseIndex) }
+        print("move from \(indexes) to \(destinationIndex)")
     }
+    
     func selectAll() { // Test
         print("selectAll function executed")
         for item in store.getItem {
@@ -101,6 +109,17 @@ struct ItemList: View {
         }
     }
 }
+/*
+ SelectedShopRow(store: s).onReceive(s.objectWillChange) {
+     PersistentContainer.saveContext() } // test
+ ---
+ .onReceive(self.store.objectWillChange) {
+     PersistentContainer.saveContext()
+ }
+ ---
+ }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
+ ---
+ */
 
 // MARK: - ITEM ROW
 
