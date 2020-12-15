@@ -16,15 +16,7 @@ struct SelectedShopView: View {
                         }.textCase(nil)
                     ) {
                         ForEach(allShops) { s in
-                            if s.countItemsInCart == 0 {
-                                SelectedShopRow(store: s).onReceive(s.objectWillChange) {
-                                    PersistentContainer.saveContext() // updating view Test
-                                }
-                            } else {
-                                NavigationLink(destination: SelectedItemView(store: s)) {
-                                    SelectedShopRow(store: s)
-                                }
-                            }
+                            ConditionalSelectedShopRow(store: s)
                         }
                     }
                 } // LS
@@ -52,12 +44,28 @@ struct SelectedShopRow: View {
             Text(store.shopName)
                 .modifier(customShopText())
                 .foregroundColor((store.countItemsInCart != 0) ? (theme.mainColor) : Color("ColorBlackWhite"))
-                
             Spacer() 
             Text("\(store.countItemsInCart)").font(.caption)
         }.frame(height: rowHeight)
     }
 }
+
+// MARK: - ConditionalSelectedShopRow
+
+struct ConditionalSelectedShopRow: View {
+    @ObservedObject var store: Shop
+    var body: some View {
+        if store.countItemsInCart == 0 {
+            SelectedShopRow(store: store)
+        } else {
+            NavigationLink(destination:
+                SelectedItemView(store: store)) {
+                    SelectedShopRow(store: store)
+            }
+        }
+    }
+}
+
 // MARK: - EmptySelectedShop
 
 struct EmptySelectedShop: View {

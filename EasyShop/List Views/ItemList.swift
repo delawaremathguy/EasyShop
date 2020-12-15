@@ -41,11 +41,11 @@ struct ItemList: View {
                 HStack {
                     Button(action: { deselectAll() }) {
                         Text("Deselect All").padding(.leading)
-                    }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count != 0) == true)
+                    }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
                     Spacer()
                     Button(action: { selectAll() }) {
                         Text("Select All").padding(.trailing)
-                    }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count != 0) == true)
+                    }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count == 0) == true)
                 }.padding(6)
             }
         }
@@ -90,38 +90,26 @@ struct ItemList: View {
         print("move from \(indexes) to \(destinationIndex)")
     }
     
-    func selectAll() { // Test
+    func selectAll() {
         print("selectAll function executed")
         for item in store.getItem {
             if item.status == kNotOnList {
                 item.status = kOnListNotTaken
-                store.objectWillChange.send() // updating view Test
+                store.getItem.forEach({ $0.status = kOnListNotTaken })
             }
         }
     }
-    func deselectAll() { // Test
+    func deselectAll() {
         print("deselectAll function executed")
         for item in store.getItem {
             if item.status == kOnListNotTaken {
                 item.status = kNotOnList
-                store.objectWillChange.send() // updating view Test
+                store.getItem.forEach({ $0.status = kNotOnList })
             }
         }
     }
 }
-/*
- shop.objectWillChange.send()
- 
- SelectedShopRow(store: s).onReceive(s.objectWillChange) {
-     PersistentContainer.saveContext() } // test
- ---
- .onReceive(self.store.objectWillChange) {
-     PersistentContainer.saveContext()
- }
- ---
- }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
- ---
- */
+
 
 // MARK: - ITEM ROW
 
