@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var theme = gThemeSettings // DMG 6
+    @ObservedObject var theme = gThemeSettings
     @State private var selected = 0
 
     var body: some View {

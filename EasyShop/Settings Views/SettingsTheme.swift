@@ -54,8 +54,8 @@ struct SettingsTheme: View {
                                 }.accentColor(Color.primary)
                             }.padding(.horizontal, 5)
                         }
-                    } // SV
-// MARK: - ALERT
+                    }
+// MARK: - Alert
                     .alert(isPresented: $isThemeChanged) {
                         Alert(
                             title: Text("DONE!"),
@@ -67,6 +67,7 @@ struct SettingsTheme: View {
         }
     }
 }
+
 // MARK: - PREVIEW
 struct SettingsTheme_Previews: PreviewProvider {
     static var previews: some View {

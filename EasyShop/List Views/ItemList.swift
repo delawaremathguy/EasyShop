@@ -22,14 +22,12 @@ struct ItemList: View {
                         .modifier(customTextfield())
                     Text("\(store.getItem.count)").padding(15)
                 }.modifier(customHStack())
-            } // SE
+            }
             Section {
 // MARK: - LIST
                 List {
                     ForEach(store.getItem) { s in
                         ItemListRow(item: s)
-//                            .onReceive(s.objectWillChange) {
-//                            PersistentContainer.saveContext() }
                     }
                     .onDelete(perform: deleteItem)
                     .onMove(perform: doMove)
@@ -53,7 +51,7 @@ struct ItemList: View {
         .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-// MARK: - TOOLBAR
+// MARK: - Toolbar
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { present.wrappedValue.dismiss() }) {
@@ -67,7 +65,7 @@ struct ItemList: View {
         .onAppear { print("ItemList appears") }
         .onDisappear { print("ItemList disappers") }
     }
-// MARK: - FUNCTIONS
+// MARK: - Functions
     func newItem() {
         Item.addNewItem(named: name, to: store)
         self.name = ""
@@ -76,22 +74,17 @@ struct ItemList: View {
     func deleteItem(at offsets: IndexSet) {
         let items = store.getItem
         offsets.forEach({ Item.delete( items[$0] )})
-//        for index in offsets {
-//            Item.delete(items[index])
-//        }
-//        PersistentContainer.saveContext()
         print("Item deleted")
     }
     private func doMove(from indexes: IndexSet, to destinationIndex: Int) {
         var revisedItems: [Item] = store.getItem.map{ $0 }
         revisedItems.move(fromOffsets: indexes, toOffset: destinationIndex)
         for index in 0 ..< revisedItems.count {
-            revisedItems[index].position = Int32(index) // Int
+            revisedItems[index].position = Int32(index)
             revisedItems.first?.shop?.objectWillChange.send()
         }
         print("move from \(indexes) to \(destinationIndex)")
     }
-    
     func selectAll() {
         print("selectAll function executed")
         store.getItem.forEach({ $0.status = kOnListNotTaken })
@@ -100,11 +93,9 @@ struct ItemList: View {
         print("deselectAll function executed")
         store.getItem.forEach({ $0.status = kNotOnList })
     }
-    
 }
 
-
-// MARK: - ITEM ROW
+// MARK: - ITEMLISTROW
 
 struct ItemListRow: View {
     @ObservedObject var item: Item
@@ -123,8 +114,6 @@ struct ItemListRow: View {
                     .foregroundColor(theme.mainColor)
             }.frame(height: rowHeight)
         }
-       // .onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
-       // }
     }
 }
 

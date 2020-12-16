@@ -19,7 +19,7 @@ struct SelectedShopView: View {
                             ConditionalSelectedShopRow(store: s)
                         }
                     }
-                } // LS
+                }
                 .listStyle(GroupedListStyle())
                 .navigationTitle("Shops")
                 if allShops.count == 0 {
@@ -50,7 +50,7 @@ struct SelectedShopRow: View {
     }
 }
 
-// MARK: - ConditionalSelectedShopRow
+// MARK: - CONDITIONALSELECTEDSHOPROW
 
 struct ConditionalSelectedShopRow: View {
     @ObservedObject var store: Shop
@@ -66,7 +66,7 @@ struct ConditionalSelectedShopRow: View {
     }
 }
 
-// MARK: - EmptySelectedShop
+// MARK: - EMPTYSELECTEDSHOP
 
 struct EmptySelectedShop: View {
     @ObservedObject var theme = gThemeSettings

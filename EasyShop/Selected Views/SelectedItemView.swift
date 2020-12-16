@@ -29,7 +29,7 @@ struct SelectedItemView: View {
                                 }
                             }.textCase(nil)
                         }
-                    } // HS
+                    }
                 } else {
                     List {
                         Section(header: Text("Remaining")) {
@@ -45,8 +45,8 @@ struct SelectedItemView: View {
                             }
                         }.textCase(nil)
                     }
-                } // Else
-            } // Group
+                }
+            }
 // MARK: - Footer
             Rectangle()
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
@@ -84,7 +84,7 @@ struct SelectedItemView: View {
         .onAppear { print("SelectedItemView appears") }
         .onDisappear { print("SelectedItemView disappers") }
     }
-// MARK: - FUNCTIONS
+// MARK: - Functions
     func takeAll() {
         print("takeAll function executed")
         for item in store.getItem {
@@ -93,7 +93,7 @@ struct SelectedItemView: View {
             }
         }
     }
-    func clearAll() { // DMG 5 - clearAll() email
+    func clearAll() {
         print("clearAll function executed")
         for item in store.getItem {
             if item.status == kOnListAndTaken {
@@ -154,40 +154,3 @@ struct SelectedTakenImage: View {
         }
     }
 }
-
-// MARK: - PREVIEWS
-
-/* NOT WORKING
-struct SelectedItemView_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    static var previews: some View {
-        let data = Shop(context: moc)
-        data.name = "Carrefour"
-        let datum = Item(context: moc)
-        datum.name = "Chicken"
-        data.addToItem(datum)
-        return SelectedItemView(store: data)
-    }
-}
-
-struct SelectedTakenRow_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    static var previews: some View {
-        let datum = Item(context: moc)
-        datum.name = "Chicken"
-        return Group {
-            SelectedTakenRow(item: datum)
-                .padding()
-                .previewLayout(.sizeThatFits)
-            SelectedTakenRow(item: datum)
-                .preferredColorScheme(.dark)
-                .padding()
-                .previewLayout(.sizeThatFits)
-        }
-    }
-}
-*/
-
-/*
-
- */

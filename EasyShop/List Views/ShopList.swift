@@ -24,9 +24,9 @@ struct ShopList: View {
                             .modifier(customTextfield())
                         Text("\(allShops.count)").padding(15)
                     }.modifier(customHStack())
-                } // SE
+                }
                 Section {
-// MARK: - LIST
+// MARK: - List
                     List {
                         Section {
                             ForEach(allShops) { s in
@@ -38,8 +38,7 @@ struct ShopList: View {
                             .onDelete(perform: deleteShop)
                             .onMove(perform: doMove)
                         }
-                    } // LS
-                    
+                    }
                     .listStyle(GroupedListStyle())
                     .navigationTitle("Shops")
                     .navigationBarTitleDisplayMode(.inline)
@@ -47,11 +46,10 @@ struct ShopList: View {
                 }
             }
         }.accentColor(theme.mainColor)
-        
         .onAppear { print("ShopList appears") }
         .onDisappear { print("ShopList disappers") }
     }
-    // MARK: - FUNCTIONS
+    // MARK: - Functions
     func newShop(name: String) {
         Shop.addNewShop(named: name)
         self.name = ""
@@ -59,7 +57,7 @@ struct ShopList: View {
     }
     func deleteShop(at offsets: IndexSet) {
         for index in offsets {
-            Shop.delete(allShops[index]) // DMG 6
+            Shop.delete(allShops[index])
         }
         PersistentContainer.saveContext()
         print("Shop deleted")
@@ -68,27 +66,13 @@ struct ShopList: View {
         var revisedItems: [Shop] = allShops.map{ $0 }
         revisedItems.move(fromOffsets: indexes, toOffset: destinationIndex)
         for index in 0 ..< revisedItems.count {
-            revisedItems[index].position = Int32(index) // Int
+            revisedItems[index].position = Int32(index)
         }
-//        for reverseIndex in stride( from: revisedItems.count - 1, to: 0, by: -1)
-//
-//        { revisedItems[reverseIndex].position = Double(reverseIndex) }
         print("move from \(indexes) to \(destinationIndex)")
     }
 }
-/*
- SelectedShopRow(store: s).onReceive(s.objectWillChange) {
-     PersistentContainer.saveContext() } // test
- ---
- .onReceive(self.store.objectWillChange) {
-     PersistentContainer.saveContext()
- }
- ---
- }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
- ---
- */
 
-// MARK: - SHOP ROW
+// MARK: - SHOPLISTROW
 
 struct ShopListRow: View {
     @ObservedObject var theme = gThemeSettings
