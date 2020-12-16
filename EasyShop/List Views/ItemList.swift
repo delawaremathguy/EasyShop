@@ -27,8 +27,9 @@ struct ItemList: View {
 // MARK: - LIST
                 List {
                     ForEach(store.getItem) { s in
-                        ItemListRow(item: s).onReceive(s.objectWillChange) {
-                            PersistentContainer.saveContext() }
+                        ItemListRow(item: s)
+//                            .onReceive(s.objectWillChange) {
+//                            PersistentContainer.saveContext() }
                     }
                     .onDelete(perform: deleteItem)
                     .onMove(perform: doMove)
@@ -74,17 +75,18 @@ struct ItemList: View {
     }
     func deleteItem(at offsets: IndexSet) {
         let items = store.getItem
-        for index in offsets {
-            Item.delete(items[index])
-        }
-        PersistentContainer.saveContext()
+        offsets.forEach({ Item.delete( items[$0] )})
+//        for index in offsets {
+//            Item.delete(items[index])
+//        }
+//        PersistentContainer.saveContext()
         print("Item deleted")
     }
     private func doMove(from indexes: IndexSet, to destinationIndex: Int) {
         var revisedItems: [Item] = store.getItem.map{ $0 }
         revisedItems.move(fromOffsets: indexes, toOffset: destinationIndex)
         for index in 0 ..< revisedItems.count {
-            revisedItems[index].position = Double(index) 
+            revisedItems[index].position = Int32(index) // Int
             revisedItems.first?.shop?.objectWillChange.send()
         }
         print("move from \(indexes) to \(destinationIndex)")
@@ -92,22 +94,13 @@ struct ItemList: View {
     
     func selectAll() {
         print("selectAll function executed")
-        for item in store.getItem {
-            if item.status == kNotOnList {
-                item.status = kOnListNotTaken
-                store.getItem.forEach({ $0.status = kOnListNotTaken })
-            }
-        }
+        store.getItem.forEach({ $0.status = kOnListNotTaken })
     }
     func deselectAll() {
         print("deselectAll function executed")
-        for item in store.getItem {
-            if item.status == kOnListNotTaken {
-                item.status = kNotOnList
-                store.getItem.forEach({ $0.status = kNotOnList })
-            }
-        }
+        store.getItem.forEach({ $0.status = kNotOnList })
     }
+    
 }
 
 
@@ -129,8 +122,9 @@ struct ItemListRow: View {
                     .imageScale(.large)
                     .foregroundColor(theme.mainColor)
             }.frame(height: rowHeight)
-        }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
         }
+       // .onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
+       // }
     }
 }
 

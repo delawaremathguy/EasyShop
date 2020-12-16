@@ -68,7 +68,7 @@ struct ShopList: View {
         var revisedItems: [Shop] = allShops.map{ $0 }
         revisedItems.move(fromOffsets: indexes, toOffset: destinationIndex)
         for index in 0 ..< revisedItems.count {
-            revisedItems[index].position = Double(index)
+            revisedItems[index].position = Int32(index) // Int
         }
 //        for reverseIndex in stride( from: revisedItems.count - 1, to: 0, by: -1)
 //

@@ -51,17 +51,13 @@ struct SelectedItemView: View {
             Rectangle()
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
             HStack {
-                Button(action: {
-                    takeAll()
-                }) {
-                    Text("Take all").padding(.leading)
-                }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
-                Spacer()
-                Button(action: {
-                    clearAll()
-                }) {
+                Button(action: { clearAll()  }) {
                     Text("Clear all").padding(.trailing)
                 }.disabled((store.getItem.filter({ $0.status == kOnListAndTaken }).count == 0) == true)
+                Spacer()
+                Button(action: { takeAll()  }) {
+                    Text("Take all").padding(.leading)
+                }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
             }.padding(.bottom, 5)
         }
         .navigationTitle("\(store.shopName)")
