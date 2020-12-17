@@ -32,8 +32,7 @@ struct ShopList: View {
                             ForEach(allShops) { s in
                                 NavigationLink(destination: ItemList(store: s)) {
                                     ShopListRow(store: s)
-                                }.onReceive(s.objectWillChange) {
-                                    PersistentContainer.saveContext() }
+                                }
                             }
                             .onDelete(perform: deleteShop)
                             .onMove(perform: doMove)

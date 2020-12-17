@@ -71,7 +71,7 @@ extension Shop {
         return count
     }
     
-    static func delete(_ shop: Shop) { // DMG 6
+    static func delete(_ shop: Shop) { 
         let context = shop.managedObjectContext
         context?.delete(shop)
     }

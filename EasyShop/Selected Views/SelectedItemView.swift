@@ -34,14 +34,14 @@ struct SelectedItemView: View {
                     List {
                         Section(header: Text("Remaining")) {
                             ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
-                                SelectedTakenRow(item: s)
+                                SelectedTakenImage(item: s)
                             }
                         }.textCase(nil)
                     }
                     List {
                         Section(header: Text("Taken")) {
                             ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
-                                SelectedTakenRow(item: k)
+                                SelectedTakenImage(item: k)
                             }
                         }.textCase(nil)
                     }
@@ -52,13 +52,13 @@ struct SelectedItemView: View {
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
             HStack {
                 Button(action: { clearAll()  }) {
-                    Text("Clear all").padding(.trailing)
+                    Text("Clear all").padding(.leading, 12)
                 }.disabled((store.getItem.filter({ $0.status == kOnListAndTaken }).count == 0) == true)
                 Spacer()
                 Button(action: { takeAll()  }) {
-                    Text("Take all").padding(.leading)
+                    Text("Take all").padding(.trailing, 12)
                 }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
-            }.padding(.bottom, 5)
+            }.padding(.bottom, 10)
         }
         .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
@@ -102,33 +102,7 @@ struct SelectedItemView: View {
         }
     }
 }
-// MARK: - SELECTED-TAKEN-ROW
-
-struct SelectedTakenRow: View {
-    @ObservedObject var item: Item
-    
-    var body: some View {
-        HStack {
-            Text(item.itemName).modifier(customItemText())
-            Spacer()
-            Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
-                .font(.system(size: 28))
-                .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
-        }
-        .padding(.horizontal, 5)
-        .frame(height: rowHeight)
-        .contentShape(Rectangle())
-        .onTapGesture(count: 2) {
-            if item.status == kOnListNotTaken {
-                item.status = kOnListAndTaken
-                print("item added on taken list")
-            } else {
-                item.status = kOnListNotTaken
-                print("item added on not taken list")
-            }
-        }
-    }
-}
+// MARK: - SELECTED-TAKEN
 
 struct SelectedTakenImage: View {
     @ObservedObject var item: Item

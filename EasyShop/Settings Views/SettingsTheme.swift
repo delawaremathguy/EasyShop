@@ -59,7 +59,7 @@ struct SettingsTheme: View {
                     .alert(isPresented: $isThemeChanged) {
                         Alert(
                             title: Text("DONE!"),
-                            message: Text("\(themes[self.theme.themeSettings].themeName) is ON!!!"),
+                            message: Text("You are using \(themes[self.theme.themeSettings].themeName)!!!"),
                             dismissButton: .default(Text("Ok"))
                     )}
                 }

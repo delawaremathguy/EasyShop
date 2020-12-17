@@ -24,6 +24,8 @@ struct ItemList: View {
                 }.modifier(customHStack())
             }
             Section {
+                Rectangle()
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
 // MARK: - LIST
                 List {
                     ForEach(store.getItem) { s in
@@ -39,13 +41,13 @@ struct ItemList: View {
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
                 HStack {
                     Button(action: { deselectAll() }) {
-                        Text("Deselect All").padding(.leading)
+                        Text("Deselect All").padding(.leading, 12)
                     }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
                     Spacer()
                     Button(action: { selectAll() }) {
-                        Text("Select All").padding(.trailing)
+                        Text("Select All").padding(.trailing, 12)
                     }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count == 0) == true)
-                }.padding(6)
+                }.padding(.vertical, 10)
             }
         }
         .navigationTitle("\(store.shopName)")
