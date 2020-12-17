@@ -65,26 +65,32 @@ struct SelectedItemView: View {
         .navigationBarBackButtonHidden(true)
 // MARK: - Toolbar
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: { present.wrappedValue.dismiss() }) {
-                    Image(systemName: "chevron.left")
-                        .padding(.horizontal)
-                        .font(.system(size: 20, weight: .regular))
-                }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    self.switchButton.toggle()
-                    self.layoutView.toggle()
-                }) {
-                    Image(switchButton ? "viewswitch1" : "viewswitch2")
-                }
-            }
+            ToolbarItem(placement: .navigationBarLeading, content: backButton)
+            ToolbarItem(placement: .navigationBarTrailing, content: switchView)
         }
         .onAppear { print("SelectedItemView appears") }
         .onDisappear { print("SelectedItemView disappers") }
     }
 // MARK: - Functions
+    func backButton() -> some View {
+        Button(action: {
+            present.wrappedValue.dismiss()
+            print("Navigating Back")
+        }) {
+            Image(systemName: "chevron.left")
+                .padding(.horizontal)
+                .font(.system(size: 20, weight: .regular))
+        }
+    }
+    func switchView() -> some View {
+        Button(action: {
+            self.switchButton.toggle()
+            self.layoutView.toggle()
+            print("switching View")
+        }) {
+            Image(switchButton ? "viewswitch1" : "viewswitch2")
+        }.animation(.default) // Animation Test
+    }
     func takeAll() {
         print("takeAll function executed")
         for item in store.getItem {
@@ -125,6 +131,6 @@ struct SelectedTakenImage: View {
                 item.status = kOnListNotTaken
                 print("item added on not taken list")
             }
-        }
+        }.animation(.default) // Animation Test
     }
 }

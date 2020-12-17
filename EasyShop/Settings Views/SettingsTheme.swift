@@ -16,6 +16,7 @@ struct SettingsTheme: View {
                                     gThemeSettings.themeSettings = item.id
                                     UserDefaults.standard.set(self.theme.themeSettings, forKey: "Theme")
                                     self.isThemeChanged.toggle()
+                                    print("Changing to \(item.themeName)")
                                 }) {
                                     VStack {
 // MARK: - Card

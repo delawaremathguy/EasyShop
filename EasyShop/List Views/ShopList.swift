@@ -32,16 +32,18 @@ struct ShopList: View {
                             ForEach(allShops) { s in
                                 NavigationLink(destination: ItemList(store: s)) {
                                     ShopListRow(store: s)
-                                }
+                                }.animation(.default) // Animation Test
                             }
                             .onDelete(perform: deleteShop)
-                            .onMove(perform: doMove)
+                            .onMove(perform: doMove).animation(.default) // Animation Test
                         }
                     }
                     .listStyle(GroupedListStyle())
                     .navigationTitle("Shops")
                     .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarItems(trailing: EditButton())
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
+                    }
                 }
             }
         }.accentColor(theme.mainColor)

@@ -18,7 +18,7 @@ struct ItemList: View {
                             .opacity(name.isEmpty ? 0.4 : 1.0)
                             .background(Color("ColorWhiteBlack"))
                     }.disabled(name.isEmpty)
-                    TextField("new product here...", text: $name)
+                    TextField("Add new product", text: $name)
                         .modifier(customTextfield())
                     Text("\(store.getItem.count)").padding(15)
                 }.modifier(customHStack())
@@ -32,7 +32,7 @@ struct ItemList: View {
                         ItemListRow(item: s)
                     }
                     .onDelete(perform: deleteItem)
-                    .onMove(perform: doMove)
+                    .onMove(perform: doMove).animation(.default) // Animation Test
                 }.listStyle(GroupedListStyle())
 // MARK: - Footer
             }
@@ -55,14 +55,8 @@ struct ItemList: View {
         .navigationBarBackButtonHidden(true)
 // MARK: - Toolbar
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: { present.wrappedValue.dismiss() }) {
-                    Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
-                }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                EditButton()
-            }
+            ToolbarItem(placement: .cancellationAction, content: backButton)
+            ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
         }
         .onAppear { print("ItemList appears") }
         .onDisappear { print("ItemList disappers") }
@@ -86,6 +80,11 @@ struct ItemList: View {
             revisedItems.first?.shop?.objectWillChange.send()
         }
         print("move from \(indexes) to \(destinationIndex)")
+    }
+    func backButton() -> some View {
+        Button(action: { present.wrappedValue.dismiss() }) {
+            Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
+        }
     }
     func selectAll() {
         print("selectAll function executed")
@@ -115,7 +114,7 @@ struct ItemListRow: View {
                     .imageScale(.large)
                     .foregroundColor(theme.mainColor)
             }.frame(height: rowHeight)
-        }
+        }.animation(.default) // Animation Test
     }
 }
 

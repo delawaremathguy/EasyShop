@@ -61,7 +61,7 @@ struct ConditionalSelectedShopRow: View {
             NavigationLink(destination:
                 SelectedItemView(store: store)) {
                     SelectedShopRow(store: store)
-            }
+            }.animation(.default) // Animation Test
         }
     }
 }
