@@ -33,7 +33,7 @@ struct SettingsViews: View {
                     Text("Version 1.0").font(.caption)
                 }
                 Spacer()
-            } // Main VS
+            }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
         }

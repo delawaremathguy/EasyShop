@@ -28,9 +28,12 @@ extension Item {
 		PersistentContainer.saveContext()
 	}
 
-    class func delete(_ item: Item) { // DMG 6
+    class func delete(_ item: Item) { 
+        let shop = item.shop
         let context = item.managedObjectContext
         context?.delete(item)
+        shop?.objectWillChange.send()
+        PersistentContainer.saveContext()
     }
     
     func toggleSelected() {
@@ -39,7 +42,7 @@ extension Item {
         } else {
             status = kNotOnList
         }
-        shop?.objectWillChange.send() // updating view Test
+        PersistentContainer.saveContext()
     }
 
     var status: Int { 

@@ -18,20 +18,21 @@ struct ItemList: View {
                             .opacity(name.isEmpty ? 0.4 : 1.0)
                             .background(Color("ColorWhiteBlack"))
                     }.disabled(name.isEmpty)
-                    TextField("new product here...", text: $name)
+                    TextField("Add new product", text: $name)
                         .modifier(customTextfield())
                     Text("\(store.getItem.count)").padding(15)
                 }.modifier(customHStack())
-            } // SE
+            }
             Section {
+                Rectangle()
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
 // MARK: - LIST
                 List {
                     ForEach(store.getItem) { s in
-                        ItemListRow(item: s).onReceive(s.objectWillChange) {
-                            PersistentContainer.saveContext() }
+                        ItemListRow(item: s)
                     }
                     .onDelete(perform: deleteItem)
-                    .onMove(perform: doMove)
+                    .onMove(perform: doMove).animation(.default) // Animation Test
                 }.listStyle(GroupedListStyle())
 // MARK: - Footer
             }
@@ -40,33 +41,27 @@ struct ItemList: View {
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
                 HStack {
                     Button(action: { deselectAll() }) {
-                        Text("Deselect All").padding(.leading)
+                        Text("Deselect All").padding(.leading, 12)
                     }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
                     Spacer()
                     Button(action: { selectAll() }) {
-                        Text("Select All").padding(.trailing)
+                        Text("Select All").padding(.trailing, 12)
                     }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count == 0) == true)
-                }.padding(6)
+                }.padding(.vertical, 10)
             }
         }
         .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-// MARK: - TOOLBAR
+// MARK: - Toolbar
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: { present.wrappedValue.dismiss() }) {
-                    Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
-                }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                EditButton()
-            }
+            ToolbarItem(placement: .cancellationAction, content: backButton)
+            ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
         }
         .onAppear { print("ItemList appears") }
         .onDisappear { print("ItemList disappers") }
     }
-// MARK: - FUNCTIONS
+// MARK: - Functions
     func newItem() {
         Item.addNewItem(named: name, to: store)
         self.name = ""
@@ -74,44 +69,34 @@ struct ItemList: View {
     }
     func deleteItem(at offsets: IndexSet) {
         let items = store.getItem
-        for index in offsets {
-            Item.delete(items[index])
-        }
-        PersistentContainer.saveContext()
+        offsets.forEach({ Item.delete( items[$0] )})
         print("Item deleted")
     }
     private func doMove(from indexes: IndexSet, to destinationIndex: Int) {
         var revisedItems: [Item] = store.getItem.map{ $0 }
         revisedItems.move(fromOffsets: indexes, toOffset: destinationIndex)
         for index in 0 ..< revisedItems.count {
-            revisedItems[index].position = Double(index) 
+            revisedItems[index].position = Int32(index)
             revisedItems.first?.shop?.objectWillChange.send()
         }
         print("move from \(indexes) to \(destinationIndex)")
     }
-    
+    func backButton() -> some View {
+        Button(action: { present.wrappedValue.dismiss() }) {
+            Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
+        }
+    }
     func selectAll() {
         print("selectAll function executed")
-        for item in store.getItem {
-            if item.status == kNotOnList {
-                item.status = kOnListNotTaken
-                store.getItem.forEach({ $0.status = kOnListNotTaken })
-            }
-        }
+        store.getItem.forEach({ $0.status = kOnListNotTaken })
     }
     func deselectAll() {
         print("deselectAll function executed")
-        for item in store.getItem {
-            if item.status == kOnListNotTaken {
-                item.status = kNotOnList
-                store.getItem.forEach({ $0.status = kNotOnList })
-            }
-        }
+        store.getItem.forEach({ $0.status = kNotOnList })
     }
 }
 
-
-// MARK: - ITEM ROW
+// MARK: - ITEMLISTROW
 
 struct ItemListRow: View {
     @ObservedObject var item: Item
@@ -129,8 +114,7 @@ struct ItemListRow: View {
                     .imageScale(.large)
                     .foregroundColor(theme.mainColor)
             }.frame(height: rowHeight)
-        }.onReceive(self.item.objectWillChange) { PersistentContainer.saveContext()
-        }
+        }.animation(.default) // Animation Test
     }
 }
 

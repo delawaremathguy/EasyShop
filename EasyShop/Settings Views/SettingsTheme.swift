@@ -16,6 +16,7 @@ struct SettingsTheme: View {
                                     gThemeSettings.themeSettings = item.id
                                     UserDefaults.standard.set(self.theme.themeSettings, forKey: "Theme")
                                     self.isThemeChanged.toggle()
+                                    print("Changing to \(item.themeName)")
                                 }) {
                                     VStack {
 // MARK: - Card
@@ -54,12 +55,12 @@ struct SettingsTheme: View {
                                 }.accentColor(Color.primary)
                             }.padding(.horizontal, 5)
                         }
-                    } // SV
-// MARK: - ALERT
+                    }
+// MARK: - Alert
                     .alert(isPresented: $isThemeChanged) {
                         Alert(
                             title: Text("DONE!"),
-                            message: Text("\(themes[self.theme.themeSettings].themeName) is ON!!!"),
+                            message: Text("You are using \(themes[self.theme.themeSettings].themeName)!!!"),
                             dismissButton: .default(Text("Ok"))
                     )}
                 }
@@ -67,6 +68,7 @@ struct SettingsTheme: View {
         }
     }
 }
+
 // MARK: - PREVIEW
 struct SettingsTheme_Previews: PreviewProvider {
     static var previews: some View {
