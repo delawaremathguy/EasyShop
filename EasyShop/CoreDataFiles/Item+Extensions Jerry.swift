@@ -29,7 +29,7 @@ extension Item {
 	}
 
     class func delete(_ item: Item) { 
-        let shop = item.shop
+        let shop = item.shop // this shop is the relationship
         let context = item.managedObjectContext
         context?.delete(item)
         shop?.objectWillChange.send()
