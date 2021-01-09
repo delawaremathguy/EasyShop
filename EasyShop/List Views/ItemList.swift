@@ -6,12 +6,14 @@ struct ItemList: View {
     @ObservedObject var store: Shop
     @ObservedObject var theme = gThemeSettings
     @State var name = ""
+    let selectImpact = UIImpactFeedbackGenerator(style: .medium)
+    let deselectImpact = UIImpactFeedbackGenerator(style: .medium)
     
     var body: some View {
         VStack(spacing: 0) {
             Section {
                 HStack(spacing: 0) {
-// MARK: - HEADER
+// MARK: - Header
                     Button(action: { newItem() }) {
                         Image(systemName: "plus")
                             .modifier(customButton())
@@ -26,7 +28,7 @@ struct ItemList: View {
             Section {
                 Rectangle()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
-// MARK: - LIST
+// MARK: - List
                 List {
                     ForEach(store.getItem) { s in
                         ItemListRow(item: s)
@@ -40,11 +42,15 @@ struct ItemList: View {
                 Rectangle()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
                 HStack {
-                    Button(action: { deselectAll() }) {
+                    Button(action: { deselectAll()
+                        deselectImpact.impactOccurred()
+                    }) {
                         Text("Deselect All").padding(.leading, 12)
                     }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
                     Spacer()
-                    Button(action: { selectAll() }) {
+                    Button(action: { selectAll()
+                        selectImpact.impactOccurred()
+                    }) {
                         Text("Select All").padding(.trailing, 12)
                     }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count == 0) == true)
                 }.padding(.vertical, 10)
@@ -101,10 +107,12 @@ struct ItemList: View {
 struct ItemListRow: View {
     @ObservedObject var item: Item
     @ObservedObject var theme = gThemeSettings
+    let selectedImpact = UIImpactFeedbackGenerator(style: .soft)
     
     var body: some View {
         Button(action: {
             self.item.toggleSelected()
+            selectedImpact.impactOccurred()
             print("item added to List not taken")
         }) {
             HStack {
