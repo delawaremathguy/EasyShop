@@ -2,22 +2,27 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var theme = gThemeSettings
-    @State private var selected = 0
+    @State private var selected = 1
 
     var body: some View {
         TabView(selection: $selected) {
-            SelectedShopView().tabItem {
-                Text("Cart")
-                Image("shopcart")
-            }.tag(0)
+            
             ShopList().tabItem {
                 Text("List")
                 Image("shoplist")
+            }.tag(0)
+            
+            SelectedShopView().tabItem {
+                Text("Cart")
+                Image("shopcart")
             }.tag(1)
+
+            
             SettingsViews().tabItem {
                 Text("Settings")
                 Image("shopsettings")
             }.tag(2)
+            
         }.accentColor(theme.mainColor)
     }
 }

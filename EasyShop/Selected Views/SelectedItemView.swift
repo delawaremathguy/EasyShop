@@ -84,8 +84,10 @@ struct SelectedItemView: View {
     }
     func switchView() -> some View {
         Button(action: {
+            withAnimation {
             self.switchButton.toggle()
             self.layoutView.toggle()
+            }
             print("switching View")
         }) {
             Image(switchButton ? "viewswitch1" : "viewswitch2")
