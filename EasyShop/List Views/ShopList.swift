@@ -43,7 +43,7 @@ struct ShopList: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
-                    }
+                    }.disabled(allShops.count == 0)
                 }
             }
         }.accentColor(theme.mainColor)

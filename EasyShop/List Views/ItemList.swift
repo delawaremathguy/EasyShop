@@ -57,7 +57,7 @@ struct ItemList: View {
         .toolbar {
             ToolbarItem(placement: .cancellationAction, content: backButton)
             ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
-        }
+        }.disabled(store.getItem.count == 0)
         .onAppear { print("ItemList appears") }
         .onDisappear { print("ItemList disappers") }
     }
