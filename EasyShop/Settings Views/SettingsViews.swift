@@ -9,22 +9,12 @@ struct SettingsViews: View {
             VStack {
                 VStack(spacing: 25) {
                     NavigationLink(destination: SettingsTheme(), tag: 1, selection: $action) {
-                        HStack {
-                            Image("appearance")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                                .padding(10)
-                            Text("Appearance")
-                                .foregroundColor(theme.mainColor)
-                                .font(.headline)
-                                .font(Font.system(size: 20, design: .serif))
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .padding(.trailing, 15)
-                        }
-                        .background(Color("ColorAccent"))
-                        .frame(maxWidth: .infinity)
+                        CapsuleRow(image: "appearance", text: "Appearance")
                     }
+                    NavigationLink(destination: SettingsLanguage(), tag: 2, selection: $action) {
+                        CapsuleRow(image: "language", text: "Language")
+                    }
+                    
                 }.padding(.top, 45)
                 Spacer()
                 VStack {
@@ -40,6 +30,32 @@ struct SettingsViews: View {
     }
 }
 
+// MARK: - CAPSULEROW
+
+struct CapsuleRow: View {
+    @ObservedObject var theme = gThemeSettings
+    var image: String
+    var text: String
+    
+    var body: some View {
+        HStack {
+            Image(image)
+                .resizable()
+                .frame(width: 40, height: 40)
+                .padding(10)
+            Text(text)
+                .foregroundColor(theme.mainColor)
+                .font(.headline)
+                .font(Font.system(size: 20, design: .serif))
+            Spacer()
+            Image(systemName: "chevron.right")
+                .padding(.trailing, 15)
+        }
+        .background(Color("ColorAccent"))
+        .frame(maxWidth: .infinity)
+    }
+}
+
  // MARK: - PREVIEWS
 
 struct SettingsViews_Previews: PreviewProvider {
@@ -47,3 +63,4 @@ struct SettingsViews_Previews: PreviewProvider {
         SettingsViews()
     }
 }
+

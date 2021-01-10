@@ -7,6 +7,8 @@ struct SelectedItemView: View {
     @ObservedObject var theme = gThemeSettings
     @State private var layoutView = false
     @State private var switchButton = false
+    let clearImpact = UIImpactFeedbackGenerator(style: .heavy)
+    let takeImpact = UIImpactFeedbackGenerator(style: .medium)
     
     var body: some View {
         VStack {
@@ -51,11 +53,15 @@ struct SelectedItemView: View {
             Rectangle()
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
             HStack {
-                Button(action: { clearAll()  }) {
+                Button(action: { clearAll()
+                    clearImpact.impactOccurred()
+                }) {
                     Text("Clear all").padding(.leading, 12)
                 }.disabled((store.getItem.filter({ $0.status == kOnListAndTaken }).count == 0) == true)
                 Spacer()
-                Button(action: { takeAll()  }) {
+                Button(action: { takeAll()
+                    takeImpact.impactOccurred()
+                }) {
                     Text("Take all").padding(.trailing, 12)
                 }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
             }.padding(.bottom, 10)
@@ -84,8 +90,10 @@ struct SelectedItemView: View {
     }
     func switchView() -> some View {
         Button(action: {
+            withAnimation {
             self.switchButton.toggle()
             self.layoutView.toggle()
+            }
             print("switching View")
         }) {
             Image(switchButton ? "viewswitch1" : "viewswitch2")
@@ -112,6 +120,7 @@ struct SelectedItemView: View {
 
 struct SelectedTakenImage: View {
     @ObservedObject var item: Item
+    let hapticTaken = UIImpactFeedbackGenerator(style: .soft)
     var body: some View {
         HStack {
             Text(item.itemName).modifier(customItemText())
@@ -131,6 +140,7 @@ struct SelectedTakenImage: View {
                 item.status = kOnListNotTaken
                 print("item added on not taken list")
             }
+            hapticTaken.impactOccurred()
         }.animation(.default) // Animation Test
     }
 }
