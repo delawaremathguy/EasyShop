@@ -1,7 +1,8 @@
-import SwiftUI
+import SwiftUI // Project on GitHub
 
 struct ContentView: View {
     @ObservedObject var theme = gThemeSettings
+//    @ObservedObject var store: Shop
     @State private var selected = 1
 
     private var badgePosition: CGFloat = 2
@@ -33,11 +34,10 @@ struct ContentView: View {
                 }
                 .frame(width: 12, height: 12)
                 .offset(x: (( 2 * self.badgePosition ) - 0.90 ) * ( geo.size.width / ( 2 * self.tabsCount ) ) + 2, y: -30)
-/*
-                .opacity(
-                (store.getItem.filter({ $0.status == kOnListNotTaken }).count != 0) ||
-                (store.getItem.filter({ $0.status == kOnListAndTaken }).count != 0) ? 1.0 : 0 ))
- */
+
+//                .opacity(
+//                    (store.getItem.filter({ $0.status == kOnListNotTaken }).count != 0) ? 1.0 : 0 )
+ 
             }
         }
     }
