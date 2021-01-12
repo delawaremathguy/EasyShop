@@ -52,5 +52,19 @@ extension Item {
             status16 = Int16(newValue)
         }
     }
+    // Badge func
+    static func onShoppingListCount() -> Int {
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "status16 == %d", kOnListNotTaken)
+        do {
+            let count = try PersistentContainer.context.count(for: fetchRequest)
+            return count
+        } catch let error as NSError {
+            NSLog("Error counting all items: \(error.localizedDescription)")
+        }
+        return 0
+    }
 }
+
+
 
