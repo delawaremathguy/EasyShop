@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		852CC98225AA6451004EB59B /* BadgeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852CC98125AA6451004EB59B /* BadgeData.swift */; };
+		85372F3425B3A3A9001FC3E1 /* ItemStatusChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85372F3325B3A3A9001FC3E1 /* ItemStatusChanged.swift */; };
+		8570491425B1F14300A24593 /* Item-Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8570491325B1F14300A24593 /* Item-Notification.swift */; };
 		880E86BE2561801A00632E6B /* Jerry'sHint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880E86BD2561801A00632E6B /* Jerry'sHint.swift */; };
 		882842C62566F26600E75B59 /* Shop+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882842C52566F26600E75B59 /* Shop+Extension.swift */; };
 		884E3A9B2572A93F00F9CBE4 /* SettingsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E3A9A2572A93F00F9CBE4 /* SettingsViews.swift */; };
@@ -32,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		852CC98125AA6451004EB59B /* BadgeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeData.swift; sourceTree = "<group>"; };
+		85372F3325B3A3A9001FC3E1 /* ItemStatusChanged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStatusChanged.swift; sourceTree = "<group>"; };
+		8570491325B1F14300A24593 /* Item-Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item-Notification.swift"; sourceTree = "<group>"; };
 		880E86BD2561801A00632E6B /* Jerry'sHint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Jerry'sHint.swift"; sourceTree = "<group>"; };
 		882842C52566F26600E75B59 /* Shop+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shop+Extension.swift"; sourceTree = "<group>"; };
 		884E3A9A2572A93F00F9CBE4 /* SettingsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViews.swift; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 			children = (
 				882842C52566F26600E75B59 /* Shop+Extension.swift */,
 				DAB1E9A8255C33C50071AAC0 /* Item+Extensions Jerry.swift */,
+				85372F3325B3A3A9001FC3E1 /* ItemStatusChanged.swift */,
+				8570491325B1F14300A24593 /* Item-Notification.swift */,
 				DA3B3C79254B43A200A78604 /* CoreDataModel.xcdatamodeld */,
 				DA3B3C75254B426400A78604 /* Persistence.swift */,
 				88CBEC872571148E0055003F /* DefaultData.swift */,
@@ -222,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8570491425B1F14300A24593 /* Item-Notification.swift in Sources */,
 				8857638A2591310800360071 /* SettingsLanguage.swift in Sources */,
 				88B1A023257860EC007AFE02 /* ColorTheme.swift in Sources */,
 				88CBEC882571148E0055003F /* DefaultData.swift in Sources */,
@@ -232,6 +239,7 @@
 				852CC98225AA6451004EB59B /* BadgeData.swift in Sources */,
 				DA3B3C9E254B478300A78604 /* ItemList.swift in Sources */,
 				880E86BE2561801A00632E6B /* Jerry'sHint.swift in Sources */,
+				85372F3425B3A3A9001FC3E1 /* ItemStatusChanged.swift in Sources */,
 				DA3B3C93254B475500A78604 /* SelectedShopView.swift in Sources */,
 				DA3B3C67254B417700A78604 /* ContentView.swift in Sources */,
 				DA3B3C65254B417700A78604 /* EasyShopApp.swift in Sources */,

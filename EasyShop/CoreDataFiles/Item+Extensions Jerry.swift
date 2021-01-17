@@ -33,6 +33,7 @@ extension Item {
         let context = item.managedObjectContext
         context?.delete(item)
         shop?.objectWillChange.send()
+        NotificationCenter.default.post(name: .itemStatusChanged, object: self)
         PersistentContainer.saveContext()
     }
     
@@ -50,8 +51,12 @@ extension Item {
         set {
             shop?.objectWillChange.send()
             status16 = Int16(newValue)
+            NotificationCenter.default.post(name: .itemStatusChanged, object: self)
         }
     }
+    
+    
+    
     // Badge func
     static func onShoppingListCount() -> Int {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
