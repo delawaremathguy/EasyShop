@@ -60,7 +60,7 @@ struct SettingsTheme: View {
                     .alert(isPresented: $isThemeChanged) {
                         Alert(
                             title: Text(NSLocalizedString("done", comment: "")),
-                            message: Text("You are using \(themes[self.theme.themeSettings].themeName)!!!"),
+                            message: Text(NSLocalizedString("changed_theme", comment: "")),
                             dismissButton: .default(Text("Ok"))
                     )}
                 }

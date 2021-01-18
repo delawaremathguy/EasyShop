@@ -20,7 +20,7 @@ struct ShopList: View {
                                 .opacity(name.isEmpty ? 0.4 : 1.0)
                                 .background(Color("ColorWhiteBlack"))
                         }.disabled(name.isEmpty)
-                        TextField("", text: $name)
+                        TextField(NSLocalizedString("new_shop", comment: ""), text: $name)
                             .modifier(customTextfield())
                         Text("\(allShops.count)").padding(15)
                     }.modifier(customHStack())

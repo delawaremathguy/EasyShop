@@ -9,10 +9,10 @@ struct SettingsViews: View {
             VStack {
                 VStack(spacing: 25) {
                     NavigationLink(destination: SettingsTheme(), tag: 1, selection: $action) {
-                        CapsuleRow(image: "appearance", text: "Appearance")
+                        CapsuleRow(image: "appearance", text: (NSLocalizedString("appearance", comment: "")))
                     }
                     NavigationLink(destination: SettingsLanguage(), tag: 2, selection: $action) {
-                        CapsuleRow(image: "language", text: "Language")
+                        CapsuleRow(image: "language", text: (NSLocalizedString("language", comment: "")))
                     }
                     
                 }.padding(.top, 45)
@@ -24,7 +24,7 @@ struct SettingsViews: View {
                 }
                 Spacer()
             }
-            .navigationTitle("Settings")
+            .navigationTitle(NSLocalizedString("tab_settings", comment: ""))
             .navigationBarTitleDisplayMode(.inline)
         }
     }

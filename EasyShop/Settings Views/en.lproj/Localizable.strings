@@ -35,5 +35,11 @@ Text(NSLocalizedString("tab_list", comment: ""))
 // Settings Theme
 "app_theme" = "App Theme";
 "done" = "DONE!";
-"you_are_using" = "You are using";
+"changed_theme" = "You have changed the theme!!!";
 
+// ColorTheme
+"blue_theme" = "Blue Theme";
+"green_theme" = "Green Theme";
+"orange_theme" = "Orange Theme";
+"pink_theme" = "Pink Theme";
+"red_theme" = "Red Theme";

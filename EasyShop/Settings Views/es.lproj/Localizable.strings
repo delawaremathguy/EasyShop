@@ -1,7 +1,6 @@
 /* 
 Created by Fede Duarte on 18/1/21.
 
-Text(NSLocalizedString("tab_list", comment: ""))
 Text(NSLocalizedString("", comment: ""))
 */
 // Content View
@@ -34,6 +33,13 @@ Text(NSLocalizedString("", comment: ""))
 "version" = "Version";
 
 // Settings Theme
-"app_theme" = "Thema de la App";
+"app_theme" = "Color de App";
 "done" = "Hecho!";
-"you_are_using" = "Estas usando";
+"changed_theme" = "Has cambiado el color!!!";
+
+// ColorTheme
+"blue_theme" = "Tema Azul";
+"green_theme" = "Tema Verde";
+"orange_theme" = "Tema Naranja";
+"pink_theme" = "Tema Rosa";
+"red_theme" = "Tema Rojo";
