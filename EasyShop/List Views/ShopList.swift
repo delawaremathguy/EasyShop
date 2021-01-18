@@ -20,7 +20,7 @@ struct ShopList: View {
                                 .opacity(name.isEmpty ? 0.4 : 1.0)
                                 .background(Color("ColorWhiteBlack"))
                         }.disabled(name.isEmpty)
-                        TextField("new shop here...", text: $name)
+                        TextField("", text: $name)
                             .modifier(customTextfield())
                         Text("\(allShops.count)").padding(15)
                     }.modifier(customHStack())
@@ -39,7 +39,7 @@ struct ShopList: View {
                         }
                     }
                     .listStyle(GroupedListStyle())
-                    .navigationTitle("Shops")
+                    .navigationTitle(Text(NSLocalizedString("shops", comment: "")))
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) { EditButton() }

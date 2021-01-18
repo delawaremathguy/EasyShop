@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  EasyShop
+
+  Created by Fede Duarte on 18/1/21.
+  
+*/
+
+"tab_list" = "Lista";
+"tab_cart" = "Carro";
+"tab_settings" = "Ajustes";

@@ -45,13 +45,13 @@ struct ItemList: View {
                     Button(action: { deselectAll()
                         deselectImpact.impactOccurred()
                     }) {
-                        Text("Deselect All").padding(.leading, 12)
+                        Text(NSLocalizedString("deselet_all", comment: "")).padding(.leading, 12)
                     }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
                     Spacer()
                     Button(action: { selectAll()
                         selectImpact.impactOccurred()
                     }) {
-                        Text("Select All").padding(.trailing, 12)
+                        Text(NSLocalizedString("select_all", comment: "")).padding(.trailing, 12)
                     }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count == 0) == true)
                 }.padding(.vertical, 10)
             }

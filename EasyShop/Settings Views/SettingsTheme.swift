@@ -8,7 +8,7 @@ struct SettingsTheme: View {
     var body: some View {
         VStack {
             Form {
-                Section(header: Text("App Theme")) {
+                Section(header: Text(NSLocalizedString("app_theme", comment: ""))) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 35) {
                             ForEach(themes, id: \.id) { item in
@@ -59,7 +59,7 @@ struct SettingsTheme: View {
 // MARK: - Alert
                     .alert(isPresented: $isThemeChanged) {
                         Alert(
-                            title: Text("DONE!"),
+                            title: Text(NSLocalizedString("done", comment: "")),
                             message: Text("You are using \(themes[self.theme.themeSettings].themeName)!!!"),
                             dismissButton: .default(Text("Ok"))
                     )}

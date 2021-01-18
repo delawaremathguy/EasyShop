@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SettingsLanguage: View {
     var body: some View {
-        Text("Languages")
+        Text(NSLocalizedString("language", comment: ""))
     }
 }
 

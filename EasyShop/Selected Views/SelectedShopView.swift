@@ -12,7 +12,7 @@ struct SelectedShopView: View {
                     Section(header:
                         HStack {
                             Spacer()
-                            Text("Products remaining").opacity(allShops.count != 0 ? 1 : 0)
+                            Text(NSLocalizedString("products_remaining", comment: "")).opacity(allShops.count != 0 ? 1 : 0)
                         }.textCase(nil)
                     ) {
                         ForEach(allShops) { s in
@@ -21,7 +21,7 @@ struct SelectedShopView: View {
                     }
                 }
                 .listStyle(GroupedListStyle())
-                .navigationTitle("Shops")
+                .navigationTitle(Text(NSLocalizedString("shops", comment: "")))
                 if allShops.count == 0 {
                     EmptySelectedShop()
                 }
@@ -73,7 +73,7 @@ struct EmptySelectedShop: View {
     var body: some View {
         ZStack {
             VStack {
-                Text("Start from the List section!")
+                Text(NSLocalizedString("Start from the List section!", comment: ""))
                     .font(Font.system(size: 20))
                 Image(systemName: "tray.and.arrow.down.fill")
                     .resizable()

@@ -17,7 +17,7 @@ struct SelectedItemView: View {
                 if layoutView {
                     HStack(spacing: 0) {
                         List {
-                            Section(header: Text("Remaining")) {
+                            Section(header: Text(NSLocalizedString("remaining", comment: ""))) {
                                 ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
                                     SelectedTakenImage(item: s).listRowInsets(EdgeInsets())
                                 }
@@ -25,7 +25,7 @@ struct SelectedItemView: View {
                         }
                         Divider().background(theme.mainColor)
                         List {
-                            Section(header: Text("Taken")) {
+                            Section(header: Text(NSLocalizedString("taken", comment: ""))) {
                                 ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
                                     SelectedTakenImage(item: k).listRowInsets(EdgeInsets())
                                 }
@@ -34,14 +34,14 @@ struct SelectedItemView: View {
                     }
                 } else {
                     List {
-                        Section(header: Text("Remaining")) {
+                        Section(header: Text(NSLocalizedString("remaining", comment: ""))) {
                             ForEach(store.getItem.filter({ $0.status == kOnListNotTaken })) { s in
                                 SelectedTakenImage(item: s)
                             }
                         }.textCase(nil)
                     }
                     List {
-                        Section(header: Text("Taken")) {
+                        Section(header: Text(NSLocalizedString("taken", comment: ""))) {
                             ForEach(store.getItem.filter({ $0.status == kOnListAndTaken })) { k in
                                 SelectedTakenImage(item: k)
                             }
@@ -56,13 +56,13 @@ struct SelectedItemView: View {
                 Button(action: { clearAll()
                     clearImpact.impactOccurred()
                 }) {
-                    Text("Clear all").padding(.leading, 12)
+                    Text(NSLocalizedString("clear_all", comment: "")).padding(.leading, 12)
                 }.disabled((store.getItem.filter({ $0.status == kOnListAndTaken }).count == 0) == true)
                 Spacer()
                 Button(action: { takeAll()
                     takeImpact.impactOccurred()
                 }) {
-                    Text("Take all").padding(.trailing, 12)
+                    Text(NSLocalizedString("take_all", comment: "")).padding(.trailing, 12)
                 }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
             }.padding(.bottom, 10)
         }
