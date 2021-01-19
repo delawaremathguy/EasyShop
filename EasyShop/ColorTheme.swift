@@ -12,15 +12,15 @@ struct Theme: Identifiable {
 
 let themeData: [Theme] = [
 
-    Theme(id: 0, themeName: "Blue Theme", mainColor: Color("ColorBlue")),
+    Theme(id: 0, themeName: String(NSLocalizedString("blue_theme", comment: "")), mainColor: Color("ColorBlue")),
     
-    Theme(id: 1, themeName: "Green Theme", mainColor: Color("ColorGreen")),
+    Theme(id: 1, themeName: String(NSLocalizedString("green_theme", comment: "")), mainColor: Color("ColorGreen")),
     
-    Theme(id: 2, themeName: "Orange Theme", mainColor: Color("ColorOrange")),
+    Theme(id: 2, themeName: String(NSLocalizedString("orange_theme", comment: "")), mainColor: Color("ColorOrange")),
     
-    Theme(id: 3, themeName: "Pink Theme", mainColor: Color("ColorPink")),
+    Theme(id: 3, themeName: String(NSLocalizedString("pink_theme", comment: "")), mainColor: Color("ColorPink")),
     
-    Theme(id: 4, themeName: "Red Theme", mainColor: Color("ColorRed"))
+    Theme(id: 4, themeName: String(NSLocalizedString("red_theme", comment: "")), mainColor: Color("ColorRed"))
 
 ]
 

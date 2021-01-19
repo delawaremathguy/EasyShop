@@ -1,0 +1,45 @@
+/* 
+Created by Fede Duarte on 18/1/21.
+
+Text(NSLocalizedString("", comment: ""))
+*/
+// Content View
+"tab_list" = "Lista";
+"tab_cart" = "Carro";
+"tab_settings" = "Ajustes";
+
+// Shop List
+"new_shop" = "nueva tienda...";
+"shops" = "Tiendas";
+
+// Item List
+"new_product" = "nuevo product...";
+"deselet_all" = "Quita todo";
+"select_all" = "Elige todo";
+
+// Selected Shop View
+"products_remaining" = "Productos restantes";
+"start_from_list" = "Empieza por la seccion Lista!";
+
+// Selected Item View
+"remaining" = "Restantes";
+"taken" = "En la cesta";
+"clear_all" = "Elimina todo";
+"take_all" = "Coge todo";
+
+// Settings View
+"appearance" = "Apariencia";
+"language" = "Idioma";
+"version" = "Version";
+
+// Settings Theme
+"app_theme" = "Color de App";
+"done" = "Hecho!";
+"changed_theme" = "Has cambiado el color!!!";
+
+// ColorTheme
+"blue_theme" = "Tema Azul";
+"green_theme" = "Tema Verde";
+"orange_theme" = "Tema Naranja";
+"pink_theme" = "Tema Rosa";
+"red_theme" = "Tema Rojo";
