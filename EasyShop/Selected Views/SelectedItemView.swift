@@ -86,8 +86,7 @@ struct SelectedItemView: View {
             print("Navigating Back")
         }) {
             Image(systemName: "chevron.left")
-                .padding(.horizontal)
-                .font(.system(size: 20, weight: .regular))
+                .modifier(chevronLeft())
         }
     }
     func switchView() -> some View {

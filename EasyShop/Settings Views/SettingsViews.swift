@@ -11,10 +11,6 @@ struct SettingsViews: View {
                     NavigationLink(destination: SettingsTheme(), tag: 1, selection: $action) {
                         CapsuleRow(image: "appearance", text: (NSLocalizedString("appearance", comment: "")))
                     }
-                    NavigationLink(destination: SettingsLanguage(), tag: 2, selection: $action) {
-                        CapsuleRow(image: "language", text: (NSLocalizedString("language", comment: "")))
-                    }
-                    
                 }.padding(.top, 45)
                 Spacer()
                 VStack {
@@ -43,8 +39,7 @@ struct CapsuleRow: View {
                 .capsuleImage(width: 40, height: 40, padding: 10)
             Text(text)
                 .foregroundColor(theme.mainColor)
-                .font(.headline)
-                .font(Font.system(size: 20, design: .serif))
+                .modifier(capsuleFont())
             Spacer()
             Image(systemName: "chevron.right")
                 .padding(.trailing, 15)
