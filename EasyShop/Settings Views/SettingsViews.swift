@@ -20,7 +20,7 @@ struct SettingsViews: View {
                 VStack {
                     Image("easyshoplogo")
                         .foregroundColor(theme.mainColor)
-                    Text("Version 1.0").font(.caption)
+                    Text(NSLocalizedString("version", comment: "Version of the app")).font(.caption)
                 }
                 Spacer()
             }
@@ -40,9 +40,7 @@ struct CapsuleRow: View {
     var body: some View {
         HStack {
             Image(image)
-                .resizable()
-                .frame(width: 40, height: 40)
-                .padding(10)
+                .capsuleImage(width: 40, height: 40, padding: 10)
             Text(text)
                 .foregroundColor(theme.mainColor)
                 .font(.headline)

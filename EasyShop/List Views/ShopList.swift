@@ -1,12 +1,11 @@
 import SwiftUI
 import CoreData
 
-var rowHeight: CGFloat = 50
-
 struct ShopList: View {
     @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop>
     @ObservedObject var theme = gThemeSettings
     @State var name = ""
+    let hapticNew = UIImpactFeedbackGenerator(style: .soft)
     
     var body: some View {
         NavigationView {
@@ -14,7 +13,10 @@ struct ShopList: View {
                 Section {
                     HStack(spacing: 0) {
 // MARK: - Header
-                        Button(action: { newShop(name: name) }) {
+                        Button(action: {
+                                newShop(name: name)
+                            hapticNew.impactOccurred()
+                        }) {
                             Image(systemName: "plus")
                                 .modifier(customButton())
                                 .opacity(name.isEmpty ? 0.4 : 1.0)
@@ -28,6 +30,8 @@ struct ShopList: View {
                 Section {
 // MARK: - List
                     List {
+                        Rectangle()
+                            .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
                         Section {
                             ForEach(allShops) { s in
                                 NavigationLink(destination: ItemList(store: s)) {

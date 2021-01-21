@@ -1,35 +1,5 @@
 import SwiftUI
 
-struct Modifiers: View {
-    @State private var name = ""
-    
-    var body: some View {
-        NavigationView {
-            VStack(spacing: 0) {
-                Section {
-                    HStack(spacing: 0) {
-                        Button(action: {}) {
-                            Image(systemName: "plus")
-                                .modifier(customButton())
-                                .opacity(name.isEmpty ? 0.4 : 1.0)
-                                .background(Color("ColorWhiteBlack"))
-                        }.disabled(name.isEmpty)
-                        
-                        TextField("name goes here", text: $name).modifier(customTextfield())
-                        Text("1").padding(15)
-                    }.modifier(customHStack())
-                }
-                List {
-                    Text("Chicken").modifier(customItemText())
-                }
-            }
-            .navigationBarTitle(("Modifiers"), displayMode: .inline)
-        }
-    }
-}
-
-// MARK: - Modifiers
-
 struct customHStack: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -76,10 +46,21 @@ struct customShopText: ViewModifier {
     }
 }
 
-// MARK: - Preview
-
-struct Modifiers_Previews: PreviewProvider {
-    static var previews: some View {
-        Modifiers()
+extension Image {
+    func displayImage(width: CGFloat, height: CGFloat) -> some View {
+        self
+            .resizable()
+            .frame(width: width, height: height)
+    }
+    func capsuleImage(width: CGFloat, height: CGFloat, padding: CGFloat) -> some View {
+        self
+            .resizable()
+            .frame(width: width, height: height)
+            .padding(padding)
+    }
+    func tabItem(width: CGFloat, height: CGFloat, color: CGColor) -> some View {
+        self
+            .frame(width: width, height: height)
+            .foregroundColor(Color(color))
     }
 }

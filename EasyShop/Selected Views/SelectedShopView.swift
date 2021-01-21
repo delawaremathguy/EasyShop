@@ -76,8 +76,7 @@ struct EmptySelectedShop: View {
                 Text(NSLocalizedString("Start from the List section!", comment: ""))
                     .font(Font.system(size: 20))
                 Image(systemName: "tray.and.arrow.down.fill")
-                    .resizable()
-                    .frame(width: 200, height: 200)
+                    .displayImage(width: 200, height: 200)
             }.foregroundColor(theme.mainColor).opacity(0.8)
         }.edgesIgnoringSafeArea(.all)
         .onAppear { print("EmptySelectedShop appears") }

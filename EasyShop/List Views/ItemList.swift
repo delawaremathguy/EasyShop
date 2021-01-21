@@ -8,13 +8,17 @@ struct ItemList: View {
     @State var name = ""
     let selectImpact = UIImpactFeedbackGenerator(style: .medium)
     let deselectImpact = UIImpactFeedbackGenerator(style: .medium)
+    let hapticNew = UIImpactFeedbackGenerator(style: .soft)
     
     var body: some View {
         VStack(spacing: 0) {
             Section {
                 HStack(spacing: 0) {
 // MARK: - Header
-                    Button(action: { newItem() }) {
+                    Button(action: {
+                            newItem()
+                        hapticNew.impactOccurred()
+                    }) {
                         Image(systemName: "plus")
                             .modifier(customButton())
                             .opacity(name.isEmpty ? 0.4 : 1.0)
@@ -42,13 +46,15 @@ struct ItemList: View {
                 Rectangle()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
                 HStack {
-                    Button(action: { deselectAll()
+                    Button(action: {
+                        deselectAll()
                         deselectImpact.impactOccurred()
                     }) {
                         Text(NSLocalizedString("deselet_all", comment: "")).padding(.leading, 12)
                     }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
                     Spacer()
-                    Button(action: { selectAll()
+                    Button(action: {
+                        selectAll()
                         selectImpact.impactOccurred()
                     }) {
                         Text(NSLocalizedString("select_all", comment: "")).padding(.trailing, 12)

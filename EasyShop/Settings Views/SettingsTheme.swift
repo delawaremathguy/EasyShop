@@ -4,6 +4,7 @@ struct SettingsTheme: View {
     @ObservedObject var theme = ThemeSettings()
     let themes: [Theme] = themeData
     @State private var isThemeChanged: Bool = false
+    let themeImpact = UIImpactFeedbackGenerator(style: .medium)
     
     var body: some View {
         VStack {
@@ -17,6 +18,7 @@ struct SettingsTheme: View {
                                     UserDefaults.standard.set(self.theme.themeSettings, forKey: "Theme")
                                     self.isThemeChanged.toggle()
                                     print("Changing to \(item.themeName)")
+                                    themeImpact.impactOccurred()
                                 }) {
                                     VStack {
 // MARK: - Card
