@@ -6,11 +6,11 @@ Text(NSLocalizedString("tab_list", comment: ""))
 // Content View
 "tab_list" = "Liste";
 "tab_cart" = "Chariot";
-"tab_settings" = "réglage";
+"tab_settings" = "Réglages";
 
 // Shop List
-"new_shop" = "Nouvelle boutique ici...";
-"shops" = "Boutique";
+"new_shop" = "Nouvelle magasin ici...";
+"shops" = "Magasin";
 
 // Item List
 "new_product" = "Nouvelle produit ici...";

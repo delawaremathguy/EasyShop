@@ -13,7 +13,7 @@ Text(NSLocalizedString("", comment: ""))
 "shops" = "Tiendas";
 
 // Item List
-"new_product" = "nuevo product...";
+"new_product" = "nuevo producto...";
 "deselet_all" = "Quita todo";
 "select_all" = "Elige todo";
 
