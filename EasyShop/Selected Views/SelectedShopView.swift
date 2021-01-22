@@ -91,19 +91,3 @@ struct SelectedShopView_Previews: PreviewProvider {
     }
 }
 
-struct SelectedShopRow_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    static var previews: some View {
-        let data = Shop(context: moc)
-        data.name = "Whole Food"
-        return Group {
-            SelectedShopRow(store: data)
-                .padding()
-                .previewLayout(.sizeThatFits)
-            SelectedShopRow(store: data)
-                .preferredColorScheme(.dark)
-                .padding()
-                .previewLayout(.sizeThatFits)
-        }
-    }
-}

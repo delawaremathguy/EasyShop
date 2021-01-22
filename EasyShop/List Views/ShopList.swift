@@ -30,8 +30,6 @@ struct ShopList: View {
                 Section {
 // MARK: - List
                     List {
-                        Rectangle()
-                            .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
                         Section {
                             ForEach(allShops) { s in
                                 NavigationLink(destination: ItemList(store: s)) {
@@ -104,21 +102,5 @@ struct ShopList_Previews: PreviewProvider {
     }
 }
 
-struct ShopListRow_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    static var previews: some View {
-        let data = Shop(context: moc)
-        data.name = "Whole Foods"
-        return Group {
-            ShopListRow(store: data)
-                .padding()
-                .previewLayout(.sizeThatFits)
-            ShopListRow(store: data)
-                .preferredColorScheme(.dark)
-                .padding()
-                .previewLayout(.sizeThatFits)
-        }
-    }
-}
 
 

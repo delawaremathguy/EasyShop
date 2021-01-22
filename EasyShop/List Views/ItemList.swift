@@ -147,22 +147,6 @@ struct ItemList_Previews: PreviewProvider {
     }
 }
 
-struct ItemListRow_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    static var previews: some View {
-        let datum = Item(context: moc)
-        datum.name = "Chicken"
-        return Group {
-            ItemListRow(item: datum)
-                .padding()
-                .previewLayout(.sizeThatFits)
-            ItemListRow(item: datum)
-                .preferredColorScheme(.dark)
-                .padding()
-                .previewLayout(.sizeThatFits)
-        }
-    }
-}
 
 
 

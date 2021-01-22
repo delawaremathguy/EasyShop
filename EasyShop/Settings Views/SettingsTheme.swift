@@ -64,15 +64,7 @@ struct SettingsTheme: View {
 // MARK: - PREVIEW
 struct SettingsTheme_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            SettingsTheme()
-                .padding()
-                .previewLayout(.sizeThatFits)
-            
-            SettingsTheme()
-                .padding()
-                .previewLayout(.sizeThatFits)
-                .preferredColorScheme(.dark)
-        }
+        SettingsTheme()
+            .padding()
     }
 }
