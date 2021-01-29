@@ -8,7 +8,7 @@ struct SettingsViews: View {
         NavigationView {
             VStack {
                 VStack(spacing: 25) {
-                    NavigationLink(destination: SettingsTheme(), tag: 1, selection: $action) {
+                    NavigationLink(destination: SettingsAppearance(), tag: 1, selection: $action) {
                         CapsuleRow(image: "appearance", text: (NSLocalizedString("appearance", comment: "")))
                     }
                 }.padding(.top, 45)

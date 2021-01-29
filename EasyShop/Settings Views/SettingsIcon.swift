@@ -6,7 +6,21 @@ struct SettingsIcon: View {
     var body: some View {
         Form {
             Section(header: Text("Choose the app icon")) {
-                Picker(selection: $iconSettings.currentIndex, label: Text("App Icons")) {
+                Picker(selection: $iconSettings.currentIndex, label:
+                        HStack {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                    .strokeBorder(Color.primary, lineWidth: 2)
+                                Image(systemName: "paintbrush")
+                                    .font(.system(size: 28, weight: .regular, design: .default))
+                                    .foregroundColor(Color.primary)
+                            }
+                            .frame(width: 44, height: 44)
+                            Text("App Icons".uppercased())
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.primary)
+                        }
+                ) {
                     ForEach(0..<iconSettings.iconNames.count) { index in
                         HStack {
                             Image(uiImage: UIImage(named: self.iconSettings.iconNames[index] ?? "Icon_Blue") ?? UIImage())
