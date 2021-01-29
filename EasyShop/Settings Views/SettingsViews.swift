@@ -14,8 +14,7 @@ struct SettingsViews: View {
                 }.padding(.top, 45)
                 Spacer()
                 VStack {
-                    Image("easyshoplogo")
-                        .foregroundColor(theme.mainColor)
+                    Image("easyshoplogo").foregroundColor(theme.mainColor)
                     Text(NSLocalizedString("version", comment: "Version of the app")).font(.caption)
                 }
                 Spacer()

@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		853690A925B60AC2001395C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 853690AB25B60AC2001395C2 /* Localizable.strings */; };
 		8570491425B1F14300A24593 /* Item-Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8570491325B1F14300A24593 /* Item-Notification.swift */; };
-		88084CBB25C37EEC009DCE0F /* Icon_Pink.png in Resources */ = {isa = PBXBuildFile; fileRef = 88084CB625C37EEC009DCE0F /* Icon_Pink.png */; };
-		88084CBC25C37EEC009DCE0F /* Icon_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = 88084CB725C37EEC009DCE0F /* Icon_Red.png */; };
-		88084CBD25C37EEC009DCE0F /* Icon_Orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 88084CB825C37EEC009DCE0F /* Icon_Orange.png */; };
-		88084CBE25C37EEC009DCE0F /* Icon_Green.png in Resources */ = {isa = PBXBuildFile; fileRef = 88084CB925C37EEC009DCE0F /* Icon_Green.png */; };
+		88084CBB25C37EEC009DCE0F /* Pink.png in Resources */ = {isa = PBXBuildFile; fileRef = 88084CB625C37EEC009DCE0F /* Pink.png */; };
+		88084CBC25C37EEC009DCE0F /* Red.png in Resources */ = {isa = PBXBuildFile; fileRef = 88084CB725C37EEC009DCE0F /* Red.png */; };
+		88084CBD25C37EEC009DCE0F /* Orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 88084CB825C37EEC009DCE0F /* Orange.png */; };
+		88084CBE25C37EEC009DCE0F /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = 88084CB925C37EEC009DCE0F /* Green.png */; };
 		88084CBF25C37EEC009DCE0F /* Icon_Blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 88084CBA25C37EEC009DCE0F /* Icon_Blue.png */; };
 		88084CC325C38749009DCE0F /* SettingsIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88084CC225C38749009DCE0F /* SettingsIcon.swift */; };
 		88084CC625C38C8B009DCE0F /* SettingsAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88084CC525C38C8B009DCE0F /* SettingsAppearance.swift */; };
@@ -40,10 +40,10 @@
 		853690AA25B60AC2001395C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		853690AD25B60B27001395C2 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8570491325B1F14300A24593 /* Item-Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item-Notification.swift"; sourceTree = "<group>"; };
-		88084CB625C37EEC009DCE0F /* Icon_Pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Pink.png; sourceTree = "<group>"; };
-		88084CB725C37EEC009DCE0F /* Icon_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Red.png; sourceTree = "<group>"; };
-		88084CB825C37EEC009DCE0F /* Icon_Orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Orange.png; sourceTree = "<group>"; };
-		88084CB925C37EEC009DCE0F /* Icon_Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Green.png; sourceTree = "<group>"; };
+		88084CB625C37EEC009DCE0F /* Pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pink.png; sourceTree = "<group>"; };
+		88084CB725C37EEC009DCE0F /* Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Red.png; sourceTree = "<group>"; };
+		88084CB825C37EEC009DCE0F /* Orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Orange.png; sourceTree = "<group>"; };
+		88084CB925C37EEC009DCE0F /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Green.png; sourceTree = "<group>"; };
 		88084CBA25C37EEC009DCE0F /* Icon_Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_Blue.png; sourceTree = "<group>"; };
 		88084CC225C38749009DCE0F /* SettingsIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsIcon.swift; sourceTree = "<group>"; };
 		88084CC525C38C8B009DCE0F /* SettingsAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppearance.swift; sourceTree = "<group>"; };
@@ -88,10 +88,10 @@
 			isa = PBXGroup;
 			children = (
 				88084CBA25C37EEC009DCE0F /* Icon_Blue.png */,
-				88084CB925C37EEC009DCE0F /* Icon_Green.png */,
-				88084CB825C37EEC009DCE0F /* Icon_Orange.png */,
-				88084CB625C37EEC009DCE0F /* Icon_Pink.png */,
-				88084CB725C37EEC009DCE0F /* Icon_Red.png */,
+				88084CB925C37EEC009DCE0F /* Green.png */,
+				88084CB825C37EEC009DCE0F /* Orange.png */,
+				88084CB625C37EEC009DCE0F /* Pink.png */,
+				88084CB725C37EEC009DCE0F /* Red.png */,
 			);
 			path = Icons;
 			sourceTree = "<group>";
@@ -100,9 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				884E3A9A2572A93F00F9CBE4 /* SettingsViews.swift */,
-				88B1A026257865F9007AFE02 /* SettingsTheme.swift */,
-				88084CC225C38749009DCE0F /* SettingsIcon.swift */,
 				88084CC525C38C8B009DCE0F /* SettingsAppearance.swift */,
+				88084CC225C38749009DCE0F /* SettingsIcon.swift */,
+				88B1A026257865F9007AFE02 /* SettingsTheme.swift */,
 			);
 			path = "Settings Views";
 			sourceTree = "<group>";
@@ -253,11 +253,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88084CBC25C37EEC009DCE0F /* Icon_Red.png in Resources */,
-				88084CBD25C37EEC009DCE0F /* Icon_Orange.png in Resources */,
-				88084CBE25C37EEC009DCE0F /* Icon_Green.png in Resources */,
+				88084CBC25C37EEC009DCE0F /* Red.png in Resources */,
+				88084CBD25C37EEC009DCE0F /* Orange.png in Resources */,
+				88084CBE25C37EEC009DCE0F /* Green.png in Resources */,
 				88084CBF25C37EEC009DCE0F /* Icon_Blue.png in Resources */,
-				88084CBB25C37EEC009DCE0F /* Icon_Pink.png in Resources */,
+				88084CBB25C37EEC009DCE0F /* Pink.png in Resources */,
 				88B1A0202578579E007AFE02 /* Colors.xcassets in Resources */,
 				853690A925B60AC2001395C2 /* Localizable.strings in Resources */,
 				DA3B3C6C254B417700A78604 /* Preview Assets.xcassets in Resources */,

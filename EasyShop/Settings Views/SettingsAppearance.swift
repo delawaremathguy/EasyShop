@@ -11,6 +11,6 @@ struct SettingsAppearance: View {
 
 struct SettingsAppearance_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsAppearance()
+        SettingsAppearance().environmentObject(IconNames())
     }
 }
