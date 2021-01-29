@@ -9,11 +9,11 @@ Text(NSLocalizedString("tab_list", comment: ""))
 "tab_settings" = "Réglages";
 
 // Shop List
-"new_shop" = "Nouvelle magasin ici...";
+"new_shop" = "Nouveau magasin ici...";
 "shops" = "Magasin";
 
 // Item List
-"new_product" = "Nouvelle produit ici...";
+"new_product" = "Nouveau produit ici...";
 "deselet_all" = "Tout désélectionner";
 "select_all" = "Tout sélectionner";
 
