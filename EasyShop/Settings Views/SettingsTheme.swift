@@ -7,8 +7,8 @@ struct SettingsTheme: View {
     let themeImpact = UIImpactFeedbackGenerator(style: .medium)
     
     var body: some View {
-        VStack {
-            Form {
+//        VStack {
+//            Form {
                 Section(header: Text(NSLocalizedString("app_theme", comment: ""))) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 35) {
@@ -56,8 +56,8 @@ struct SettingsTheme: View {
                             dismissButton: .default(Text("Ok"))
                     )}
                 }
-            }
-        }
+//            } // Form
+//        } // VStack
     }
 }
 

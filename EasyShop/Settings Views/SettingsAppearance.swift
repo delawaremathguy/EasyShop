@@ -2,10 +2,15 @@ import SwiftUI
 
 struct SettingsAppearance: View {
     var body: some View {
-        VStack {
-            SettingsIcon()
-            SettingsTheme()
-        }
+
+                Form {
+                SettingsIcon()
+
+                SettingsTheme()
+                
+                }
+
+        
     }
 }
 

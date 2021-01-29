@@ -4,7 +4,7 @@ struct SettingsIcon: View {
     @EnvironmentObject var iconSettings: IconNames
     
     var body: some View {
-        Form {
+//        Form {
             Section(header: Text("Choose the app icon")) {
                 Picker(selection: $iconSettings.currentIndex, label:
                         HStack {
@@ -23,7 +23,7 @@ struct SettingsIcon: View {
                 ) {
                     ForEach(0..<iconSettings.iconNames.count) { index in
                         HStack {
-                            Image(uiImage: UIImage(named: self.iconSettings.iconNames[index] ?? "Icon_Blue") ?? UIImage())
+                            Image(uiImage: UIImage(named: self.iconSettings.iconNames[index] ?? "Blue") ?? UIImage())
                                 .renderingMode(.original)
                                 .resizable()
                                 .scaledToFit()
@@ -49,8 +49,9 @@ struct SettingsIcon: View {
                         }
                     }
                 }
-            }.padding(.vertical, 3)
-        }
+            } // Section
+            .padding(.vertical, 3)
+//        } // Form
     }
 }
 
