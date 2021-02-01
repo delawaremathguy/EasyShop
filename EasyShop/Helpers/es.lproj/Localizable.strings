@@ -25,7 +25,7 @@ Text(NSLocalizedString("", comment: ""))
 "remaining" = "Restantes";
 "taken" = "En la cesta";
 "clear_all" = "Elimina todo";
-"take_all" = "Coge todo";
+"take_all" = "Añade todo";
 
 // Settings View
 "appearance" = "Apariencia";
@@ -36,6 +36,11 @@ Text(NSLocalizedString("", comment: ""))
 "app_theme" = "Color de App";
 "done" = "Hecho!";
 "changed_theme" = "Has cambiado el color!!!";
+
+// IconColor
+"app_icon" = "COLOR DEL ICONO";
+"app_icons" = "ICONOS";
+"app_success" = "Hecho! Has cambiado el color del icono";
 
 // ColorTheme
 "blue_theme" = "Tema Azul";

@@ -97,7 +97,7 @@ struct SelectedItemView: View {
             }
             print("switching View")
         }) {
-            Image(switchButton ? "viewswitch1" : "viewswitch2")
+            Image(switchButton ? "arrow1" : "arrow2")
         }.animation(.default) // Animation Test
     }
     func takeAll() {

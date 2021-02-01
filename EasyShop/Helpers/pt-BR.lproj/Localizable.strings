@@ -37,6 +37,11 @@ Text(NSLocalizedString("tab_list", comment: ""))
 "done" = "FEITO!";
 "changed_theme" = "Voce mudou o tema!!!";
 
+// IconColor
+"app_icon" = "APP ICON";
+"app_icons" = "ICONS";
+"app_success" = "DONE! You have changed the icon";
+
 // ColorTheme
 "blue_theme" = "Tema Azul";
 "green_theme" = "Tema Verde";

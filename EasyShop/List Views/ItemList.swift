@@ -30,8 +30,6 @@ struct ItemList: View {
                 }.modifier(customHStack())
             }
             Section {
-                Rectangle()
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
 // MARK: - List
                 List {
                     ForEach(store.getItem) { s in
