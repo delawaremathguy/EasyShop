@@ -6,7 +6,7 @@ struct SettingsAppearance: View {
             SettingsIcon()
             SettingsTheme()
             
-        }
+        }.navigationTitle(NSLocalizedString("appearance", comment: ""))
     }
 }
 

@@ -1,8 +1,3 @@
-/* 
-Created by Fede Duarte on 18/1/21.
-
-Text(NSLocalizedString("", comment: ""))
-*/
 // Content View
 "tab_list" = "Lista";
 "tab_cart" = "Carro";

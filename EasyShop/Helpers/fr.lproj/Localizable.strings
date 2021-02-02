@@ -1,8 +1,3 @@
-/*
-Created by Fede Duarte on 18/1/21.
-
-Text(NSLocalizedString("tab_list", comment: ""))
-*/
 // Content View
 "tab_list" = "Liste";
 "tab_cart" = "Chariot";
@@ -43,8 +38,8 @@ Text(NSLocalizedString("tab_list", comment: ""))
 "app_success" = "DONE! You have changed the icon";
 
 // ColorTheme
-"blue_theme" = "Thème blue";
-"green_theme" = "Thème vert";
-"orange_theme" = "Thème orange";
-"pink_theme" = "Thème rose";
-"red_theme" = "Thème rouge";
+"blue_theme" = "Blue";
+"green_theme" = "Vert";
+"orange_theme" = "Orange";
+"pink_theme" = "Rose";
+"red_theme" = "Rouge";

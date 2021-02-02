@@ -4,7 +4,7 @@ struct SettingsIcon: View {
     @EnvironmentObject var iconSettings: IconNames
     
     var body: some View {
-        Section(header: Text(NSLocalizedString("app_icon", comment: ""))) { //Text("Choose the app icon")
+        Section(header: Text(NSLocalizedString("app_icon", comment: ""))) {
             Picker(selection: $iconSettings.currentIndex, label:
                     HStack {
                         ZStack {
@@ -15,7 +15,7 @@ struct SettingsIcon: View {
                                 .foregroundColor(Color.primary)
                         }
                         .frame(width: 44, height: 44)
-                        Text(NSLocalizedString("app_icons", comment: "")) // Text("App Icons".uppercased())
+                        Text(NSLocalizedString("app_icons", comment: ""))
                             .fontWeight(.bold)
                             .foregroundColor(Color.primary)
                     }
@@ -26,16 +26,12 @@ struct SettingsIcon: View {
                             .renderingMode(.original)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 44, height: 44)
+                            .frame(width: 60, height: 60)
                             .cornerRadius(9)
-                        Spacer().frame(width: 8)
-                        
-//                        Text(self.iconSettings.iconNames[index] ?? "Blue")
-//                            .frame(alignment: .leading) // No translation
+
                     }.padding(3)
                 }
-            }
-            .onReceive([self.iconSettings.currentIndex].publisher.first()) {
+            }.onReceive([self.iconSettings.currentIndex].publisher.first()) {
                 (value) in
                 let index = self.iconSettings.iconNames.firstIndex(of: UIApplication.shared.alternateIconName) ?? 0
                 if index != value {
@@ -44,7 +40,7 @@ struct SettingsIcon: View {
                             print(error.localizedDescription)
                         } else {
                             print(Text(NSLocalizedString("app_success", comment: "")))
-                        } // print("Success! You have changed the app icon")
+                        } 
                     }
                 }
             }
