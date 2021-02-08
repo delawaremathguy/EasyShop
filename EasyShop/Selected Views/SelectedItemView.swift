@@ -53,13 +53,15 @@ struct SelectedItemView: View {
             Rectangle()
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
             HStack {
-                Button(action: { clearAll()
+                Button(action: {
+                    clearAll()
                     clearImpact.impactOccurred()
                 }) {
                     Text(NSLocalizedString("clear_all", comment: "")).padding(.leading, 12)
                 }.disabled((store.getItem.filter({ $0.status == kOnListAndTaken }).count == 0) == true)
                 Spacer()
-                Button(action: { takeAll()
+                Button(action: {
+                    takeAll()
                     takeImpact.impactOccurred()
                 }) {
                     Text(NSLocalizedString("take_all", comment: "")).padding(.trailing, 12)
@@ -84,8 +86,7 @@ struct SelectedItemView: View {
             print("Navigating Back")
         }) {
             Image(systemName: "chevron.left")
-                .padding(.horizontal)
-                .font(.system(size: 20, weight: .regular))
+                .modifier(chevronLeft())
         }
     }
     func switchView() -> some View {
@@ -96,7 +97,7 @@ struct SelectedItemView: View {
             }
             print("switching View")
         }) {
-            Image(switchButton ? "viewswitch1" : "viewswitch2")
+            Image(switchButton ? "arrow1" : "arrow2")
         }.animation(.default) // Animation Test
     }
     func takeAll() {

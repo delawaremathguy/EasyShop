@@ -1,0 +1,45 @@
+// Content View
+"tab_list" = "Lista";
+"tab_cart" = "Carrello";
+"tab_settings" = "Impostazioni";
+
+// Shop List
+"new_shop" = "aggiungi negozio...";
+"shops" = "Negozi";
+
+// Item List
+"new_product" = "aggiungi un nuovo prodotto...";
+"deselet_all" = "Elimina tutto";
+"select_all" = "Seleziona tutto";
+
+// Selected Shop View
+"products_remaining" = "Prodotti rimanenti";
+"start_from_list" = "Comincia dalla Lista!";
+
+// Selected Item View
+"remaining" = "Rimanenza";
+"taken" = "Sekezionati";
+"clear_all" = "Cancella tutto";
+"take_all" = "Seleziona tutti";
+
+// Settings View
+"appearance" = "Aspetto";
+"language" = "Lingua";
+"version" = "Versione 1.0";
+
+// Settings Theme
+"app_theme" = "App Theme";
+"done" = "FATTO!";
+"changed_theme" = "Hai cambiato colore!";
+
+// IconColor
+"app_icon" = "APP ICON";
+"app_icons" = "ICONS";
+"app_success" = "DONE! You have changed the icon";
+
+// ColorTheme
+"blue_theme" = "Blu";
+"green_theme" = "Verde";
+"orange_theme" = "Arancione";
+"pink_theme" = "Rosa";
+"red_theme" = "Rosso";

@@ -76,8 +76,7 @@ struct EmptySelectedShop: View {
                 Text(NSLocalizedString("Start from the List section!", comment: ""))
                     .font(Font.system(size: 20))
                 Image(systemName: "tray.and.arrow.down.fill")
-                    .resizable()
-                    .frame(width: 200, height: 200)
+                    .displayImage(width: 200, height: 200)
             }.foregroundColor(theme.mainColor).opacity(0.8)
         }.edgesIgnoringSafeArea(.all)
         .onAppear { print("EmptySelectedShop appears") }
@@ -92,19 +91,3 @@ struct SelectedShopView_Previews: PreviewProvider {
     }
 }
 
-struct SelectedShopRow_Previews: PreviewProvider {
-    static let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    static var previews: some View {
-        let data = Shop(context: moc)
-        data.name = "Whole Food"
-        return Group {
-            SelectedShopRow(store: data)
-                .padding()
-                .previewLayout(.sizeThatFits)
-            SelectedShopRow(store: data)
-                .preferredColorScheme(.dark)
-                .padding()
-                .previewLayout(.sizeThatFits)
-        }
-    }
-}

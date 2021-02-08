@@ -1,8 +1,4 @@
-/*
-Created by Fede Duarte on 18/1/21.
-
-Text(NSLocalizedString("tab_list", comment: ""))
-*/
+// Text(NSLocalizedString("tab_list", comment: ""))
 // Content View
 "tab_list" = "List";
 "tab_cart" = "Cart";
@@ -30,16 +26,21 @@ Text(NSLocalizedString("tab_list", comment: ""))
 // Settings View
 "appearance" = "Appearance";
 "language" = "Language";
-"version" = "Version";
+"version" = "Version 1.0";
 
 // Settings Theme
 "app_theme" = "App Theme";
 "done" = "DONE!";
 "changed_theme" = "You have changed the theme!!!";
 
+// IconColor
+"app_icon" = "APP ICON";
+"app_icons" = "ICONS";
+"app_success" = "DONE! You have changed the icon";
+
 // ColorTheme
-"blue_theme" = "Blue Theme";
-"green_theme" = "Green Theme";
-"orange_theme" = "Orange Theme";
-"pink_theme" = "Pink Theme";
-"red_theme" = "Red Theme";
+"blue_theme" = "Blue";
+"green_theme" = "Green";
+"orange_theme" = "Orange";
+"pink_theme" = "Pink";
+"red_theme" = "Red";

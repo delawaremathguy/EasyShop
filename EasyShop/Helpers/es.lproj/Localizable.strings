@@ -1,8 +1,3 @@
-/* 
-Created by Fede Duarte on 18/1/21.
-
-Text(NSLocalizedString("", comment: ""))
-*/
 // Content View
 "tab_list" = "Lista";
 "tab_cart" = "Carro";
@@ -13,7 +8,7 @@ Text(NSLocalizedString("", comment: ""))
 "shops" = "Tiendas";
 
 // Item List
-"new_product" = "nuevo product...";
+"new_product" = "nuevo producto...";
 "deselet_all" = "Quita todo";
 "select_all" = "Elige todo";
 
@@ -25,17 +20,22 @@ Text(NSLocalizedString("", comment: ""))
 "remaining" = "Restantes";
 "taken" = "En la cesta";
 "clear_all" = "Elimina todo";
-"take_all" = "Coge todo";
+"take_all" = "Añade todo";
 
 // Settings View
 "appearance" = "Apariencia";
 "language" = "Idioma";
-"version" = "Version";
+"version" = "Version 1.0";
 
 // Settings Theme
 "app_theme" = "Color de App";
 "done" = "Hecho!";
 "changed_theme" = "Has cambiado el color!!!";
+
+// IconColor
+"app_icon" = "COLOR DEL ICONO";
+"app_icons" = "ICONOS";
+"app_success" = "Hecho! Has cambiado el color del icono";
 
 // ColorTheme
 "blue_theme" = "Tema Azul";

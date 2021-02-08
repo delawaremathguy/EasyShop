@@ -1,0 +1,45 @@
+// Content View
+"tab_list" = "Liste";
+"tab_cart" = "Chariot";
+"tab_settings" = "Réglages";
+
+// Shop List
+"new_shop" = "Nouveau magasin ici...";
+"shops" = "Magasin";
+
+// Item List
+"new_product" = "Nouveau produit ici...";
+"deselet_all" = "Tout désélectionner";
+"select_all" = "Tout sélectionner";
+
+// Selected Shop View
+"products_remaining" = "Produits restants";
+"start_from_list" = "Commencer à partir de la section Liste!";
+
+// Selected Item View
+"remaining" = "Restants";
+"taken" = "Pris";
+"clear_all" = "Tout effacer";
+"take_all" = "Pendre toutes";
+
+// Settings View
+"appearance" = "Apparence";
+"language" = "Langue";
+"version" = "Version 1.0";
+
+// Settings Theme
+"app_theme" = "Thème de l’application";
+"done" = "TERMINÉ!";
+"changed_theme" = "vous avez changé de thème!";
+
+// IconColor
+"app_icon" = "APP ICON";
+"app_icons" = "ICONS";
+"app_success" = "DONE! You have changed the icon";
+
+// ColorTheme
+"blue_theme" = "Blue";
+"green_theme" = "Vert";
+"orange_theme" = "Orange";
+"pink_theme" = "Rose";
+"red_theme" = "Rouge";

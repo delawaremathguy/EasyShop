@@ -8,19 +8,14 @@ struct SettingsViews: View {
         NavigationView {
             VStack {
                 VStack(spacing: 25) {
-                    NavigationLink(destination: SettingsTheme(), tag: 1, selection: $action) {
+                    NavigationLink(destination: SettingsAppearance(), tag: 1, selection: $action) {
                         CapsuleRow(image: "appearance", text: (NSLocalizedString("appearance", comment: "")))
                     }
-                    NavigationLink(destination: SettingsLanguage(), tag: 2, selection: $action) {
-                        CapsuleRow(image: "language", text: (NSLocalizedString("language", comment: "")))
-                    }
-                    
                 }.padding(.top, 45)
                 Spacer()
                 VStack {
-                    Image("easyshoplogo")
-                        .foregroundColor(theme.mainColor)
-                    Text("Version 1.0").font(.caption)
+                    Image("easyshoplogo").foregroundColor(theme.mainColor)
+                    Text(NSLocalizedString("version", comment: "Version of the app")).font(.caption)
                 }
                 Spacer()
             }
@@ -40,13 +35,10 @@ struct CapsuleRow: View {
     var body: some View {
         HStack {
             Image(image)
-                .resizable()
-                .frame(width: 40, height: 40)
-                .padding(10)
+                .capsuleImage(width: 40, height: 40, padding: 10)
             Text(text)
                 .foregroundColor(theme.mainColor)
-                .font(.headline)
-                .font(Font.system(size: 20, design: .serif))
+                .modifier(capsuleFont())
             Spacer()
             Image(systemName: "chevron.right")
                 .padding(.trailing, 15)
