@@ -13,6 +13,11 @@ struct ShopList: View {
                 Section {
                     HStack(spacing: 0) {
 // MARK: - Header
+                        Text("\(allShops.count)").padding(15)
+                        
+                        TextField(NSLocalizedString("new_shop", comment: ""), text: $name)
+                            .modifier(customTextfield())
+                        
                         Button(action: {
                                 newShop(name: name)
                             hapticNew.impactOccurred()
@@ -22,9 +27,7 @@ struct ShopList: View {
                                 .opacity(name.isEmpty ? 0.4 : 1.0)
                                 .background(Color("ColorWhiteBlack"))
                         }.disabled(name.isEmpty)
-                        TextField(NSLocalizedString("new_shop", comment: ""), text: $name)
-                            .modifier(customTextfield())
-                        Text("\(allShops.count)").padding(15)
+                        
                     }.modifier(customHStack())
                 }
                 Section {

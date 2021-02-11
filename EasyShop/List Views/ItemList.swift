@@ -15,6 +15,9 @@ struct ItemList: View {
             Section {
                 HStack(spacing: 0) {
 // MARK: - Header
+                    Text("\(store.getItem.count)").padding(15)
+                    TextField(NSLocalizedString("new_product", comment: ""), text: $name)
+                        .modifier(customTextfield())
                     Button(action: {
                             newItem()
                         hapticNew.impactOccurred()
@@ -24,9 +27,6 @@ struct ItemList: View {
                             .opacity(name.isEmpty ? 0.4 : 1.0)
                             .background(Color("ColorWhiteBlack"))
                     }.disabled(name.isEmpty)
-                    TextField(NSLocalizedString("new_product", comment: ""), text: $name)
-                        .modifier(customTextfield())
-                    Text("\(store.getItem.count)").padding(15)
                 }.modifier(customHStack())
             }
             Section {
