@@ -5,7 +5,6 @@ struct ShopList: View {
     @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop>
     @ObservedObject var theme = gThemeSettings
     @State var name = ""
-    let hapticNew = UIImpactFeedbackGenerator(style: .soft)
     
     var body: some View {
         NavigationView {
@@ -14,20 +13,17 @@ struct ShopList: View {
                     HStack(spacing: 0) {
 // MARK: - Header
                         Text("\(allShops.count)").padding(15)
-                        
                         TextField(NSLocalizedString("new_shop", comment: ""), text: $name)
                             .modifier(customTextfield())
-                        
                         Button(action: {
-                                newShop(name: name)
-                            hapticNew.impactOccurred()
+                            newShop(name: name)
+                            impactSoft.impactOccurred()
                         }) {
                             Image(systemName: "plus")
                                 .modifier(customButton())
                                 .opacity(name.isEmpty ? 0.4 : 1.0)
-                                .background(Color("ColorWhiteBlack"))
+                                .background(colorWhiteBlack)
                         }.disabled(name.isEmpty)
-                        
                     }.modifier(customHStack())
                 }
                 Section {
@@ -87,7 +83,8 @@ struct ShopListRow: View {
     var body: some View {
         HStack {
             Text(store.shopName).modifier(customShopText())
-                .foregroundColor(store.hasItemsInCartNotYetTaken ? (theme.mainColor) : Color("ColorBlackWhite"))
+                .foregroundColor(store.hasItemsInCartNotYetTaken ? (theme.mainColor) : colorBlackWhite)
+            //.foregroundColor(store.hasItemsInCartNotYetTaken ? (theme.mainColor) : Color("ColorBlackWhite"))
             Spacer()
         }
         .frame(height: rowHeight)

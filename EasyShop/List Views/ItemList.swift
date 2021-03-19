@@ -6,9 +6,6 @@ struct ItemList: View {
     @ObservedObject var store: Shop
     @ObservedObject var theme = gThemeSettings
     @State var name = ""
-    let selectImpact = UIImpactFeedbackGenerator(style: .medium)
-    let deselectImpact = UIImpactFeedbackGenerator(style: .medium)
-    let hapticNew = UIImpactFeedbackGenerator(style: .soft)
     
     var body: some View {
         VStack(spacing: 0) {
@@ -19,13 +16,13 @@ struct ItemList: View {
                     TextField(NSLocalizedString("new_product", comment: ""), text: $name)
                         .modifier(customTextfield())
                     Button(action: {
-                            newItem()
-                        hapticNew.impactOccurred()
+                        newItem()
+                        impactSoft.impactOccurred()
                     }) {
                         Image(systemName: "plus")
                             .modifier(customButton())
                             .opacity(name.isEmpty ? 0.4 : 1.0)
-                            .background(Color("ColorWhiteBlack"))
+                            .background(colorWhiteBlack)
                     }.disabled(name.isEmpty)
                 }.modifier(customHStack())
             }
@@ -46,14 +43,14 @@ struct ItemList: View {
                 HStack {
                     Button(action: {
                         deselectAll()
-                        deselectImpact.impactOccurred()
+                        impactMedium.impactOccurred()
                     }) {
                         Text(NSLocalizedString("deselet_all", comment: "")).padding(.leading, 12)
                     }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
                     Spacer()
                     Button(action: {
                         selectAll()
-                        selectImpact.impactOccurred()
+                        impactMedium.impactOccurred()
                     }) {
                         Text(NSLocalizedString("select_all", comment: "")).padding(.trailing, 12)
                     }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count == 0) == true)
@@ -111,12 +108,11 @@ struct ItemList: View {
 struct ItemListRow: View {
     @ObservedObject var item: Item
     @ObservedObject var theme = gThemeSettings
-    let selectedImpact = UIImpactFeedbackGenerator(style: .soft)
     
     var body: some View {
         Button(action: {
             self.item.toggleSelected()
-            selectedImpact.impactOccurred()
+            impactSoft.impactOccurred()
             print("item added to List not taken")
         }) {
             HStack {

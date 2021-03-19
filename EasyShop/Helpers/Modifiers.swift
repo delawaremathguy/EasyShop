@@ -3,9 +3,9 @@ import SwiftUI
 struct customHStack: ViewModifier { // ShopList, ItemList
     func body(content: Content) -> some View {
         content
-            .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(Color("ColorWhiteBlack")))
+            .overlay(RoundedRectangle(cornerRadius: 5).stroke(lineWidth: 1).foregroundColor(colorWhiteBlack))
             .padding()
-            .background(Color("ColorAccent"))
+            .background(colorAccent)
     }
 }
 
@@ -23,7 +23,7 @@ struct customTextfield: ViewModifier { // ShopList, ItemList
     func body(content: Content) -> some View {
         content
             .frame(height: rowHeight)
-            .background(Color("ColorWhiteBlack"))
+            .background(colorWhiteBlack)
             .font(Font.system(size: 20))
             .multilineTextAlignment(.center)
             .disableAutocorrection(true)
@@ -34,7 +34,7 @@ struct customTextfield: ViewModifier { // ShopList, ItemList
 struct customItemText: ViewModifier { // ItemList, SelectedItemView
     func body(content: Content) -> some View {
         content
-            .foregroundColor(Color("ColorBlackWhite"))
+            .foregroundColor(colorBlackWhite)
             .font(Font.system(size: 20))
     }
 }
