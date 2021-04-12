@@ -113,6 +113,9 @@ struct SelectedItemView: View {
                 item.status = kNotOnList
             }
         }
+        if store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0 { 
+            present.wrappedValue.dismiss()
+        }
     }
 }
 // MARK: - SELECTED-TAKEN
@@ -122,10 +125,11 @@ struct SelectedTakenImage: View {
     var body: some View {
         HStack {
             Text(item.itemName).modifier(customItemText())
+            .padding(.horizontal, 10)
             Spacer()
-            Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
-                .font(.system(size: 20))
-                .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
+//            Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
+//                .font(.system(size: 20))
+//                .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
         }
         .padding(.horizontal, 5)
         .frame(height: rowHeight)

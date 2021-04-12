@@ -11,7 +11,7 @@ struct ItemList: View {
         VStack(spacing: 0) {
             Section {
                 HStack(spacing: 0) {
-// MARK: - Header
+                    // MARK: - Header
                     Text("\(store.getItem.count)").padding(15)
                     TextField(NSLocalizedString("new_product", comment: ""), text: $name)
                         .modifier(customTextfield())
@@ -26,20 +26,9 @@ struct ItemList: View {
                     }.disabled(name.isEmpty)
                 }.modifier(customHStack())
             }
+            // MARK: - Footer
             Section {
-// MARK: - List
-                List {
-                    ForEach(store.getItem) { s in
-                        ItemListRow(item: s)
-                    }
-                    .onDelete(perform: deleteItem)
-                    .onMove(perform: doMove).animation(.default) // Animation Test
-                }.listStyle(GroupedListStyle())
-// MARK: - Footer
-            }
-            Section {
-                Rectangle()
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
+
                 HStack {
                     Button(action: {
                         deselectAll()
@@ -55,12 +44,24 @@ struct ItemList: View {
                         Text(NSLocalizedString("select_all", comment: "")).padding(.trailing, 12)
                     }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count == 0) == true)
                 }.padding(.vertical, 10)
+                Rectangle()
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
+            }
+            // MARK: - List
+            Section {
+                List {
+                    ForEach(store.getItem) { s in
+                        ItemListRow(item: s)
+                    }
+                    .onDelete(perform: deleteItem)
+                    .onMove(perform: doMove).animation(.default) // Animation Test
+                }.listStyle(GroupedListStyle())
             }
         }
         .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-// MARK: - Toolbar
+        // MARK: - Toolbar
         .toolbar {
             ToolbarItem(placement: .cancellationAction, content: backButton)
             ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
@@ -68,7 +69,7 @@ struct ItemList: View {
         .onAppear { print("ItemList appears") }
         .onDisappear { print("ItemList disappers") }
     }
-// MARK: - Functions
+    // MARK: - Functions
     func newItem() {
         Item.addNewItem(named: name, to: store)
         self.name = ""
@@ -136,7 +137,8 @@ struct ItemList_Previews: PreviewProvider {
         let datum = Item(context: moc)
         datum.name = "Eggs"
         data.addToItem(datum)
-        return ItemList(store: data) 
+        return ItemList(store: data)
+            .previewDevice("iPhone 8")
             .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
     }
 }
