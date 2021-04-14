@@ -5,10 +5,6 @@
 import Foundation
 import CoreData
 
-let kNotOnList: Int = 0
-let kOnListNotTaken: Int = 1
-let kOnListAndTaken: Int = 2
-
 extension Item {
 // 1
     public var itemName: String {

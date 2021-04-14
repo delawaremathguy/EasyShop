@@ -6,31 +6,49 @@ struct ItemList: View {
     @ObservedObject var store: Shop
     @ObservedObject var theme = gThemeSettings
     @State var name = ""
-    let selectImpact = UIImpactFeedbackGenerator(style: .medium)
-    let deselectImpact = UIImpactFeedbackGenerator(style: .medium)
-    let hapticNew = UIImpactFeedbackGenerator(style: .soft)
     
     var body: some View {
         VStack(spacing: 0) {
             Section {
                 HStack(spacing: 0) {
-// MARK: - Header
+                    // MARK: - Header
+                    Text("\(store.getItem.count)").padding(15)
+                    TextField(NSLocalizedString("new_product", comment: ""), text: $name)
+                        .modifier(customTextfield())
                     Button(action: {
-                            newItem()
-                        hapticNew.impactOccurred()
+                        newItem()
+                        impactSoft.impactOccurred()
                     }) {
                         Image(systemName: "plus")
                             .modifier(customButton())
                             .opacity(name.isEmpty ? 0.4 : 1.0)
-                            .background(Color("ColorWhiteBlack"))
+                            .background(colorWhiteBlack)
                     }.disabled(name.isEmpty)
-                    TextField(NSLocalizedString("new_product", comment: ""), text: $name)
-                        .modifier(customTextfield())
-                    Text("\(store.getItem.count)").padding(15)
                 }.modifier(customHStack())
             }
+            // MARK: - Footer
             Section {
-// MARK: - List
+
+                HStack {
+                    Button(action: {
+                        deselectAll()
+                        impactMedium.impactOccurred()
+                    }) {
+                        Text(NSLocalizedString("deselet_all", comment: "")).padding(.leading, 12)
+                    }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
+                    Spacer()
+                    Button(action: {
+                        selectAll()
+                        impactMedium.impactOccurred()
+                    }) {
+                        Text(NSLocalizedString("select_all", comment: "")).padding(.trailing, 12)
+                    }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count == 0) == true)
+                }.padding(.vertical, 10)
+                Rectangle()
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
+            }
+            // MARK: - List
+            Section {
                 List {
                     ForEach(store.getItem) { s in
                         ItemListRow(item: s)
@@ -38,32 +56,12 @@ struct ItemList: View {
                     .onDelete(perform: deleteItem)
                     .onMove(perform: doMove).animation(.default) // Animation Test
                 }.listStyle(GroupedListStyle())
-// MARK: - Footer
-            }
-            Section {
-                Rectangle()
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
-                HStack {
-                    Button(action: {
-                        deselectAll()
-                        deselectImpact.impactOccurred()
-                    }) {
-                        Text(NSLocalizedString("deselet_all", comment: "")).padding(.leading, 12)
-                    }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
-                    Spacer()
-                    Button(action: {
-                        selectAll()
-                        selectImpact.impactOccurred()
-                    }) {
-                        Text(NSLocalizedString("select_all", comment: "")).padding(.trailing, 12)
-                    }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count == 0) == true)
-                }.padding(.vertical, 10)
             }
         }
         .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-// MARK: - Toolbar
+        // MARK: - Toolbar
         .toolbar {
             ToolbarItem(placement: .cancellationAction, content: backButton)
             ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
@@ -71,7 +69,7 @@ struct ItemList: View {
         .onAppear { print("ItemList appears") }
         .onDisappear { print("ItemList disappers") }
     }
-// MARK: - Functions
+    // MARK: - Functions
     func newItem() {
         Item.addNewItem(named: name, to: store)
         self.name = ""
@@ -111,12 +109,11 @@ struct ItemList: View {
 struct ItemListRow: View {
     @ObservedObject var item: Item
     @ObservedObject var theme = gThemeSettings
-    let selectedImpact = UIImpactFeedbackGenerator(style: .soft)
     
     var body: some View {
         Button(action: {
             self.item.toggleSelected()
-            selectedImpact.impactOccurred()
+            impactSoft.impactOccurred()
             print("item added to List not taken")
         }) {
             HStack {
@@ -140,7 +137,8 @@ struct ItemList_Previews: PreviewProvider {
         let datum = Item(context: moc)
         datum.name = "Eggs"
         data.addToItem(datum)
-        return ItemList(store: data) 
+        return ItemList(store: data)
+            .previewDevice("iPhone 8")
             .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
     }
 }

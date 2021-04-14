@@ -4,7 +4,6 @@ struct SettingsTheme: View {
     @ObservedObject var theme = ThemeSettings()
     let themes: [Theme] = themeData
     @State private var isThemeChanged: Bool = false
-    let themeImpact = UIImpactFeedbackGenerator(style: .medium)
     
     var body: some View {
         Section(header: Text(NSLocalizedString("app_theme", comment: ""))) {
@@ -16,10 +15,11 @@ struct SettingsTheme: View {
                             UserDefaults.standard.set(self.theme.themeSettings, forKey: "Theme")
                             self.isThemeChanged.toggle()
                             print("Changing to \(item.themeName)")
-                            themeImpact.impactOccurred()
+                            impactMedium.impactOccurred()
                         }) {
                             VStack {
-                                // MARK: - Card
+                                
+// MARK: - Card
                                 VStack {
                                     Spacer()
                                     Divider()
@@ -30,7 +30,8 @@ struct SettingsTheme: View {
                                         .font(.system(size: 35, weight: .regular))
                                     Spacer().frame(height: 45)
                                     Divider().background(Color.gray)
-                                    // MARK: - Tabbar
+                                    
+// MARK: - Tabbar
                                     HStack(spacing: 20) {
                                         Rectangle()
                                             .frame(width: 10, height: 10)
@@ -39,7 +40,8 @@ struct SettingsTheme: View {
                                         Rectangle().modifier(themeRectangle())
                                     }.padding(.bottom, 12)
                                 }.modifier(themeTabbar())
-                                // MARK: - Label
+                                
+// MARK: - Label
                                 Text(item.themeName).modifier(capsuleFont())
                             } // VS
                         }.accentColor(Color.primary)

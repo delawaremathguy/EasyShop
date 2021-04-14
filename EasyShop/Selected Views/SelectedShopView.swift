@@ -43,7 +43,7 @@ struct SelectedShopRow: View {
         HStack {
             Text(store.shopName)
                 .modifier(customShopText())
-                .foregroundColor((store.countItemsInCart != 0) ? (theme.mainColor) : Color("ColorBlackWhite"))
+                .foregroundColor((store.countItemsInCart != 0) ? (theme.mainColor) : colorBlackWhite)
             Spacer() 
             Text("\(store.countItemsInCart)").font(.caption)
         }.frame(height: rowHeight)
@@ -73,7 +73,7 @@ struct EmptySelectedShop: View {
     var body: some View {
         ZStack {
             VStack {
-                Text(NSLocalizedString("Start from the List section!", comment: ""))
+                Text(NSLocalizedString("start_from_list", comment: ""))
                     .font(Font.system(size: 20))
                 Image(systemName: "tray.and.arrow.down.fill")
                     .displayImage(width: 200, height: 200)

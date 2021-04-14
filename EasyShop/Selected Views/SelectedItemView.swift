@@ -7,8 +7,6 @@ struct SelectedItemView: View {
     @ObservedObject var theme = gThemeSettings
     @State private var layoutView = false
     @State private var switchButton = false
-    let clearImpact = UIImpactFeedbackGenerator(style: .heavy)
-    let takeImpact = UIImpactFeedbackGenerator(style: .medium)
     
     var body: some View {
         VStack {
@@ -55,14 +53,14 @@ struct SelectedItemView: View {
             HStack {
                 Button(action: {
                     clearAll()
-                    clearImpact.impactOccurred()
+                    impactHeavy.impactOccurred()
                 }) {
                     Text(NSLocalizedString("clear_all", comment: "")).padding(.leading, 12)
                 }.disabled((store.getItem.filter({ $0.status == kOnListAndTaken }).count == 0) == true)
                 Spacer()
                 Button(action: {
                     takeAll()
-                    takeImpact.impactOccurred()
+                    impactMedium.impactOccurred()
                 }) {
                     Text(NSLocalizedString("take_all", comment: "")).padding(.trailing, 12)
                 }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
@@ -115,20 +113,23 @@ struct SelectedItemView: View {
                 item.status = kNotOnList
             }
         }
+        if store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0 { 
+            present.wrappedValue.dismiss()
+        }
     }
 }
 // MARK: - SELECTED-TAKEN
 
 struct SelectedTakenImage: View {
     @ObservedObject var item: Item
-    let hapticTaken = UIImpactFeedbackGenerator(style: .soft)
     var body: some View {
         HStack {
             Text(item.itemName).modifier(customItemText())
+            .padding(.horizontal, 10)
             Spacer()
-            Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
-                .font(.system(size: 20))
-                .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
+//            Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
+//                .font(.system(size: 20))
+//                .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
         }
         .padding(.horizontal, 5)
         .frame(height: rowHeight)
@@ -141,7 +142,7 @@ struct SelectedTakenImage: View {
                 item.status = kOnListNotTaken
                 print("item added on not taken list")
             }
-            hapticTaken.impactOccurred()
+            impactSoft.impactOccurred()
         }.animation(.default) // Animation Test
     }
 }

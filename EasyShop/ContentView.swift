@@ -4,8 +4,6 @@ struct ContentView: View {
     @ObservedObject var theme = gThemeSettings
     @State private var selected = 1
     @StateObject private var itemStatusChanged = ItemStatusChanged()
-    private var badgePosition: CGFloat = 2
-    private var tabsCount: CGFloat = 3
     
     var body: some View {
         GeometryReader { geometry in
@@ -33,14 +31,14 @@ struct ContentView: View {
                     Circle().foregroundColor(.red)
                 }
                 .frame(width: 13, height: 13)
-                .offset(x: ( ( 2 * self.badgePosition) - 0.94 ) * ( geometry.size.width / ( 2 * self.tabsCount ) ) + 2, y: -29)
+                .offset(x: (( 2 * badgePosition) - 0.94 ) * ( geometry.size.width / ( 2 * tabsCount ) ) + 2, y: -29)
                 .opacity(Item.onShoppingListCount() != 0 ? 1.0 : 0)
             }
-        }
+        }.ignoresSafeArea(.keyboard)
     }
 }
 
-var rowHeight: CGFloat = 50
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
