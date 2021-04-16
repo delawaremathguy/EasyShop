@@ -12,7 +12,8 @@ struct ItemList: View {
             Section {
                 HStack(spacing: 0) {
 // MARK: - Header
-                    Text("\(store.getItem.filter({ $0.status == kOnListNotTaken }).count)").padding(15)
+                    Text("\(store.getItem.filter({ $0.status == kOnListNotTaken }).count)")
+                        .frame(minWidth: 45, maxWidth: 55)
                     TextField(NSLocalizedString("new_product", comment: ""), text: $name)
                         .modifier(customTextfield())
                     Button(action: {
