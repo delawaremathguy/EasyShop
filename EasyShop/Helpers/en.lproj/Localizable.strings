@@ -33,9 +33,13 @@
 "done" = "DONE!";
 "changed_theme" = "You have changed the theme!!!";
 
+// Settings Dark Mode
+"aspect" = "Aspect";
+"dark_mode" = "Dark Mode";
+
 // IconColor
 "app_icon" = "APP ICON";
-"app_icons" = "ICONS";
+"app_icons" = "Icons";
 "app_success" = "DONE! You have changed the icon";
 
 // ColorTheme

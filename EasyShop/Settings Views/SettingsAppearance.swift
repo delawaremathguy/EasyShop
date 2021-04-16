@@ -5,6 +5,7 @@ struct SettingsAppearance: View {
         Form {
             SettingsIcon()
             SettingsTheme()
+            SettingsDarkMode()
             
         }.navigationTitle(NSLocalizedString("appearance", comment: ""))
     }

@@ -11,8 +11,8 @@ struct ItemList: View {
         VStack(spacing: 0) {
             Section {
                 HStack(spacing: 0) {
-                    // MARK: - Header
-                    Text("\(store.getItem.count)").padding(15)
+// MARK: - Header
+                    Text("\(store.getItem.filter({ $0.status == kOnListNotTaken }).count)").padding(15)
                     TextField(NSLocalizedString("new_product", comment: ""), text: $name)
                         .modifier(customTextfield())
                     Button(action: {
@@ -26,9 +26,8 @@ struct ItemList: View {
                     }.disabled(name.isEmpty)
                 }.modifier(customHStack())
             }
-            // MARK: - Footer
+// MARK: - Footer
             Section {
-
                 HStack {
                     Button(action: {
                         deselectAll()
@@ -47,21 +46,21 @@ struct ItemList: View {
                 Rectangle()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
             }
-            // MARK: - List
+// MARK: - List
             Section {
                 List {
                     ForEach(store.getItem) { s in
                         ItemListRow(item: s)
                     }
                     .onDelete(perform: deleteItem)
-                    .onMove(perform: doMove).animation(.default) // Animation Test
+                    .onMove(perform: doMove).animation(.default)
                 }.listStyle(GroupedListStyle())
             }
         }
         .navigationTitle("\(store.shopName)")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        // MARK: - Toolbar
+// MARK: - Toolbar
         .toolbar {
             ToolbarItem(placement: .cancellationAction, content: backButton)
             ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
@@ -69,7 +68,7 @@ struct ItemList: View {
         .onAppear { print("ItemList appears") }
         .onDisappear { print("ItemList disappers") }
     }
-    // MARK: - Functions
+// MARK: - Functions
     func newItem() {
         Item.addNewItem(named: name, to: store)
         self.name = ""
@@ -123,7 +122,7 @@ struct ItemListRow: View {
                     .imageScale(.large)
                     .foregroundColor(theme.mainColor)
             }.frame(height: rowHeight)
-        }.animation(.default) // Animation Test
+        }.animation(.default) 
     }
 }
 

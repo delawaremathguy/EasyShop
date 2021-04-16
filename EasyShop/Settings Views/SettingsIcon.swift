@@ -5,6 +5,7 @@ struct SettingsIcon: View {
     
     var body: some View {
         Section(header: Text(NSLocalizedString("app_icon", comment: ""))) {
+// MARK: - Picker
             Picker(selection: $iconSettings.currentIndex, label:
                     HStack {
                         ZStack {
@@ -16,10 +17,10 @@ struct SettingsIcon: View {
                         }
                         .frame(width: 44, height: 44)
                         Text(NSLocalizedString("app_icons", comment: ""))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.primary)
+                            .modifier(capsuleFont())
                     }
             ) {
+// MARK: - ForEach
                 ForEach(0..<iconSettings.iconNames.count) { index in
                     HStack {
                         Image(uiImage: UIImage(named: self.iconSettings.iconNames[index] ?? "Blue") ?? UIImage())

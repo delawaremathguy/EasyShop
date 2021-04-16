@@ -3,21 +3,24 @@ import SwiftUI
 struct SettingsViews: View {
     @ObservedObject var theme = gThemeSettings
     @State private var action: Int? = 0
-    
+        
     var body: some View {
         NavigationView {
             VStack {
                 VStack(spacing: 25) {
+// MARK: - Navigation
                     NavigationLink(destination: SettingsAppearance(), tag: 1, selection: $action) {
                         CapsuleRow(image: "appearance", text: (NSLocalizedString("appearance", comment: "")))
                     }
-                }.padding(.top, 45)
-                Spacer()
+                }.offset(y: -190)
+                
+// MARK: - Logo
                 VStack {
                     Image("easyshoplogo").foregroundColor(theme.mainColor)
                     Text(NSLocalizedString("version", comment: "Version of the app")).font(.caption)
                 }
-                Spacer()
+                .transition(.move(edge: .top))
+                .animation(.easeOut(duration: 0.8))
             }
             .navigationTitle(NSLocalizedString("tab_settings", comment: ""))
             .navigationBarTitleDisplayMode(.inline)

@@ -3,6 +3,9 @@ import SwiftUI
 @main
 struct EasyShopApp: App {
     let context = PersistentContainer.persistentContainer.viewContext
+    
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
+    
     var body: some Scene {
         if Shop.count() == 0 {
             Shop.loadSeedData(into: context)
@@ -11,6 +14,7 @@ struct EasyShopApp: App {
             ContentView()
                 .environment(\.managedObjectContext, context)
                 .environmentObject(IconNames())
+                .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
 }
