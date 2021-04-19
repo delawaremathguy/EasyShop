@@ -19,6 +19,7 @@
 		881B486F2603DBA100087B21 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881B486E2603DBA100087B21 /* Constants.swift */; };
 		882842C62566F26600E75B59 /* Shop+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882842C52566F26600E75B59 /* Shop+Extension.swift */; };
 		884E3A9B2572A93F00F9CBE4 /* SettingsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884E3A9A2572A93F00F9CBE4 /* SettingsViews.swift */; };
+		88AFE6762629CCB200E34CA3 /* SettingsDarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AFE6752629CCB200E34CA3 /* SettingsDarkMode.swift */; };
 		88B1A0202578579E007AFE02 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88B1A01F2578579E007AFE02 /* Colors.xcassets */; };
 		88B1A023257860EC007AFE02 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B1A022257860EC007AFE02 /* ColorTheme.swift */; };
 		88B1A027257865F9007AFE02 /* SettingsTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B1A026257865F9007AFE02 /* SettingsTheme.swift */; };
@@ -55,6 +56,7 @@
 		88A1400C25BA416E0018EDE3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		88A1400D25BA41740018EDE3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		88A1400F25BA4E7A0018EDE3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		88AFE6752629CCB200E34CA3 /* SettingsDarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDarkMode.swift; sourceTree = "<group>"; };
 		88B1A01F2578579E007AFE02 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		88B1A022257860EC007AFE02 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		88B1A026257865F9007AFE02 /* SettingsTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTheme.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				88084CC525C38C8B009DCE0F /* SettingsAppearance.swift */,
 				88084CC225C38749009DCE0F /* SettingsIcon.swift */,
 				88B1A026257865F9007AFE02 /* SettingsTheme.swift */,
+				88AFE6752629CCB200E34CA3 /* SettingsDarkMode.swift */,
 			);
 			path = "Settings Views";
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				DA3B3C67254B417700A78604 /* ContentView.swift in Sources */,
 				DA3B3C65254B417700A78604 /* EasyShopApp.swift in Sources */,
 				DAB1E9AB255C33C50071AAC0 /* Item+Extensions Jerry.swift in Sources */,
+				88AFE6762629CCB200E34CA3 /* SettingsDarkMode.swift in Sources */,
 				88B1A027257865F9007AFE02 /* SettingsTheme.swift in Sources */,
 				88084CC325C38749009DCE0F /* SettingsIcon.swift in Sources */,
 				884E3A9B2572A93F00F9CBE4 /* SettingsViews.swift in Sources */,

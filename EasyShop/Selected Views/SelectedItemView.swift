@@ -89,14 +89,14 @@ struct SelectedItemView: View {
     }
     func switchView() -> some View {
         Button(action: {
-            withAnimation {
+            withAnimation() {
             self.switchButton.toggle()
             self.layoutView.toggle()
             }
             print("switching View")
         }) {
             Image(switchButton ? "arrow1" : "arrow2")
-        }.animation(.default) // Animation Test
+        }.animation(.default)
     }
     func takeAll() {
         print("takeAll function executed")
@@ -127,9 +127,6 @@ struct SelectedTakenImage: View {
             Text(item.itemName).modifier(customItemText())
             .padding(.horizontal, 10)
             Spacer()
-//            Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
-//                .font(.system(size: 20))
-//                .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
         }
         .padding(.horizontal, 5)
         .frame(height: rowHeight)
@@ -143,6 +140,11 @@ struct SelectedTakenImage: View {
                 print("item added on not taken list")
             }
             impactSoft.impactOccurred()
-        }.animation(.default) // Animation Test
+        }.animation(.easeOut(duration: 1.5))
     }
 }
+/*
+ Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
+     .font(.system(size: 20))
+     .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
+ */

@@ -12,7 +12,6 @@ struct ShopList: View {
                 Section {
                     HStack(spacing: 0) {
 // MARK: - Header
-                        Text("\(allShops.count)").padding(15)
                         TextField(NSLocalizedString("new_shop", comment: ""), text: $name)
                             .modifier(customTextfield())
                         Button(action: {
@@ -36,7 +35,7 @@ struct ShopList: View {
                                 }
                             }
                             .onDelete(perform: deleteShop)
-                            .onMove(perform: doMove).animation(.default) // Animation Test
+                            .onMove(perform: doMove).animation(.default)
                         }
                     }
                     .listStyle(GroupedListStyle())
