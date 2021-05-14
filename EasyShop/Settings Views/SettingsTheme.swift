@@ -33,16 +33,16 @@ struct SettingsTheme: View {
                                     
 // MARK: - Tabbar
                                     HStack(spacing: 20) {
-                                        Rectangle()
-                                            .frame(width: 10, height: 10)
-                                            .foregroundColor(item.mainColor)
-                                        Rectangle().modifier(themeRectangle())
-                                        Rectangle().modifier(themeRectangle())
+                                        Rectangle().reusableShape(width: 10, heigth: 10, color: item.mainColor)
+                                        Rectangle().reusableShape(width: 10, heigth: 10, color: .gray)
+                                        Rectangle().reusableShape(width: 10, heigth: 10, color: .gray)
                                     }.padding(.bottom, 12)
-                                }.modifier(themeTabbar())
+                                }.reusableTabbar(width: 110, height: 180, maskRadius: 12, overlayRadius: 8, strokeColor: .gray)
+                                //.modifier(themeTabbar())
                                 
 // MARK: - Label
-                                Text(item.themeName).modifier(capsuleFont())
+                                Text(item.themeName)
+                                    .reusableLabel(font: .headline, size: 20, design: .serif, color: item.mainColor)
                             } // VS
                         }.accentColor(Color.primary)
                     }.padding(.horizontal, 5)

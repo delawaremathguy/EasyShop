@@ -12,23 +12,19 @@ struct SettingsIcon: View {
                             RoundedRectangle(cornerRadius: 8, style: .continuous)
                                 .strokeBorder(Color.primary, lineWidth: 2)
                             Image(systemName: "paintbrush")
-                                .font(.system(size: 28, weight: .regular, design: .default))
-                                .foregroundColor(Color.primary)
+                                .reusableIcon(size: 28, weight: .regular, desing: .default, color: .primary)
                         }
                         .frame(width: 44, height: 44)
                         Text(NSLocalizedString("app_icons", comment: ""))
-                            .modifier(capsuleFont())
+                            .reusableLabel(font: .headline, size: 20, design: .serif, color: .primary)
+                         //   .modifier(capsuleFont())
                     }
             ) {
 // MARK: - ForEach
                 ForEach(0..<iconSettings.iconNames.count) { index in
                     HStack {
                         Image(uiImage: UIImage(named: self.iconSettings.iconNames[index] ?? "Blue") ?? UIImage())
-                            .renderingMode(.original)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 60, height: 60)
-                            .cornerRadius(9)
+                            .reusableIconApp(rendering: .original, width: 60, height: 60, corner: 9)
 
                     }.padding(3)
                 }

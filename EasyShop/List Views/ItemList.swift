@@ -15,17 +15,18 @@ struct ItemList: View {
                     Text("\(store.getItem.filter({ $0.status == kOnListNotTaken }).count)")
                         .frame(minWidth: 45, maxWidth: 55)
                     TextField(NSLocalizedString("new_product", comment: ""), text: $name)
-                        .modifier(customTextfield())
+                        .reusableTextField(height: rowHeight, color: colorWhiteBlack, fontSize: 20, alignment: .center, autocorrection: true)
                     Button(action: {
                         newItem()
                         impactSoft.impactOccurred()
                     }) {
                         Image(systemName: "plus")
-                            .modifier(customButton())
+                            .reusableButtonImage(scale: .large, width: 50, height: 50, colorF: theme.mainColor, colorB: colorWhiteBlack)
                             .opacity(name.isEmpty ? 0.4 : 1.0)
-                            .background(colorWhiteBlack)
                     }.disabled(name.isEmpty)
-                }.modifier(customHStack())
+                }
+                .reusableHstack(radius: 5, stroke: 1, colorF: colorWhiteBlack, colorB: colorAccent)
+                //.modifier(customHStack())
             }
 // MARK: - Footer
             Section {
@@ -44,8 +45,7 @@ struct ItemList: View {
                         Text(NSLocalizedString("select_all", comment: "")).padding(.trailing, 12)
                     }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count == 0) == true)
                 }.padding(.vertical, 10)
-                Rectangle()
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
+            InfinitLine()
             }
 // MARK: - List
             Section {
@@ -58,8 +58,7 @@ struct ItemList: View {
                 }.listStyle(GroupedListStyle())
             }
         }
-        .navigationTitle("\(store.shopName)")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("\(store.shopName)", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
 // MARK: - Toolbar
         .toolbar {
@@ -117,7 +116,8 @@ struct ItemListRow: View {
             print("item added to List not taken")
         }) {
             HStack {
-                Text(item.itemName).modifier(customItemText())
+                Text(item.itemName).reusableTextItem(colorF: colorBlackWhite, size: 20)
+                    //.modifier(customItemText())
                 Spacer()
                 Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill")
                     .imageScale(.large)

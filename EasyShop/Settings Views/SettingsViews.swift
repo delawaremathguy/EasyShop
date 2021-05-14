@@ -22,8 +22,7 @@ struct SettingsViews: View {
                 .transition(.move(edge: .top))
                 .animation(.easeOut(duration: 0.8))
             }
-            .navigationTitle(NSLocalizedString("tab_settings", comment: ""))
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle(NSLocalizedString("tab_settings", comment: ""), displayMode: .inline)
         }
     }
 }
@@ -38,10 +37,9 @@ struct CapsuleRow: View {
     var body: some View {
         HStack {
             Image(image)
-                .capsuleImage(width: 40, height: 40, padding: 10)
+                .reusableImage(width: 40, height: 40, padding: 10)
             Text(text)
-                .foregroundColor(theme.mainColor)
-                .modifier(capsuleFont())
+                .reusableLabel(font: .headline, size: 20, design: .serif, color: theme.mainColor)
             Spacer()
             Image(systemName: "chevron.right")
                 .padding(.trailing, 15)

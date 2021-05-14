@@ -21,7 +21,7 @@ struct SelectedShopView: View {
                     }
                 }
                 .listStyle(GroupedListStyle())
-                .navigationTitle(Text(NSLocalizedString("shops", comment: "")))
+                .navigationBarTitle(Text(NSLocalizedString("shops", comment: "")))
                 if allShops.count == 0 {
                     EmptySelectedShop()
                 }
@@ -42,7 +42,7 @@ struct SelectedShopRow: View {
     var body: some View {
         HStack {
             Text(store.shopName)
-                .modifier(customShopText())
+                .font(Font.system(size: 20))
                 .foregroundColor((store.countItemsInCart != 0) ? (theme.mainColor) : colorBlackWhite)
             Spacer() 
             Text("\(store.countItemsInCart)").font(.caption)

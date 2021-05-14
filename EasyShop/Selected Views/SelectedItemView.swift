@@ -48,8 +48,7 @@ struct SelectedItemView: View {
                 }
             }
 // MARK: - Footer
-            Rectangle()
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 1, idealHeight: 1, maxHeight: 1)
+            InfinitLine()
             HStack {
                 Button(action: {
                     clearAll()
@@ -66,8 +65,7 @@ struct SelectedItemView: View {
                 }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
             }.padding(.bottom, 10)
         }
-        .navigationTitle("\(store.shopName)")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("\(store.shopName)", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
 // MARK: - Toolbar
         .toolbar {
@@ -84,7 +82,7 @@ struct SelectedItemView: View {
             print("Navigating Back")
         }) {
             Image(systemName: "chevron.left")
-                .modifier(chevronLeft())
+                .reusableChevron(place: .horizontal, size: 20, weight: .regular)
         }
     }
     func switchView() -> some View {
@@ -124,8 +122,7 @@ struct SelectedTakenImage: View {
     @ObservedObject var item: Item
     var body: some View {
         HStack {
-            Text(item.itemName).modifier(customItemText())
-            .padding(.horizontal, 10)
+            Text(item.itemName).reusableText(colorF: colorBlackWhite, size: 20, place: .horizontal, padding: 10)
             Spacer()
         }
         .padding(.horizontal, 5)

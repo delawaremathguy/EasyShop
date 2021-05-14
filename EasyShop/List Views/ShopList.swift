@@ -9,44 +9,41 @@ struct ShopList: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                Section {
+                Section(header:
                     HStack(spacing: 0) {
 // MARK: - Header
-                        TextField(NSLocalizedString("new_shop", comment: ""), text: $name)
-                            .modifier(customTextfield())
-                        Button(action: {
+                       TextField(NSLocalizedString("new_shop", comment: ""), text: $name)
+                           .reusableTextField(height: rowHeight, color: colorWhiteBlack, fontSize: 20, alignment: .center, autocorrection: true)
+                       Button(action: {
                             newShop(name: name)
                             impactSoft.impactOccurred()
-                        }) {
+                       }) {
                             Image(systemName: "plus")
-                                .modifier(customButton())
+                                .reusableButtonImage(scale: .large, width: 50, height: 50, colorF: theme.mainColor, colorB: colorWhiteBlack)
                                 .opacity(name.isEmpty ? 0.4 : 1.0)
-                                .background(colorWhiteBlack)
-                        }.disabled(name.isEmpty)
-                    }.modifier(customHStack())
-                }
-                Section {
+                                }.disabled(name.isEmpty)
+                            }.reusableHstack(radius: 5, stroke: 1, colorF: colorWhiteBlack, colorB: colorAccent)
+                            //.modifier(customHStack())
+                ) {
 // MARK: - List
                     List {
-                        Section {
-                            ForEach(allShops) { s in
-                                NavigationLink(destination: ItemList(store: s)) {
-                                    ShopListRow(store: s)
-                                }
+                        ForEach(allShops) { s in
+                            NavigationLink(destination: ItemList(store: s)) {
+                                ShopListRow(store: s)
                             }
-                            .onDelete(perform: deleteShop)
-                            .onMove(perform: doMove).animation(.default)
                         }
+                        .onDelete(perform: deleteShop)
+                        .onMove(perform: doMove).animation(.default)
                     }
                     .listStyle(GroupedListStyle())
-                    .navigationTitle(Text(NSLocalizedString("shops", comment: "")))
-                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarTitle(Text(NSLocalizedString("shops", comment: "")), displayMode: .inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
                     }.disabled(allShops.count == 0)
                 }
-            }
-        }.accentColor(theme.mainColor)
+            } // VS
+        } // NV
+        .accentColor(theme.mainColor)
         .onAppear { print("ShopList appears") }
         .onDisappear { print("ShopList disappers") }
     }
@@ -81,7 +78,8 @@ struct ShopListRow: View {
     
     var body: some View {
         HStack {
-            Text(store.shopName).modifier(customShopText())
+            Text(store.shopName)
+                .font(Font.system(size: 20))
                 .foregroundColor(store.hasItemsInCartNotYetTaken ? (theme.mainColor) : colorBlackWhite)
             Spacer()
         }
@@ -102,3 +100,48 @@ struct ShopList_Previews: PreviewProvider {
 
 
 
+/*
+ BACKUP
+ 
+ NavigationView {
+     VStack(spacing: 0) {
+         Section { // make the HStack the header of the section
+             HStack(spacing: 0) {
+// MARK: - Header
+                 TextField(NSLocalizedString("new_shop", comment: ""), text: $name)
+                     .reusableTextField(height: rowHeight, color: colorWhiteBlack, fontSize: 20, alignment: .center, autocorrection: true)
+                    // .modifier(customTextfield())
+                 Button(action: {
+                     newShop(name: name)
+                     impactSoft.impactOccurred()
+                 }) {
+                     Image(systemName: "plus")
+                        // .modifier(customButton())
+                         .reusableButtonImage(scale: .large, width: 50, height: 50, colorF: theme.mainColor, colorB: colorWhiteBlack)
+                         .opacity(name.isEmpty ? 0.4 : 1.0)
+                       //  .background(colorWhiteBlack)
+                 }.disabled(name.isEmpty)
+             }.modifier(customHStack())
+         }
+         Section {
+// MARK: - List
+             List {
+                 Section {
+                     ForEach(allShops) { s in
+                         NavigationLink(destination: ItemList(store: s)) {
+                             ShopListRow(store: s)
+                         }
+                     }
+                     .onDelete(perform: deleteShop)
+                     .onMove(perform: doMove).animation(.default)
+                 }
+             }
+             .listStyle(GroupedListStyle())
+             .navigationBarTitle(Text(NSLocalizedString("shops", comment: "")), displayMode: .inline)
+             .toolbar {
+                 ToolbarItem(placement: .navigationBarTrailing) { EditButton() }
+             }.disabled(allShops.count == 0)
+         }
+     } // VS
+ } // NV
+ */
