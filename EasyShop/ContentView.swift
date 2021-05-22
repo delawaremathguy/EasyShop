@@ -12,17 +12,17 @@ struct ContentView: View {
         TabView(selection: $selected) {
             
             ShopList().tabItem {
-                Text(NSLocalizedString("tab_list", comment: ""))
+                Text(NSLocalizedString("tab_list", comment: "List tab"))
                 Image("shoplist")
             }.tag(0)
             
             SelectedShopView().tabItem {
-                Text(NSLocalizedString("tab_cart", comment: ""))
+                Text(NSLocalizedString("tab_cart", comment: "Cart tab"))
                 Image("shopcart")
             }.tag(1)
             
             SettingsViews().tabItem {
-                Text(NSLocalizedString("tab_settings", comment: ""))
+                Text(NSLocalizedString("tab_settings", comment: "Settings tab"))
                 Image("shopsettings")
             }.tag(2)
             

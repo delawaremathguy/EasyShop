@@ -36,12 +36,13 @@ extension Image {
             .frame(width: width, height: height)
             .padding(padding)
     }
-    func reusableButtonImage(scale: Scale, width: CGFloat, height: CGFloat, colorF: Color, colorB: Color) -> some View {
+    func reusableButtonImage(scale: Scale, width: CGFloat, height: CGFloat, colorF: Color, opacity: Double) -> some View {
         self
             .imageScale(scale)
             .frame(width: width, height: height)
             .foregroundColor(colorF)
-            .background(colorB)
+            .opacity(opacity)
+            
     }
     func reusableChevron(place: Edge.Set, size: CGFloat, weight: Font.Weight) -> some View {
         self

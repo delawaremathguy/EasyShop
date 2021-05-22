@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct SettingsDarkMode: View {
+    
     @AppStorage("isDarkMode") private var isDarkMode: Bool = false
+    
     @ObservedObject var theme = gThemeSettings
     
     var body: some View {
@@ -11,7 +13,6 @@ struct SettingsDarkMode: View {
                     .foregroundColor(theme.mainColor)
                 Text(NSLocalizedString("dark_mode", comment: ""))
                     .reusableLabel(font: .headline, size: 20, design: .serif, color: .primary)
-                // .modifier(capsuleFont())
             })
         }
     }
@@ -23,7 +24,6 @@ struct SettingsDarkMode_Previews: PreviewProvider {
             SettingsDarkMode()
                 .padding()
                 .previewLayout(.sizeThatFits)
-
         }
     }
 }

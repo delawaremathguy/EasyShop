@@ -2,7 +2,9 @@ import SwiftUI
 
 struct SettingsTheme: View {
     @ObservedObject var theme = ThemeSettings()
+    
     let themes: [Theme] = themeData
+    
     @State private var isThemeChanged: Bool = false
     
     var body: some View {
@@ -10,7 +12,7 @@ struct SettingsTheme: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 35) {
                     ForEach(themes, id: \.id) { item in
-                        Button(action: {
+                        Button(action: { // animation
                             gThemeSettings.themeSettings = item.id
                             UserDefaults.standard.set(self.theme.themeSettings, forKey: "Theme")
                             self.isThemeChanged.toggle()
@@ -23,9 +25,9 @@ struct SettingsTheme: View {
                                 VStack {
                                     Spacer()
                                     Divider()
-                                        .frame(width: 50, height: 3)
+                                        .frame(width: 50, height: 3) // modifier
                                         .background(item.mainColor)
-                                    Image(systemName: "tray.and.arrow.down.fill")
+                                    Image(systemName: "tray.and.arrow.down.fill") // modifier
                                         .foregroundColor(item.mainColor)
                                         .font(.system(size: 35, weight: .regular))
                                     Spacer().frame(height: 45)

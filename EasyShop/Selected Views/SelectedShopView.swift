@@ -2,8 +2,9 @@ import SwiftUI
 import CoreData
 
 struct SelectedShopView: View {
-    @ObservedObject var theme = gThemeSettings
     @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop>
+    
+    @ObservedObject var theme = gThemeSettings
     
     var body: some View {
         NavigationView {
@@ -12,8 +13,8 @@ struct SelectedShopView: View {
                     Section(header:
                         HStack {
                             Spacer()
-                            Text(NSLocalizedString("products_remaining", comment: "")).opacity(allShops.count != 0 ? 1 : 0)
-                        }.textCase(nil)
+                            Text(NSLocalizedString("products_remaining", comment: "Remaining products")).opacity(allShops.count != 0 ? 1 : 0) // worth it?
+                        }.textCase(nil) // textcase?
                     ) {
                         ForEach(allShops) { s in
                             ConditionalSelectedShopRow(store: s)
@@ -21,7 +22,7 @@ struct SelectedShopView: View {
                     }
                 }
                 .listStyle(GroupedListStyle())
-                .navigationBarTitle(Text(NSLocalizedString("shops", comment: "")))
+                .navigationBarTitle(Text(NSLocalizedString("shops", comment: "Shops")))
                 if allShops.count == 0 {
                     EmptySelectedShop()
                 }
@@ -33,7 +34,7 @@ struct SelectedShopView: View {
     }
 }
 
-// MARK: - SelectedRow
+// MARK: - SELECTEDROW
 
 struct SelectedShopRow: View {
     @ObservedObject var theme = gThemeSettings
@@ -41,7 +42,7 @@ struct SelectedShopRow: View {
     
     var body: some View {
         HStack {
-            Text(store.shopName)
+            Text(store.shopName) // modifier
                 .font(Font.system(size: 20))
                 .foregroundColor((store.countItemsInCart != 0) ? (theme.mainColor) : colorBlackWhite)
             Spacer() 
@@ -61,7 +62,7 @@ struct ConditionalSelectedShopRow: View {
             NavigationLink(destination:
                 SelectedItemView(store: store)) {
                     SelectedShopRow(store: store)
-            }.animation(.default) 
+            }
         }
     }
 }
@@ -73,11 +74,11 @@ struct EmptySelectedShop: View {
     var body: some View {
         ZStack {
             VStack {
-                Text(NSLocalizedString("start_from_list", comment: ""))
-                    .font(Font.system(size: 20))
+                Text(NSLocalizedString("start_from_list", comment: "Start from List section!"))
+                    .font(Font.system(size: 20)) // modifier
                 Image(systemName: "tray.and.arrow.down.fill")
                     .displayImage(width: 200, height: 200)
-            }.foregroundColor(theme.mainColor).opacity(0.8)
+            }.foregroundColor(theme.mainColor).opacity(0.8) // modifier
         }.edgesIgnoringSafeArea(.all)
         .onAppear { print("EmptySelectedShop appears") }
         .onDisappear { print("EmptySelectedShop disappers") }

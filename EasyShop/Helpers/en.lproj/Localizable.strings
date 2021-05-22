@@ -1,4 +1,3 @@
-// Text(NSLocalizedString("tab_list", comment: ""))
 // Content View
 "tab_list" = "List";
 "tab_cart" = "Cart";
@@ -25,7 +24,7 @@
 
 // Settings View
 "appearance" = "Appearance";
-"language" = "Language";
+"logo" = "App information";
 "version" = "Version 1.0";
 
 // Settings Theme
@@ -34,13 +33,8 @@
 "changed_theme" = "You have changed the theme!!!";
 
 // Settings Dark Mode
-"aspect" = "Aspect";
+"aspect" = "App Aspect";
 "dark_mode" = "Dark Mode";
-
-// IconColor
-"app_icon" = "APP ICON";
-"app_icons" = "Icons";
-"app_success" = "DONE! You have changed the icon";
 
 // ColorTheme
 "blue_theme" = "Blue";
@@ -48,3 +42,5 @@
 "orange_theme" = "Orange";
 "pink_theme" = "Pink";
 "red_theme" = "Red";
+
+// Text(NSLocalizedString("tab_list", comment: ""))
