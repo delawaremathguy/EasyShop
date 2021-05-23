@@ -16,10 +16,11 @@ struct ShopList: View {
 // MARK: - Header
                        TextField(NSLocalizedString("new_shop", comment: "new shop here..."), text: $name)
                            .reusableTextField(height: rowHeight, color: colorWhiteBlack, fontSize: 20, alignment: .center, autocorrection: true)
-                       Button(action: { // animation
+                       Button(action: {
+                        withAnimation {
                             newShop(name: name)
                             impactSoft.impactOccurred()
-                       }) {
+                        } } ) {
                             Image(systemName: "plus")
                                 .reusableButtonImage(scale: .large, width: 50, height: 50, colorF: theme.mainColor, opacity: name.isEmpty ? 0.4 : 1.0)
                                 }.disabled(name.isEmpty)
@@ -49,19 +50,19 @@ struct ShopList: View {
         .onDisappear { print("ShopList disappers") }
     }
     // MARK: - Functions
-    func newShop(name: String) { // animation
+    func newShop(name: String) {
         Shop.addNewShop(named: name)
         self.name = ""
         print("New Shop created")
     }
-    func deleteShop(at offsets: IndexSet) { // animation
+    func deleteShop(at offsets: IndexSet) {
         for index in offsets {
             Shop.delete(allShops[index])
         }
         PersistentContainer.saveContext()
         print("Shop deleted")
     }
-    private func doMove(from indexes: IndexSet, to destinationIndex: Int) { // animation
+    private func doMove(from indexes: IndexSet, to destinationIndex: Int) {
         var revisedItems: [Shop] = allShops.map{ $0 }
         revisedItems.move(fromOffsets: indexes, toOffset: destinationIndex)
         for index in 0 ..< revisedItems.count {
@@ -80,8 +81,9 @@ struct ShopListRow: View {
     var body: some View {
         HStack {
             Text(store.shopName) // Modifiers
-                .font(Font.system(size: 20))
-                .foregroundColor(store.hasItemsInCartNotYetTaken ? (theme.mainColor) : colorBlackWhite)
+                .reusableTextItem(colorF: store.hasItemsInCartNotYetTaken ? (theme.mainColor) : colorBlackWhite, size: 20)
+//                .font(Font.system(size: 20))
+//                .foregroundColor(store.hasItemsInCartNotYetTaken ? (theme.mainColor) : colorBlackWhite)
             Spacer()
         }
         .frame(height: rowHeight)

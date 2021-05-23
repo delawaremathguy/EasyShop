@@ -25,13 +25,18 @@ struct LogoView: View {
     var body: some View {
         Section(header: Text(NSLocalizedString("logo", comment: "Information about the app"))) {
             Image("easyshoplogo").foregroundColor(theme.mainColor)
-            Text(NSLocalizedString("version", comment: "Version of the app")).font(.caption)
-        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center) // modifier
+                .reusableSection(miW: 0, maW: .infinity, miH: 0, maH: .infinity, ali: .center)
+            Text(NSLocalizedString("version", comment: "Version of the app"))
+                .reusableSection(miW: 0, maW: .infinity, miH: 0, maH: .infinity, ali: .center)
+        }
     }
 }
-
-
-
+extension View {
+    func reusableSection(miW: CGFloat, maW: CGFloat, miH: CGFloat, maH: CGFloat, ali: Alignment) -> some View {
+        self
+            .frame(minWidth: miW, maxWidth: maW, minHeight: miH, maxHeight: maH, alignment: ali)
+    }
+}
 
  // MARK: - PREVIEWS
 

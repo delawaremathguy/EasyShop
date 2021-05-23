@@ -35,7 +35,6 @@
 		DA3B3C96254B476300A78604 /* SelectedItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C95254B476300A78604 /* SelectedItemView.swift */; };
 		DA3B3C9A254B477800A78604 /* ShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C99254B477800A78604 /* ShopList.swift */; };
 		DA3B3C9E254B478300A78604 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3C9D254B478300A78604 /* ItemList.swift */; };
-		DA3B3CA4254B4CED00A78604 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B3CA3254B4CED00A78604 /* Modifiers.swift */; };
 		DAB1E9AB255C33C50071AAC0 /* Item+Extensions Jerry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1E9A8255C33C50071AAC0 /* Item+Extensions Jerry.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,7 +74,6 @@
 		DA3B3C95254B476300A78604 /* SelectedItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedItemView.swift; sourceTree = "<group>"; };
 		DA3B3C99254B477800A78604 /* ShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopList.swift; sourceTree = "<group>"; };
 		DA3B3C9D254B478300A78604 /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
-		DA3B3CA3254B4CED00A78604 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		DAB1E9A8255C33C50071AAC0 /* Item+Extensions Jerry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Item+Extensions Jerry.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,14 +100,6 @@
 			path = Icons;
 			sourceTree = "<group>";
 		};
-		881B486D2603DB7C00087B21 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				881B486E2603DBA100087B21 /* Constants.swift */,
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
 		884E3A992572A90D00F9CBE4 /* Settings Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,8 +115,8 @@
 		8876918A25B9E201001841F4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				881B486E2603DBA100087B21 /* Constants.swift */,
 				853690AB25B60AC2001395C2 /* Localizable.strings */,
-				DA3B3CA3254B4CED00A78604 /* Modifiers.swift */,
 				8821AE84264ED0270019E71D /* Extensions.swift */,
 				88B1A022257860EC007AFE02 /* ColorTheme.swift */,
 			);
@@ -159,7 +149,6 @@
 				884E3A992572A90D00F9CBE4 /* Settings Views */,
 				8876918A25B9E201001841F4 /* Helpers */,
 				88084CB525C37E0B009DCE0F /* Icons */,
-				881B486D2603DB7C00087B21 /* Utility */,
 				DA3B3C68254B417700A78604 /* Assets.xcassets */,
 				88B1A01F2578579E007AFE02 /* Colors.xcassets */,
 				DA3B3C6D254B417700A78604 /* Info.plist */,
@@ -309,7 +298,6 @@
 				884E3A9B2572A93F00F9CBE4 /* SettingsViews.swift in Sources */,
 				DA3B3C7B254B43A200A78604 /* CoreDataModel.xcdatamodeld in Sources */,
 				88084CC625C38C8B009DCE0F /* SettingsAppearance.swift in Sources */,
-				DA3B3CA4254B4CED00A78604 /* Modifiers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

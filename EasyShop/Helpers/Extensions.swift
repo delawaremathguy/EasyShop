@@ -7,8 +7,7 @@ extension View {
         self
             .overlay(RoundedRectangle(cornerRadius: radius)
                         .stroke(lineWidth: stroke)
-                        .foregroundColor(colorF)
-            )
+                        .foregroundColor(colorF))
             .padding()
             .background(colorB)
     }
@@ -17,8 +16,19 @@ extension View {
             .frame(width: width, height: height)
             .mask(RoundedRectangle(cornerRadius: maskRadius))
             .overlay(RoundedRectangle(cornerRadius: overlayRadius)
-                        .stroke(strokeColor)
-            )
+                        .stroke(strokeColor))
+    }
+    func reusableTakenImage(place: Edge.Set, padding: CGFloat, height: CGFloat, shape: Rectangle) -> some View {
+        self
+            .padding(place, padding)
+            .frame(height: height)
+            .contentShape(shape)
+    }
+    
+    func reusableStack(opacity: Double, colorF: Color) -> some View {
+        self
+            .opacity(opacity)
+            .foregroundColor(colorF)
     }
 }
 
@@ -26,15 +36,14 @@ extension View {
 
 extension Image {
     func displayImage(width: CGFloat, height: CGFloat) -> some View {
-        self  // SelectedShopView
+        self
             .resizable()
             .frame(width: width, height: height)
     }
-    func reusableImage(width: CGFloat, height: CGFloat, padding: CGFloat) -> some View {
-        self  // SettingsView
-            .resizable()
-            .frame(width: width, height: height)
-            .padding(padding)
+    func reusableSelectedImage(scale: Scale, coloF: Color) -> some View {
+        self
+            .imageScale(scale)
+            .foregroundColor(coloF)
     }
     func reusableButtonImage(scale: Scale, width: CGFloat, height: CGFloat, colorF: Color, opacity: Double) -> some View {
         self
@@ -42,25 +51,6 @@ extension Image {
             .frame(width: width, height: height)
             .foregroundColor(colorF)
             .opacity(opacity)
-            
-    }
-    func reusableChevron(place: Edge.Set, size: CGFloat, weight: Font.Weight) -> some View {
-        self
-            .padding(place)
-            .font(.system(size: size, weight: weight))
-    }
-    func reusableIcon(size: CGFloat, weight: Font.Weight, desing: Font.Design, color: Color) -> some View {
-        self
-            .font(.system(size: size, weight: weight, design: desing))
-            .foregroundColor(color)
-    }
-    func reusableIconApp(rendering: Image.TemplateRenderingMode, width: CGFloat, height: CGFloat, corner: CGFloat) -> some View {
-        self
-            .renderingMode(rendering)
-            .resizable()
-            .scaledToFit()
-            .frame(width: width, height: height)
-            .cornerRadius(corner)
     }
 }
 
@@ -110,3 +100,31 @@ extension TextField {
         
     }
 }
+/*
+ 
+//    func reusableImage(width: CGFloat, height: CGFloat, padding: CGFloat) -> some View {
+//        self  // SettingsView
+//            .resizable()
+//            .frame(width: width, height: height)
+//            .padding(padding)
+//    }
+ 
+ //    func reusableChevron(place: Edge.Set, size: CGFloat, weight: Font.Weight) -> some View {
+ //        self
+ //            .padding(place)
+ //            .font(.system(size: size, weight: weight))
+ //    }
+ //    func reusableIcon(size: CGFloat, weight: Font.Weight, desing: Font.Design, color: Color) -> some View {
+ //        self
+ //            .font(.system(size: size, weight: weight, design: desing))
+ //            .foregroundColor(color)
+ //    }
+ //    func reusableIconApp(rendering: Image.TemplateRenderingMode, width: CGFloat, height: CGFloat, corner: CGFloat) -> some View {
+ //        self
+ //            .renderingMode(rendering)
+ //            .resizable()
+ //            .scaledToFit()
+ //            .frame(width: width, height: height)
+ //            .cornerRadius(corner)
+ //    }
+ */

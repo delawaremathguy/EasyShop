@@ -13,7 +13,7 @@ struct SelectedShopView: View {
                     Section(header:
                         HStack {
                             Spacer()
-                            Text(NSLocalizedString("products_remaining", comment: "Remaining products")).opacity(allShops.count != 0 ? 1 : 0) // worth it?
+                            Text(NSLocalizedString("products_remaining", comment: "Remaining products"))//.opacity(allShops.count != 0 ? 1 : 0) // worth it?
                         }.textCase(nil) // textcase?
                     ) {
                         ForEach(allShops) { s in
@@ -42,9 +42,10 @@ struct SelectedShopRow: View {
     
     var body: some View {
         HStack {
-            Text(store.shopName) // modifier
-                .font(Font.system(size: 20))
-                .foregroundColor((store.countItemsInCart != 0) ? (theme.mainColor) : colorBlackWhite)
+            Text(store.shopName)
+                .reusableTextItem(colorF: store.countItemsInCart != 0 ? (theme.mainColor) : colorBlackWhite, size: 20)
+//                .font(Font.system(size: 20))
+//                .foregroundColor((store.countItemsInCart != 0) ? (theme.mainColor) : colorBlackWhite)
             Spacer() 
             Text("\(store.countItemsInCart)").font(.caption)
         }.frame(height: rowHeight)
@@ -78,7 +79,8 @@ struct EmptySelectedShop: View {
                     .font(Font.system(size: 20)) // modifier
                 Image(systemName: "tray.and.arrow.down.fill")
                     .displayImage(width: 200, height: 200)
-            }.foregroundColor(theme.mainColor).opacity(0.8) // modifier
+            }.reusableStack(opacity: 0.8, colorF: theme.mainColor)
+           // .foregroundColor(theme.mainColor).opacity(0.8) // modifier
         }.edgesIgnoringSafeArea(.all)
         .onAppear { print("EmptySelectedShop appears") }
         .onDisappear { print("EmptySelectedShop disappers") }

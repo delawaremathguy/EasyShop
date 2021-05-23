@@ -19,10 +19,11 @@ struct ItemList: View {
                         .frame(minWidth: 45, maxWidth: 55)
                     TextField(NSLocalizedString("new_product", comment: "new product here..."), text: $name)
                         .reusableTextField(height: rowHeight, color: colorWhiteBlack, fontSize: 20, alignment: .center, autocorrection: true)
-                    Button(action: { // animation
+                    Button(action: {
+                        withAnimation {
                         newItem()
                         impactSoft.impactOccurred()
-                    }) {
+                        } } ) {
                         Image(systemName: "plus")
                             .reusableButtonImage(scale: .large, width: 50, height: 50, colorF: theme.mainColor, opacity: name.isEmpty ? 0.4 : 1.0)
                     }.disabled(name.isEmpty)
@@ -44,20 +45,22 @@ struct ItemList: View {
             Section {
                 InfinitLine()
                 HStack {
-                    Button(action: { // animation
-                        deselectAll()
-                        impactMedium.impactOccurred()
-                    }) {
-                        Text(NSLocalizedString("deselet_all", comment: "")).padding(.leading, 12)
+                    Button(action: {
+                            withAnimation {
+                                deselectAll()
+                                impactMedium.impactOccurred()
+                            }}) {
+                        Text(NSLocalizedString("deselet_all", comment: ""))
                     }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
                     Spacer()
-                    Button(action: { // animation
-                        selectAll()
-                        impactMedium.impactOccurred()
-                    }) {
-                        Text(NSLocalizedString("select_all", comment: "")).padding(.trailing, 12)
+                    Button(action: {
+                            withAnimation {
+                                selectAll()
+                                impactMedium.impactOccurred()
+                            }}) {
+                        Text(NSLocalizedString("select_all", comment: ""))
                     }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count == 0) == true)
-                }.padding(.vertical, 10) // horizontal padding 12?
+                }.padding([.horizontal, .vertical], 10)
             } // SC
         } // VS
         
@@ -73,17 +76,17 @@ struct ItemList: View {
     }
     
 // MARK: - FUNCTIONS
-    func newItem() { // animation
+    func newItem() {
         Item.addNewItem(named: name, to: store)
         self.name = ""
         print("New Item created")
     }
-    func deleteItem(at offsets: IndexSet) { // animation
+    func deleteItem(at offsets: IndexSet) {
         let items = store.getItem
         offsets.forEach({ Item.delete( items[$0] )})
         print("Item deleted")
     }
-    private func doMove(from indexes: IndexSet, to destinationIndex: Int) { // animation
+    private func doMove(from indexes: IndexSet, to destinationIndex: Int) {
         var revisedItems: [Item] = store.getItem.map{ $0 }
         revisedItems.move(fromOffsets: indexes, toOffset: destinationIndex)
         for index in 0 ..< revisedItems.count {
@@ -97,11 +100,11 @@ struct ItemList: View {
             Image(systemName: "chevron.left").font(.system(size: 16, weight: .regular))
         }
     }
-    func selectAll() { // animation
+    func selectAll() {
         print("selectAll function executed")
         store.getItem.forEach({ $0.status = kOnListNotTaken })
     }
-    func deselectAll() { // animation
+    func deselectAll() {
         print("deselectAll function executed")
         store.getItem.forEach({ $0.status = kNotOnList })
     }
@@ -115,16 +118,18 @@ struct ItemListRow: View {
     
     var body: some View {
         Button(action: { // animation
-            self.item.toggleSelected()
-            impactSoft.impactOccurred()
-            print("item added to List not taken")
-        }) {
+                withAnimation {
+                    self.item.toggleSelected()
+                    impactSoft.impactOccurred()
+                    print("item added to List not taken")
+                }}) {
             HStack {
                 Text(item.itemName).reusableTextItem(colorF: colorBlackWhite, size: 20)
                 Spacer()
                 Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill")
-                    .imageScale(.large) // modifiers
-                    .foregroundColor(theme.mainColor)
+                    .reusableSelectedImage(scale: .large, coloF: theme.mainColor)
+//                    .imageScale(.large) // modifiers
+//                    .foregroundColor(theme.mainColor)
             }.frame(height: rowHeight)
         }
     }

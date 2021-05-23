@@ -8,12 +8,11 @@ struct SelectedItemView: View {
     @ObservedObject var theme = gThemeSettings
     
     @State private var layoutView = false
-    @State private var switchButton = false
     
     var body: some View {
         VStack {
-// MARK: - List
-            Group { // Navigating back and forth dismiss the selected view style!!!
+// MARK: - List // Navigating back and forth dismiss the selected view style!!!
+            Group {
                 if layoutView {
                     HStack(spacing: 0) {
                         List {
@@ -52,20 +51,22 @@ struct SelectedItemView: View {
 // MARK: - Footer
             InfinitLine()
             HStack {
-                Button(action: { // animation
-                    clearAll()
-                    impactHeavy.impactOccurred()
-                }) {
-                    Text(NSLocalizedString("clear_all", comment: "")).padding(.leading, 12)
+                Button(action: {
+                        withAnimation {
+                            clearAll()
+                            impactHeavy.impactOccurred()
+                        }}) {
+                    Text(NSLocalizedString("clear_all", comment: ""))
                 }.disabled((store.getItem.filter({ $0.status == kOnListAndTaken }).count == 0) == true)
                 Spacer()
-                Button(action: { // animation
-                    takeAll()
-                    impactMedium.impactOccurred()
-                }) {
-                    Text(NSLocalizedString("take_all", comment: "")).padding(.trailing, 12)
+                Button(action: {
+                        withAnimation {
+                            takeAll()
+                            impactMedium.impactOccurred()
+                        }}) {
+                    Text(NSLocalizedString("take_all", comment: ""))
                 }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
-            }.padding(.bottom, 10) // horizontal padding??
+            }.padding([.horizontal, .bottom], 10)
         }
         .navigationBarTitle("\(store.shopName)", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
@@ -84,21 +85,19 @@ struct SelectedItemView: View {
             print("Navigating Back")
         }) {
             Image(systemName: "chevron.left")
-                .reusableChevron(place: .horizontal, size: 20, weight: .regular) // working?
         }
     }
     func switchView() -> some View {
         Button(action: {
             withAnimation() {
-            self.switchButton.toggle()
-            self.layoutView.toggle() // using only 1 toggle for all would work?
+            self.layoutView.toggle()
             }
             print("switching View")
         }) {
-            Image(switchButton ? "arrow1" : "arrow2") // create new icon
-        }.animation(.default)
+            Image(layoutView ? "arrow1" : "arrow2").animation(.default)
+        }
     }
-    func takeAll() { // animation
+    func takeAll() {
         print("takeAll function executed")
         for item in store.getItem {
             if item.status == kOnListNotTaken {
@@ -106,7 +105,7 @@ struct SelectedItemView: View {
             }
         }
     }
-    func clearAll() { // animation
+    func clearAll() {
         print("clearAll function executed")
         for item in store.getItem {
             if item.status == kOnListAndTaken {
@@ -127,9 +126,10 @@ struct SelectedTakenImage: View {
             Text(item.itemName).reusableText(colorF: colorBlackWhite, size: 20, place: .horizontal, padding: 10)
             Spacer()
         }
-        .padding(.horizontal, 5) // modifier
-        .frame(height: rowHeight)
-        .contentShape(Rectangle())
+        .reusableTakenImage(place: .horizontal, padding: 5, height: rowHeight, shape: Rectangle())
+//        .padding(.horizontal, 5) // modifier
+//        .frame(height: rowHeight)
+//        .contentShape(Rectangle())
         .onTapGesture(count: 2) {
             if item.status == kOnListNotTaken {
                 item.status = kOnListAndTaken
@@ -139,7 +139,7 @@ struct SelectedTakenImage: View {
                 print("item added on not taken list")
             }
             impactSoft.impactOccurred()
-        }.animation(.easeOut(duration: 1.5)) // working?
+        }
     }
 }
 
