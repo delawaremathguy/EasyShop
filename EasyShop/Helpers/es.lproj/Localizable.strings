@@ -24,7 +24,7 @@
 
 // Settings View
 "appearance" = "Apariencia";
-"language" = "Idioma";
+"logo" = "Informacion de la app";
 "version" = "Version 1.0";
 
 // Settings Theme
@@ -33,13 +33,8 @@
 "changed_theme" = "Has cambiado el color!!!";
 
 // Settings Dark Mode
-"aspect" = "Aspecto";
+"aspect" = "Aspecto de la App";
 "dark_mode" = "Modo Oscuro";
-
-// IconColor
-"app_icon" = "COLOR DEL ICONO";
-"app_icons" = "Iconos";
-"app_success" = "Hecho! Has cambiado el color del icono";
 
 // ColorTheme
 "blue_theme" = "Tema Azul";

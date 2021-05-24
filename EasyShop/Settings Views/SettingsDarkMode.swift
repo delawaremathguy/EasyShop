@@ -1,14 +1,18 @@
 import SwiftUI
 
 struct SettingsDarkMode: View {
+    
     @AppStorage("isDarkMode") private var isDarkMode: Bool = false
+    
+    @ObservedObject var theme = gThemeSettings
     
     var body: some View {
         Section(header: Text(NSLocalizedString("aspect", comment: ""))) {
             Toggle(isOn: $isDarkMode, label: {
                 Image(systemName: "moon.circle")
+                    .foregroundColor(theme.mainColor)
                 Text(NSLocalizedString("dark_mode", comment: ""))
-                    .modifier(capsuleFont())
+                    .reusableLabel(font: .headline, size: 20, design: .serif, color: .primary)
             })
         }
     }
@@ -16,8 +20,11 @@ struct SettingsDarkMode: View {
 
 struct SettingsDarkMode_Previews: PreviewProvider {
     static var previews: some View {
-        Toggle("Dark Mode", isOn: .constant(false))
-            .padding()
-            .previewLayout(.sizeThatFits)
+        Group {
+            SettingsDarkMode()
+                .padding()
+                .previewLayout(.sizeThatFits)
+        }
     }
 }
+//
