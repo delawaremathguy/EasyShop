@@ -11,7 +11,7 @@ struct SelectedItemView: View {
     
     var body: some View {
         VStack {
-// MARK: - List // Navigating back and forth dismiss the selected view style!!!
+// MARK: - List // Navigating back and forth dismiss the selected view style, from columns to list!!!
             Group {
                 if layoutView {
                     HStack(spacing: 0) {
