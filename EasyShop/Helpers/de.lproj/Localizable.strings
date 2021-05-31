@@ -24,7 +24,7 @@
 
 // Settings View
 "appearance" = "App-Erscheinungsbild";
-"logo" = "Informacion de la app"; // <-- FIX
+"logo" = "App-Information";
 "version" = "Die Version 1.0";
 
 // Settings Theme
@@ -33,5 +33,5 @@
 "changed_theme" = "Sie haben das Thema geändert!!!";
 
 // Settings Dark Mode
-"aspect" = "Aspect"; // <-- FIX
-"dark_mode" = "Dark Mode"; // <-- FIX
+"aspect" = "Erscheinungsbild";
+"dark_mode" = "Dunkler Modus";

@@ -23,8 +23,8 @@
 "take_all" = "Leve tudo";
 
 // Settings View
-"appearance" = "Aparencia";
-"logo" = "Informacion de la app"; // <-- FIX
+"appearance" = "Aparência";
+"logo" = "Sobre la App";
 "version" = "Versao 1.0";
 
 // Settings Theme
@@ -33,5 +33,5 @@
 "changed_theme" = "Voce mudou o tema!!!";
 
 // Settings Dark Mode
-"aspect" = "Aspect"; // <-- FIX
-"dark_mode" = "Dark Mode"; // <-- FIX
+"aspect" = "Aparència";
+"dark_mode" = "Mode Escuro";
