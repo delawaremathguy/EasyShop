@@ -132,6 +132,9 @@ struct ItemListRow: View {
                     }}
             Spacer()
             TextField(item.itemAmount, text: $textfieldLimit.amount, onCommit: updateAmount)
+                .onChange(of: textfieldLimit.amount) {_ in
+                    updateAmount()
+                }
                 .multilineTextAlignment(.trailing)
             
             Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill")

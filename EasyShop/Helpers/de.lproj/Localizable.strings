@@ -35,3 +35,10 @@
 // Settings Dark Mode
 "aspect" = "Erscheinungsbild";
 "dark_mode" = "Dunkler Modus";
+
+// ColorTheme
+"blue_theme" = "Blaues";
+"green_theme" = "Grünes";
+"orange_theme" = "Orange";
+"pink_theme" = "Rosa";
+"red_theme" = "Rotes";

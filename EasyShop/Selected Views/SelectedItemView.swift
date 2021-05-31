@@ -129,10 +129,9 @@ struct SelectedTakenImage: View {
     @ObservedObject var item: Item
     var body: some View {
         HStack {
-            Text(item.itemName).reusableText(colorF: colorBlackWhite, size: 20, place: .horizontal, padding: 10).border(Color.yellow)
+            Text(item.itemName).reusableText(colorF: colorBlackWhite, size: 20, place: .horizontal, padding: 10)
             Spacer()
             Text(item.amount ?? "")
-                .frame(width: 60) // change from for limit textfield
                 .multilineTextAlignment(.trailing)
         }
         .reusableTakenImage(place: .horizontal, padding: 5, height: rowHeight, shape: Rectangle())

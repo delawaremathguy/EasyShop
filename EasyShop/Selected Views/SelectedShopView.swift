@@ -15,8 +15,8 @@ struct SelectedShopView: View {
                     Section(header:
                         HStack {
                             Spacer()
-                            Text(NSLocalizedString("products_remaining", comment: "Remaining products"))//.opacity(allShops.count != 0 ? 1 : 0) // worth it?
-                        }.textCase(nil) // textcase?
+                            Text(NSLocalizedString("products_remaining", comment: "Remaining products")).opacity(allShops.count != 0 ? 1 : 0)
+                        }.textCase(nil)
                     ) {
                         ForEach(allShops) { s in
                             ConditionalSelectedShopRow(store: s)

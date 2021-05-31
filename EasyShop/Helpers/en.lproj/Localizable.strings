@@ -36,4 +36,11 @@
 "aspect" = "App Aspect";
 "dark_mode" = "Dark Mode";
 
+// ColorTheme
+"blue_theme" = "Blue";
+"green_theme" = "Green";
+"orange_theme" = "Orange";
+"pink_theme" = "Pink";
+"red_theme" = "Red";
+
 // Text(NSLocalizedString("tab_list", comment: ""))

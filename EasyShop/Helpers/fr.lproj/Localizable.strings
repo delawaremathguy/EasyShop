@@ -33,6 +33,13 @@
 "changed_theme" = "vous avez changé de thème!";
 
 // Settings Dark Mode
-"aspect" = "Aspect"; // <-- FIX
-"dark_mode" = "Dark Mode"; // <-- FIX
+"aspect" = "Apparence";
+"dark_mode" = "Mode Sombre";
+
+// ColorTheme
+"blue_theme" = "Blue";
+"green_theme" = "Vert";
+"orange_theme" = "Orange";
+"pink_theme" = "Rose";
+"red_theme" = "Rouge";
 

@@ -120,10 +120,10 @@
 				DA3B3C98254B476800A78604 /* Selected Views */,
 				884E3A992572A90D00F9CBE4 /* Settings Views */,
 				8876918A25B9E201001841F4 /* Helpers */,
+				DA3B3C74254B425200A78604 /* CoreDataFiles */,
 				DA3B3C68254B417700A78604 /* Assets.xcassets */,
 				88B1A01F2578579E007AFE02 /* Colors.xcassets */,
 				DA3B3C6D254B417700A78604 /* Info.plist */,
-				DA3B3C74254B425200A78604 /* CoreDataFiles */,
 				DA3B3C6A254B417700A78604 /* Preview Content */,
 			);
 			path = EasyShop;

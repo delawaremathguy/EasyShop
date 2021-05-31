@@ -35,3 +35,10 @@
 // Settings Dark Mode
 "aspect" = "Aparència";
 "dark_mode" = "Mode Escuro";
+
+// ColorTheme
+"blue_theme" = "Azul";
+"green_theme" = "Verde";
+"orange_theme" = "Laranja";
+"pink_theme" = "Rosa";
+"red_theme" = "Vermelho";

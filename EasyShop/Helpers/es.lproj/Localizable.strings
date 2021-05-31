@@ -35,3 +35,10 @@
 // Settings Dark Mode
 "aspect" = "Aspecto de la App";
 "dark_mode" = "Modo Oscuro";
+
+// ColorTheme
+"blue_theme" = "Tema Azul";
+"green_theme" = "Tema Verde";
+"orange_theme" = "Tema Naranja";
+"pink_theme" = "Tema Rosa";
+"red_theme" = "Tema Rojo";

@@ -101,31 +101,4 @@ extension TextField {
         
     }
 }
-/*
- 
-//    func reusableImage(width: CGFloat, height: CGFloat, padding: CGFloat) -> some View {
-//        self  // SettingsView
-//            .resizable()
-//            .frame(width: width, height: height)
-//            .padding(padding)
-//    }
- 
- //    func reusableChevron(place: Edge.Set, size: CGFloat, weight: Font.Weight) -> some View {
- //        self
- //            .padding(place)
- //            .font(.system(size: size, weight: weight))
- //    }
- //    func reusableIcon(size: CGFloat, weight: Font.Weight, desing: Font.Design, color: Color) -> some View {
- //        self
- //            .font(.system(size: size, weight: weight, design: desing))
- //            .foregroundColor(color)
- //    }
- //    func reusableIconApp(rendering: Image.TemplateRenderingMode, width: CGFloat, height: CGFloat, corner: CGFloat) -> some View {
- //        self
- //            .renderingMode(rendering)
- //            .resizable()
- //            .scaledToFit()
- //            .frame(width: width, height: height)
- //            .cornerRadius(corner)
- //    }
- */
+
