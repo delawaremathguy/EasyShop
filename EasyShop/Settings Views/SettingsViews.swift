@@ -1,18 +1,17 @@
 import SwiftUI
 
 struct SettingsViews: View {
+    
     @ObservedObject var theme = gThemeSettings
+    
     @State private var action: Int? = 0
         
     var body: some View {
         NavigationView {
             Form {
                 SettingsTheme()
-                
                 SettingsDarkMode()
-                
                 LogoView()
-                
             }.navigationBarTitle(NSLocalizedString("tab_settings", comment: ""), displayMode: .inline)
         }
     }
@@ -21,7 +20,9 @@ struct SettingsViews: View {
 // MARK: - LOGO VIEW
 
 struct LogoView: View {
+    
     @ObservedObject var theme = gThemeSettings
+    
     var body: some View {
         Section(header: Text(NSLocalizedString("logo", comment: "Information about the app"))) {
             Image("easyshoplogo").foregroundColor(theme.mainColor)

@@ -2,6 +2,8 @@ import SwiftUI
 import CoreData
 
 struct SelectedItemView: View {
+    
+// MARK: - PROPERTIES
     @Environment(\.presentationMode) var present
     
     @ObservedObject var store: Shop
@@ -11,7 +13,8 @@ struct SelectedItemView: View {
     
     var body: some View {
         VStack {
-// MARK: - List // Navigating back and forth dismiss the selected view style, from columns to list!!!
+            
+// MARK: - LIST // Navigating back and forth dismiss the selected view style, from columns to list!!!
             Group {
                 if layoutView {
                     HStack(spacing: 0) {
@@ -48,7 +51,8 @@ struct SelectedItemView: View {
                     }
                 }
             }
-// MARK: - Footer
+            
+// MARK: - FOOTER
             InfinitLine()
             HStack {
                 Button(action: {
@@ -56,7 +60,7 @@ struct SelectedItemView: View {
                             clearAll()
                             impactHeavy.impactOccurred()
                         }}) {
-                    Text(NSLocalizedString("clear_all", comment: ""))
+                    Text(NSLocalizedString("clear_all", comment: "delete all from list"))
                 }.disabled((store.getItem.filter({ $0.status == kOnListAndTaken }).count == 0) == true)
                 Spacer()
                 Button(action: {
@@ -64,25 +68,27 @@ struct SelectedItemView: View {
                             takeAll()
                             impactMedium.impactOccurred()
                         }}) {
-                    Text(NSLocalizedString("take_all", comment: ""))
+                    Text(NSLocalizedString("take_all", comment: "add all to list"))
                 }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
             }.padding([.horizontal, .bottom], 10)
         }
+        
+// MARK: - MODIFIERS
         .navigationBarTitle("\(store.shopName)", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
-// MARK: - Toolbar
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading, content: backButton)
             ToolbarItem(placement: .navigationBarTrailing, content: switchView)
         }
-        .onAppear { print("SelectedItemView appears") }
-        .onDisappear { print("SelectedItemView disappers") }
+        .onAppear { print("SelectedItemView appears") } // PRINTING TEST
+        .onDisappear { print("SelectedItemView disappers") } // PRINTING TEST
     }
-// MARK: - Functions
+    
+// MARK: - FUNCTIONS
     func backButton() -> some View {
         Button(action: {
             present.wrappedValue.dismiss()
-            print("Navigating Back")
+            print("Navigating Back") // PRINTING TEST
         }) {
             Image(systemName: "chevron.left")
         }
@@ -92,13 +98,13 @@ struct SelectedItemView: View {
             withAnimation() {
             self.layoutView.toggle()
             }
-            print("switching View")
+            print("switching View") // PRINTING TEST
         }) {
             Image(layoutView ? "arrow1" : "arrow2").animation(.default)
         }
     }
     func takeAll() {
-        print("takeAll function executed")
+        print("takeAll function executed") // PRINTING TEST
         for item in store.getItem {
             if item.status == kOnListNotTaken {
                 item.status = kOnListAndTaken
@@ -106,7 +112,7 @@ struct SelectedItemView: View {
         }
     }
     func clearAll() {
-        print("clearAll function executed")
+        print("clearAll function executed") // PRINTING TEST
         for item in store.getItem {
             if item.status == kOnListAndTaken {
                 item.status = kNotOnList
@@ -123,20 +129,20 @@ struct SelectedTakenImage: View {
     @ObservedObject var item: Item
     var body: some View {
         HStack {
-            Text(item.itemName).reusableText(colorF: colorBlackWhite, size: 20, place: .horizontal, padding: 10)
+            Text(item.itemName).reusableText(colorF: colorBlackWhite, size: 20, place: .horizontal, padding: 10).border(Color.yellow)
             Spacer()
+            Text(item.amount ?? "")
+                .frame(width: 60) // change from for limit textfield
+                .multilineTextAlignment(.trailing)
         }
         .reusableTakenImage(place: .horizontal, padding: 5, height: rowHeight, shape: Rectangle())
-//        .padding(.horizontal, 5) // modifier
-//        .frame(height: rowHeight)
-//        .contentShape(Rectangle())
         .onTapGesture(count: 2) {
             if item.status == kOnListNotTaken {
                 item.status = kOnListAndTaken
-                print("item added on taken list")
+                print("item added on taken list") // PRINTING TEST
             } else {
                 item.status = kOnListNotTaken
-                print("item added on not taken list")
+                print("item added on not taken list") // PRINTING TEST
             }
             impactSoft.impactOccurred()
         }
@@ -152,18 +158,12 @@ struct SelectedItemView_Previews: PreviewProvider {
         data.name = "K-Mart"
         let datum = Item(context: moc)
         datum.name = "Eggs"
+        datum.amount = "6"
         datum.status = kOnListNotTaken
         data.addToItem(datum)
         return
-            SelectedItemView(store: data)
-                .previewDevice("iPhone 8")
-                .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
-
+                SelectedItemView(store: data)
+                    .previewDevice("iPhone 8")
+                    .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
     }
 }
-
-/*
- Image(systemName: (item.status == kOnListAndTaken) ? "cart.fill" : "cart.badge.plus")
-     .font(.system(size: 20))
-     .foregroundColor((item.status == kOnListAndTaken) ? .green : .red)
- */

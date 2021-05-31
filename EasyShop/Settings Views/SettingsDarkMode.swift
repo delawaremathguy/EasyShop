@@ -7,11 +7,11 @@ struct SettingsDarkMode: View {
     @ObservedObject var theme = gThemeSettings
     
     var body: some View {
-        Section(header: Text(NSLocalizedString("aspect", comment: ""))) {
+        Section(header: Text(NSLocalizedString("aspect", comment: "App aspect"))) {
             Toggle(isOn: $isDarkMode, label: {
                 Image(systemName: "moon.circle")
                     .foregroundColor(theme.mainColor)
-                Text(NSLocalizedString("dark_mode", comment: ""))
+                Text(NSLocalizedString("dark_mode", comment: "light/dark mode"))
                     .reusableLabel(font: .headline, size: 20, design: .serif, color: .primary)
             })
         }
@@ -27,4 +27,3 @@ struct SettingsDarkMode_Previews: PreviewProvider {
         }
     }
 }
-//

@@ -24,7 +24,7 @@
 
 // Settings View
 "appearance" = "Aparencia";
-"logo" = "Informacion de la app";
+"logo" = "Informacion de la app"; // <-- FIX
 "version" = "Versao 1.0";
 
 // Settings Theme
@@ -33,12 +33,5 @@
 "changed_theme" = "Voce mudou o tema!!!";
 
 // Settings Dark Mode
-"aspect" = "Aspect";
-"dark_mode" = "Dark Mode";
-
-// ColorTheme
-"blue_theme" = "Azul";
-"green_theme" = "Verde";
-"orange_theme" = "Laranja";
-"pink_theme" = "Rosa";
-"red_theme" = "Vermelho";
+"aspect" = "Aspect"; // <-- FIX
+"dark_mode" = "Dark Mode"; // <-- FIX

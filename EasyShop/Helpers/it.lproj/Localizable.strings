@@ -18,13 +18,13 @@
 
 // Selected Item View
 "remaining" = "Rimanenza";
-"taken" = "Sekezionati";
+"taken" = "Sekezionati"; // Seke???
 "clear_all" = "Cancella tutto";
 "take_all" = "Seleziona tutti";
 
 // Settings View
 "appearance" = "Aspetto";
-"logo" = "Informacion de la app";
+"logo" = "Informacion de la App";
 "version" = "Versione 1.0";
 
 // Settings Theme
@@ -33,12 +33,6 @@
 "changed_theme" = "Hai cambiato colore!";
 
 // Settings Dark Mode
-"aspect" = "Aspect";
+"aspect" = "Aspect"; // de la App
 "dark_mode" = "Dark Mode";
 
-// ColorTheme
-"blue_theme" = "Blu";
-"green_theme" = "Verde";
-"orange_theme" = "Arancione";
-"pink_theme" = "Rosa";
-"red_theme" = "Rosso";

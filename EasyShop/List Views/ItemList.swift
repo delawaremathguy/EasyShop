@@ -2,6 +2,8 @@ import SwiftUI
 import CoreData
 
 struct ItemList: View {
+    
+// MARK: - PROPERTIES
     @Environment(\.presentationMode) var present
     
     @ObservedObject var store: Shop
@@ -14,16 +16,16 @@ struct ItemList: View {
             Section {
                 HStack(spacing: 0) {
                     
-   // MARK: - HEADER
+// MARK: - HEADER
                     Text("\(store.getItem.filter({ $0.status == kOnListNotTaken }).count)")
                         .frame(minWidth: 45, maxWidth: 55)
                     TextField(NSLocalizedString("new_product", comment: "new product here..."), text: $name)
-                        .reusableTextField(height: rowHeight, color: colorWhiteBlack, fontSize: 20, alignment: .center, autocorrection: true)
+                        .reusableTextField(height: rowHeight, color: colorWhiteBlack, fontSize: 20, alignment: .center, autocorrection: true, limit: 2)
                     Button(action: {
                         withAnimation {
-                        newItem()
-                        impactSoft.impactOccurred()
-                        } } ) {
+                            newItem()
+                            impactSoft.impactOccurred()
+                        }}) {
                         Image(systemName: "plus")
                             .reusableButtonImage(scale: .large, width: 50, height: 50, colorF: theme.mainColor, opacity: name.isEmpty ? 0.4 : 1.0)
                     }.disabled(name.isEmpty)
@@ -50,7 +52,7 @@ struct ItemList: View {
                                 deselectAll()
                                 impactMedium.impactOccurred()
                             }}) {
-                        Text(NSLocalizedString("deselet_all", comment: ""))
+                            Text(NSLocalizedString("deselet_all", comment: ""))
                     }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
                     Spacer()
                     Button(action: {
@@ -58,7 +60,7 @@ struct ItemList: View {
                                 selectAll()
                                 impactMedium.impactOccurred()
                             }}) {
-                        Text(NSLocalizedString("select_all", comment: ""))
+                            Text(NSLocalizedString("select_all", comment: ""))
                     }.disabled((store.getItem.filter({ $0.status == kNotOnList }).count == 0) == true)
                 }.padding([.horizontal, .vertical], 10)
             } // SC
@@ -71,20 +73,20 @@ struct ItemList: View {
             ToolbarItem(placement: .cancellationAction, content: backButton)
             ToolbarItem(placement: .navigationBarTrailing) { EditButton().disabled(store.getItem.count == 0) }
         }
-        .onAppear { print("ItemList appears") }
-        .onDisappear { print("ItemList disappers") }
+        .onAppear { print("ItemList appears") } // PRINTING TEST
+        .onDisappear { print("ItemList disappers") } // PRINTING TEST
     }
     
 // MARK: - FUNCTIONS
     func newItem() {
         Item.addNewItem(named: name, to: store)
         self.name = ""
-        print("New Item created")
+        print("New Item created") // PRINTING TEST
     }
     func deleteItem(at offsets: IndexSet) {
         let items = store.getItem
         offsets.forEach({ Item.delete( items[$0] )})
-        print("Item deleted")
+        print("Item deleted") // PRINTING TEST
     }
     private func doMove(from indexes: IndexSet, to destinationIndex: Int) {
         var revisedItems: [Item] = store.getItem.map{ $0 }
@@ -93,7 +95,7 @@ struct ItemList: View {
             revisedItems[index].position = Int32(index)
             revisedItems.first?.shop?.objectWillChange.send()
         }
-        print("move from \(indexes) to \(destinationIndex)")
+        print("move from \(indexes) to \(destinationIndex)") // PRINTING TEST
     }
     func backButton() -> some View {
         Button(action: { present.wrappedValue.dismiss() }) {
@@ -101,11 +103,11 @@ struct ItemList: View {
         }
     }
     func selectAll() {
-        print("selectAll function executed")
+        print("selectAll function executed") // PRINTING TEST
         store.getItem.forEach({ $0.status = kOnListNotTaken })
     }
     func deselectAll() {
-        print("deselectAll function executed")
+        print("deselectAll function executed") // PRINTING TEST
         store.getItem.forEach({ $0.status = kNotOnList })
     }
 }
@@ -113,28 +115,75 @@ struct ItemList: View {
 // MARK: - ITEMLISTROW
 
 struct ItemListRow: View {
+    
+// MARK: - PROPERTIES
     @ObservedObject var item: Item
     @ObservedObject var theme = gThemeSettings
-    
+    @ObservedObject private var textfieldLimit = TextFieldLimit()
+        
     var body: some View {
-        Button(action: { // animation
-                withAnimation {
-                    self.item.toggleSelected()
-                    impactSoft.impactOccurred()
-                    print("item added to List not taken")
-                }}) {
-            HStack {
-                Text(item.itemName).reusableTextItem(colorF: colorBlackWhite, size: 20)
-                Spacer()
-                Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill")
-                    .reusableSelectedImage(scale: .large, coloF: theme.mainColor)
-//                    .imageScale(.large) // modifiers
-//                    .foregroundColor(theme.mainColor)
-            }.frame(height: rowHeight)
+        HStack {
+            Text(item.itemName).reusableTextItem(colorF: colorBlackWhite, size: 20)
+                .onTapGesture {
+                    withAnimation {
+                        self.item.toggleSelected()
+                        impactSoft.impactOccurred()
+                        print("item added to List not taken") // PRINTING TEST
+                    }}
+            Spacer()
+            TextField(item.itemAmount, text: $textfieldLimit.amount, onCommit: updateAmount)
+                .multilineTextAlignment(.trailing)
+            
+            Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill")
+                .reusableSelectedImage(scale: .large, coloF: theme.mainColor)
+                .onTapGesture {
+                    withAnimation {
+                        self.item.toggleSelected()
+                        impactSoft.impactOccurred()
+                        print("item added to List not taken") // PRINTING TEST
+                }
+            }
+        }.frame(height: rowHeight)
+    }
+    func updateAmount() {
+        if !item.itemAmount.isEmpty {
+            item.amount = textfieldLimit.amount
+            Item.saveUpdateItem()
         }
     }
 }
 
+// MARK: - TEXTLIMIT CLASS
+
+class TextFieldLimit: ObservableObject {
+    var limit: Int = 5
+    
+    @Published var amount: String = "" {
+        didSet {
+            if amount.count > limit {
+                amount = String(amount.prefix(limit))
+            }
+        }
+    }
+}
+
+/*
+ Button(action: { // animation
+         withAnimation {
+             self.item.toggleSelected()
+             impactSoft.impactOccurred()
+             print("item added to List not taken")
+         }}) {
+     HStack {
+         Text(item.itemName).reusableTextItem(colorF: colorBlackWhite, size: 20)
+         Spacer()
+         Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill")
+             .reusableSelectedImage(scale: .large, coloF: theme.mainColor)
+//                    .imageScale(.large) // modifiers
+//                    .foregroundColor(theme.mainColor)
+     }.frame(height: rowHeight)
+ }
+ */
 // MARK: - PREVIEWS
 
 struct ItemList_Previews: PreviewProvider {

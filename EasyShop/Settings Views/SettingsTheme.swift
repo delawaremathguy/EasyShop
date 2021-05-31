@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SettingsTheme: View {
+    
     @ObservedObject var theme = ThemeSettings()
     
     let themes: [Theme] = themeData
@@ -16,12 +17,12 @@ struct SettingsTheme: View {
                             gThemeSettings.themeSettings = item.id
                             UserDefaults.standard.set(self.theme.themeSettings, forKey: "Theme")
                             self.isThemeChanged.toggle()
-                            print("Changing to \(item.themeName)")
+                            print("Changing to \(item.themeName)") // Printing Test
                             impactMedium.impactOccurred()
                         }) {
                             VStack {
                                 
-// MARK: - Card
+// MARK: - CARD
                                 VStack {
                                     Spacer()
                                     Divider()
@@ -33,16 +34,15 @@ struct SettingsTheme: View {
                                     Spacer().frame(height: 45)
                                     Divider().background(Color.gray)
                                     
-// MARK: - Tabbar
+// MARK: - TABBAR
                                     HStack(spacing: 20) {
                                         Rectangle().reusableShape(width: 10, heigth: 10, color: item.mainColor)
                                         Rectangle().reusableShape(width: 10, heigth: 10, color: .gray)
                                         Rectangle().reusableShape(width: 10, heigth: 10, color: .gray)
                                     }.padding(.bottom, 12)
                                 }.reusableTabbar(width: 110, height: 180, maskRadius: 12, overlayRadius: 8, strokeColor: .gray)
-                                //.modifier(themeTabbar())
                                 
-// MARK: - Label
+// MARK: - LABEL
                                 Text(item.themeName)
                                     .reusableLabel(font: .headline, size: 20, design: .serif, color: item.mainColor)
                             } // VS
@@ -53,8 +53,8 @@ struct SettingsTheme: View {
             // MARK: - Alert
             .alert(isPresented: $isThemeChanged) {
                 Alert(
-                    title: Text(NSLocalizedString("done", comment: "")),
-                    message: Text(NSLocalizedString("changed_theme", comment: "")),
+                    title: Text(NSLocalizedString("done", comment: "Done text")),
+                    message: Text(NSLocalizedString("changed_theme", comment: "warning quote")),
                     dismissButton: .default(Text("Ok"))
                 )}
         }

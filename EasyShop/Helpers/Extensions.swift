@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - VIEW's
+// MARK: - VIEWS
 
 extension View {
     func reusableHstack(radius: CGFloat, stroke: CGFloat, colorF: Color, colorB: Color) -> some View {
@@ -90,13 +90,14 @@ extension Shape {
 // MARK: - TEXTFIELD
 
 extension TextField {
-    func reusableTextField(height: CGFloat, color: Color, fontSize: CGFloat, alignment: TextAlignment, autocorrection: Bool) -> some View {
+    func reusableTextField(height: CGFloat, color: Color, fontSize: CGFloat, alignment: TextAlignment, autocorrection: Bool, limit: Int) -> some View {
         self
             .frame(height: height)
             .background(color)
             .font(Font.system(size: fontSize))
             .multilineTextAlignment(alignment)
             .disableAutocorrection(autocorrection)
+            .lineLimit(limit)
         
     }
 }

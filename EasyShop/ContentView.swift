@@ -1,4 +1,4 @@
-import SwiftUI // Project on GitHub
+import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var theme = gThemeSettings

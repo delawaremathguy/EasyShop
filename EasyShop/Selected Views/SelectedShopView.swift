@@ -2,6 +2,8 @@ import SwiftUI
 import CoreData
 
 struct SelectedShopView: View {
+    
+// MARK: - PROPERTIES
     @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop>
     
     @ObservedObject var theme = gThemeSettings
@@ -29,8 +31,8 @@ struct SelectedShopView: View {
             }
         }
         .accentColor(theme.mainColor)
-        .onAppear { print("SelectedShopView appears") }
-        .onDisappear { print("SelectedShopView disappers") }
+        .onAppear { print("SelectedShopView appears") } // PRINTING TEST
+        .onDisappear { print("SelectedShopView disappers") } // PRINTING TEST
     }
 }
 
@@ -44,8 +46,6 @@ struct SelectedShopRow: View {
         HStack {
             Text(store.shopName)
                 .reusableTextItem(colorF: store.countItemsInCart != 0 ? (theme.mainColor) : colorBlackWhite, size: 20)
-//                .font(Font.system(size: 20))
-//                .foregroundColor((store.countItemsInCart != 0) ? (theme.mainColor) : colorBlackWhite)
             Spacer() 
             Text("\(store.countItemsInCart)").font(.caption)
         }.frame(height: rowHeight)
@@ -56,6 +56,7 @@ struct SelectedShopRow: View {
 
 struct ConditionalSelectedShopRow: View {
     @ObservedObject var store: Shop
+    
     var body: some View {
         if store.countItemsInCart == 0 {
             SelectedShopRow(store: store)
@@ -76,14 +77,13 @@ struct EmptySelectedShop: View {
         ZStack {
             VStack {
                 Text(NSLocalizedString("start_from_list", comment: "Start from List section!"))
-                    .font(Font.system(size: 20)) // modifier
+                    .font(Font.system(size: 20))
                 Image(systemName: "tray.and.arrow.down.fill")
                     .displayImage(width: 200, height: 200)
             }.reusableStack(opacity: 0.8, colorF: theme.mainColor)
-           // .foregroundColor(theme.mainColor).opacity(0.8) // modifier
         }.edgesIgnoringSafeArea(.all)
-        .onAppear { print("EmptySelectedShop appears") }
-        .onDisappear { print("EmptySelectedShop disappers") }
+        .onAppear { print("EmptySelectedShop appears") } // PRINTING TEST
+        .onDisappear { print("EmptySelectedShop disappers") } // PRINTING TEST
     }
 }
 // MARK: - PREVIEWS
