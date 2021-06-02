@@ -151,7 +151,7 @@ struct ItemListRow: View {
     func updateAmount() {
         if !item.itemAmount.isEmpty {
             item.amount = textfieldLimit.amount
-            Item.saveUpdateItem()
+            PersistentContainer.saveContext()
         }
     }
 }

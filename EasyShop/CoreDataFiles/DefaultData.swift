@@ -7,7 +7,7 @@ struct Shops: Codable, Identifiable {
     var item: [Items]
 }
 struct Items: Codable, Equatable, Identifiable {
-    var id = UUID()
+    var id = UUID() 
     var name: String?
     var position: Int32
 }

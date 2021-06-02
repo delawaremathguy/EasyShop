@@ -14,7 +14,7 @@ struct SelectedItemView: View {
     var body: some View {
         VStack {
             
-// MARK: - LIST // Navigating back and forth dismiss the selected view style, from columns to list!!!
+// MARK: - LIST
             Group {
                 if layoutView {
                     HStack(spacing: 0) {
@@ -72,6 +72,7 @@ struct SelectedItemView: View {
                 }.disabled((store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0) == true)
             }.padding([.horizontal, .bottom], 10)
         }
+        .onAppear(perform: navigateBack)
         
 // MARK: - MODIFIERS
         .navigationBarTitle("\(store.shopName)", displayMode: .inline)
@@ -83,6 +84,7 @@ struct SelectedItemView: View {
         .onAppear { print("SelectedItemView appears") } // PRINTING TEST
         .onDisappear { print("SelectedItemView disappers") } // PRINTING TEST
     }
+    
     
 // MARK: - FUNCTIONS
     func backButton() -> some View {
@@ -119,6 +121,11 @@ struct SelectedItemView: View {
             }
         }
         if store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0 { 
+            present.wrappedValue.dismiss()
+        }
+    }
+    func navigateBack() {
+        if store.getItem.filter({ $0.status == kOnListNotTaken }).count == 0 && store.getItem.filter({ $0.status == kOnListAndTaken }).count == 0 {
             present.wrappedValue.dismiss()
         }
     }

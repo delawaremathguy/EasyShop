@@ -18,7 +18,6 @@ extension Item {
 	class func addNewItem(named name: String, to store: Shop) {
 		let addItem = Item(context: PersistentContainer.context)
 		addItem.name = name
-        addItem.amount = ""
 		store.addToItem(addItem)
         if let lastItemByPosition = store.getItem.last {
             addItem.position = lastItemByPosition.position + 1

@@ -65,6 +65,7 @@ struct ShopList: View {
         for index in offsets {
             Shop.delete(allShops[index])
         }
+        
         PersistentContainer.saveContext()
         print("Shop deleted") // PRINTING TEST
     }

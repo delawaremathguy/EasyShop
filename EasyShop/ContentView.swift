@@ -33,6 +33,7 @@ struct ContentView: View {
                 .frame(width: 13, height: 13)
                 .offset(x: (( 2 * badgePosition) - 0.94 ) * ( geometry.size.width / ( 2 * tabsCount ) ) + 2, y: -29)
                 .opacity(Item.onShoppingListCount() != 0 ? 1.0 : 0)
+                
             }
         }.ignoresSafeArea(.keyboard)
     }
