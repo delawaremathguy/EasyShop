@@ -12,7 +12,7 @@ struct SelectedItemView: View {
     @State private var layoutView = false
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             
 // MARK: - LIST
             Group {
@@ -168,8 +168,10 @@ struct SelectedItemView_Previews: PreviewProvider {
         datum.status = kOnListNotTaken
         data.addToItem(datum)
         return
+            NavigationView {
                 SelectedItemView(store: data)
-                    .previewDevice("iPhone 8")
+                        .previewDevice("iPhone 8")
                     .environment(\.managedObjectContext, PersistentContainer.persistentContainer.viewContext)
+            }
     }
 }

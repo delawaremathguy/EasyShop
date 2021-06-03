@@ -22,7 +22,7 @@ class LimitAmount: ObservableObject {
 
 // MARK: - SHOP LIMIT
 
-class LimitShop: ObservableObject {
+class LimitShop: ObservableObject { // not working
     var limit: Int = 56
     
     @Published var name: String = "" {
@@ -36,7 +36,7 @@ class LimitShop: ObservableObject {
 
 // MARK: - ITEM LIMIT
 
-class LimitItem: ObservableObject {
+class LimitItem: ObservableObject { // not working
     var limit: Int = 42
     
     @Published var name: String = "" {

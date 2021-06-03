@@ -8,7 +8,6 @@ struct ItemList: View {
     
     @ObservedObject var store: Shop
     @ObservedObject var theme = gThemeSettings
-    @ObservedObject var limititem = LimitItem()
     
     @State var name = ""
     
@@ -20,7 +19,7 @@ struct ItemList: View {
 // MARK: - HEADER
                     Text("\(store.getItem.filter({ $0.status == kOnListNotTaken }).count)")
                         .frame(minWidth: 45, maxWidth: 55)
-                    TextField(NSLocalizedString("new_product", comment: "new product here..."), text: $limititem.name)
+                    TextField(NSLocalizedString("new_product", comment: "new product here..."), text: $name)
                         .reusableTextField(height: rowHeight, color: colorWhiteBlack, fontSize: 20, alignment: .center, autocorrection: true, limit: 2)
                     Button(action: {
                         withAnimation {
