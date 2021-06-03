@@ -30,3 +30,9 @@ iphone 11 -> 48 / 51
 
 8- When deleting a shop/product that has been selected, the red point remains visible on cart. - Fixed with notification center - DONE
 
+------------------ 
+ 
+ UPLOAD THE APP
+ 
+ 1. get and app id
+ 
