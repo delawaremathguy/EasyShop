@@ -8,6 +8,7 @@ struct ItemList: View {
     
     @ObservedObject var store: Shop
     @ObservedObject var theme = gThemeSettings
+    @ObservedObject var limititem = LimitItem()
     
     @State var name = ""
     
@@ -19,7 +20,7 @@ struct ItemList: View {
 // MARK: - HEADER
                     Text("\(store.getItem.filter({ $0.status == kOnListNotTaken }).count)")
                         .frame(minWidth: 45, maxWidth: 55)
-                    TextField(NSLocalizedString("new_product", comment: "new product here..."), text: $name)
+                    TextField(NSLocalizedString("new_product", comment: "new product here..."), text: $limititem.name)
                         .reusableTextField(height: rowHeight, color: colorWhiteBlack, fontSize: 20, alignment: .center, autocorrection: true, limit: 2)
                     Button(action: {
                         withAnimation {
@@ -119,7 +120,7 @@ struct ItemListRow: View {
 // MARK: - PROPERTIES
     @ObservedObject var item: Item
     @ObservedObject var theme = gThemeSettings
-    @ObservedObject private var textfieldLimit = TextFieldLimit()
+    @ObservedObject private var limitAmount = LimitAmount()
         
     var body: some View {
         HStack {
@@ -131,11 +132,13 @@ struct ItemListRow: View {
                         print("item added to List not taken") // PRINTING TEST
                     }}
             Spacer()
-            TextField(item.itemAmount, text: $textfieldLimit.amount, onCommit: updateAmount)
-                .onChange(of: textfieldLimit.amount) {_ in
+            
+            TextField(item.itemAmount, text: $limitAmount.amount, onCommit: updateAmount)
+                .onChange(of: limitAmount.amount) {_ in
                     updateAmount()
                 }
-                .multilineTextAlignment(.trailing)
+                .frame(maxWidth: 60)
+                .multilineTextAlignment(.center)
             
             Image(systemName: item.status != kOnListNotTaken ? "circle" : "checkmark.circle.fill")
                 .reusableSelectedImage(scale: .large, coloF: theme.mainColor)
@@ -150,25 +153,13 @@ struct ItemListRow: View {
     }
     func updateAmount() {
         if !item.itemAmount.isEmpty {
-            item.amount = textfieldLimit.amount
+            item.amount = limitAmount.amount
             PersistentContainer.saveContext()
         }
     }
 }
 
-// MARK: - TEXTLIMIT CLASS
 
-class TextFieldLimit: ObservableObject {
-    var limit: Int = 5
-    
-    @Published var amount: String = "" {
-        didSet {
-            if amount.count > limit {
-                amount = String(amount.prefix(limit))
-            }
-        }
-    }
-}
 
 /*
  Button(action: { // animation
@@ -195,7 +186,8 @@ struct ItemList_Previews: PreviewProvider {
         let data = Shop(context: moc)
         data.name = "K-Mart"
         let datum = Item(context: moc)
-        datum.name = "Eggs"
+        datum.name = "Item56789/123456789/123456789/123456789/123456789/123456789/"
+        datum.amount = "12345"
         data.addToItem(datum)
         return NavigationView {
             ItemList(store: data)

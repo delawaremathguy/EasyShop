@@ -72,7 +72,14 @@ var shopsList = [
         Items(name: "Cassava", position: 11),
         Items(name: "Celery", position: 12),
         Items(name: "Corn", position: 13)
-    ]), // end of shop
+    ]),
+    
+    Shops(id: 1005, name: "Test56789/123456789/123456789/123456789/123456789/123456789/", position: 4, item: [
+        Items(name: "Item56789/123456789/123456789/123456789/123456789/123456789/", position: 1),
+        Items(name: "Items6789/123456789/123456789/123456789/123456789/123456789/", position: 2)
+    ]),
+    
+    // end of shop
 //    Shops(id: 1005, name: "BookShop", position: 4, item: [
 //        Items(name: "Permanent Record", position: 1),
 //        Items(name: "Steve Jobs", position: 2),

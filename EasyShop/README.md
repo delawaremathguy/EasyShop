@@ -4,6 +4,14 @@ FIX:
 1- No placeholder created when new product is created - ok
 
 2 - Too many characters for shop / product name. Test with dummy data on devices first
+Shop: 
+iphone 6s -> 56 / 60
+iphone 11 -> 60 + / 60 +
+Item: 
+iphone 6s -> 42 / 46
+iphone 11 -> 48 / 51
+
+NEEDS A TEST
 
 3 - When introducing an amount and not saving it by clicking the enter the amount dissapear if the product is selected - ok
 

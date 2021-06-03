@@ -7,6 +7,7 @@ struct ShopList: View {
     @FetchRequest(fetchRequest: Shop.allShops()) var allShops: FetchedResults<Shop>
     
     @ObservedObject var theme = gThemeSettings
+    @ObservedObject var limitshop = LimitShop()
     
     @State var name = ""
     @State private var showingAlert = false
@@ -18,7 +19,7 @@ struct ShopList: View {
                     HStack(spacing: 0) {
                         
 // MARK: - HEADER
-                       TextField(NSLocalizedString("new_shop", comment: "new shop here..."), text: $name)
+                        TextField(NSLocalizedString("new_shop", comment: "new shop here..."), text: $limitshop.name)
                            .reusableTextField(height: rowHeight, color: colorWhiteBlack, fontSize: 20, alignment: .center, autocorrection: true, limit: 2)
                         
                        Button(action: {
