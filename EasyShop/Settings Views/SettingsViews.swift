@@ -9,9 +9,10 @@ struct SettingsViews: View {
     var body: some View {
         NavigationView {
             Form {
+                LogoView()
                 SettingsTheme()
                 SettingsDarkMode()
-                LogoView()
+                
             }.navigationBarTitle(NSLocalizedString("tab_settings", comment: ""), displayMode: .inline)
         }
     }

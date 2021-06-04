@@ -132,7 +132,7 @@ struct ItemListRow: View {
                     }}
             Spacer()
             
-            TextField(item.itemAmount, text: $limitAmount.amount, onCommit: updateAmount)
+            TextField(item.itemAmount, text: $limitAmount.amount) // , onCommit: updateAmount
                 .onChange(of: limitAmount.amount) {_ in
                     updateAmount()
                 }

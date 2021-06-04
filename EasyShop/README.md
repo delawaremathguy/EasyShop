@@ -4,7 +4,7 @@ TO FIX:
 
 7- SelectedItemView changes the view when navigating back and forth.
 
-9- Save newShop && newItem when pressing enter
+9- Save newShop && newItem when pressing enter.
 
 ----------------
 
@@ -30,9 +30,5 @@ iphone 11 -> 48 / 51
 
 8- When deleting a shop/product that has been selected, the red point remains visible on cart. - Fixed with notification center - DONE
 
------------------- 
- 
- UPLOAD THE APP
- 
- 1. get and app id
+
  
