@@ -20,32 +20,5 @@ class LimitAmount: ObservableObject {
     }
 }
 
-// MARK: - SHOP LIMIT
-
-class LimitShop: ObservableObject { // not working
-    var limit: Int = 56
-    
-    @Published var name: String = "" {
-        didSet {
-            if name.count > limit {
-                name = String(name.prefix(limit))
-            }
-        }
-    }
-}
-
-// MARK: - ITEM LIMIT
-
-class LimitItem: ObservableObject { // not working
-    var limit: Int = 42
-    
-    @Published var name: String = "" {
-        didSet {
-            if name.count > limit {
-                name = String(name.prefix(limit))
-            }
-        }
-    }
-}
 
 

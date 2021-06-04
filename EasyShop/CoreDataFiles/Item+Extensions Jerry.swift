@@ -28,14 +28,6 @@ extension Item {
 		PersistentContainer.saveContext()
 	}
 // 4
-    static func saveUpdateItem() {
-        do {
-            try PersistentContainer.persistentContainer.viewContext.save()
-        } catch {
-            PersistentContainer.persistentContainer.viewContext.rollback()
-        }
-    }
-// 5
     class func delete(_ item: Item) { 
         let shop = item.shop // this shop is the relationship
         let context = item.managedObjectContext
@@ -44,7 +36,7 @@ extension Item {
         NotificationCenter.default.post(name: .itemStatusChanged, object: self)
         PersistentContainer.saveContext()
     }
-// 6
+// 5
     var status: Int {
         get { Int( status16 )}
         set {
@@ -53,7 +45,7 @@ extension Item {
             NotificationCenter.default.post(name: .itemStatusChanged, object: self)
         }
     }
-// 7
+// 6
     func toggleSelected() {
         if status == kNotOnList {
             status = kOnListNotTaken
@@ -62,7 +54,7 @@ extension Item {
         }
         PersistentContainer.saveContext()
     }
-// 8
+// 7
     static func onShoppingListCount() -> Int {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "status16 == %d", kOnListNotTaken)

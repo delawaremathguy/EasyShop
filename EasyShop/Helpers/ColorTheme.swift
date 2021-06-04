@@ -39,6 +39,7 @@ class ThemeSettings: ObservableObject {
 let gThemeSettings = ThemeSettings()
 
 // MARK: - Usage
+
 /*
  @ObservedObject var theme = gThemeSettings
  
