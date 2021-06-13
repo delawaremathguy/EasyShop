@@ -2,13 +2,13 @@
 import CoreData
 
 public class PersistentContainer {
-    // MARK: - Define Constants / Variables
+// MARK: - Define Constants / Variables
     public static var context: NSManagedObjectContext {
             return persistentContainer.viewContext
     }
-    // MARK: - Initializer
+// MARK: - Initializer
     private init() {}
-    // MARK: - Core Data stack
+// MARK: - Core Data stack
     public static var persistentContainer: NSPersistentContainer = {
             let container = NSPersistentContainer(name: "CoreDataModel") // CDModel   name
             container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -20,7 +20,7 @@ public class PersistentContainer {
             container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
             return container
     }()
-    // MARK: - Core Data Saving support
+// MARK: - Core Data Saving support
     public static func saveContext () {
             let context = persistentContainer.viewContext
             if context.hasChanges {

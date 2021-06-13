@@ -35,9 +35,11 @@ class ThemeSettings: ObservableObject {
     }
     var mainColor: Color { themeData[themeSettings].mainColor }
 }
+
 let gThemeSettings = ThemeSettings()
 
 // MARK: - Usage
+
 /*
  @ObservedObject var theme = gThemeSettings
  

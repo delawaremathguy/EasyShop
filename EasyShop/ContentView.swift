@@ -1,4 +1,4 @@
-import SwiftUI // Project on GitHub
+import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var theme = gThemeSettings
@@ -33,12 +33,11 @@ struct ContentView: View {
                 .frame(width: 13, height: 13)
                 .offset(x: (( 2 * badgePosition) - 0.94 ) * ( geometry.size.width / ( 2 * tabsCount ) ) + 2, y: -29)
                 .opacity(Item.onShoppingListCount() != 0 ? 1.0 : 0)
+                
             }
         }.ignoresSafeArea(.keyboard)
     }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

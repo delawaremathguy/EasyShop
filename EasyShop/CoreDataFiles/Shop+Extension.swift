@@ -32,6 +32,7 @@ extension Shop {
     static func delete(_ shop: Shop) {
         let context = shop.managedObjectContext
         context?.delete(shop)
+        NotificationCenter.default.post(name: .itemStatusChanged, object: self)
     }
 // 5
     static func shopList() -> [Shop] {

@@ -23,8 +23,8 @@
 "take_all" = "Leve tudo";
 
 // Settings View
-"appearance" = "Aparencia";
-"logo" = "Informacion de la app";
+"appearance" = "Aparência";
+"logo" = "Sobre la App";
 "version" = "Versao 1.0";
 
 // Settings Theme
@@ -33,12 +33,12 @@
 "changed_theme" = "Voce mudou o tema!!!";
 
 // Settings Dark Mode
-"aspect" = "Aspect";
-"dark_mode" = "Dark Mode";
+"aspect" = "Aparència";
+"dark_mode" = "Mode Escuro";
 
 // ColorTheme
 "blue_theme" = "Azul";
 "green_theme" = "Verde";
 "orange_theme" = "Laranja";
-"pink_theme" = "Rosa";
+"pink_theme" = "Púrpura";
 "red_theme" = "Vermelho";

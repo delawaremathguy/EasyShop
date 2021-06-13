@@ -1,17 +1,17 @@
 import SwiftUI
 
 struct SettingsViews: View {
+    
     @ObservedObject var theme = gThemeSettings
+    
     @State private var action: Int? = 0
         
     var body: some View {
         NavigationView {
             Form {
-                SettingsTheme()
-                
-                SettingsDarkMode()
-                
                 LogoView()
+                SettingsTheme()
+                SettingsDarkMode()
                 
             }.navigationBarTitle(NSLocalizedString("tab_settings", comment: ""), displayMode: .inline)
         }
@@ -21,10 +21,12 @@ struct SettingsViews: View {
 // MARK: - LOGO VIEW
 
 struct LogoView: View {
+    
     @ObservedObject var theme = gThemeSettings
+    
     var body: some View {
         Section(header: Text(NSLocalizedString("logo", comment: "Information about the app"))) {
-            Image("easyshoplogo").foregroundColor(theme.mainColor)
+            Image("shopincart").foregroundColor(theme.mainColor) // shopincart
                 .reusableSection(miW: 0, maW: .infinity, miH: 0, maH: .infinity, ali: .center)
             Text(NSLocalizedString("version", comment: "Version of the app"))
                 .reusableSection(miW: 0, maW: .infinity, miH: 0, maH: .infinity, ali: .center)
@@ -45,51 +47,3 @@ struct SettingsViews_Previews: PreviewProvider {
         SettingsViews()
     }
 }
-
-/*
- var body: some View {
-     NavigationView {
-         VStack {
-             VStack(spacing: 25) {
-// MARK: - Navigation
-                 NavigationLink(destination: SettingsAppearance(), tag: 1, selection: $action) {
-                     CapsuleRow(image: "appearance", text: (NSLocalizedString("appearance", comment: "")))
-                 }
-             }.offset(y: -190)
-             
-// MARK: - Logo
-             VStack {
-                 Image("easyshoplogo").foregroundColor(theme.mainColor)
-                 Text(NSLocalizedString("version", comment: "Version of the app")).font(.caption)
-             }
-             .transition(.move(edge: .top))
-             .animation(.easeOut(duration: 0.8))
-         }
-         .navigationBarTitle(NSLocalizedString("tab_settings", comment: ""), displayMode: .inline)
-     }
- }
-}
- 
- // MARK: - CAPSULEROW
-
- struct CapsuleRow: View {
-     @ObservedObject var theme = gThemeSettings
-     var image: String
-     var text: String
-     
-     var body: some View {
-         HStack {
-             Image(image)
-                 .reusableImage(width: 40, height: 40, padding: 10)
-             Text(text)
-                 .reusableLabel(font: .headline, size: 20, design: .serif, color: theme.mainColor)
-             Spacer()
-             Image(systemName: "chevron.right")
-                 .padding(.trailing, 15)
-         }
-         .background(Color("ColorAccent"))
-         .frame(maxWidth: .infinity)
-     }
- }
- 
- */

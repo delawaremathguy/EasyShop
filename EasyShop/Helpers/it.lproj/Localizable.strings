@@ -18,27 +18,27 @@
 
 // Selected Item View
 "remaining" = "Rimanenza";
-"taken" = "Sekezionati";
+"taken" = "Selezionati";
 "clear_all" = "Cancella tutto";
 "take_all" = "Seleziona tutti";
 
 // Settings View
 "appearance" = "Aspetto";
-"logo" = "Informacion de la app";
+"logo" = "Informazione della App";
 "version" = "Versione 1.0";
 
 // Settings Theme
-"app_theme" = "App Theme";
+"app_theme" = "Tema della App";
 "done" = "FATTO!";
 "changed_theme" = "Hai cambiato colore!";
 
 // Settings Dark Mode
-"aspect" = "Aspect";
-"dark_mode" = "Dark Mode";
+"aspect" = "Aspetto della App"; 
+"dark_mode" = "Modo Scuro";
 
 // ColorTheme
 "blue_theme" = "Blu";
 "green_theme" = "Verde";
 "orange_theme" = "Arancione";
-"pink_theme" = "Rosa";
+"pink_theme" = "Viola";
 "red_theme" = "Rosso";

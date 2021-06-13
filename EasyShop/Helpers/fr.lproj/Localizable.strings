@@ -23,22 +23,23 @@
 "take_all" = "Pendre toutes";
 
 // Settings View
-"appearance" = "Apparence";
-"logo" = "Informacion de la app";
+"appearance" = "Apparence de l´App";
+"logo" = "Informacion de l´App";
 "version" = "Version 1.0";
 
 // Settings Theme
-"app_theme" = "Thème de l’application";
+"app_theme" = "Thème de l’App";
 "done" = "TERMINÉ!";
 "changed_theme" = "vous avez changé de thème!";
 
 // Settings Dark Mode
-"aspect" = "Aspect";
-"dark_mode" = "Dark Mode";
+"aspect" = "Apparence";
+"dark_mode" = "Mode Sombre";
 
 // ColorTheme
 "blue_theme" = "Blue";
 "green_theme" = "Vert";
 "orange_theme" = "Orange";
-"pink_theme" = "Rose";
+"pink_theme" = "Violete";
 "red_theme" = "Rouge";
+

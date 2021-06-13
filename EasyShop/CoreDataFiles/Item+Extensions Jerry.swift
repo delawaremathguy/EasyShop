@@ -11,6 +11,10 @@ extension Item {
         name ?? "Unknown item name"
     }
 // 2
+    public var itemAmount: String {
+        amount ?? "..."
+    }    
+// 3
 	class func addNewItem(named name: String, to store: Shop) {
 		let addItem = Item(context: PersistentContainer.context)
 		addItem.name = name
@@ -23,7 +27,7 @@ extension Item {
         addItem.status = kNotOnList
 		PersistentContainer.saveContext()
 	}
-// 3
+// 4
     class func delete(_ item: Item) { 
         let shop = item.shop // this shop is the relationship
         let context = item.managedObjectContext
@@ -32,7 +36,7 @@ extension Item {
         NotificationCenter.default.post(name: .itemStatusChanged, object: self)
         PersistentContainer.saveContext()
     }
-// 4
+// 5
     var status: Int {
         get { Int( status16 )}
         set {
@@ -41,7 +45,7 @@ extension Item {
             NotificationCenter.default.post(name: .itemStatusChanged, object: self)
         }
     }
-// 5
+// 6
     func toggleSelected() {
         if status == kNotOnList {
             status = kOnListNotTaken
@@ -50,7 +54,7 @@ extension Item {
         }
         PersistentContainer.saveContext()
     }
-// 6
+// 7
     static func onShoppingListCount() -> Int {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "status16 == %d", kOnListNotTaken)
